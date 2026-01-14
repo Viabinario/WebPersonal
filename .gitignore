@@ -65,8 +65,9 @@ out/
 # Archivos compilados
 *.js.map
 *.d.ts.map
+# Excluir archivos .js compilados, pero permitir archivos SVG generados en imports
 *.js
-!src/**/*.js  # Mantener solo los archivos fuente si es necesario
+!src/imports/*.js  # Mantener archivos SVG generados
 *.d.ts
 !src/**/*.d.ts
 

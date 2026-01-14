@@ -312,16 +312,15 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
       clearTimeout(timeoutId);
 
       // Verificar si la respuesta es JSON válido
-      let result;
       const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        result = await response.json();
-      } else {
-        const text = await response.text();
+      if (!contentType || !contentType.includes('application/json')) {
+        await response.text(); // Consumir la respuesta
         throw new Error('Respuesta inválida del servidor');
       }
 
       if (!response.ok) {
+        // Consumir la respuesta para evitar warnings
+        await response.json().catch(() => {});
         // No exponer detalles del error del servidor
         console.error('Error al enviar formulario');
         setErrorModal({ 
@@ -331,6 +330,9 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
         setIsSubmitting(false);
         return;
       }
+
+      // Parsear JSON solo si la respuesta es exitosa
+      await response.json();
 
       // Éxito - resetear rate limiter
       rateLimiter.reset(userIdentifier);
@@ -424,16 +426,6 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     return '#a16f44';
   };
 
-  const getFormBackgroundColor = (): string => {
-    const hasErrors = Object.keys(touched).some(key => {
-      const field = key as keyof FormData;
-      return touched[field] && formData[field] && !isFieldValid(field);
-    });
-    
-    if (hasErrors) return '#ffcece';
-    if (allFieldsValid()) return '#e5e2de';
-    return '#e5e2de';
-  };
 
   const getSendButtonColor = (): string => {
     if (allFieldsValid()) return '#4d4b4a'; // Gris cuando está válido
@@ -504,18 +496,18 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   };
 
   return (
-    <div className="w-full min-h-screen lg:w-[1280px] lg:h-[832px] bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-8">
+    <div className="w-full min-h-screen lg:w-[1280px] lg:h-[832px] bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-0">
       {/* Wrapper container for form and modals */}
-      <div className="relative flex items-center">
-        {/* Contact Form */}
+      <div className="relative w-full h-full flex items-center justify-center">
+        {/* Contact Form - Fondo #e5e2de con campos a todo el ancho menos 10px por lado */}
         <div 
-          className={`rounded-[22px] w-full max-w-[490px] relative shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
-          style={{ backgroundColor: getFormBackgroundColor() }}
+          className={`bg-[#e5e2de] flex flex-col gap-[10px] px-[10px] py-[22px] relative rounded-[22px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] w-full max-w-[400px] mx-auto ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
           onClick={handleClick}
         >
-          <div className="flex flex-col gap-[2px] items-center pb-6 md:pb-8 lg:pb-[32px] pt-4 md:pt-6 lg:pt-[22px] px-4 md:px-12 lg:px-[100px]">
+          {/* Contenedor de campos - gap-[5px] entre campos, w-full para ocupar todo el ancho */}
+          <div className="flex flex-col gap-[5px] w-full">
             {/* Name Input */}
-            <div className="flex flex-col gap-[4px] items-start w-full max-w-[404px] mb-[2px]">
+            <div className="flex flex-col gap-[4px] w-full">
               <div 
                 className="h-[48px] rounded-[8px] w-full relative transition-colors duration-200"
                 style={{ backgroundColor: getInputBackgroundColor('nombre') }}
@@ -555,7 +547,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Email Input */}
-            <div className="flex flex-col gap-[4px] items-start w-full max-w-[404px] mb-[2px]">
+            <div className="flex flex-col gap-[4px] items-start w-full">
               <div 
                 className="h-[48px] rounded-[8px] w-full relative transition-colors duration-200"
                 style={{ backgroundColor: getInputBackgroundColor('email') }}
@@ -596,7 +588,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Phone Input */}
-            <div className="flex flex-col gap-[4px] items-start w-full max-w-[404px] mb-[2px]">
+            <div className="flex flex-col gap-[4px] w-full">
               <div 
                 className="h-[48px] rounded-[8px] w-full relative transition-colors duration-200"
                 style={{ backgroundColor: getInputBackgroundColor('telefono') }}
@@ -637,7 +629,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Subject Input */}
-            <div className="flex flex-col gap-[4px] items-start w-full max-w-[404px] mb-[2px]">
+            <div className="flex flex-col gap-[4px] w-full">
               <div 
                 className="h-[48px] rounded-[8px] w-full relative transition-colors duration-200"
                 style={{ backgroundColor: getInputBackgroundColor('asunto') }}
@@ -677,7 +669,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Message Input */}
-            <div className="flex flex-col gap-[4px] items-start w-full max-w-[404px] mb-[2px]">
+            <div className="flex flex-col gap-[4px] w-full">
               <div 
                 className="rounded-[8px] w-full relative transition-colors duration-200"
                 style={{ backgroundColor: getInputBackgroundColor('mensaje') }}
@@ -715,7 +707,21 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-4 md:gap-5 lg:gap-[20px] h-[44px] items-center justify-end w-full max-w-[400px] mt-[4px]">
+            <div className="h-[44px] relative shrink-0 w-full flex items-center justify-between">
+              <button 
+                onClick={(e) => { e.stopPropagation(); handleDelete(); }}
+                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid"
+                style={{ 
+                  backgroundColor: getDeleteButtonColor(),
+                  borderColor: getDeleteButtonBorderColor()
+                }}
+              >
+                <div className="w-[24px] h-[24px]">
+                  <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
+                    <path d={svgPaths.p327d2300} stroke={getDeleteIconColor()} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                  </svg>
+                </div>
+              </button>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleSend(); }}
                 disabled={isSubmitting}
@@ -731,23 +737,13 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                   </svg>
                 </div>
               </button>
-              <button 
-                onClick={(e) => { e.stopPropagation(); handleDelete(); }}
-                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid"
-                style={{ 
-                  backgroundColor: getDeleteButtonColor(),
-                  borderColor: getDeleteButtonBorderColor()
-                }}
-              >
-                <div className="w-[24px] h-[24px]">
-                  <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-                    <path d={svgPaths.p327d2300} stroke={getDeleteIconColor()} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                  </svg>
-                </div>
-              </button>
             </div>
           </div>
-          <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+          
+          {/* Borde del formulario */}
+          <div className="absolute inset-0 rounded-[22px] pointer-events-none">
+            <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 rounded-[22px]" />
+          </div>
         </div>
 
         {/* Success Modal */}
