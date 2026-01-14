@@ -1,0 +1,284 @@
+# ============================================
+# SEGURIDAD Y PRIVACIDAD
+# ============================================
+
+# Archivos con credenciales y secretos
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+secrets.json
+credentials.json
+config.json
+*.secret
+*.token
+
+# Archivos de Supabase con información sensible
+# NOTA: Si info.tsx contiene credenciales, debe ser excluido o usar variables de entorno
+# src/utils/supabase/info.tsx  # Descomentar si contiene credenciales sensibles
+
+# Variables de entorno
+.envrc
+.env.backup
+
+# ============================================
+# DEPENDENCIAS Y PAQUETES
+# ============================================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Package manager locks (opcional - algunos proyectos los incluyen)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ============================================
+# ARCHIVOS DE BUILD Y DISTRIBUCIÓN
+# ============================================
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+
+# Archivos compilados
+*.js.map
+*.d.ts.map
+*.js
+!src/**/*.js  # Mantener solo los archivos fuente si es necesario
+*.d.ts
+!src/**/*.d.ts
+
+# ============================================
+# ARCHIVOS TEMPORALES Y CACHE
+# ============================================
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+.stylelintcache
+.turbo/
+.vite/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================
+# SISTEMA OPERATIVO
+# ============================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================
+# IDEs Y EDITORES
+# ============================================
+
+# Visual Studio Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+
+# JetBrains IDEs (WebStorm, IntelliJ, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ============================================
+# TESTING Y COBERTURA
+# ============================================
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output/
+.coverage/
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Test results
+test-results/
+playwright-report/
+playwright/.cache/
+
+# ============================================
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# ============================================
+
+# Archivos de configuración local
+config.local.*
+settings.local.*
+*.local.*
+
+# Archivos de backup
+*.bak
+*.backup
+*.old
+*.orig
+
+# Archivos de migración temporal
+migrations/*.tmp
+
+# ============================================
+# SEGURIDAD ADICIONAL
+# ============================================
+
+# Archivos de auditoría de seguridad
+security-audit.log
+vulnerability-report.*
+npm-audit-results.json
+
+# Archivos de sesión
+*.session
+*.sess
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+# Archivos de dump
+*.dump
+*.sql.gz
+
+# ============================================
+# ARCHIVOS DE DEPLOYMENT
+# ============================================
+
+# Vercel
+.vercel
+
+# Netlify
+.netlify
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# ============================================
+# DOCUMENTACIÓN TEMPORAL
+# ============================================
+
+# Archivos de documentación generados
+docs/build/
+site/
+
+# ============================================
+# NOTAS IMPORTANTES
+# ============================================
+
+# IMPORTANTE: Si el archivo src/utils/supabase/info.tsx contiene
+# credenciales sensibles (projectId, publicAnonKey), considera:
+# 1. Mover las credenciales a variables de entorno (.env)
+# 2. Agregar info.tsx al .gitignore
+# 3. Crear un archivo info.example.tsx con valores de ejemplo
+
+# Para usar variables de entorno, crear un archivo .env.example:
+# SUPABASE_PROJECT_ID=your_project_id_here
+# SUPABASE_PUBLIC_ANON_KEY=your_anon_key_here

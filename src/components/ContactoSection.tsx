@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import svgPaths from "../imports/svg-pj45jcyo5z";
 import svgPathsSuccess from "../imports/svg-ug55i8e7pd";
 import svgPathsError from "../imports/svg-nd4dsni8hv";
 import { projectId, publicAnonKey } from '../utils/supabase/info';
+import {
+  validateAndSanitizeName,
+  validateAndSanitizeEmail,
+  validateAndSanitizePhone,
+  validateAndSanitizeSubject,
+  validateAndSanitizeMessage,
+  rateLimiter,
+  getUserIdentifier
+} from '../utils/security';
 
 interface ContactoSectionProps {
   isZoomed?: boolean;
@@ -60,6 +69,9 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
 
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [errorModal, setErrorModal] = useState<{field: string, message: string} | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rateLimitError, setRateLimitError] = useState(false);
+  const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Calculate vertical position for error modals based on field
   const getErrorModalTopPosition = (field: string): number => {
@@ -90,14 +102,14 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     }
   };
 
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+  const validateEmail = (email: string): boolean => {
+    const sanitized = validateAndSanitizeEmail(email);
+    return sanitized !== null;
   };
 
-  const validatePhone = (phone: string) => {
-    const phoneRegex = /^\+\d{1,3}\s?\d{3}\s?\d{3}\s?\d{3}$/;
-    return phoneRegex.test(phone);
+  const validatePhone = (phone: string): boolean => {
+    const sanitized = validateAndSanitizePhone(phone);
+    return sanitized !== null;
   };
 
   const isFieldValid = (field: keyof FormData): boolean => {
@@ -128,13 +140,37 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   };
 
   const handleFieldChange = (field: keyof FormData, value: string) => {
-    // Limit mensaje to 300 characters
-    if (field === 'mensaje' && value.length > 300) {
+    // Limitar longitud de campos según tipo
+    let maxLength = 1000;
+    switch (field) {
+      case 'nombre':
+        maxLength = 100;
+        break;
+      case 'email':
+        maxLength = 254;
+        break;
+      case 'telefono':
+        maxLength = 20;
+        break;
+      case 'asunto':
+        maxLength = 200;
+        break;
+      case 'mensaje':
+        maxLength = 1000; // Aumentado de 300 a 1000 pero con validación estricta
+        break;
+    }
+
+    if (value.length > maxLength) {
       return;
     }
     
     setFormData(prev => ({ ...prev, [field]: value }));
     setTouched(prev => ({ ...prev, [field]: true }));
+    
+    // Limpiar errores de rate limiting cuando el usuario modifica el formulario
+    if (rateLimitError) {
+      setRateLimitError(false);
+    }
     
     // Clear error modal if this field is being corrected
     if (errorModal && errorModal.field === field) {
@@ -176,6 +212,11 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   };
 
   const handleSend = async () => {
+    // Prevenir múltiples envíos simultáneos
+    if (isSubmitting) {
+      return;
+    }
+
     setTouched({
       nombre: true,
       email: true,
@@ -184,6 +225,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
       mensaje: true
     });
 
+    // Validación básica de campos
     if (!allFieldsValid()) {
       const fields: (keyof FormData)[] = ['nombre', 'email', 'telefono', 'asunto', 'mensaje'];
       for (const field of fields) {
@@ -191,19 +233,19 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
           let message = '';
           switch(field) {
             case 'nombre':
-              message = 'Ingresar nombre completo';
+              message = 'Ingresar nombre completo (mín. 2 caracteres)';
               break;
             case 'email':
               message = 'Ingresar email válido';
               break;
             case 'telefono':
-              message = 'Ingresar teléfono válido';
+              message = 'Ingresar teléfono válido (+### ### ### ###)';
               break;
             case 'asunto':
-              message = 'Ingresar asunto';
+              message = 'Ingresar asunto (mín. 3 caracteres)';
               break;
             case 'mensaje':
-              message = 'Ingresar mensaje';
+              message = 'Ingresar mensaje (mín. 10 caracteres)';
               break;
           }
           setErrorModal({ field, message });
@@ -213,34 +255,94 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
       return;
     }
 
-    // Send data to Supabase
+    // Rate limiting
+    const userIdentifier = getUserIdentifier();
+    if (!rateLimiter.canMakeRequest(userIdentifier)) {
+      setRateLimitError(true);
+      setErrorModal({ 
+        field: 'general', 
+        message: 'Demasiados intentos. Por favor, espera un momento antes de intentar nuevamente.' 
+      });
+      return;
+    }
+
+    // Sanitizar y validar todos los campos
+    const sanitizedNombre = validateAndSanitizeName(formData.nombre);
+    const sanitizedEmail = validateAndSanitizeEmail(formData.email);
+    const sanitizedTelefono = validateAndSanitizePhone(formData.telefono);
+    const sanitizedAsunto = validateAndSanitizeSubject(formData.asunto);
+    const sanitizedMensaje = validateAndSanitizeMessage(formData.mensaje);
+
+    // Verificar que todos los campos sean válidos después de sanitización
+    if (!sanitizedNombre || !sanitizedEmail || !sanitizedTelefono || !sanitizedAsunto || !sanitizedMensaje) {
+      setErrorModal({ 
+        field: 'general', 
+        message: 'Los datos ingresados no son válidos. Por favor, verifica todos los campos.' 
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setRateLimitError(false);
+
+    // Send data to Supabase con datos sanitizados
     try {
+      const sanitizedData = {
+        nombre: sanitizedNombre,
+        email: sanitizedEmail,
+        telefono: sanitizedTelefono,
+        asunto: sanitizedAsunto,
+        mensaje: sanitizedMensaje
+      };
+
+      // Crear AbortController para timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
+
       const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-44bf6176/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${publicAnonKey}`
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(sanitizedData),
+        signal: controller.signal
       });
 
-      const result = await response.json();
+      clearTimeout(timeoutId);
+
+      // Verificar si la respuesta es JSON válido
+      let result;
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        const text = await response.text();
+        throw new Error('Respuesta inválida del servidor');
+      }
 
       if (!response.ok) {
-        console.error('Error al enviar formulario:', result);
+        // No exponer detalles del error del servidor
+        console.error('Error al enviar formulario');
         setErrorModal({ 
           field: 'general', 
-          message: result.error || 'Error al enviar mensaje' 
+          message: 'Error al enviar mensaje. Por favor, intenta nuevamente más tarde.' 
         });
+        setIsSubmitting(false);
         return;
       }
 
-      console.log('Mensaje enviado exitosamente:', result);
+      // Éxito - resetear rate limiter
+      rateLimiter.reset(userIdentifier);
       
       setShowSuccessModal(true);
       
       // Reset form after successful submission
-      setTimeout(() => {
+      if (submitTimeoutRef.current) {
+        clearTimeout(submitTimeoutRef.current);
+      }
+      
+      submitTimeoutRef.current = setTimeout(() => {
         setFormData({
           nombre: '',
           email: '',
@@ -256,14 +358,33 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
           mensaje: false
         });
         setShowSuccessModal(false);
+        setIsSubmitting(false);
       }, 3000);
 
     } catch (error) {
-      console.error('Error de red al enviar formulario:', error);
-      setErrorModal({ 
-        field: 'general', 
-        message: 'Error de conexión' 
-      });
+      setIsSubmitting(false);
+      
+      // Manejar diferentes tipos de errores sin exponer información sensible
+      if (error instanceof Error) {
+        if (error.name === 'AbortError' || error.name === 'TimeoutError') {
+          setErrorModal({ 
+            field: 'general', 
+            message: 'Tiempo de espera agotado. Por favor, verifica tu conexión e intenta nuevamente.' 
+          });
+        } else {
+          setErrorModal({ 
+            field: 'general', 
+            message: 'Error de conexión. Por favor, intenta nuevamente más tarde.' 
+          });
+        }
+      } else {
+        setErrorModal({ 
+          field: 'general', 
+          message: 'Error inesperado. Por favor, intenta nuevamente más tarde.' 
+        });
+      }
+      
+      console.error('Error al enviar formulario:', error);
     }
   };
 
@@ -409,6 +530,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       onChange={(e) => handleFieldChange('nombre', e.target.value)}
                       onBlur={() => handleFieldBlur('nombre')}
                       placeholder="NOMBRE"
+                      maxLength={100}
                       className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[14px] tracking-[2.8px] bg-transparent outline-none text-[#362517] placeholder:text-[#5a3e26]"
                       onClick={(e) => !isZoomed && e.stopPropagation()}
                     />
@@ -448,6 +570,8 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       onChange={(e) => handleFieldChange('email', e.target.value)}
                       onBlur={() => handleFieldBlur('email')}
                       placeholder="EMAIL (dirección@host)"
+                      maxLength={254}
+                      autoComplete="email"
                       className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[14px] tracking-[2.8px] bg-transparent outline-none text-[#362517] placeholder:text-[#5a3e26]"
                       onClick={(e) => !isZoomed && e.stopPropagation()}
                     />
@@ -487,6 +611,8 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       onChange={(e) => handleFieldChange('telefono', e.target.value)}
                       onBlur={() => handleFieldBlur('telefono')}
                       placeholder="TELÉFONO (+### ### ### ###)"
+                      maxLength={20}
+                      autoComplete="tel"
                       className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[14px] tracking-[2.8px] bg-transparent outline-none text-[#362517] placeholder:text-[#5a3e26]"
                       onClick={(e) => !isZoomed && e.stopPropagation()}
                     />
@@ -526,6 +652,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       onChange={(e) => handleFieldChange('asunto', e.target.value)}
                       onBlur={() => handleFieldBlur('asunto')}
                       placeholder="ASUNTO"
+                      maxLength={200}
                       className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[14px] tracking-[2.8px] bg-transparent outline-none text-[#362517] placeholder:text-[#5a3e26]"
                       onClick={(e) => !isZoomed && e.stopPropagation()}
                     />
@@ -564,7 +691,8 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                         value={formData.mensaje}
                         onChange={(e) => handleFieldChange('mensaje', e.target.value)}
                         onBlur={() => handleFieldBlur('mensaje')}
-                        placeholder="MENSAJE (máx. 300 caracteres)"
+                        placeholder="MENSAJE (mín. 10, máx. 1000 caracteres)"
+                      maxLength={1000}
                         className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[16px] bg-transparent outline-none resize-none w-full h-full text-[#362517] placeholder:text-[#5a3e26]"
                         onClick={(e) => !isZoomed && e.stopPropagation()}
                       />
@@ -578,7 +706,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                     </div>
                     {/* Character Counter */}
                     <div className="absolute bottom-0 left-0 text-[10px] font-['Roboto:Regular',sans-serif] text-[#5a3e26]">
-                      {formData.mensaje.length}/300
+                      {formData.mensaje.length}/1000
                     </div>
                   </div>
                 </div>
@@ -590,7 +718,8 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             <div className="flex gap-4 md:gap-5 lg:gap-[20px] h-[44px] items-center justify-end w-full max-w-[400px] mt-[4px]">
               <button 
                 onClick={(e) => { e.stopPropagation(); handleSend(); }}
-                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid"
+                disabled={isSubmitting}
+                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ 
                   backgroundColor: getSendButtonColor(),
                   borderColor: getSendButtonBorderColor()
