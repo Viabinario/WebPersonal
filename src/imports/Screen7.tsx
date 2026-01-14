@@ -1,0 +1,359 @@
+import svgPaths from "./svg-n4kuctr9cz";
+import imgProfilePhoto from "figma:asset/037303b6b1de60b5b46c711eb2f0e126520f42b0.png";
+import imgLogoSocialNetworks from "figma:asset/eb32313f181d7f397e280d071d68cd4848de3309.png";
+import imgLogoSocialNetworks1 from "figma:asset/ba860023c4945015a1341b916ead911ab33959ca.png";
+import imgLogoSocialNetworks2 from "figma:asset/ce87b991d33908119ebd53423d76d4d176fa3dd6.png";
+import imgLogoSocialNetworks3 from "figma:asset/f4070059249511aee028c2a23241923404682ade.png";
+import imgLogoSocialNetworks4 from "figma:asset/2a49aaca2afd902bddff6a117e6ba2b56e221665.png";
+import imgImage from "figma:asset/ece298d0ec2c16f10310d45724b276a6035cb503.png";
+
+function Wrapper({ children }: React.PropsWithChildren<{}>) {
+  return (
+    <div className="relative shrink-0 size-[12px]">
+      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 12 12">
+        {children}
+      </svg>
+    </div>
+  );
+}
+type InputTextProps = {
+  text: string;
+};
+
+function InputText({ text }: InputTextProps) {
+  return (
+    <div className="bg-[#f7f2ed] h-[24px] relative rounded-[4px] shrink-0 w-full">
+      <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
+        <div className="content-stretch flex gap-[7px] items-center px-[6px] py-[3px] relative size-full">
+          <div className="basis-0 flex flex-col font-['Roboto:Regular',sans-serif] font-normal grow h-[8px] justify-center leading-[0] min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[#5a3e26] text-[7px] text-nowrap tracking-[1.4px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <p className="leading-[normal] overflow-ellipsis overflow-hidden">{text}</p>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" className="absolute border-[#a16f44] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[4px]" />
+    </div>
+  );
+}
+
+export default function Screen() {
+  return (
+    <div className="bg-[#f7f2ed] relative size-full" data-name="Screen 7">
+      <div className="absolute content-stretch flex h-[832px] items-start left-0 min-h-[832px] min-w-[1280px] top-0 w-[1280px]" data-name="Matrix_V2">
+        <div className="basis-0 bg-[#f7f2ed] content-stretch flex grow h-full items-start min-h-px min-w-[640px] relative shrink-0" data-name="Content-Body-Left">
+          <div className="basis-0 bg-[#f7f2ed] grow h-full min-h-px min-w-[173px] shrink-0" data-name="Content-Body-Side-Left" />
+          <div className="basis-0 content-stretch flex flex-col grow h-full items-start min-h-px min-w-[356px] relative shrink-0" data-name="Content-Center">
+            <div className="h-[121px] relative shrink-0 w-full" data-name="Content-Profile-Photo">
+              <div className="content-stretch flex items-start pb-0 pl-[50px] pr-0 pt-[19px] relative size-full">
+                <div className="pointer-events-none relative rounded-[11px] shrink-0 size-[92px]" data-name="Profile_Photo">
+                  <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover rounded-[11px] size-full" src={imgProfilePhoto} />
+                  <div aria-hidden="true" className="absolute border-[#5a3e26] border-[0.5px] border-dashed inset-0 rounded-[11px]" />
+                </div>
+              </div>
+            </div>
+            <div className="h-[190px] relative shrink-0 w-full" data-name="Content-Box-Text">
+              <div className="content-stretch flex flex-col items-start pl-[50px] pr-0 py-0 relative size-full">
+                <div className="bg-[#e8d8c9] h-[190px] relative rounded-[11px] shrink-0 w-[296px]" data-name="Box_text">
+                  <div className="content-stretch flex flex-col items-start overflow-clip px-[50px] py-[24px] relative rounded-[inherit] size-full">
+                    <div className="basis-0 font-['Roboto:Regular',sans-serif] font-normal grow leading-[normal] min-h-px min-w-px relative shrink-0 text-[7px] text-black text-justify w-[192.5px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                      <p className="mb-0">Lorem ipsum dolor sit amet consectetur. Congue mauris id rhoncus adipiscing amet pharetra ornare amet luctus. Suspendisse lectus viverra sollicitudin nibh imperdiet diam vitae. Scelerisque mi urna tellus odio tortor. Et platea placerat eget iaculis consectetur in.</p>
+                      <p>Hac nec nisi nunc rhoncus gravida. Dignissim purus nunc risus diam amet faucibus nibh lacus. Dui enim nulla etiam molestie at a dictum eu dapibus. Pharetra ut sed id praesent. Massa facilisi tristique massa nunc amet consequat faucibus.</p>
+                    </div>
+                  </div>
+                  <div aria-hidden="true" className="absolute border-[#5a3e26] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[11px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)]" />
+                </div>
+              </div>
+            </div>
+            <div className="basis-0 content-stretch flex grow items-end min-h-px min-w-px pb-[19px] pt-0 px-0 relative shrink-0 w-full" data-name="Content-Form">
+              <div className="content-stretch flex flex-col items-start relative shrink-0 w-[347px]" data-name="Contact">
+                <div className="bg-[#e5e2de] relative rounded-[11px] shrink-0 w-[245px]" data-name="Contact_Form">
+                  <div className="content-stretch flex flex-col gap-px items-center overflow-clip pb-[16px] pt-[11px] px-[50px] relative rounded-[inherit] w-full">
+                    <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-[202px]" data-name="Name_Input">
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />
+                      <InputText text="NOMBRE" />
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-[202px]" data-name="Email_Input">
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />
+                      <InputText text="EMAIL" />
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-[202px]" data-name="Phone_Input">
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />
+                      <InputText text="TELÉFONO" />
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-[202px]" data-name="Subject_Input">
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />
+                      <InputText text="ASUNTO" />
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />
+                    </div>
+                    <div className="content-stretch flex flex-col gap-[2px] items-start relative shrink-0 w-[202px]" data-name="Message_Input">
+                      <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content Label" />
+                      <div className="bg-[#f7f2ed] relative rounded-[4px] shrink-0 w-full" data-name="Input">
+                        <div className="overflow-clip rounded-[inherit] size-full">
+                          <div className="content-stretch flex flex-col gap-px items-start p-[6px] relative w-full">
+                            <div className="content-stretch flex h-[90px] items-start relative shrink-0 w-full" data-name="Content Placeholder">
+                              <div className="-webkit-box basis-0 flex-col font-['Roboto:Regular',sans-serif] font-normal grow justify-center leading-[0] min-h-px min-w-px overflow-ellipsis overflow-hidden relative shrink-0 text-[#5a3e26] text-[8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                                <p className="leading-[normal]">MENSAJE</p>
+                              </div>
+                            </div>
+                            <div className="content-stretch flex items-end justify-end shrink-0 w-full" data-name="Content icon" />
+                          </div>
+                        </div>
+                        <div aria-hidden="true" className="absolute border-[#a16f44] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[4px]" />
+                      </div>
+                      <div className="content-stretch flex h-[10px] items-center justify-center shrink-0 w-full" data-name="Content Message" />
+                    </div>
+                    <div className="content-stretch flex gap-[10px] h-[22px] items-center justify-end relative shrink-0 w-[200px]" data-name="Content">
+                      <div className="bg-[#e1e1e1] content-stretch flex gap-[5px] h-[22px] items-center justify-center p-[5px] relative rounded-[5e+10px] shrink-0 w-[44px]" data-name="Button">
+                        <div aria-hidden="true" className="absolute border-[#a3a19e] border-[0.5px] border-solid inset-0 pointer-events-none rounded-[5e+10px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)]" />
+                        <Wrapper>
+                          <g id="send-01">
+                            <path d={svgPaths.p23f0cd80} id="Icon" stroke="var(--stroke-0, #3D3A36)" strokeLinecap="round" />
+                          </g>
+                        </Wrapper>
+                      </div>
+                      <div className="bg-[#e1e1e1] content-stretch flex gap-[5px] h-[22px] items-center justify-center p-[5px] relative rounded-[499.5px] shrink-0 w-[44px]" data-name="Button">
+                        <div aria-hidden="true" className="absolute border-[#a3a19e] border-[0.5px] border-solid inset-0 pointer-events-none rounded-[499.5px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)]" />
+                        <Wrapper>
+                          <g id="delete">
+                            <path d={svgPaths.p6f53300} id="Icon" stroke="var(--stroke-0, #3D3A36)" strokeLinecap="round" strokeLinejoin="round" />
+                          </g>
+                        </Wrapper>
+                      </div>
+                    </div>
+                  </div>
+                  <div aria-hidden="true" className="absolute border-[#5a3e26] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[11px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)]" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="basis-0 content-stretch flex flex-col grow h-full items-start justify-end min-h-px min-w-[111px] pb-0 pt-[308px] px-0 relative shrink-0" data-name="Content-Right">
+            <div className="basis-0 content-stretch flex flex-col grow items-start min-h-px min-w-px relative shrink-0 w-[111px]" data-name="Content-SocialNetworks">
+              <div className="bg-[#e5e2de] relative rounded-[11px] shrink-0 w-[92px]" data-name="Social_Networks">
+                <div className="content-stretch flex flex-col gap-[5px] items-start overflow-clip px-0 py-[9px] relative rounded-[inherit] w-full">
+                  <div className="content-stretch flex gap-[2px] items-center justify-center relative shrink-0 w-full" data-name="Content_SocialButton">
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute left-[calc(50%+0.5px)] rounded-[7px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),0px_2px_0.5px_0px_rgba(0,0,0,0),0px_1.25px_0.5px_0px_rgba(0,0,0,0.01),0px_0.75px_0.5px_0px_rgba(0,0,0,0.03),0px_0.25px_0.25px_0px_rgba(0,0,0,0.04)] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks">
+                          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[7px] size-full" src={imgLogoSocialNetworks} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute left-[calc(50%+0.5px)] rounded-[7px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),0px_2px_0.5px_0px_rgba(0,0,0,0),0px_1.25px_0.5px_0px_rgba(0,0,0,0.01),0px_0.75px_0.5px_0px_rgba(0,0,0,0.03),0px_0.25px_0.25px_0px_rgba(0,0,0,0.04)] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks">
+                          <div aria-hidden="true" className="absolute inset-0 pointer-events-none rounded-[7px]">
+                            <div className="absolute bg-[#f7f2ed] inset-0 rounded-[7px]" />
+                            <img alt="" className="absolute max-w-none object-50%-50% object-cover rounded-[7px] size-full" src={imgLogoSocialNetworks1} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute left-[calc(50%+0.5px)] rounded-[7px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),0px_2px_0.5px_0px_rgba(0,0,0,0),0px_1.25px_0.5px_0px_rgba(0,0,0,0.01),0px_0.75px_0.5px_0px_rgba(0,0,0,0.03),0px_0.25px_0.25px_0px_rgba(0,0,0,0.04)] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks">
+                          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[7px] size-full" src={imgLogoSocialNetworks2} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex gap-[2px] items-center justify-center relative shrink-0 w-full" data-name="Content_SocialButton">
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute left-[calc(50%+0.5px)] rounded-[7px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),0px_2px_0.5px_0px_rgba(0,0,0,0),0px_1.25px_0.5px_0px_rgba(0,0,0,0.01),0px_0.75px_0.5px_0px_rgba(0,0,0,0.03),0px_0.25px_0.25px_0px_rgba(0,0,0,0.04)] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks">
+                          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[7px] size-full" src={imgLogoSocialNetworks3} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute left-[calc(50%+0.5px)] rounded-[7px] shadow-[0px_1px_1px_0px_rgba(0,0,0,0.25),0px_2px_0.5px_0px_rgba(0,0,0,0),0px_1.25px_0.5px_0px_rgba(0,0,0,0.01),0px_0.75px_0.5px_0px_rgba(0,0,0,0.03),0px_0.25px_0.25px_0px_rgba(0,0,0,0.04)] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks">
+                          <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[7px] size-full" src={imgLogoSocialNetworks4} />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative shrink-0 size-[24px]" data-name="Content">
+                      <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                        <div className="absolute bg-[#f7f2ed] left-[calc(50%+0.5px)] rounded-[7px] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks" />
+                      </div>
+                    </div>
+                  </div>
+                  {[...Array(3).keys()].map((_, i) => (
+                    <div className="content-stretch flex gap-[2px] items-center justify-center relative shrink-0 w-full" data-name="Content_SocialButton">
+                      {[...Array(3).keys()].map((_, i) => (
+                        <div className="relative shrink-0 size-[24px]" data-name="Content">
+                          <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
+                            <div className="absolute bg-[#f7f2ed] left-[calc(50%+0.5px)] rounded-[7px] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+                <div aria-hidden="true" className="absolute border-[#5a3e26] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[11px]" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="basis-0 bg-[#f7f2ed] content-stretch flex flex-col grow h-full items-start min-h-px min-w-[640px] relative shrink-0" data-name="Content-Body-Right">
+          <div className="basis-0 grow min-h-px min-w-px relative shrink-0 w-full" data-name="Content-Box-Text">
+            <div className="content-stretch flex items-start pb-0 pl-[274px] pr-0 pt-[19px] relative size-full">
+              <div className="bg-[#e8d8c9] h-[292px] relative rounded-[11px] shrink-0 w-[194px]" data-name="Box_text_Column">
+                <div className="content-stretch flex flex-col items-center overflow-clip px-0 py-[24px] relative rounded-[inherit] size-full">
+                  <div className="basis-0 grow min-h-px min-w-px relative shrink-0 w-full" data-name="Container_Text">
+                    <div className="content-stretch flex flex-col gap-[6px] items-start px-[16px] py-0 relative size-full">
+                      <div className="basis-0 font-['Roboto:Regular',sans-serif] font-normal grow leading-[1.2] min-h-px min-w-px relative shrink-0 text-[7px] text-black text-justify w-full" style={{ fontVariationSettings: "'wdth' 100" }}>
+                        <p className="mb-0">{`Hola, soy Francisco Sánchez, arquitecto de profesión con una experiencia laboral de más de 14 años, diseñando y gestionando proyectos de edificación de diversa tipología. `}</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">Mi camino hacia el UX/UI surge desde mis primeros años de universidad, interesándome en el mundo digital a través del diseño de sitios web, apreciándolos como experiencias habitables digitales.</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">Posteriormente, al especializarme en BIM, pude darle continuidad a esta inquietud de conocimiento y creatividad, abordando proyectos con una mayor complejidad en la gestión digital de la información.</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">{`Este cambio de rumbo aparente, es parte sustancial de mi búsqueda profesional, ahora en una fase de consolidar mi interés en la creación de productos digitales, donde quiero volcar mis años de madurez, descubrimientos de trabajar con muchos equipos y aprendizajes que nunca acaban y siempre suman.   `}</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p className="mb-0">&nbsp;</p>
+                        <p>&nbsp;</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div aria-hidden="true" className="absolute border-[#5a3e26] border-[0.5px] border-dashed inset-0 pointer-events-none rounded-[11px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)]" />
+              </div>
+            </div>
+          </div>
+          <div className="basis-0 content-stretch flex flex-col grow items-center justify-end min-h-px min-w-px pb-[100px] pt-0 px-0 relative shrink-0 w-full" data-name="Content-Carousel">
+            <div className="h-[151px] relative shrink-0 w-[640px]" data-name="Carousel">
+              <div className="overflow-x-auto overflow-y-clip relative size-full">
+                <div className="absolute content-stretch flex gap-[10px] items-center left-0 top-0" data-name="Ribbon">
+                  {[...Array(3).keys()].map((_, i) => (
+                    <div className="bg-[#b2b0ad] content-center flex flex-wrap gap-[6px] items-center max-w-[296px] min-w-[143px] overflow-clip p-[6px] relative rounded-[11px] shrink-0" data-name="Card">
+                      <div className="h-[131px] relative rounded-[6px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)] shrink-0 w-[130px]" data-name="Image">
+                        <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[6px] size-full" src={imgImage} />
+                      </div>
+                      <div className="content-stretch flex flex-col gap-[6px] items-start relative shrink-0 w-[148px]" data-name="content_Right_Side">
+                        <div className="bg-[#f7f2ed] h-[48px] overflow-clip relative rounded-[6px] shrink-0 w-full" data-name="Content_Block_Right_1">
+                          <div className="absolute left-0 top-0 w-[148px]" data-name="Content_Title">
+                            <div className="content-stretch flex items-center justify-center overflow-clip px-[6.5px] py-[7px] relative rounded-[inherit] w-full">
+                              <p className="basis-0 font-['Roboto:Regular',sans-serif] font-normal grow leading-[normal] min-h-px min-w-px relative shrink-0 text-[#5a3e26] text-[9px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                                Title
+                              </p>
+                            </div>
+                            <div aria-hidden="true" className="absolute border-[#b2b0ad] border-[0px_0px_0.5px] border-dashed inset-0 pointer-events-none" />
+                          </div>
+                          <div className="absolute content-center flex flex-wrap gap-0 items-center left-0 top-[24.5px] w-[148px]" data-name="Content">
+                            <div className="basis-0 grow h-[24px] min-h-px min-w-px relative shrink-0" data-name="Content_Date">
+                              <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
+                                <div className="content-stretch flex items-center justify-center px-[6px] py-[7px] relative size-full">
+                                  <p className="basis-0 font-['Roboto:Regular',sans-serif] font-normal grow leading-[normal] min-h-px min-w-px relative shrink-0 text-[#5a3e26] text-[8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                                    12/2025
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="content-stretch flex gap-px h-[24px] items-center overflow-clip relative shrink-0 w-[91px]" data-name="Content_Tools">
+                              <div className="relative shrink-0 size-[22px]" data-name="icn_figma">
+                                <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 22 22">
+                                  <g id="icn_figma">
+                                    <g id="Vector">
+                                      <path d={svgPaths.p38a21e80} fill="#F4511E" />
+                                      <path d={svgPaths.p2d04280} fill="#FF8A65" />
+                                      <path d={svgPaths.p2f8ddd00} fill="#29B6F6" />
+                                      <path d={svgPaths.p24abdc80} fill="#7C4DFF" />
+                                      <path d={svgPaths.p12a84f00} fill="var(--fill-0, #00E676)" />
+                                    </g>
+                                  </g>
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-[#f7f2ed] h-[47px] relative rounded-[6px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)] shrink-0 w-full" data-name="Content_Description">
+                          <div className="overflow-clip rounded-[inherit] size-full">
+                            <div className="content-stretch flex items-start px-[6px] py-[5.5px] relative size-full">
+                              <p className="basis-0 font-['Roboto:Regular',sans-serif] font-normal grow h-full leading-[normal] min-h-px min-w-px relative shrink-0 text-[#524e4a] text-[7px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+                                Lorem ipsum dolor sit amet consectetur. Egestas faucibus sit lacus odio vitae aliquet eleifend. At integer nulla leo id vel fusce scelerisque volutpat.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="bg-[#f7f2ed] relative rounded-[6px] shrink-0 w-full" data-name="Content_button">
+                          <div className="flex flex-row items-center justify-center overflow-clip rounded-[inherit] size-full">
+                            <div className="content-stretch flex items-center justify-center p-px relative w-full">
+                              <div className="content-stretch flex items-start relative shrink-0 w-[146px]" data-name="Button_Card">
+                                <div className="basis-0 bg-[#4d4b4a] grow h-[22px] min-h-px min-w-px relative rounded-[5px] shrink-0" data-name="Button">
+                                  <div className="flex flex-row items-center justify-center size-full">
+                                    <div className="content-stretch flex gap-[5px] items-center justify-center p-[5px] relative size-full">
+                                      <p className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#f7f2ed] text-[4px] text-nowrap" style={{ fontVariationSettings: "'wdth' 100" }}>
+                                        VER CASO DE ESTUDIO
+                                      </p>
+                                      <Wrapper>
+                                        <g id="share">
+                                          <path d={svgPaths.p36456c00} id="Icon" stroke="var(--stroke-1, #F7F2ED)" strokeLinejoin="round" />
+                                        </g>
+                                      </Wrapper>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div aria-hidden="true" className="absolute border-[#7e5635] border-[0px_1px] border-dashed inset-0 pointer-events-none" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute content-stretch flex flex-col h-[832px] items-start justify-between left-0 p-[38px] top-0 w-[222px]" data-name="Content-Side-Bar">
+        <div className="h-[224px] relative shrink-0 w-[184px]" data-name="Menu_Button">
+          <div className="absolute left-[101px] size-[82px] top-[102px]" data-name="B2X2">
+            <div className="absolute bg-[#4d4b4a] left-0 rounded-[22px] size-[82px] top-0" data-name="B1" />
+          </div>
+          <div className="absolute left-0 size-[82px] top-[102px]" data-name="B2X1">
+            <div className="absolute bg-[#4d4b4a] left-0 rounded-[22px] size-[82px] top-0" data-name="B1" />
+          </div>
+          <div className="absolute left-[102px] size-[82px] top-0" data-name="B1X2">
+            <div className="absolute bg-[#4d4b4a] left-0 rounded-[22px] size-[82px] top-0" data-name="B1" />
+          </div>
+          <div className="absolute left-0 size-[82px] top-0" data-name="B1x1">
+            <div className="absolute bg-[#4d4b4a] left-0 rounded-[22px] size-[82px] top-0" data-name="B1" />
+          </div>
+        </div>
+        <div className="h-[82px] relative shrink-0 w-[184px]" data-name="Content-Zoom-Button">
+          <div className="absolute left-0 size-[82px] top-0" data-name="Zoom_Button">
+            <div className="absolute bg-[#a16f44] border border-[#666463] border-dashed left-0 overflow-clip rounded-[22px] size-[82px] top-0" data-name="B1">
+              <div className="absolute left-px size-[38px] top-px" data-name="Zoom_Button">
+                <div className="absolute bg-[#4d4b4a] border border-[#666463] border-dashed inset-0 rounded-bl-[10px] rounded-br-[10px] rounded-tl-[20px] rounded-tr-[10px]" data-name="B1" />
+              </div>
+              <div className="absolute left-[-1px] size-[38px] top-[42px]" data-name="Zoom_Button">
+                <div className="absolute bg-[#f7f2ed] border border-[#666463] border-dashed inset-[-2.63%_-5.26%_2.63%_5.26%] rounded-bl-[20px] rounded-br-[10px] rounded-tl-[10px] rounded-tr-[10px]" data-name="B1" />
+              </div>
+              <div className="absolute bg-[#f7f2ed] border border-[#666463] border-dashed inset-[calc(51.22%-1px)_calc(2.44%-1px)_calc(2.44%-1px)_calc(51.22%-1px)] rounded-bl-[10px] rounded-br-[20px] rounded-tl-[10px] rounded-tr-[10px]" data-name="B1" />
+              <div className="absolute left-[41px] size-[38px] top-px" data-name="Zoom_Button">
+                <div className="absolute bg-[#f7f2ed] border border-[#666463] border-dashed inset-0 rounded-bl-[10px] rounded-br-[10px] rounded-tl-[10px] rounded-tr-[20px]" data-name="B1" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="absolute left-[47px] size-[64px] top-[47px]" data-name="Hit_area" />
+      <div className="absolute left-[149px] size-[64px] top-[47px]" data-name="Hit_area" />
+      <div className="absolute left-[149px] size-[64px] top-[149px]" data-name="Hit_area" />
+      <div className="absolute left-[47px] size-[64px] top-[149px]" data-name="Hit_area" />
+      <div className="absolute h-[443px] left-[223px] top-0 w-[398px]" data-name="Hit_area" />
+      <div className="absolute h-[389px] left-[173px] top-[443px] w-[448px]" data-name="Hit_area" />
+      <div className="absolute h-[389px] left-[640px] top-[443px] w-[640px]" data-name="Hit_area" />
+      <div className="absolute h-[443px] left-[640px] top-0 w-[640px]" data-name="Hit_area" />
+    </div>
+  );
+}
