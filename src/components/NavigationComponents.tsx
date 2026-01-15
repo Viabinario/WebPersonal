@@ -8,21 +8,32 @@ interface SimpleNavButtonProps {
   bgColor: string;
   onHover: () => void;
   onLeave: () => void;
+  sectionName: string;
 }
 
-function SimpleNavButton({ onClick, isActive, bgColor, onHover, onLeave }: SimpleNavButtonProps) {
+function SimpleNavButton({ onClick, isActive, bgColor, onHover, onLeave, sectionName }: SimpleNavButtonProps) {
   return (
     <button
       onClick={onClick}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
+      aria-label={`Navegar a la sección ${sectionName}`}
+      title={`Navegar a la sección ${sectionName}`}
       className={`relative w-14 h-14 md:w-16 md:h-16 lg:w-[82px] lg:h-[82px] rounded-[16px] md:rounded-[18px] lg:rounded-[22px] transition-all duration-300 ${
         isActive 
           ? 'scale-95 shadow-[inset_0px_4px_8px_rgba(0,0,0,0.3)]' 
           : 'hover:scale-105 hover:shadow-[0px_4px_8px_rgba(0,0,0,0.2)] shadow-[0px_2px_4px_rgba(0,0,0,0.1)]'
-      }`}
+      } group overflow-visible`}
       style={{ backgroundColor: bgColor }}
-    />
+    >
+      {/* Borde difuminado que se irradia en hover */}
+      <div 
+        className="absolute -inset-1 rounded-[18px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+        }}
+      />
+    </button>
   );
 }
 
@@ -55,6 +66,7 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             bgColor="#e8d8c9"
             onHover={() => setHoveredSection('presentacion')}
             onLeave={() => setHoveredSection(null)}
+            sectionName="Presentación"
           />
 
           {/* Top Right - Sobre Mí */}
@@ -64,6 +76,7 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             bgColor="#a16f44"
             onHover={() => setHoveredSection('sobre-mi')}
             onLeave={() => setHoveredSection(null)}
+            sectionName="Sobre mí"
           />
 
           {/* Bottom Left - Casos de Estudio (CAMBIADO) */}
@@ -73,6 +86,7 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             bgColor="#5a3e26"
             onHover={() => setHoveredSection('casos-estudio')}
             onLeave={() => setHoveredSection(null)}
+            sectionName="Casos de estudio"
           />
 
           {/* Bottom Right - Contacto (CAMBIADO) */}
@@ -82,6 +96,7 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             bgColor="#caa381"
             onHover={() => setHoveredSection('contacto')}
             onLeave={() => setHoveredSection(null)}
+            sectionName="Contacto"
           />
         </div>
 
@@ -106,18 +121,26 @@ export function ZoomGridButton({ isZoomed, onToggleZoom }: ZoomGridButtonProps) 
     <div className="fixed bottom-2 left-2 md:bottom-4 md:left-4 lg:bottom-[38px] lg:left-[38px] z-50">
       <button
         onClick={onToggleZoom}
-        className="relative w-14 h-14 md:w-16 md:h-16 lg:w-[82px] lg:h-[82px] rounded-[16px] md:rounded-[18px] lg:rounded-[22px] border border-[#666463] border-dashed overflow-clip bg-[#f7f2ed] transition-all hover:bg-[#e8d8c9]"
         aria-label={isZoomed ? 'Volver a la sección' : 'Ver todo el lienzo'}
+        title={isZoomed ? 'Volver a la sección' : 'Ver todo el lienzo'}
+        className="relative w-14 h-14 md:w-16 md:h-16 lg:w-[82px] lg:h-[82px] rounded-[16px] md:rounded-[18px] lg:rounded-[22px] border border-[#666463] border-dashed overflow-visible bg-[#f7f2ed] transition-all hover:bg-[#e8d8c9] group"
       >
+        {/* Borde difuminado que se irradia en hover */}
+        <div 
+          className="absolute -inset-1 rounded-[18px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={{
+            boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+          }}
+        />
         {/* Four quadrants representing the sections */}
-        <div className="absolute left-px top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px]">
+        <div className="absolute left-px top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
           <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[12px] md:rounded-tl-[16px] lg:rounded-tl-[20px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px]" />
         </div>
-        <div className="absolute left-[-1px] top-[30px] md:top-[34px] lg:top-[42px] w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px]">
+        <div className="absolute left-[-1px] top-[30px] md:top-[34px] lg:top-[42px] w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
           <div className="absolute border border-[#666463] border-dashed rounded-bl-[12px] md:rounded-bl-[16px] lg:rounded-bl-[20px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px]" style={{ inset: 'calc(-2.63%) calc(-5.26%) calc(2.63%) calc(5.26%)' }} />
         </div>
-        <div className="absolute border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[12px] md:rounded-br-[16px] lg:rounded-br-[20px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px]" style={{ inset: 'calc(51.22% - 1px) calc(2.44% - 1px) calc(2.44% - 1px) calc(51.22% - 1px)' }} />
-        <div className="absolute left-[29px] md:left-[33px] lg:left-[41px] top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px]">
+        <div className="absolute border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[12px] md:rounded-br-[16px] lg:rounded-br-[20px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px] z-10" style={{ inset: 'calc(51.22% - 1px) calc(2.44% - 1px) calc(2.44% - 1px) calc(51.22% - 1px)' }} />
+        <div className="absolute left-[29px] md:left-[33px] lg:left-[41px] top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
           <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[12px] md:rounded-tr-[16px] lg:rounded-tr-[20px]" />
         </div>
       </button>

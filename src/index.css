@@ -6,7 +6,7 @@
   * {
     @apply border-[#5a3e26];
   }
-  
+
   body {
     @apply bg-[#f7f2ed] text-[#362517];
     font-family: 'Roboto', sans-serif;

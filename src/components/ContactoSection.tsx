@@ -73,28 +73,6 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   const [rateLimitError, setRateLimitError] = useState(false);
   const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Calculate vertical position for error modals based on field
-  const getErrorModalTopPosition = (field: string): number => {
-    const paddingTop = 22; // pt-[22px]
-    const inputHeight = 48;
-    const gap = 2; // gap-[2px] between inputs
-    const fieldGap = 4; // gap-[4px] within each field container
-    
-    switch(field) {
-      case 'nombre':
-        return paddingTop + 20; // Centered with first input
-      case 'email':
-        return paddingTop + (inputHeight + gap + fieldGap) + 20;
-      case 'telefono':
-        return paddingTop + 2 * (inputHeight + gap + fieldGap) + 20;
-      case 'asunto':
-        return paddingTop + 3 * (inputHeight + gap + fieldGap) + 20;
-      case 'mensaje':
-        return paddingTop + 4 * (inputHeight + gap + fieldGap) + 60; // mensaje is taller
-      default:
-        return paddingTop;
-    }
-  };
 
   const handleClick = () => {
     if (isZoomed && onNavigate) {
@@ -298,7 +276,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
       // Crear AbortController para timeout
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
-
+      
       const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-44bf6176/contact`, {
         method: 'POST',
         headers: {
@@ -380,10 +358,10 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
           });
         }
       } else {
-        setErrorModal({ 
-          field: 'general', 
+      setErrorModal({ 
+        field: 'general', 
           message: 'Error inesperado. Por favor, intenta nuevamente más tarde.' 
-        });
+      });
       }
       
       console.error('Error al enviar formulario:', error);
@@ -498,12 +476,18 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   return (
     <div className="w-full min-h-screen lg:w-[1280px] lg:h-[832px] bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-0">
       {/* Wrapper container for form and modals */}
-      <div className="relative w-full h-full flex items-center justify-center">
-        {/* Contact Form - Fondo #e5e2de con campos a todo el ancho menos 10px por lado */}
-        <div 
-          className={`bg-[#e5e2de] flex flex-col gap-[10px] px-[10px] py-[22px] relative rounded-[22px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] w-full max-w-[400px] mx-auto ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
-          onClick={handleClick}
-        >
+      <div className="relative w-full h-full flex items-center justify-end">
+        {/* Container for form and modals */}
+        <div className="relative w-full max-w-[400px] lg:absolute lg:right-[38px] lg:top-1/2 lg:-translate-y-1/2">
+          {/* Contact Form - Fondo #e5e2de con campos a todo el ancho menos 10px por lado */}
+          <div 
+            className={`bg-[#e5e2de] flex flex-col gap-[10px] px-[10px] py-[22px] relative rounded-[22px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] w-full ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
+            onClick={handleClick}
+            aria-label={isZoomed ? "Hacer clic para navegar a la sección de Contacto" : undefined}
+            title={isZoomed ? "Hacer clic para navegar a la sección de Contacto" : undefined}
+            role={isZoomed ? "button" : undefined}
+            tabIndex={isZoomed ? 0 : undefined}
+          >
           {/* Contenedor de campos - gap-[5px] entre campos, w-full para ocupar todo el ancho */}
           <div className="flex flex-col gap-[5px] w-full">
             {/* Name Input */}
@@ -697,7 +681,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       )}
                     </div>
                     {/* Character Counter */}
-                    <div className="absolute bottom-0 left-0 text-[10px] font-['Roboto:Regular',sans-serif] text-[#5a3e26]">
+                    <div className="absolute bottom-0 left-3 text-[10px] font-['Roboto:Regular',sans-serif] text-[#5a3e26]">
                       {formData.mensaje.length}/1000
                     </div>
                   </div>
@@ -707,16 +691,25 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
 
             {/* Buttons */}
-            <div className="h-[44px] relative shrink-0 w-full flex items-center justify-between">
+            <div className="h-[44px] relative shrink-0 w-full flex items-center justify-between pt-[10px]">
               <button 
                 onClick={(e) => { e.stopPropagation(); handleDelete(); }}
-                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid"
+                aria-label="Borrar todos los campos del formulario"
+                title="Borrar todos los campos del formulario"
+                className="relative flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid group overflow-visible transition-all duration-300"
                 style={{ 
                   backgroundColor: getDeleteButtonColor(),
                   borderColor: getDeleteButtonBorderColor()
                 }}
               >
-                <div className="w-[24px] h-[24px]">
+                {/* Borde difuminado en hover */}
+                <div 
+                  className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+                  }}
+                />
+                <div className="w-[24px] h-[24px] relative z-10">
                   <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
                     <path d={svgPaths.p327d2300} stroke={getDeleteIconColor()} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                   </svg>
@@ -725,13 +718,22 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
               <button 
                 onClick={(e) => { e.stopPropagation(); handleSend(); }}
                 disabled={isSubmitting}
-                className="flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label={isSubmitting ? "Enviando mensaje..." : "Enviar mensaje de contacto"}
+                title={isSubmitting ? "Enviando mensaje..." : "Enviar mensaje de contacto"}
+                className="relative flex gap-[10px] h-[44px] items-center justify-center p-[10px] rounded-full w-[88px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] border border-solid disabled:opacity-50 disabled:cursor-not-allowed group overflow-visible transition-all duration-300"
                 style={{ 
                   backgroundColor: getSendButtonColor(),
                   borderColor: getSendButtonBorderColor()
                 }}
               >
-                <div className="w-[24px] h-[24px]">
+                {/* Borde difuminado en hover */}
+                <div 
+                  className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none disabled:opacity-0"
+                  style={{
+                    boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+                  }}
+                />
+                <div className="w-[24px] h-[24px] relative z-10">
                   <svg className="block w-full h-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
                     <path d={svgPaths.p18e0c400} stroke={getSendIconColor()} strokeLinecap="round" strokeWidth="2" />
                   </svg>
@@ -740,33 +742,30 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             </div>
           </div>
           
-          {/* Borde del formulario */}
-          <div className="absolute inset-0 rounded-[22px] pointer-events-none">
-            <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 rounded-[22px]" />
+            {/* Borde del formulario */}
+            <div className="absolute inset-0 rounded-[22px] pointer-events-none">
+              <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 rounded-[22px]" />
+            </div>
           </div>
-        </div>
 
-        {/* Success Modal */}
-        {showSuccessModal && (
-          <div className="absolute left-full ml-4 lg:left-[510px] top-1/2 transform -translate-y-1/2 bg-[#295120] flex flex-col h-[88px] items-center justify-center overflow-clip rounded-[22px] shadow-[0px_54px_15px_0px_rgba(0,0,0,0),0px_34px_14px_0px_rgba(0,0,0,0.02),0px_19px_12px_0px_rgba(0,0,0,0.07),0px_9px_9px_0px_rgba(0,0,0,0.12),0px_2px_5px_0px_rgba(0,0,0,0.14)] w-[184px]">
-            <div className="flex flex-col items-center px-[7px] py-[23px] w-full h-full">
+          {/* Success Modal */}
+          {showSuccessModal && (
+            <div className="absolute left-0 right-0 mx-auto bottom-full mb-[5px] bg-[#295120] flex items-center justify-center h-[48px] overflow-clip rounded-[16px] shadow-[0px_54px_15px_0px_rgba(0,0,0,0),0px_34px_14px_0px_rgba(0,0,0,0.02),0px_19px_12px_0px_rgba(0,0,0,0.07),0px_9px_9px_0px_rgba(0,0,0,0.12),0px_2px_5px_0px_rgba(0,0,0,0.14)] w-full px-[7px]">
               <p className="font-['Roboto:Regular',sans-serif] font-normal text-[14px] text-center text-white leading-normal">
                 Mensaje enviado exitosamente
               </p>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Error Modal */}
-        {errorModal && (
-          <div className="absolute left-full ml-4 lg:left-[510px] bg-[#4d0d0d] flex flex-col h-[88px] items-center justify-center overflow-clip rounded-[22px] shadow-[0px_54px_15px_0px_rgba(0,0,0,0),0px_34px_14px_0px_rgba(0,0,0,0.02),0px_19px_12px_0px_rgba(0,0,0,0.07),0px_9px_9px_0px_rgba(0,0,0,0.12),0px_2px_5px_0px_rgba(0,0,0,0.14)] w-[184px]" style={{ top: `${getErrorModalTopPosition(errorModal.field)}px` }}>
-            <div className="flex flex-col items-center px-[7px] py-[23px] w-full h-full">
+          {/* Error Modal */}
+          {errorModal && (
+            <div className="absolute left-0 right-0 mx-auto bottom-full mb-[5px] bg-[#4d0d0d] flex items-center justify-center h-[48px] overflow-clip rounded-[16px] shadow-[0px_54px_15px_0px_rgba(0,0,0,0),0px_34px_14px_0px_rgba(0,0,0,0.02),0px_19px_12px_0px_rgba(0,0,0,0.07),0px_9px_9px_0px_rgba(0,0,0,0.12),0px_2px_5px_0px_rgba(0,0,0,0.14)] w-full px-[7px]">
               <p className="font-['Roboto:Regular',sans-serif] font-normal text-[14px] text-center text-white leading-normal">
                 {errorModal.message}
               </p>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

@@ -148,3 +148,4 @@ El proyecto incluye un `.gitignore` completo que protege:
 ## 📄 Licencia
 
 Este proyecto es privado y personal.
+  

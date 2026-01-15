@@ -23,6 +23,10 @@ function CaseStudyCard({ title, date, description, image, isZoomed = false, onNa
     <div 
       className={`min-w-[280px] md:min-w-[400px] lg:min-w-[592px] max-w-[592px] h-auto min-h-[286px] lg:h-[286px] bg-[#b2b0ad] hover:bg-[#c5c3c0] rounded-[22px] p-3 md:p-4 lg:p-[12px] flex flex-col md:flex-row gap-3 md:gap-4 lg:gap-[12px] transition-all duration-300 group ${isZoomed ? 'cursor-pointer hover:scale-105' : ''}`}
       onClick={handleClick}
+      aria-label={isZoomed ? `Hacer clic para navegar al caso de estudio: ${title}` : undefined}
+      title={isZoomed ? `Hacer clic para navegar al caso de estudio: ${title}` : undefined}
+      role={isZoomed ? "button" : undefined}
+      tabIndex={isZoomed ? 0 : undefined}
     >
       {/* Image */}
       <div className="w-full md:w-[260px] h-[200px] md:h-[262px] lg:h-[262px] rounded-[12px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] overflow-hidden flex-shrink-0">
@@ -76,7 +80,11 @@ function CaseStudyCard({ title, date, description, image, isZoomed = false, onNa
 
         {/* Button */}
         <div className="bg-[#f7f2ed] rounded-[12px] p-[2px]">
-          <button className="w-full bg-[#4d4b4a] rounded-[10px] h-[44px] flex items-center justify-center gap-[10px] px-[10px] hover:bg-[#3a3938] hover:scale-[1.02] transition-all duration-300 shadow-[0px_2px_4px_rgba(0,0,0,0.2)] hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]">
+          <button 
+            className="w-full bg-[#4d4b4a] rounded-[10px] h-[44px] flex items-center justify-center gap-[10px] px-[10px] hover:bg-[#3a3938] hover:scale-[1.02] transition-all duration-300 shadow-[0px_2px_4px_rgba(0,0,0,0.2)] hover:shadow-[0px_4px_8px_rgba(0,0,0,0.3)]"
+            aria-label={`Ver detalles del caso de estudio: ${title}`}
+            title={`Ver detalles del caso de estudio: ${title}`}
+          >
             <span className="font-['Roboto:Bold',sans-serif] font-bold text-[#f7f2ed] text-[16px]">
               VER CASO DE ESTUDIO
             </span>
