@@ -4,6 +4,10 @@
   import path from 'path';
 
   export default defineConfig({
+    // Base path para GitHub Pages
+    // Si tu repo es 'username.github.io', usa: base: '/'
+    // Si tu repo tiene otro nombre, usa: base: '/nombre-del-repo/'
+    base: process.env.GITHUB_PAGES === 'true' ? '/DEV_WebPersonal/' : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
