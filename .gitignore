@@ -23,8 +23,40 @@ config.json
 *.token
 
 # Archivos de Supabase con información sensible
-# NOTA: Si info.tsx contiene credenciales, debe ser excluido o usar variables de entorno
-# src/utils/supabase/info.tsx  # Descomentar si contiene credenciales sensibles
+# NOTA: info.tsx contiene credenciales hardcodeadas - DEBE estar excluido
+src/utils/supabase/info.tsx
+
+# Archivos de configuración de Supabase con credenciales
+**/supabase/config.toml
+**/supabase/.env
+**/supabase/.env.local
+supabase/.env
+supabase/.env.local
+
+# Service role keys y keys privadas de Supabase
+**/*service*role*key*
+**/*supabase*service*key*
+**/*supabase*anon*key*
+supabase_service_role_key*
+supabase_anon_key*
+
+# Archivos de migración de Supabase con datos sensibles
+supabase/migrations/*.sql
+supabase/seed.sql
+
+# Archivos de Edge Functions con variables de entorno
+supabase/functions/.env
+supabase/functions/.env.local
+**/supabase/functions/**/.env*
+src/supabase/functions/**/.env*
+
+# Archivos de logs de Supabase
+supabase/logs/
+*.supabase.log
+
+# Archivos de backup de Supabase
+*.supabase.backup
+supabase/backups/
 
 # Variables de entorno
 .envrc
@@ -269,6 +301,17 @@ ui-debug.log
 # Archivos de documentación generados
 docs/build/
 site/
+
+# Archivos de guías e instrucciones (excepto README.md que es público)
+ENV_SETUP.md
+SECURITY_AUDIT_SUPABASE.md
+PUBLIC_BRANCH_SETUP.md
+GITHUB_PAGES_DEPLOY.md
+CLEANUP_REPORT.md
+SECURITY.md
+GITIGNORE_GUIDE.md
+src/Attributions.md
+src/guidelines/Guidelines.md
 
 # ============================================
 # NOTAS IMPORTANTES

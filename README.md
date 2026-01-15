@@ -105,11 +105,7 @@ VITE_SUPABASE_PROJECT_ID=tu-project-id
 VITE_SUPABASE_PUBLIC_ANON_KEY=tu-anon-key
 ```
 
-3. Actualiza `src/utils/supabase/info.tsx` para usar variables de entorno:
-```typescript
-export const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-export const publicAnonKey = import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY;
-```
+3. El archivo `src/utils/supabase/info.tsx` ya está configurado para usar variables de entorno.
 
 **Nota:** El archivo `.env` está en `.gitignore` y NO se subirá al repositorio.
 
