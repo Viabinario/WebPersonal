@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - gh-pages-source  # Cambia esto por el nombre de tu rama pública
+      - fsanchez  # Rama pública para GitHub Pages
   workflow_dispatch:
 
 permissions:
@@ -36,9 +36,9 @@ jobs:
         env:
           # Configura estas variables en GitHub Secrets (Settings → Secrets and variables → Actions)
           GITHUB_PAGES: 'true'
-          # Descomenta y configura estos secrets en GitHub:
-          # VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
-          # VITE_SUPABASE_PUBLIC_ANON_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_ANON_KEY }}
+          # Variables de entorno de Supabase (configurar en GitHub Secrets)
+          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
+          VITE_SUPABASE_PUBLIC_ANON_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_ANON_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
