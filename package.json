@@ -3,6 +3,7 @@
   "name": "diseño-de-sitio-web-personal-v2",
       "version": "0.1.0",
       "private": true,
+      "homepage": "https://fsanchez.suroesteintegral.com",
   "type": "module",
       "dependencies": {
           "@jsr/supabase__supabase-js": "^2.49.8",
