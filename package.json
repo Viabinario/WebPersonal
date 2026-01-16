@@ -2,6 +2,7 @@
   {
   "name": "diseño-de-sitio-web-personal-v2",
       "version": "0.1.0",
+      "homepage": "https://fsanchez.suroesteintegral.com",
       "private": true,
   "type": "module",
       "dependencies": {
