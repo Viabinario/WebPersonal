@@ -7,7 +7,7 @@
     // Base path para GitHub Pages
     // Repositorio: WebPersonal
     // URL será: https://viabinario.github.io/WebPersonal/
-    base: process.env.GITHUB_PAGES === 'true' ? '/WebPersonal/' : '/',
+    base: '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
