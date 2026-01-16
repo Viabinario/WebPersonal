@@ -4,7 +4,7 @@
       "version": "0.1.0",
       "private": true,
       "homepage": "https://fsanchez.suroesteintegral.com",
-  "type": "module",
+      "type": "module",
       "dependencies": {
           "@jsr/supabase__supabase-js": "^2.49.8",
           "@radix-ui/react-accordion": "^1.2.3",
