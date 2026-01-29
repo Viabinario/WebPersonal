@@ -118,7 +118,7 @@ interface ZoomGridButtonProps {
 
 export function ZoomGridButton({ isZoomed, onToggleZoom }: ZoomGridButtonProps) {
   return (
-    <div className="fixed bottom-2 left-2 md:bottom-4 md:left-4 lg:bottom-[38px] lg:left-[38px] z-50">
+    <div className="fixed bottom-[12px] left-2 md:left-4 lg:left-[38px] z-50">
       <button
         onClick={onToggleZoom}
         aria-label={isZoomed ? 'Volver a la sección' : 'Ver todo el lienzo'}

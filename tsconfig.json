@@ -28,7 +28,7 @@
   },
   "include": ["src"],
   "exclude": [
-    "src/imports",
+    "reference",
     "src/supabase",
     "src/components/ui",
     "src/components/NavigationMenuNew.tsx",

@@ -32,10 +32,7 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
@@ -74,7 +71,7 @@ export default function App() {
         transformOrigin: '0 0',
       };
     } else {
-      // Show active section
+      // Show active section — content left-aligned (no empty zone on left)
       const position = sectionPositions[activeSection];
       return {
         transform: `translate(${position.x}px, ${position.y}px)`,
@@ -144,7 +141,7 @@ export default function App() {
           )}
           {activeSection === 'casos-estudio' && (
             <div className="w-full min-h-screen">
-              <CasosEstudioSection isZoomed={false} onNavigate={handleNavigate} />
+              <CasosEstudioSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
             </div>
           )}
           {activeSection === 'contacto' && (
@@ -157,6 +154,9 @@ export default function App() {
     );
   }
 
+  // When in Casos de estudio (not zoomed): extend viewport to browser right edge without deforming content
+  const showCasosEstudioViewportExtension = !isZoomed && activeSection === 'casos-estudio';
+
   // Desktop layout: original canvas design
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#f7f2ed] relative">
@@ -166,12 +166,23 @@ export default function App() {
       {/* Fixed Zoom Button */}
       <ZoomGridButton isZoomed={isZoomed} onToggleZoom={handleToggleZoom} />
 
-      {/* Canvas Container */}
+      {/* Casos de estudio (not zoomed): viewport from left 0 to right 38px — no empty zone left or right */}
       <div
-        className="absolute top-0 left-0 transition-transform duration-700 ease-in-out"
-        style={getCanvasTransform()}
+        className={`absolute top-0 left-0 bottom-0 overflow-hidden ${showCasosEstudioViewportExtension ? 'right-[38px]' : 'right-0'}`}
       >
-        {/* Large Canvas - 2x2 Grid */}
+        {/* From 1280px to clip edge: same background so no visible empty zone (Contacto section hidden) */}
+        {showCasosEstudioViewportExtension && (
+          <div
+            className="absolute top-0 bottom-0 left-[1280px] right-0 z-10 pointer-events-none bg-[#f7f2ed]"
+            aria-hidden
+          />
+        )}
+        {/* Canvas Container */}
+        <div
+          className="absolute top-0 left-0 transition-transform duration-700 ease-in-out"
+          style={getCanvasTransform()}
+        >
+          {/* Large Canvas - 2x2 Grid */}
         <div className="w-[2560px] h-[1664px] grid grid-cols-2 grid-rows-2 relative">
           {/* Top Left - Presentación */}
           <div className="w-[1280px] h-[832px]">
@@ -185,7 +196,7 @@ export default function App() {
 
           {/* Bottom Left - Casos de Estudio */}
           <div className="w-[1280px] h-[832px]">
-            <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} />
+            <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
           </div>
 
           {/* Bottom Right - Contacto */}
@@ -206,6 +217,7 @@ export default function App() {
             />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
