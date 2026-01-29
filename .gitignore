@@ -314,6 +314,9 @@ GITIGNORE_GUIDE.md
 src/Attributions.md
 src/guidelines/Guidelines.md
 
+# Archivos de referencia
+reference/
+
 # ============================================
 # NOTAS IMPORTANTES
 # ============================================
