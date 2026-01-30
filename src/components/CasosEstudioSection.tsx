@@ -42,7 +42,7 @@ function CaseButton({ onClick, isActive, label, overContent = false }: CaseButto
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative shrink-0 flex items-center gap-[10px] transition-all duration-300"
+      className="relative shrink-0 flex items-center gap-[10px] transition-all duration-300 group"
       style={{
         width: (isActive || isHovered) && label ? 'auto' : '48px',
         opacity: isOpaque ? 1 : 0.5,
@@ -53,12 +53,21 @@ function CaseButton({ onClick, isActive, label, overContent = false }: CaseButto
     >
       {/* Square button with background - 48x48px */}
       <div
-        className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 ${
+        className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 overflow-visible ${
           isActive ? 'bg-[#4d4b4a]' : 'bg-[#4d4b4a] hover:bg-[#3a3938]'
         }`}
       >
         {isActive && (
           <div className="absolute inset-0 border-4 border-[#5a3e26] border-solid rounded-[12px] pointer-events-none" />
+        )}
+        {/* Borde difuminado que se irradia en hover (mismo efecto que menú principal) */}
+        {!isActive && (
+          <div
+            className="absolute -inset-1 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            style={{
+              boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+            }}
+          />
         )}
       </div>
 
@@ -93,7 +102,7 @@ const ZOOMED_PLACEHOLDER_STYLE = `
   }
   @keyframes casos-estudio-ripple {
     0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(4.333); opacity: 0; }
+    100% { transform: scale(9.333); opacity: 0; }
   }
   .casos-estudio-ripple {
     animation: casos-estudio-ripple 1.4s ease-out infinite;
@@ -167,7 +176,7 @@ function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enterin
           style={moverStyle}
           onTransitionEnd={handleTransitionEnd}
         >
-          {/* Ondas cuadradas que se disuelven a 80px del perímetro */}
+          {/* Ondas cuadradas que se disuelven a 200px del perímetro */}
           <div
             className="casos-estudio-ripple absolute w-[48px] h-[48px] rounded-[12px] pointer-events-none"
             style={{ animationDelay: '0s' }}
@@ -376,11 +385,10 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     setPlaceholderEnteringFromButtons(false);
   };
 
-  // Clic en el fondo de la sección (fuera del placeholder): zoom in directo
+  // Clic en la sección: zoom in. En modo zoom out toda la sección es siempre hit area (menú o case activo), sin depender de otras interacciones.
   const handleSectionClick = () => {
-    if (_isZoomed && _onNavigate && !placeholderExiting) {
-      _onNavigate('casos-estudio');
-    }
+    if (!_isZoomed || !_onNavigate || placeholderExiting) return;
+    _onNavigate('casos-estudio');
   };
 
   // Delegación de clic: abrir lightbox con imagen original (legible) si existe en public/originals/; si no, la del caso
@@ -521,13 +529,14 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     return (
       <div
         className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden ${_isZoomed ? 'cursor-pointer hover:opacity-95 transition-opacity duration-200' : ''}`}
-        onClick={handleSectionClick}
+        onClick={_isZoomed ? handleSectionClick : undefined}
         aria-label={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
         title={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
         role={_isZoomed ? 'button' : undefined}
         tabIndex={_isZoomed ? 0 : undefined}
       >
-        {(_isZoomed || placeholderExiting) && (
+        {/* Botón animado cuando no hay case activo; hit area de toda la sección siempre activa en zoom out */}
+        {(_isZoomed || placeholderExiting) && currentView === 'menu' && (
             <ZoomedPlaceholder
               onClick={handlePlaceholderClick}
               isExiting={placeholderExiting}
@@ -541,25 +550,9 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     );
   }
 
-  // Case Studies View with horizontal scroll (case1 or case2 only); buttons fixed at zoom height
+  // Case Studies View (case1 o case2): no botón animado; hit area de toda la zona cuando zoom out
   return (
-    <div
-      className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden ${_isZoomed ? 'cursor-pointer hover:opacity-95 transition-opacity duration-200' : ''}`}
-      onClick={handleSectionClick}
-      aria-label={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
-      title={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
-      role={_isZoomed ? 'button' : undefined}
-      tabIndex={_isZoomed ? 0 : undefined}
-    >
-      {(_isZoomed || placeholderExiting) && (
-        <ZoomedPlaceholder
-          onClick={handlePlaceholderClick}
-          isExiting={placeholderExiting}
-          onExitComplete={handlePlaceholderExitComplete}
-          enteringFromButtons={placeholderEnteringFromButtons}
-          onEnterComplete={handlePlaceholderEnterComplete}
-        />
-      )}
+    <div className="relative w-full h-full bg-[#f7f2ed] overflow-hidden">
       <div
         ref={scrollContainerRef}
         className="absolute inset-0 overflow-x-auto overflow-y-hidden"
@@ -612,6 +605,18 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           )}
         </div>
       </div>
+
+      {/* Overlay hit area cuando zoom out con case activo: encima del contenido, toda la cuadrícula clicable para zoom in */}
+      {_isZoomed && (
+        <div
+          className="absolute inset-0 z-30 cursor-pointer hover:opacity-95 transition-opacity duration-200"
+          onClick={handleSectionClick}
+          aria-label="Hacer clic para navegar a la sección Casos de Estudio"
+          title="Hacer clic para navegar a la sección Casos de Estudio"
+          role="button"
+          tabIndex={0}
+        />
+      )}
 
       {/* Case buttons + ScrollProgress: solo en Casos de Estudio y sin zoom */}
       {showCaseStudyUI &&
