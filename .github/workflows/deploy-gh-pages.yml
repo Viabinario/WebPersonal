@@ -34,11 +34,9 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Configura estas variables en GitHub Secrets (Settings → Secrets and variables → Actions)
           GITHUB_PAGES: 'true'
-          # Variables de entorno de Supabase (configurar en GitHub Secrets)
-          VITE_SUPABASE_PROJECT_ID: ${{ secrets.VITE_SUPABASE_PROJECT_ID }}
-          VITE_SUPABASE_PUBLIC_ANON_KEY: ${{ secrets.VITE_SUPABASE_PUBLIC_ANON_KEY }}
+          # Variable de repo en GitHub: Settings → Secrets and variables → Actions → Variables (el aviso del linter es falso positivo)
+          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
