@@ -42,10 +42,16 @@ El formulario de contacto envía los mensajes por email usando [Resend](https://
 7. Pulsa **Deploy**. Cuando termine, tendrás una URL como `https://tu-proyecto.vercel.app`.
 8. La ruta del formulario de contacto será: `https://tu-proyecto.vercel.app/api/contact`.
 
-**Si el build falla en Vercel:** el proyecto incluye un `vercel.json` que fija el comando de build y la salida. Revisa el **mensaje de error completo** en la pestaña **Deployments** → clic en el deployment fallido → **Building** (o **Logs**). Errores frecuentes:
+**Rama por defecto (main vs tu rama):** Vercel construye por defecto desde la rama **Production** (normalmente `main`). Si tu código está en otra rama:
+- **Opción A – Usar tu rama como producción:** en Vercel → **Settings** → **Git** → **Production Branch**, cambia a tu rama (ej. `dev`, `resend`) y guarda. Los próximos deploys de producción usarán esa rama.
+- **Opción B – Al crear el proyecto:** al importar el repo, tras elegir el repositorio puedes elegir la rama en el desplegable antes de **Deploy**. La rama que elijas será la **Production Branch** inicial.
+- **Opción C – Merge a main:** haz merge de tu rama a `main` y empuja; Vercel desplegará automáticamente desde `main`.
+
+**Si el build falla en Vercel:** el proyecto incluye un `vercel.json` que fija el comando de build (`npx vite build`) y la salida. Revisa el **mensaje de error completo** en **Deployments** → clic en el deployment fallido → **Building** (o **Logs**). Errores frecuentes:
+- **`Permission denied` en vite:** el build usa `npx vite build` para evitar problemas de permisos en el binario. Si sigue fallando, en Vercel → **Settings** → **General** → **Build Command** pon `npx vite build`.
 - **`npm install` falla:** comprueba que no haya dependencias que requieran compilación nativa o que fallen en Linux. Si usas `package-lock.json`, asegúrate de subirlo al repo.
-- **Build command no encontrado:** en el dashboard de Vercel, en **Settings** → **General** → **Build & Development Settings**, pon **Build Command** = `npm run build` y **Output Directory** = `dist`.
-- **Node:** el proyecto pide Node >= 18. En Vercel → **Settings** → **General** → **Node.js Version** puedes fijar **18.x** o **20.x**.
+- **Build command no encontrado:** en **Settings** → **General** → **Build & Development Settings**, pon **Build Command** = `npx vite build` y **Output Directory** = `dist`.
+- **Node:** el proyecto pide Node >= 18. En **Settings** → **General** → **Node.js Version** puedes fijar **18.x** o **20.x**.
 
 ---
 
