@@ -43,7 +43,7 @@ El formulario de contacto envía los mensajes por email usando [Resend](https://
 8. La ruta del formulario de contacto será: `https://tu-proyecto.vercel.app/api/contact`.
 
 **Rama por defecto (main vs tu rama):** Vercel construye por defecto desde la rama **Production** (normalmente `main`). Si tu código está en otra rama:
-- **Opción A – Usar tu rama como producción:** en Vercel → **Settings** → **Git** → **Production Branch**, cambia a tu rama (ej. `dev`, `resend`) y guarda. Los próximos deploys de producción usarán esa rama.
+- **Opción A – Usar tu rama como producción:** en Vercel → **Settings** → **Environments** (menú izquierdo). En esa página verás la sección **Production Branch**; ahí puedes elegir tu rama (ej. `dev`, `resend`) y pulsar **Save**. Los próximos deploys de producción usarán esa rama.
 - **Opción B – Al crear el proyecto:** al importar el repo, tras elegir el repositorio puedes elegir la rama en el desplegable antes de **Deploy**. La rama que elijas será la **Production Branch** inicial.
 - **Opción C – Merge a main:** haz merge de tu rama a `main` y empuja; Vercel desplegará automáticamente desde `main`.
 
