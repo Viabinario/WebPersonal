@@ -4,9 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    // Base path para GitHub Pages (proyecto = subpath /WebPersonal/).
-    // Con base correcto, los .js se piden en la ruta buena y el servidor devuelve MIME correcto.
-    base: '/WebPersonal/',
+    // Dominio propio sirve en raíz; base '/' para que los scripts sean /assets/... (no /WebPersonal/assets/...)
+    base: '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

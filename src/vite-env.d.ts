@@ -1,9 +1,8 @@
 /// <reference types="vite/client" />
 
-// Variables de entorno de Supabase
+// Variables de entorno (Vite sustituye en build)
 interface ImportMetaEnv {
-  readonly VITE_SUPABASE_PROJECT_ID: string;
-  readonly VITE_SUPABASE_PUBLIC_ANON_KEY: string;
+  readonly VITE_CONTACT_API_URL?: string;
 }
 
 interface ImportMeta {

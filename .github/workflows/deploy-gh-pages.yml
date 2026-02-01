@@ -38,6 +38,12 @@ jobs:
           # Variable de repo en GitHub: Settings → Secrets and variables → Actions → Variables (el aviso del linter es falso positivo)
           VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
 
+      - name: Verificar salida del build (compatibilidad GitHub Pages)
+        run: |
+          ls -la dist/
+          ls -la dist/assets/ 2>/dev/null || true
+          head -5 dist/index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
