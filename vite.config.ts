@@ -4,10 +4,9 @@
   import path from 'path';
 
   export default defineConfig({
-    // Base path para GitHub Pages
-    // Repositorio: WebPersonal
-    // URL será: https://viabinario.github.io/WebPersonal/
-    base: '/',
+    // Base path para GitHub Pages (proyecto = subpath /WebPersonal/).
+    // Con base correcto, los .js se piden en la ruta buena y el servidor devuelve MIME correcto.
+    base: '/WebPersonal/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
