@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import svgPaths from "../imports/svg-pj45jcyo5z";
 import svgPathsSuccess from "../imports/svg-ug55i8e7pd";
 import svgPathsError from "../imports/svg-nd4dsni8hv";
-import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { contactApiUrl } from '../utils/contactApi';
 import {
   validateAndSanitizeName,
   validateAndSanitizeEmail,
@@ -263,7 +263,16 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     setIsSubmitting(true);
     setRateLimitError(false);
 
-    // Send data to Supabase con datos sanitizados
+    // Enviar datos al endpoint de contacto (Resend u otro backend)
+    if (!contactApiUrl) {
+      setErrorModal({
+        field: 'general',
+        message: 'El formulario de contacto no está configurado. Configura VITE_CONTACT_API_URL.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const sanitizedData = {
         nombre: sanitizedNombre,
@@ -273,16 +282,12 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
         mensaje: sanitizedMensaje
       };
 
-      // Crear AbortController para timeout
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos
-      
-      const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-44bf6176/contact`, {
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+      const response = await fetch(contactApiUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${publicAnonKey}`
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(sanitizedData),
         signal: controller.signal
       });
