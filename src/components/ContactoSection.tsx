@@ -217,7 +217,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
               message = 'Ingresar email válido';
               break;
             case 'telefono':
-              message = 'Ingresar teléfono válido (9–20 dígitos, ej: 612 345 678)';
+              message = 'Ingresar teléfono válido (9–20 dígitos, ej: 000 000 000)';
               break;
             case 'asunto':
               message = 'Ingresar asunto (mín. 3 caracteres)';
