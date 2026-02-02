@@ -74,7 +74,7 @@ DEV_WebPersonal/
 - **Vite 6.3.5**: Build tool y dev server
 - **Tailwind CSS 3.4.13**: Framework de CSS utility-first
 - **Radix UI**: Componentes accesibles
-- **Supabase**: Backend para formulario de contacto
+- **Resend**: Envío de emails del formulario de contacto (vía API de contacto)
 
 ## 📱 Responsive Design
 
@@ -86,28 +86,23 @@ El sitio está optimizado para:
 
 ### Variables de Entorno
 
-El proyecto utiliza Supabase para el formulario de contacto. 
-
-**⚠️ IMPORTANTE - Seguridad:**
-- Las credenciales NO deben estar hardcodeadas en el código
-- Usa variables de entorno para credenciales sensibles
+El formulario de contacto se gestiona con **Resend** (API de envío de emails). La configuración se hace con variables de entorno.
 
 **Configuración recomendada:**
 
-1. Copia el archivo de ejemplo:
+1. Copia el archivo de ejemplo (si existe):
 ```bash
 cp .env.example .env
 ```
 
-2. Edita `.env` con tus credenciales reales:
+2. En el **frontend** (`.env` en la raíz), configura la URL del API de contacto:
 ```
-VITE_SUPABASE_PROJECT_ID=tu-project-id
-VITE_SUPABASE_PUBLIC_ANON_KEY=tu-anon-key
+VITE_CONTACT_API_URL=https://tu-proyecto.vercel.app/api/contact
 ```
 
-3. El archivo `src/utils/supabase/info.tsx` ya está configurado para usar variables de entorno.
+3. En el **backend** (Vercel → Environment Variables), configura: `RESEND_API_KEY`, `RESEND_TO_EMAIL` y opcionalmente `RESEND_FROM_EMAIL`.
 
-**Nota:** El archivo `.env` está en `.gitignore` y NO se subirá al repositorio.
+**Nota:** El archivo `.env` está en `.gitignore` y NO se subirá al repositorio. Para detalles completos (despliegue, troubleshooting), ver **RESEND_SETUP.md**.
 
 ## 📝 Notas de Desarrollo
 

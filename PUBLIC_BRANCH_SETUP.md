@@ -26,26 +26,14 @@ git branch
 
 ### 3. Asegurar que las Credenciales Usen Variables de Entorno
 
-**IMPORTANTE**: Antes de hacer push, verifica que `src/utils/supabase/info.tsx` use variables de entorno:
-
-```typescript
-// ✅ CORRECTO (usar variables de entorno)
-export const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID || '';
-export const publicAnonKey = import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY || '';
-
-// ❌ INCORRECTO (credenciales hardcodeadas)
-export const projectId = "yejjhcrhbsrfvriojqzb";
-export const publicAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
-```
+**IMPORTANTE**: Antes de hacer push, verifica que la URL del API de contacto use variables de entorno (`VITE_CONTACT_API_URL`) y que no haya URLs o claves hardcodeadas en el código.
 
 ### 4. Verificar Archivos Excluidos
 
 Asegúrate de que estos archivos NO se suban:
 
-- `.env`
-- `.env.local`
-- `src/utils/supabase/info.tsx` (si contiene credenciales hardcodeadas)
-- Cualquier archivo con credenciales
+- `.env` y variantes (`.env.local`, etc.)
+- Cualquier archivo con credenciales o secrets
 
 ### 5. Hacer Commit y Push
 
@@ -60,16 +48,15 @@ git commit -m "Preparar rama pública para GitHub Pages"
 git push origin gh-pages-source
 ```
 
-### 6. Configurar GitHub Secrets
+### 6. Configurar GitHub Secrets (para el formulario de contacto)
 
 1. Ve a tu repositorio en GitHub
 2. Settings → Secrets and variables → Actions
-3. Click en "New repository secret"
-4. Añade estos secrets:
-   - **Name**: `VITE_SUPABASE_PROJECT_ID`
-     **Value**: Tu project ID de Supabase
-   - **Name**: `VITE_SUPABASE_PUBLIC_ANON_KEY`
-     **Value**: Tu public anon key de Supabase
+3. Añade la variable (o secret) que use tu workflow para el build:
+   - **Name**: `VITE_CONTACT_API_URL`
+   - **Value**: URL completa del API de contacto (ej: `https://tu-proyecto.vercel.app/api/contact`)
+
+Ver **RESEND_SETUP.md** para la configuración completa del formulario.
 
 ### 7. Habilitar GitHub Pages
 
@@ -90,10 +77,9 @@ git push origin gh-pages-source
 
 ### Checklist de Seguridad
 
-- [ ] `src/utils/supabase/info.tsx` usa variables de entorno
 - [ ] `.env` está en `.gitignore`
 - [ ] No hay credenciales hardcodeadas en el código
-- [ ] Los secrets están configurados en GitHub
+- [ ] Los secrets/variables están configurados en GitHub (p. ej. `VITE_CONTACT_API_URL` si usas el formulario)
 - [ ] La rama `main` sigue siendo privada (si es necesario)
 
 ### Archivos que NO deben estar en la rama pública
@@ -165,7 +151,7 @@ Cuando hagas cambios en `main` que quieras publicar:
 ### Las credenciales no funcionan
 
 - Verifica que los secrets estén bien escritos (sin espacios)
-- Asegúrate de que `info.tsx` use `import.meta.env.VITE_*`
+- Asegúrate de que la app use `import.meta.env.VITE_CONTACT_API_URL` para el formulario
 - Revisa la consola del navegador para errores
 
 ### El sitio no carga

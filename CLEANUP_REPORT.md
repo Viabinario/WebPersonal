@@ -36,9 +36,8 @@ Los siguientes archivos `.js` fueron eliminados porque tenían versiones `.tsx` 
    - **Razón**: Versión antigua compilada, reemplazada por `App.tsx`
 
 ### Archivos de Configuración Duplicados
-9. ✅ `src/utils/supabase/info.js`
-   - **Razón**: Versión antigua con credenciales hardcodeadas, reemplazada por `info.tsx`
-   - **⚠️ Advertencia**: `info.tsx` también contiene credenciales hardcodeadas. Se recomienda migrar a variables de entorno.
+9. ✅ `src/utils/supabase/info.js` (y posteriormente toda la integración Supabase)
+   - **Razón**: Se eliminó Supabase del proyecto; el formulario de contacto se gestiona con Resend y API de contacto.
 
 ### Archivos Temporales
 10. ✅ `FORCE_RELOAD.md`
@@ -61,21 +60,9 @@ Estos archivos son generados automáticamente y se usan en los componentes.
 - Actualizado para excluir archivos `.js` compilados
 - Excepción agregada para archivos SVG generados en `src/imports/*.js`
 
-## ⚠️ Problemas Identificados
+## ⚠️ Problemas Identificados (resueltos)
 
-### 1. Credenciales Hardcodeadas
-**Ubicación**: `src/utils/supabase/info.tsx`
-
-**Problema**: El archivo contiene credenciales de Supabase hardcodeadas:
-- `projectId`: "yejjhcrhbsrfvriojqzb"
-- `publicAnonKey`: (JWT token completo)
-
-**Recomendación**: 
-1. Migrar a variables de entorno usando `import.meta.env.VITE_SUPABASE_PROJECT_ID` y `import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY`
-2. Agregar `info.tsx` al `.gitignore` si contiene credenciales sensibles
-3. Crear un archivo `.env.example` con valores de ejemplo
-
-**Referencia**: El archivo `info.example.tsx` ya existe con instrucciones.
+Supabase fue retirado del proyecto; las credenciales y el archivo `src/utils/supabase/info.tsx` ya no existen. El contacto se gestiona con Resend y variables de entorno (`VITE_CONTACT_API_URL`, etc.).
 
 ## ✅ Verificaciones Realizadas
 

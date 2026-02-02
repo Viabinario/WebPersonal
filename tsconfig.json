@@ -29,7 +29,6 @@
   "include": ["src"],
   "exclude": [
     "reference",
-    "src/supabase",
     "src/components/ui",
     "src/components/NavigationMenuNew.tsx",
     "src/components/ZoomButtonNew.tsx"

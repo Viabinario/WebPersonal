@@ -7,7 +7,7 @@
 ## 📋 Requisitos Previos
 
 1. ✅ **SPA (Single Page Application)**: El proyecto es compatible
-2. ✅ **Supabase Edge Functions**: Funcionarán desde GitHub Pages (son endpoints públicos)
+2. ✅ **Formulario de contacto**: Se gestiona con Resend; el frontend llama al API (Vercel u otro) configurado con `VITE_CONTACT_API_URL`
 3. ⚠️ **Credenciales**: Deben estar en variables de entorno o secrets de GitHub
 4. ⚠️ **Base Path**: Necesita configuración si el repo no es `username.github.io`
 
@@ -20,7 +20,6 @@
 git checkout -b gh-pages-source
 
 # Asegúrate de que NO incluyas credenciales sensibles
-# Verifica que src/utils/supabase/info.tsx use variables de entorno
 ```
 
 ### 2. Configurar Variables de Entorno
@@ -29,9 +28,8 @@ git checkout -b gh-pages-source
 
 1. Ve a tu repositorio en GitHub
 2. Settings → Secrets and variables → Actions
-3. Añade estos secrets:
-   - `VITE_SUPABASE_PROJECT_ID`
-   - `VITE_SUPABASE_PUBLIC_ANON_KEY`
+3. Añade el secret necesario para el formulario de contacto:
+   - `VITE_CONTACT_API_URL` (URL del API de contacto, p. ej. Vercel)
 
 **Opción B: Variables de Entorno en el Workflow**
 
@@ -71,27 +69,22 @@ El workflow de GitHub Actions se ejecutará automáticamente y desplegará el si
 
 **CRÍTICO**: Antes de publicar, asegúrate de:
 
-1. ✅ `src/utils/supabase/info.tsx` usa variables de entorno:
-   ```typescript
-   export const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
-   export const publicAnonKey = import.meta.env.VITE_SUPABASE_PUBLIC_ANON_KEY;
-   ```
-
-2. ✅ El archivo `.env` está en `.gitignore`
-3. ✅ No hay credenciales hardcodeadas en el código
+1. ✅ El archivo `.env` está en `.gitignore`
+2. ✅ No hay credenciales hardcodeadas en el código
+3. ✅ Si usas el formulario de contacto, `VITE_CONTACT_API_URL` está configurada (ver RESEND_SETUP.md)
 
 ### Funcionalidades que Funcionarán
 
 - ✅ Navegación entre secciones
 - ✅ Zoom del canvas
 - ✅ Diseño responsive
-- ✅ Formulario de contacto (si Supabase está configurado)
+- ✅ Formulario de contacto (si el API de Resend está configurado; ver RESEND_SETUP.md)
 - ✅ Todos los efectos visuales y animaciones
 
 ### Limitaciones de GitHub Pages
 
 - ⚠️ Solo archivos estáticos (SPA funciona perfecto)
-- ⚠️ No hay backend (pero Supabase Edge Functions funcionan)
+- ⚠️ No hay backend en GitHub Pages; el API de contacto debe estar desplegado aparte (p. ej. Vercel)
 - ⚠️ HTTPS automático (bueno para seguridad)
 
 ## 🔍 Verificar el Despliegue

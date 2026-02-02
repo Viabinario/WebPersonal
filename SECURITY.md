@@ -74,7 +74,7 @@ Este documento describe las medidas de seguridad implementadas en el formulario 
    - Límites de longitud en inputs HTML
 
 2. **Servidor (Backend)**:
-   - Validación adicional en Supabase Edge Functions
+   - Validación adicional en el API de contacto (p. ej. Vercel serverless)
    - Sanitización en el servidor
 
 ### 7. **Prevención de Doble Envío**
@@ -100,12 +100,11 @@ Todos los campos tienen atributos `maxLength`:
 ## 🛡️ Protecciones Específicas
 
 ### Contra Inyección SQL
-- **No aplicable directamente**: Supabase usa consultas parametrizadas
-- Los datos se sanitizan antes de llegar a la base de datos
+- El formulario no escribe en base de datos; los datos se envían por API (Resend) y se sanitizan en cliente y servidor.
 
 ### Contra CSRF (Cross-Site Request Forgery)
-- Supabase maneja tokens de autenticación
-- Validación de origen en el servidor
+- Validación de origen y buenas prácticas en el API de contacto
+- Uso de variables de entorno para la URL del API
 
 ### Contra Ataques de Denegación de Servicio (DoS)
 - Rate limiting en el cliente
@@ -141,7 +140,7 @@ Todos los campos tienen atributos `maxLength`:
 ## 📝 Notas Importantes
 
 - La sanitización se realiza **antes** de enviar datos al servidor
-- El servidor debe tener validación adicional (ya implementada en Supabase Functions)
+- El servidor (API de contacto) debe tener validación adicional
 - Los logs de error no deben exponerse en producción
 - El rate limiting es básico; para producción, considerar implementación en el servidor
 
@@ -157,4 +156,3 @@ Todos los campos tienen atributos `maxLength`:
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [OWASP XSS Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
-- [Supabase Security](https://supabase.com/docs/guides/platform/security)
