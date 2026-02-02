@@ -1,8 +1,28 @@
-# Nomenclatura de imágenes de Casos de Estudio
+# Nomenclatura de imágenes
+
+## Redes sociales (Presentación + Cases)
+
+- **Carpeta:** `src/assets/social/`.
+- **Nombres:** `social-01.png` … `social-05.png` (orden fijo: LinkedIn, GitHub, Behance, Notion, YouTube).
+- **Uso:** `src/components/case-shared/index.tsx` importa estos archivos y los expone en `SOCIAL_LOGO_SRCS`; los usan **PresentacionSection** y los casos de estudio (Case1, Case2).
+
+| Nº | Archivo      | Red     |
+|----|--------------|---------|
+| 01 | social-01.png | LinkedIn |
+| 02 | social-02.png | GitHub   |
+| 03 | social-03.png | Behance  |
+| 04 | social-04.png | Notion   |
+| 05 | social-05.png | YouTube  |
+
+**Script:** `scripts/rename-social-assets.cjs` copia los archivos con hash a `social/social-NN.png`.
+
+---
+
+## Casos de Estudio
 
 Las imágenes de los casos de estudio siguen una numeración consistente para facilitar su identificación y mantenimiento.
 
-## Convención
+### Convención
 
 - **Caso 1:** `case1-01.png` … `case1-34.png` (dos dígitos, orden de aparición en el caso).
 - **Caso 2:** `case2-01.png` … `case2-23.png`.

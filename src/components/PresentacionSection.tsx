@@ -1,8 +1,8 @@
-import imgLinkedIn from "../assets/eb32313f181d7f397e280d071d68cd4848de3309.png";
-import imgGitHub from "../assets/ba860023c4945015a1341b916ead911ab33959ca.png";
-import imgBehance from "../assets/ce87b991d33908119ebd53423d76d4d176fa3dd6.png";
-import imgNotion from "../assets/f4070059249511aee028c2a23241923404682ade.png";
-import imgYouTube from "../assets/2a49aaca2afd902bddff6a117e6ba2b56e221665.png";
+import {
+  CASE_INTRO_TEXT,
+  SOCIAL_LOGO_SRCS,
+  SOCIAL_LABELS,
+} from "./case-shared";
 
 interface PresentacionSectionProps {
   isZoomed?: boolean;
@@ -30,13 +30,9 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
       >
         <div className="w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
           <p className="font-['Roboto:Regular',sans-serif] text-sm md:text-base lg:text-[14px] text-black text-justify leading-normal">
-            Lorem ipsum dolor sit amet consectetur. Congue mauris id rhoncus adipiscing amet pharetra ornare amet luctus. 
-            Suspendisse lectus viverra sollicitudin nibh imperdiet diam vitae. Scelerisque mi urna tellus odio tortor. 
-            Et platea placerat eget iaculis consectetur in.
+            {CASE_INTRO_TEXT.paragraph1}
             <br /><br />
-            Hac nec nisi nunc rhoncus gravida. Dignissim purus nunc risus diam amet faucibus nibh lacus. 
-            Dui enim nulla etiam molestie at a dictum eu dapibus. Pharetra ut sed id praesent. 
-            Massa facilisi tristique massa nunc amet consequat faucibus.
+            {CASE_INTRO_TEXT.paragraph2}
           </p>
         </div>
       </div>
@@ -45,17 +41,15 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
       <div className="absolute bottom-4 right-4 md:bottom-[38px] md:right-[38px] lg:bottom-[228px] lg:right-[38px]">
         <div className="bg-[#e5e2de] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[18px]">
           <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-[4px]">
-            {/* Row 1 */}
-            <SocialButton img={imgLinkedIn} />
-            <SocialButton img={imgGitHub} />
-            <SocialButton img={imgBehance} />
-            
-            {/* Row 2 */}
-            <SocialButton img={imgNotion} />
-            <SocialButton img={imgYouTube} />
+            {/* Row 1: LinkedIn, GitHub, Behance */}
+            <SocialButton img={SOCIAL_LOGO_SRCS[0]} label={SOCIAL_LABELS[0]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[1]} label={SOCIAL_LABELS[1]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[2]} label={SOCIAL_LABELS[2]} />
+            {/* Row 2: Notion, YouTube, vacío */}
+            <SocialButton img={SOCIAL_LOGO_SRCS[3]} label={SOCIAL_LABELS[3]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[4]} label={SOCIAL_LABELS[4]} />
             <SocialButton empty />
-            
-            {/* Row 3 - All empty */}
+            {/* Row 3: vacíos */}
             <SocialButton empty />
             <SocialButton empty />
             <SocialButton empty />
@@ -68,26 +62,16 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
 
 interface SocialButtonProps {
   img?: string;
+  label?: string;
   empty?: boolean;
 }
 
-function SocialButton({ img, empty }: SocialButtonProps) {
-  const getSocialName = () => {
-    if (empty) return "Botón de red social vacío";
-    // Determinar el nombre basado en la ruta de la imagen
-    if (img?.includes('eb32313f181d7f397e280d071d68cd4848de3309')) return "LinkedIn";
-    if (img?.includes('ba860023c4945015a1341b916ead911ab33959ca')) return "GitHub";
-    if (img?.includes('ce87b991d33908119ebd53423d76d4d176fa3dd6')) return "Behance";
-    if (img?.includes('f4070059249511aee028c2a23241923404682ade')) return "Notion";
-    if (img?.includes('2a49aaca2afd902bddff6a117e6ba2b56e221665')) return "YouTube";
-    return "Red social";
-  };
-
+function SocialButton({ img, label, empty }: SocialButtonProps) {
   return (
     <button 
       className="relative w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110"
-      aria-label={empty ? "Botón de red social vacío" : `Visitar perfil en ${getSocialName()}`}
-      title={empty ? "Botón de red social vacío" : `Visitar perfil en ${getSocialName()}`}
+      aria-label={empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`}
+      title={empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`}
       disabled={empty}
     >
       <div className="absolute bg-[#d9bda5] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300">
