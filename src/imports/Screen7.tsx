@@ -179,10 +179,10 @@ export default function Screen() {
                       </div>
                     </div>
                   </div>
-                  {[...Array(3).keys()].map((_, i) => (
-                    <div className="content-stretch flex gap-[2px] items-center justify-center relative shrink-0 w-full" data-name="Content_SocialButton">
-                      {[...Array(3).keys()].map((_, i) => (
-                        <div className="relative shrink-0 size-[24px]" data-name="Content">
+                  {[...Array(3).keys()].map((_, rowIdx) => (
+                    <div key={rowIdx} className="content-stretch flex gap-[2px] items-center justify-center relative shrink-0 w-full" data-name="Content_SocialButton">
+                      {[...Array(3).keys()].map((_, colIdx) => (
+                        <div key={colIdx} className="relative shrink-0 size-[24px]" data-name="Content">
                           <div className="absolute bg-[#d9bda5] left-1/2 rounded-[8px] size-[21px] top-1/2 translate-x-[-50%] translate-y-[-50%]" data-name="Border_Logo_socialNetworkd">
                             <div className="absolute bg-[#f7f2ed] left-[calc(50%+0.5px)] rounded-[7px] size-[22px] top-[calc(50%+0.5px)] translate-x-[-50%] translate-y-[-50%]" data-name="Logo_socialNetworks" />
                           </div>
@@ -232,7 +232,7 @@ export default function Screen() {
               <div className="overflow-x-auto overflow-y-clip relative size-full">
                 <div className="absolute content-stretch flex gap-[10px] items-center left-0 top-0" data-name="Ribbon">
                   {[...Array(3).keys()].map((_, i) => (
-                    <div className="bg-[#b2b0ad] content-center flex flex-wrap gap-[6px] items-center max-w-[296px] min-w-[143px] overflow-clip p-[6px] relative rounded-[11px] shrink-0" data-name="Card">
+                    <div key={i} className="bg-[#b2b0ad] content-center flex flex-wrap gap-[6px] items-center max-w-[296px] min-w-[143px] overflow-clip p-[6px] relative rounded-[11px] shrink-0" data-name="Card">
                       <div className="h-[131px] relative rounded-[6px] shadow-[12.5px_12.5px_5px_0px_rgba(0,0,0,0),8px_8px_4.5px_0px_rgba(0,0,0,0.02),4.5px_4.5px_4px_0px_rgba(0,0,0,0.07),2px_2px_3px_0px_rgba(0,0,0,0.12),0.5px_0.5px_1.5px_0px_rgba(0,0,0,0.14)] shrink-0 w-[130px]" data-name="Image">
                         <img alt="" className="absolute inset-0 max-w-none object-50%-50% object-cover pointer-events-none rounded-[6px] size-full" src={imgImage} />
                       </div>

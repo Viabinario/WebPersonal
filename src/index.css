@@ -14,3 +14,31 @@
     -moz-osx-font-smoothing: grayscale;
   }
 }
+
+/* Tipografía compartida Case1 / Case2: una sola fuente de verdad en CSS (colores del tema en tailwind.config) */
+@layer components {
+  .case-form-label {
+    @apply flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal h-[16px] justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-brown-dark text-[14px] text-ellipsis tracking-[2.8px];
+    font-variation-settings: 'wdth' 100;
+  }
+
+  .case-title-sm {
+    @apply absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-brown-dark text-[16px];
+    font-variation-settings: 'wdth' 100;
+  }
+
+  .case-title-md {
+    @apply absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-brown-dark text-[20px];
+    font-variation-settings: 'wdth' 100;
+  }
+
+  .case-body-justify {
+    @apply absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-brown-dark text-[14px] text-justify;
+    font-variation-settings: 'wdth' 100;
+  }
+
+  .case-title-lg {
+    @apply font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-brown-dark text-[24px];
+    font-variation-settings: 'wdth' 100;
+  }
+}

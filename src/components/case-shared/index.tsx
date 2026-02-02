@@ -33,6 +33,14 @@ export const SOCIAL_LOGO_SRCS = [
 /** Nombres de redes para aria-label/title (mismo orden que SOCIAL_LOGO_SRCS). */
 export const SOCIAL_LABELS = ['LinkedIn', 'GitHub', 'Behance', 'Notion', 'YouTube'] as const;
 
+// --- Estilos de texto compartidos (Case1 y Case2). Clases definidas en index.css (@layer components). ---
+export const CASE_FONT_STYLE = { fontVariationSettings: "'wdth' 100" } as const;
+export const CASE_CLASS_FORM_LABEL = "css-g0mm18 case-form-label";
+export const CASE_CLASS_TITLE_SM = "case-title-sm";
+export const CASE_CLASS_TITLE_MD = "case-title-md";
+export const CASE_CLASS_BODY_JUSTIFY = "case-body-justify";
+export const CASE_CLASS_TITLE_LG = "css-ew64yg case-title-lg";
+
 export function ContentBodySideLeft() {
   return (
     <div

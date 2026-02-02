@@ -1,3 +1,8 @@
+/**
+ * Design-system alternativo (variables oklch, @theme inline).
+ * No está importado en la app: los estilos globales activos están en src/index.css.
+ * Mantener solo si se adopta este sistema; si no, se puede eliminar.
+ */
 @custom-variant dark (&:is(.dark *));
 
 :root {

@@ -4,10 +4,14 @@ import {
   ContentBodySideLeft,
   ContentCenter,
   ContentRight,
+  CASE_FONT_STYLE,
+  CASE_CLASS_FORM_LABEL,
+  CASE_CLASS_TITLE_SM,
+  CASE_CLASS_TITLE_MD,
+  CASE_CLASS_BODY_JUSTIFY,
+  CASE_CLASS_TITLE_LG,
 } from "../components/case-shared";
-import imgMacBookAir151 from "../assets/case1/case1-01.png";
-import imgIPadPro1141 from "../assets/case1/case1-02.png";
-import imgIPhone16ProMax41 from "../assets/case1/case1-03.png";
+import imgContentImage0 from "../assets/case1/case1-03b.png";
 import imgContentImage from "../assets/case1/case1-04.png";
 import imgContentImage1 from "../assets/case1/case1-05.png";
 import imgVisualRoadmapDesign21 from "../assets/case1/case1-06.png";
@@ -39,7 +43,6 @@ import imgVariables1 from "../assets/case1/case1-31.png";
 import imgComImg1 from "../assets/case1/case1-32.png";
 import imgPrototype1 from "../assets/case1/case1-33.png";
 import imgTesteo1 from "../assets/case1/case1-34.png";
-
 
 function Content1X() {
   return (
@@ -76,7 +79,7 @@ function ContainerText() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Container_Text">
       <div className="content-stretch flex flex-col gap-[12px] items-start px-[32px] relative size-full">
-        <div className="flex-[1_0_0] font-['Roboto:Regular',sans-serif] font-normal leading-[1.2] min-h-px min-w-px relative text-[14px] text-black text-justify w-full" style={{ fontVariationSettings: "'wdth' 100" }}>
+        <div className="flex-[1_0_0] font-['Roboto:Regular',sans-serif] font-normal leading-[1.2] min-h-px min-w-px relative text-[14px] text-black text-justify w-full" style={CASE_FONT_STYLE}>
           <p className="css-4hzbpn mb-0">{`Hola, soy Francisco Sánchez, arquitecto de profesión con una experiencia laboral de más de 14 años, diseñando y gestionando proyectos de edificación de diversa tipología. `}</p>
           <p className="css-4hzbpn mb-0">&nbsp;</p>
           <p className="css-4hzbpn mb-0">Mi camino hacia el UX/UI surge desde mis primeros años de universidad, interesándome en el mundo digital a través del diseño de sitios web, apreciándolos como experiencias habitables digitales.</p>
@@ -126,7 +129,7 @@ function Input() {
     <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal h-[16px] justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[14px] text-ellipsis tracking-[2.8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
             <p className="css-g0mm18 leading-[normal] overflow-hidden">NOMBRE</p>
           </div>
         </div>
@@ -159,7 +162,7 @@ function Input1() {
     <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal h-[16px] justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[14px] text-ellipsis tracking-[2.8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
             <p className="css-g0mm18 leading-[normal] overflow-hidden">EMAIL</p>
           </div>
         </div>
@@ -192,7 +195,7 @@ function Input2() {
     <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal h-[16px] justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[14px] text-ellipsis tracking-[2.8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
             <p className="css-g0mm18 leading-[normal] overflow-hidden">TELÉFONO</p>
           </div>
         </div>
@@ -225,7 +228,7 @@ function Input3() {
     <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
       <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className="css-g0mm18 flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal h-[16px] justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[14px] text-ellipsis tracking-[2.8px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
             <p className="css-g0mm18 leading-[normal] overflow-hidden">ASUNTO</p>
           </div>
         </div>
@@ -256,7 +259,7 @@ function ContentLabel4() {
 function ContentPlaceholder() {
   return (
     <div className="content-stretch flex h-[180px] items-start relative shrink-0 w-full" data-name="Content Placeholder">
-      <div className="flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[16px] text-ellipsis" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[16px] text-ellipsis" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">MENSAJE</p>
       </div>
     </div>
@@ -407,7 +410,7 @@ function ContentLeft184Px() {
 function ContentProjectTitle() {
   return (
     <div className="content-start flex flex-wrap gap-[10px] h-[72px] items-start relative shrink-0 w-full" data-name="Content Project Title">
-      <p className="css-4hzbpn flex-[1_0_0] font-['Roboto:Bold',sans-serif] font-bold leading-[40px] min-h-px min-w-px relative text-[#5a3e26] text-[32px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="css-4hzbpn flex-[1_0_0] font-['Roboto:Bold',sans-serif] font-bold leading-[40px] min-h-px min-w-px relative text-[#5a3e26] text-[32px]" style={CASE_FONT_STYLE}>
         Kora
       </p>
     </div>
@@ -417,7 +420,7 @@ function ContentProjectTitle() {
 function ContentTitle() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[16px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Tipo de Proyecto</p>
       </div>
     </div>
@@ -427,7 +430,7 @@ function ContentTitle() {
 function ContentText() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         Proyecto Final de Bootcamp (PFB) Web adaptativa / responsiva, trabajo individual.
       </p>
     </div>
@@ -446,7 +449,7 @@ function ModuleText() {
 function ContentTitle1() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[16px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Entregables</p>
       </div>
     </div>
@@ -456,7 +459,7 @@ function ContentTitle1() {
 function ContentText1() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones.
       </p>
     </div>
@@ -484,7 +487,7 @@ function ContentText2() {
 function ContentTitle2() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[16px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">{`Herramientas `}</p>
       </div>
     </div>
@@ -494,9 +497,9 @@ function ContentTitle2() {
 function ContentText3() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         <span className="leading-[normal]">{`Metodología `}</span>
-        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
           Design Thinking
         </span>
         <span className="leading-[normal]">. Software: Figma (Design, Make, Slide)</span>
@@ -517,7 +520,7 @@ function ModuleText2() {
 function ContentTitle3() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[16px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">{`Duración `}</p>
       </div>
     </div>
@@ -527,7 +530,7 @@ function ContentTitle3() {
 function ContentText4() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         15 días.
       </p>
     </div>
@@ -570,28 +573,10 @@ function ContentResume388Px() {
   );
 }
 
-function Group() {
-  return (
-    <div className="grid-cols-[max-content] grid-rows-[max-content] inline-grid items-[start] justify-items-[start] leading-[0] relative shrink-0">
-      <div className="col-1 h-[266px] ml-0 mt-0 relative row-1 w-[432px]" data-name="MacBook Air - 15 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMacBookAir151} />
-      </div>
-      <div className="col-1 h-[164px] ml-[366px] mt-[63px] relative row-1 w-[119px]" data-name="iPad Pro 11_ - 4 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPadPro1141} />
-      </div>
-      <div className="col-1 h-[126px] ml-[473px] mt-[82px] relative row-1 w-[62px]" data-name="iPhone 16 Pro Max - 4 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIPhone16ProMax41} />
-      </div>
-    </div>
-  );
-}
-
 function ContentImage() {
   return (
     <div className="h-[286px] relative rounded-[8px] shrink-0 w-[576px]" data-name="Content-Image">
-      <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[inherit] size-full">
-        <Group />
-      </div>
+      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgContentImage0} />
       <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
     </div>
   );
@@ -600,7 +585,7 @@ function ContentImage() {
 function ContentTitle4() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Descripción</p>
       </div>
     </div>
@@ -610,14 +595,14 @@ function ContentTitle4() {
 function ContentText6() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Kora es una `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             plataforma social digital y ecosistema de intercambio de valor bidireccional
           </span>
           <span className="leading-[normal]">{`, cuyo propósito central es `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             revalorizar el capital senior y fortalecer la cohesión social mediante la conexión estructurada entre generaciones
           </span>
           <span className="leading-[normal]">.</span>
@@ -625,7 +610,7 @@ function ContentText6() {
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`A diferencia de los modelos educativos tradicionales, Kora está diseñada sobre el principio de la `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             Reciprocidad Solidaria
           </span>
           <span className="leading-[normal]">:</span>
@@ -633,7 +618,7 @@ function ContentText6() {
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <ul className="mb-0">
           <li className="css-4hzbpn list-disc ms-[21px]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Para el Adulto Mayor
             </span>
             <span className="leading-[normal]">: Kora es el canal para transformar el conocimiento no académico (relatos, oficios manuales, historia local, recetas) en un activo productivo y monetizable. Esto combate el aislamiento social y la subutilización del senior talent al asignarle un valor económico y cultural a su experiencia.</span>
@@ -642,7 +627,7 @@ function ContentText6() {
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <ul className="mb-0">
           <li className="css-4hzbpn list-disc ms-[21px]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Para la Generación Joven
             </span>
             <span className="leading-[normal]">
@@ -711,7 +696,7 @@ function IconChapters() {
 function ContentTextIcon() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Reto
       </p>
     </div>
@@ -732,7 +717,7 @@ function IconTitleSection() {
 function ContentTitle5() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Contexto y Necesidades</p>
       </div>
     </div>
@@ -742,7 +727,7 @@ function ContentTitle5() {
 function ContentText8() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">El aislamiento social, el envejecimiento poblacional y la soledad no deseada, son señaladas como fenómenos perjudiciales que afectan la calidad de vida de nuestras sociedades, principalmente en los segmentos seniors y jóvenes.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">Los programas y productos observados, si bien apuntan a la integración digital de los adultos mayores, no desarrollan un enfoque de retroalimentación donde ellos puedan a la vez ofrecer sus conocimientos, habilidades y sabidurías.</p>
@@ -795,7 +780,7 @@ function ContentImage2() {
 function ContentTitle6() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Objetivos</p>
       </div>
     </div>
@@ -805,7 +790,7 @@ function ContentTitle6() {
 function ContentText10() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">Surge así la idea de generar un producto donde los adultos mayores sean agentes activos y no sólo pacientes de diversas actividades y puedan aportar valor a ese segmento de la población que también se observa con necesidades de integración y vínculos emocionales: los jóvenes; de manera que el tejido social se enriquezca en el tiempo intergeneracional y mejore la calidad de vida en el corto y largo plazo.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
@@ -851,7 +836,7 @@ function ContentTitle7() {
 function ContentText12() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute flex flex-col font-['Roboto:Bold','Noto_Sans:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px] text-center" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute flex flex-col font-['Roboto:Bold','Noto_Sans:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px] text-center" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Roadmap →</p>
       </div>
     </div>
@@ -921,7 +906,7 @@ function IconChapters1() {
 function ContentTextIcon1() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Research
       </p>
     </div>
@@ -942,7 +927,7 @@ function IconTitleSection1() {
 function ContentTitle8() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Research Question</p>
       </div>
     </div>
@@ -952,10 +937,10 @@ function ContentTitle8() {
 function ContentText14() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">Para comprender las necesidades del usuario, que en este caso de estudio se planteará en dos perfiles (senior y joven), nos preguntamos inicialmente: “</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             ¿Cómo se construyen vínculos significativos entre adultos mayores y jóvenes en actividades compartidas?
           </span>
           <span className="leading-[normal]">” y realizamos una investigación de tipo secundaria, recopilando publicaciones de prensa y de estudios institucionales.</span>
@@ -999,43 +984,43 @@ function ContentResume388Px3() {
 function Group1() {
   return (
     <div className="absolute contents left-0 top-0">
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[105.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[1.152px] w-[71px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[105.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[1.152px] w-[71px]" style={CASE_FONT_STYLE}>
         Empatizar
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[23.6px] leading-[1.5] left-[308.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[3.328px] w-[92.6px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[23.6px] leading-[1.5] left-[308.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[3.328px] w-[92.6px]" style={CASE_FONT_STYLE}>
         Idear
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[23px] leading-[1.5] left-[23.55px] text-[#420cc0] text-[13px] text-center top-[84px] tracking-[-0.299px] w-[47.1px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[23px] leading-[1.5] left-[23.55px] text-[#420cc0] text-[13px] text-center top-[84px] tracking-[-0.299px] w-[47.1px]" style={CASE_FONT_STYLE}>
         Reto
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[52.9px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[52.9px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={CASE_FONT_STYLE}>
         Problema
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[241px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[241px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={CASE_FONT_STYLE}>
         Oportunidad
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[447px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal h-[23px] leading-[1.5] left-[447px] text-[#420cc0] text-[13px] text-center top-[202.6px] tracking-[-0.299px] w-[71.4px]" style={CASE_FONT_STYLE}>
         Solución
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[108.85px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.256px] w-[78.3px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[108.85px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.256px] w-[78.3px]" style={CASE_FONT_STYLE}>
         Cuál es la naturaleza del problema?
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[183.3px] text-[6.4px] text-center text-white top-[111.4px] tracking-[-0.1472px] w-[68.6px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[183.3px] text-[6.4px] text-center text-white top-[111.4px] tracking-[-0.1472px] w-[68.6px]" style={CASE_FONT_STYLE}>
         ¿Cómo podemos acotar el problema?
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[310.7px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.192px] w-[68px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[310.7px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.192px] w-[68px]" style={CASE_FONT_STYLE}>
         ¿Cuáles son las posibles soluciones?
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[14.4px] leading-[1.5] left-[382.8px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.96px] w-[71.4px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[14.4px] leading-[1.5] left-[382.8px] text-[6.4px] text-center text-white top-[111.4px] tracking-[0.96px] w-[71.4px]" style={CASE_FONT_STYLE}>
         ¿Qué soluciones sí funcionan?
       </p>
-      <p className="absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.5px] leading-[1.5] left-[464.2px] text-[#420cc0] text-[13px] top-[87.5px] tracking-[-0.299px] w-[73.6px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.5px] leading-[1.5] left-[464.2px] text-[#420cc0] text-[13px] top-[87.5px] tracking-[-0.299px] w-[73.6px]" style={CASE_FONT_STYLE}>
         Entregable
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[189.35px] text-[12.8px] text-center text-white top-[87.8px] tracking-[1.28px] w-[82.1px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[19.2px] leading-[1.5] left-[189.35px] text-[12.8px] text-center text-white top-[87.8px] tracking-[1.28px] w-[82.1px]" style={CASE_FONT_STYLE}>
         Sintetizar
       </p>
-      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[14.4px] leading-[1.5] left-[392.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[2.304px] w-[60.2px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="-translate-x-1/2 absolute css-4hzbpn font-['Roboto:Black',sans-serif] font-black h-[14.4px] leading-[1.5] left-[392.2px] text-[12.8px] text-center text-white top-[87.8px] tracking-[2.304px] w-[60.2px]" style={CASE_FONT_STYLE}>
         Diseñar
       </p>
       <div className="absolute flex h-[93px] items-center justify-center left-[48.1px] top-[97.4px] w-0" style={{ "--transform-inner-width": "300", "--transform-inner-height": "150" } as React.CSSProperties}>
@@ -1099,7 +1084,7 @@ function ContentImage4() {
 function ContentTitle9() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Metodología</p>
       </div>
     </div>
@@ -1109,9 +1094,9 @@ function ContentTitle9() {
 function ContentText16() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <span className="leading-[normal]">{`Para abordar el desarrollo de la investigación fue implementada la metodología `}</span>
-        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
           Design Thinking
         </span>
         <span className="leading-[normal]">{`, la cual permite entender al usuario y centrar el producto final a sus necesidades e intereses. `}</span>
@@ -1140,7 +1125,7 @@ function ContentText17() {
 function ContentTitle10() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Herramientas</p>
       </div>
     </div>
@@ -1150,29 +1135,29 @@ function ContentTitle10() {
 function ContentText18() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal] mb-0">{`Las herramientas implementadas en cada fase del proceso fueron: `}</p>
         <ul className="list-disc mb-0">
           <li className="css-4hzbpn mb-0 ms-[calc(var(--list-marker-font-size,0)*1.5*1)]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Empatizar
             </span>
             <span className="leading-[normal]">: Desk Research, Benchmark, DAFO, Encuestas, Entrevistas.</span>
           </li>
           <li className="css-4hzbpn mb-0 ms-[calc(var(--list-marker-font-size,0)*1.5*1)]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Sintetizar
             </span>
             <span className="leading-[normal]">: User Persona, Joruney Map, Empathy Map, Model Business, Canvas, Value Propoisition.</span>
           </li>
           <li className="css-4hzbpn mb-0 ms-[calc(var(--list-marker-font-size,0)*1.5*1)]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Idear
             </span>
             <span className="leading-[normal]">: Insights, Ideación, Priorización (MoSCoW), Card Sorting, .</span>
           </li>
           <li className="css-4hzbpn ms-[calc(var(--list-marker-font-size,0)*1.5*1)]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
               Diseñar
             </span>
             <span className="leading-[normal]">: Arquitectura, Wireframe, Prototipo HF.</span>
@@ -1231,7 +1216,7 @@ function ContentImage5() {
 function ContentTitle11() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Benchmark</p>
       </div>
     </div>
@@ -1241,11 +1226,11 @@ function ContentTitle11() {
 function ContentText20() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         <span className="leading-[normal]">{`Las competencias analizadas tuvieron relación con el tipo de usuario focalizado, qué propuestas tenían como ofertas, y en qué basaban sus contenidos. Las competencias `}</span>
-        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>{`directas `}</span>
+        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>{`directas `}</span>
         <span className="leading-[normal]">{`reunían estos dos componentes con mayor relevancia (segmento etario / contenido), mientras que las `}</span>
-        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
           indirectas
         </span>
         <span className="leading-[normal]">{` se caracterizaban por el formato de contenido con similar propósito: sitios web que ofrecen cursos o actividades de aprendizajes, las cuales ofrecen una amplia variedad de tipos de interacciones (vídeos, descargas, chats, etc).`}</span>
@@ -1300,7 +1285,7 @@ function ContentImage6() {
 function ContentTitle12() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">DAFO</p>
       </div>
     </div>
@@ -1310,7 +1295,7 @@ function ContentTitle12() {
 function ContentText22() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">Con esta herramientas analizamos las situaciones internas y externas en vías de desarrollar un producto / solución.</p>
         <p className="css-4hzbpn">Las oportunidades se utilizaron para hacer una consulta por método de Borda con 6 puntos (3,2,1) para tres preferencias, las cuales se reservaron para incorporar los insights posteriores.</p>
       </div>
@@ -1370,7 +1355,7 @@ function ContentImage7() {
 function ContentTitle13() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Encuesta / Entrevistas</p>
       </div>
     </div>
@@ -1380,10 +1365,10 @@ function ContentTitle13() {
 function ContentText24() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Para el diseño de la `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             encuesta
           </span>
           <span className="leading-[normal]">{` consideramos la observación de que existen al menos cuatro tipos de usuarios: dos directos (adulto mayor y jóvenes) y dos indirectos (familiar/tutor  y organización). Los directos, quienes interactuarían con la propuesta, y los indirectos más relacionados con el buyer. Creamos el formulario en Google Form, y mediante redes sociales se hizo circular la consulta.`}</span>
@@ -1391,7 +1376,7 @@ function ContentText24() {
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn">
           <span className="leading-[normal]">{`En la fase de `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             entrevistas
           </span>
           <span className="leading-[normal]">, contemplamos la necesidad de obtener todos los inputs posibles en términos de tipos de usuarios. Dada la poca disponibilidad de tiempo, se priorizó entrevistar a usuarios directos en persona (1 joven, 1 senior), y generar perfiles con IA generativa en base a documentación previa del presente estudio como inputs.</span>
@@ -1460,7 +1445,7 @@ function IconChapters2() {
 function ContentTextIcon2() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Análisis e Insights
       </p>
     </div>
@@ -1485,7 +1470,7 @@ function ContentTitle14() {
 function ContentText26() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         En esta serie de herramientas de investigación ahondaremos desde distintos ángulos en entender al usuario, los aspectos externos e internos, su comportamiento, sus afinidades, sus temores.
       </p>
     </div>
@@ -1541,7 +1526,7 @@ function ContentImage9() {
 function ContentTitle15() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Personas</p>
       </div>
     </div>
@@ -1551,7 +1536,7 @@ function ContentTitle15() {
 function ContentText28() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Determinamos tres tipos de user persona. Ricardo, el joven; Elena, la senior; y Ana, la familiar tutora y quien calificaría como Buyer Persona. También identificamos al arquetipo, el “Constructor de Puentes”.
       </p>
     </div>
@@ -1605,7 +1590,7 @@ function Frame() {
 function ContentTitle16() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">User Journey Map</p>
       </div>
     </div>
@@ -1615,7 +1600,7 @@ function ContentTitle16() {
 function ContentText30() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>{`En el Journey Map del usuario se seleccionó a Elena. En un trabajo más elaborado hubiéramos querido analizar a los otros tipos de users, para comprender mejor el universo y ahondar más en el concepto de “match” que se plantea en la solución. Aquí, Elena recorre desde su inquietud su relación con la plataforma. Es una usuaria activa: dispuesta a aprender y ganar autonomía en habilidades digitales, y también a ofrecer sus conocimientos. `}</p>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>{`En el Journey Map del usuario se seleccionó a Elena. En un trabajo más elaborado hubiéramos querido analizar a los otros tipos de users, para comprender mejor el universo y ahondar más en el concepto de “match” que se plantea en la solución. Aquí, Elena recorre desde su inquietud su relación con la plataforma. Es una usuaria activa: dispuesta a aprender y ganar autonomía en habilidades digitales, y también a ofrecer sus conocimientos. `}</p>
     </div>
   );
 }
@@ -1667,7 +1652,7 @@ function Frame1() {
 function ContentTitle17() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Empathy Map</p>
       </div>
     </div>
@@ -1677,7 +1662,7 @@ function ContentTitle17() {
 function ContentText32() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Buscamos profundizar en aspectos más blandos de Elena, de su relación con la solución y de su interacción con los usuarios que participan. Surge con relevancia la importancia de la seguridad y su interés por la confianza en el uso de la plataforma y de adquirir confianza y seguridad en sí misma.
       </p>
     </div>
@@ -1731,7 +1716,7 @@ function Frame2() {
 function ContentTitle18() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Business Canvas</p>
       </div>
     </div>
@@ -1741,7 +1726,7 @@ function ContentTitle18() {
 function ContentText34() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         El modelo de negocio al integrar los tipos de usuarios nos permitió aclarar flujos de la idea de negocio y precisar subproductos asociados a cada uno de los tipos de usuario: qué intereses tienen los seniors del caso, los jóvenes, los buyer. Fue de usma importancia comprender también los requermientos y alcances de inversión para materializar el proyecto. La posibilidad de tener una comprensión en fases de implementación es mucho más clara así como también de organizar los avances de tipo comercial.
       </p>
     </div>
@@ -1795,7 +1780,7 @@ function Frame3() {
 function ContentTitle19() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Value Proposition</p>
       </div>
     </div>
@@ -1805,7 +1790,7 @@ function ContentTitle19() {
 function ContentText36() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>{`Luego de hacer el modelo de negocio, analizamos las relaciones de nuestra propuesta de producto con el cliente, qué evitar, qué espera, que beneficios obtiene, etc. Esto nos permitirá afinar las herramientas o la utilidad que tendrá nuestro producto, a no perder de vista factores primordiales que caracterizan a nuestros usuarios y a qué de sus necesidades y deseos  estamos atendiendo. La Plataforma Kora debe responder satisfactoriamente a tres tipos de usuarios que se interrelacionan en un ecosistema integrado.`}</p>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>{`Luego de hacer el modelo de negocio, analizamos las relaciones de nuestra propuesta de producto con el cliente, qué evitar, qué espera, que beneficios obtiene, etc. Esto nos permitirá afinar las herramientas o la utilidad que tendrá nuestro producto, a no perder de vista factores primordiales que caracterizan a nuestros usuarios y a qué de sus necesidades y deseos  estamos atendiendo. La Plataforma Kora debe responder satisfactoriamente a tres tipos de usuarios que se interrelacionan en un ecosistema integrado.`}</p>
     </div>
   );
 }
@@ -1842,7 +1827,7 @@ function ContentProject796Px3() {
 function ContentTitle20() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Ideación</p>
       </div>
     </div>
@@ -1852,7 +1837,7 @@ function ContentTitle20() {
 function ContentText38() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         En esta fase reunimos los insights de cada herramienta de investigación y las analizamos mediante POV, para centralizar las ideas finales. La formulación se plantea sobre los tipos de usuario que interactuarán en la plataforma, Elena y Ricardo.
       </p>
     </div>
@@ -1883,7 +1868,7 @@ function ContentTitle21() {
 function ContentText40() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Las ideas finales, finalmente en este proceso de ideación pasarán a una fase priorización.
       </p>
     </div>
@@ -1950,7 +1935,7 @@ function Frame4() {
 function ContentTitle22() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Priorización</p>
       </div>
     </div>
@@ -1960,7 +1945,7 @@ function ContentTitle22() {
 function ContentText42() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Usamos la herramienta MoSCoW, para priorizar las ideas finales. En otras palabras: qué debe tener, qué debería tener, qué podría tener y qué no tendrá (para la primera versión). Finalizada la entrega se decidió, por límites de tiempo, pasar algunas ideas de Could Have a Won’t Have.
       </p>
     </div>
@@ -2027,7 +2012,7 @@ function IconChapters3() {
 function ContentTextIcon3() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Ideación y Estructuras
       </p>
     </div>
@@ -2052,7 +2037,7 @@ function ContentTitle23() {
 function ContentText44() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">{`En estas fases, a continuación, pasamos a diseñar la estructura de la plataforma web. `}</p>
         <p className="css-4hzbpn">En primer lugar, creamos la estructura de contenido en tres niveles, para luego implementar la técnica de Card Sorting híbrido y así obtener un equilibrio entre la idea, lo pensado como estructura y un punto de vista externo, todo centrado en el usuario.</p>
       </div>
@@ -2093,7 +2078,7 @@ function ContentProject388Px() {
 function ContentTitle24() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Card Sorting</p>
       </div>
     </div>
@@ -2103,7 +2088,7 @@ function ContentTitle24() {
 function ContentText46() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         El flujo del Card Sorting Híbrido transcurrió en una actividad de tres etapas. La primera, como investigador autor, generé una estructura preliminar de los elementos (post it) que compondrían la plataforma web, especificando con colores los tres niveles requeridos. El segundo paso fue “neutralizar” el orden de los elementos y asignarles un solo color, para luego compartir este lienzo con una compañera de Bootcamp, con el finde que ella propusiera un orden y asignación de colores (niveles). Finalmente se diseña una estructura que integra ambas propuestas: la propia y la de la compañera
       </p>
     </div>
@@ -2154,7 +2139,7 @@ function ContentProject1000Px2() {
 function ContentTitle25() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Arquitectura de la información</p>
       </div>
     </div>
@@ -2164,7 +2149,7 @@ function ContentTitle25() {
 function ContentText48() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">La arquitectura de información propuesta la concebimos tomando en consideración a los dos usuarios objetivos, Elena (usuario senior) y Ricardo (usuario joven). Cada uno tiene su propia interfaz, con algunas similitudes en los niveles, que en términos del backend dan cuenta de las interconexiones e interacciones entre ambos usuarios.</p>
         <p className="css-4hzbpn">{`Fue importante priorizar la simpleza en la navegación, para ambos usuarios. Por parte del senior, por razones de facilitar la memoria y los accesos a los servicios, y por parte del joven, para involucrarlo en la jerarquía de servicios orientados al usuario senior. `}</p>
       </div>
@@ -2192,7 +2177,7 @@ function ContentText49() {
 function ContentTitle26() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Wireframes</p>
       </div>
     </div>
@@ -2202,7 +2187,7 @@ function ContentTitle26() {
 function ContentText50() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>{`De acuerdo al Briefing del PFB, se diseñaron los Wireframes Low Fidelity de las pantallas principales de la arquitectura, sin indicar flujos. A modo personal, esta herramienta facilitó la visualización precisamente de los flujos e interacciones, manteniendo los criterios de accesibilidad, en cuanto a simpleza, tamaños, y de usabilidad, contemplando versatilidad de los componentes y de la unicidad de la plataforma en su conjunto.  `}</p>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>{`De acuerdo al Briefing del PFB, se diseñaron los Wireframes Low Fidelity de las pantallas principales de la arquitectura, sin indicar flujos. A modo personal, esta herramienta facilitó la visualización precisamente de los flujos e interacciones, manteniendo los criterios de accesibilidad, en cuanto a simpleza, tamaños, y de usabilidad, contemplando versatilidad de los componentes y de la unicidad de la plataforma en su conjunto.  `}</p>
     </div>
   );
 }
@@ -2261,7 +2246,7 @@ function ContentProject1000Px4() {
 function ContentTitle27() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Identidad Visual</p>
       </div>
     </div>
@@ -2271,10 +2256,10 @@ function ContentTitle27() {
 function ContentText52() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Gráficamente, el elemento simbólico que da origen al nombre de la aplicación y a su concepto unitario es el instrumento músical de cuerdas conocido como Kora, utilizado en algunos países africanos como parte de la cultura oral y que acompaña a los poetas a transmitir de generación en generación tradiciones mediante el canto. Esto simboliza el objetivo de `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={{ fontVariationSettings: "'wdth' 100" }}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
             Kora - Plataforma Web
           </span>
           <span className="leading-[normal]">, que se propone como un espacio de intercambio bidireccional de saberes con foco en el tejido social.</span>
@@ -2363,7 +2348,7 @@ function IconChapters4() {
 function ContentTextIcon4() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Diseño Visual
       </p>
     </div>
@@ -2384,7 +2369,7 @@ function IconTitleSection4() {
 function ContentTitle28() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Design System</p>
       </div>
     </div>
@@ -2394,7 +2379,7 @@ function ContentTitle28() {
 function ContentText54() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Está orientado principalmente por variables: [1] Accesibilidad: si bien no se realizó una aplicación exhaustiva de la WCAG 2.1, se incorporación conscientemente criterios en contrastes, tamaños de textos en componentes, pensando en un usuario general, pero motivado por nuestro caso senior. [2] Simplicidad. El diseño tiende a un aspecto algo “vintage” con cierta intención, la de cuidar familiaridad con interfaces ya conocidas. Esta es un área para desarrollar con mayor análisis, para saber de qué manera o en qué direcciones podemos innovar en diseño visual sin que la disrupción aleje a nuestro usuario senior.
       </p>
     </div>
@@ -2434,7 +2419,7 @@ function ContentResume388Px5() {
 function ContentTitle29() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Style Guide</p>
       </div>
     </div>
@@ -2444,7 +2429,7 @@ function ContentTitle29() {
 function ContentText56() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <ul className="list-disc mb-0">
           <li className="css-4hzbpn mb-0 ms-[21px]">
             <span className="leading-[normal]">Style Color</span>
@@ -2558,7 +2543,7 @@ function ContentProject592Px9() {
 function ContentTitle30() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Componentes</p>
       </div>
     </div>
@@ -2568,7 +2553,7 @@ function ContentTitle30() {
 function ContentText58() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <ul className="absolute block font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <ul className="absolute block font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <li className="css-4hzbpn mb-0 ms-[21px]">
           <span className="leading-[normal]">Icons</span>
         </li>
@@ -2665,7 +2650,7 @@ function ContentProject592Px10() {
 function ContentTitle31() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Prototipado</p>
       </div>
     </div>
@@ -2675,7 +2660,7 @@ function ContentTitle31() {
 function ContentText60() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         <ul className="list-disc mb-0">
           <li className="css-4hzbpn mb-0 ms-[21px]">
             <span className="leading-[normal]">Register</span>
@@ -2773,7 +2758,7 @@ function IconChapters5() {
 function ContentTextIcon5() {
   return (
     <div className="content-stretch flex h-full items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className="css-ew64yg font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-[#5a3e26] text-[24px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
         Validación y Testeo
       </p>
     </div>
@@ -2794,7 +2779,7 @@ function IconTitleSection5() {
 function ContentTitle32() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Pruebas de Usuario</p>
       </div>
     </div>
@@ -2804,7 +2789,7 @@ function ContentTitle32() {
 function ContentText62() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
         Realizamos dos pruebas de usuario, una insitu con una persona voluntaria y otra con una compañera, de manera remota. En el momento del testeo, el prototipo no estaba completamente terminado, de manera que las observaciones fueron muy bien recibidas, ya que permitieron abordar antes de un avance importante algunas deficiencias u omisiones. También contribuyeron a corregir o detenerse en algunas interacciones, para analizar si realmente estaban cumpliendo con lo esperado.
       </p>
     </div>
@@ -2873,7 +2858,7 @@ function ContentTitle184Px5() {
 function ContentTitle33() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Análisis de Resultados</p>
       </div>
     </div>
@@ -2883,7 +2868,7 @@ function ContentTitle33() {
 function ContentText65() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">{`En este PFB pudimos abordar con mayor detalle las fases de UX  y UI que vimos en dos retos anteriores dentro del Bootcamp. Esta vez, a diferencia de las anteriores, introdujimos Accesibilidad, más precisión respecto a herramientas de UX Research y también más arrojo en probar nuevos elementos de interfaz. En nuestro caso, al tratarse de una plataforma de tipo social y de intercambio bidireccional, la selección de qué componentes incorporar o qué interacciones priorizar, cómo y dónde, fue un desafío muy estimulante, ya que nos empujaba a ponernos en la situación de dos tipos de usuarios que interactuarían mediante la plataforma, bajo la premisa de que esa relación debía convertirse en un círculo virtuoso.`}</p>
         <p className="css-4hzbpn">{`Ante este descubrimiento, la visión del producto final cobró una mayor complejidad que a vista de la entrega concreta del proyecto, se asumiría para un proceso con mayor desarrollo. `}</p>
       </div>
@@ -2911,7 +2896,7 @@ function ContentText66() {
 function ContentTitle34() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className="absolute flex flex-col font-['Roboto:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px]" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn leading-[normal]">Agradecimientos</p>
       </div>
     </div>
@@ -2921,7 +2906,7 @@ function ContentTitle34() {
 function ContentText67() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={{ fontVariationSettings: "'wdth' 100" }}>
+      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
         <p className="css-4hzbpn mb-0">A mi familia, por apoyo, colaboración, amor, paciencia, entrega.</p>
         <p className="css-4hzbpn mb-0">A nuestro profesor/tutor de UX/UI, Óscar Orosa, por su dedicación docente destacada, generosidad y empatía.</p>
         <p className="css-4hzbpn mb-0">Al equipo de Neoland, por la infraestructura y gestión de la enseñanza.</p>
