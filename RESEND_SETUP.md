@@ -107,3 +107,26 @@ Sustituye `tu-proyecto.vercel.app` por la URL que te dio Vercel en el Paso 4.
   - En **Vercel** (backend): `RESEND_API_KEY`, `RESEND_TO_EMAIL`, y opcionalmente `RESEND_FROM_EMAIL`.
 
 Si quieres usar otro backend (Netlify Functions, Cloudflare Workers, etc.), mantén el mismo contrato: POST JSON con `nombre`, `email`, `telefono`, `asunto`, `mensaje` y respuestas JSON en éxito/error; dentro de ese backend puedes llamar a la API de Resend de la misma forma.
+
+---
+
+## Solución de problemas
+
+### "Campos incompletos" o "Teléfono inválido" con datos rellenados
+
+- **Teléfono:** El formulario acepta **9–20 dígitos** (p. ej. móvil español `000 000 000`). Si antes pedía 10 dígitos, actualiza el código; la validación ya permite 9.
+- **Nombre:** Mínimo 2 caracteres; solo letras, espacios, guiones y apóstrofes.
+- **Asunto:** Mínimo 3 caracteres.
+- **Mensaje:** Mínimo 10 caracteres.
+
+Si un campo sigue fallando, el mensaje de error indica qué campo corregir (nombre, email, teléfono, asunto o mensaje).
+
+### "Error de conexión"
+
+1. **URL del API:** `VITE_CONTACT_API_URL` debe ser la URL **completa** de tu API en Vercel, por ejemplo:  
+   `https://tu-proyecto.vercel.app/api/contact`  
+   No uses una ruta relativa (`/api/contact`) si el sitio está en otro dominio (p. ej. GitHub Pages).
+2. **Build:** La variable se inyecta en **tiempo de build**. Si usas GitHub Pages, configura `VITE_CONTACT_API_URL` en **GitHub → repo → Settings → Secrets and variables → Actions → Variables** y asegúrate de que el workflow de deploy hace el build con esa variable.
+3. **API desplegada:** En Vercel, comprueba que el último deployment ha terminado bien y que en **Project → Settings → Environment Variables** tienes `RESEND_API_KEY` y `RESEND_TO_EMAIL` para el entorno de producción.
+4. **CORS:** La API responde con `Access-Control-Allow-Origin: *`; si usas otro backend, debe permitir peticiones desde el origen de tu web.
+5. **Red:** Abre la pestaña **Network** del navegador al enviar; si la petición a `api/contact` falla (timeout, 404, 502), revisa la URL y el estado del deployment en Vercel.

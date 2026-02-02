@@ -125,19 +125,19 @@ export function validateAndSanitizeEmail(email: string): string | null {
  */
 export function validateAndSanitizePhone(phone: string): string | null {
   const sanitized = sanitizePhone(phone);
-  
-  if (sanitized.length < 10) {
-    return null;
-  }
-  
-  if (sanitized.length > 20) {
+  const digitsOnly = sanitized.replace(/\D/g, '');
+
+  // Permitir 9–20 dígitos (p. ej. móviles españoles 9 dígitos, internacional hasta 20)
+  if (digitsOnly.length < 9) {
     return null;
   }
 
-  // Validar que tenga formato de teléfono internacional
-  // Permitir: +1234567890, +1 234 567 890, etc.
-  const phoneRegex = /^\+?\d{1,3}[\s-]?\d{3,4}[\s-]?\d{3,4}[\s-]?\d{3,4}$/;
-  if (!phoneRegex.test(sanitized.replace(/\s/g, ''))) {
+  if (digitsOnly.length > 20) {
+    return null;
+  }
+
+  // Aceptar formato internacional: opcional +, dígitos, espacios y guiones
+  if (!/^\+?[\d\s-]+$/.test(sanitized)) {
     return null;
   }
 

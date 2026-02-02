@@ -217,7 +217,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
               message = 'Ingresar email válido';
               break;
             case 'telefono':
-              message = 'Ingresar teléfono válido (+### ### ### ###)';
+              message = 'Ingresar teléfono válido (9–20 dígitos, ej: 612 345 678)';
               break;
             case 'asunto':
               message = 'Ingresar asunto (mín. 3 caracteres)';
@@ -251,12 +251,15 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     const sanitizedAsunto = validateAndSanitizeSubject(formData.asunto);
     const sanitizedMensaje = validateAndSanitizeMessage(formData.mensaje);
 
-    // Verificar que todos los campos sean válidos después de sanitización
-    if (!sanitizedNombre || !sanitizedEmail || !sanitizedTelefono || !sanitizedAsunto || !sanitizedMensaje) {
-      setErrorModal({ 
-        field: 'general', 
-        message: 'Los datos ingresados no son válidos. Por favor, verifica todos los campos.' 
-      });
+    // Indicar qué campo falla tras sanitización para que el usuario sepa qué corregir
+    const sanitizeErrors: { field: keyof FormData; message: string }[] = [];
+    if (!sanitizedNombre) sanitizeErrors.push({ field: 'nombre', message: 'Nombre: solo letras, espacios, guiones o apóstrofes (mín. 2 caracteres).' });
+    if (!sanitizedEmail) sanitizeErrors.push({ field: 'email', message: 'Email: formato válido (ej: nombre@dominio.com).' });
+    if (!sanitizedTelefono) sanitizeErrors.push({ field: 'telefono', message: 'Teléfono: 9–20 dígitos, opcional + al inicio (ej: 612 345 678 o +34 612 345 678).' });
+    if (!sanitizedAsunto) sanitizeErrors.push({ field: 'asunto', message: 'Asunto: mínimo 3 caracteres, sin caracteres especiales.' });
+    if (!sanitizedMensaje) sanitizeErrors.push({ field: 'mensaje', message: 'Mensaje: mínimo 10 caracteres, máximo 1000.' });
+    if (sanitizeErrors.length > 0) {
+      setErrorModal({ field: sanitizeErrors[0].field, message: sanitizeErrors[0].message });
       return;
     }
 
@@ -264,10 +267,10 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     setRateLimitError(false);
 
     // Enviar datos al endpoint de contacto (Resend u otro backend)
-    if (!contactApiUrl) {
+    if (!contactApiUrl || !contactApiUrl.startsWith('http')) {
       setErrorModal({
         field: 'general',
-        message: 'El formulario de contacto no está configurado. Configura VITE_CONTACT_API_URL.'
+        message: 'El formulario no está configurado (falta URL del API). Configura VITE_CONTACT_API_URL en el build y vuelve a desplegar.'
       });
       setIsSubmitting(false);
       return;
@@ -302,14 +305,15 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
       }
 
       if (!response.ok) {
-        // Consumir la respuesta para evitar warnings
-        await response.json().catch(() => {});
-        // No exponer detalles del error del servidor
-        console.error('Error al enviar formulario');
-        setErrorModal({ 
-          field: 'general', 
-          message: 'Error al enviar mensaje. Por favor, intenta nuevamente más tarde.' 
-        });
+        let serverMessage = 'Error al enviar mensaje. Por favor, intenta nuevamente más tarde.';
+        try {
+          const errBody = await response.json();
+          if (errBody && typeof errBody.error === 'string') serverMessage = errBody.error;
+        } catch {
+          // Respuesta no es JSON (p. ej. página de error del hosting)
+        }
+        console.error('Error al enviar formulario', response.status, serverMessage);
+        setErrorModal({ field: 'general', message: serverMessage });
         setIsSubmitting(false);
         return;
       }
@@ -348,27 +352,30 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
 
     } catch (error) {
       setIsSubmitting(false);
-      
-      // Manejar diferentes tipos de errores sin exponer información sensible
+
       if (error instanceof Error) {
         if (error.name === 'AbortError' || error.name === 'TimeoutError') {
-          setErrorModal({ 
-            field: 'general', 
-            message: 'Tiempo de espera agotado. Por favor, verifica tu conexión e intenta nuevamente.' 
+          setErrorModal({
+            field: 'general',
+            message: 'Tiempo de espera agotado. Comprueba tu conexión y que la API (Vercel/Resend) esté activa.'
+          });
+        } else if (error.message?.includes('fetch') || error.message?.includes('NetworkError') || (error instanceof TypeError && error.message?.toLowerCase().includes('fetch'))) {
+          setErrorModal({
+            field: 'general',
+            message: 'No se pudo conectar con el servidor. Comprueba tu conexión, que VITE_CONTACT_API_URL apunte a tu API en Vercel (ej: https://tu-proyecto.vercel.app/api/contact) y que la API esté desplegada con RESEND_API_KEY y RESEND_TO_EMAIL.'
           });
         } else {
-          setErrorModal({ 
-            field: 'general', 
-            message: 'Error de conexión. Por favor, intenta nuevamente más tarde.' 
+          setErrorModal({
+            field: 'general',
+            message: 'Error de conexión o respuesta inválida. Comprueba que la URL del API sea correcta y que el servidor responda con JSON.'
           });
         }
       } else {
-      setErrorModal({ 
-        field: 'general', 
-          message: 'Error inesperado. Por favor, intenta nuevamente más tarde.' 
-      });
+        setErrorModal({
+          field: 'general',
+          message: 'Error inesperado. Por favor, intenta nuevamente más tarde.'
+        });
       }
-      
       console.error('Error al enviar formulario:', error);
     }
   };
