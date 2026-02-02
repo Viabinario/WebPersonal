@@ -65,9 +65,11 @@ El formulario de contacto envía los mensajes por email usando [Resend](https://
 | `RESEND_API_KEY`     | `re_xxxx...` (tu API key)| Production (y Preview si quieres) |
 | `RESEND_TO_EMAIL`    | Tu email (ej: `tu@email.com`) | Production (y Preview) |
 | `RESEND_FROM_EMAIL`  | (Opcional) Ej: `Contacto <contacto@tudominio.com>` | Production |
+| `VITE_CONTACT_API_URL` | **Obligatorio si el sitio está en Vercel.** URL completa del API, ej: `https://tu-proyecto.vercel.app/api/contact` | Production (y Preview si quieres) |
 
 - Si no pones `RESEND_FROM_EMAIL`, se usará `onboarding@resend.dev` (dominio de prueba de Resend).
-3. Guarda y haz un **Redeploy** del proyecto para que las variables se apliquen.
+- **`VITE_CONTACT_API_URL`:** Vite inyecta esta variable en **tiempo de build**. Si despliegas el frontend en el **mismo proyecto de Vercel**, añádela aquí con la URL de tu deployment: `https://[tu-dominio-vercel].vercel.app/api/contact`. Escribe **`https://`** con los dos puntos (no `https//`). Si la interfaz de Vercel añade automáticamente `https://` al valor, no lo repitas: el valor final debe ser una sola vez la URL completa (ej: `https://tu-proyecto.vercel.app/api/contact`).
+3. Guarda y haz un **Redeploy** del proyecto para que las variables se apliquen (el build incluirá `VITE_CONTACT_API_URL` en el frontend).
 
 ---
 

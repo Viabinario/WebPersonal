@@ -598,7 +598,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
                       value={formData.telefono}
                       onChange={(e) => handleFieldChange('telefono', e.target.value)}
                       onBlur={() => handleFieldBlur('telefono')}
-                      placeholder="TELÉFONO (+### ### ### ###)"
+                      placeholder="TELÉFONO (+99 999 999 999)"
                       maxLength={20}
                       autoComplete="tel"
                       className="flex-1 font-['Roboto:Regular',sans-serif] font-normal text-[14px] tracking-[2.8px] bg-transparent outline-none text-[#362517] placeholder:text-[#5a3e26]"

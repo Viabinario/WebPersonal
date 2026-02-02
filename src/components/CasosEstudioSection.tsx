@@ -344,6 +344,8 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [lightboxPreferredSrc, setLightboxPreferredSrc] = useState<string | null>(null);
   const [lightboxFallbackSrc, setLightboxFallbackSrc] = useState<string | null>(null);
+  const [lightboxZoom, setLightboxZoom] = useState(1);
+  const [lightboxImageSize, setLightboxImageSize] = useState<{ w: number; h: number } | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const caseContainerRef = useRef<HTMLDivElement>(null);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -411,7 +413,23 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
   const closeLightbox = () => {
     setLightboxPreferredSrc(null);
     setLightboxFallbackSrc(null);
+    setLightboxZoom(1);
+    setLightboxImageSize(null);
   };
+
+  useEffect(() => {
+    if (lightboxDisplaySrc) {
+      setLightboxZoom(1);
+      setLightboxImageSize(null);
+    }
+  }, [lightboxDisplaySrc]);
+
+  const LIGHTBOX_ZOOM_MIN = 0.25;
+  const LIGHTBOX_ZOOM_MAX = 3;
+  const LIGHTBOX_ZOOM_STEP = 0.25;
+  const lightboxZoomOut = () => setLightboxZoom((z) => Math.max(LIGHTBOX_ZOOM_MIN, z - LIGHTBOX_ZOOM_STEP));
+  const lightboxZoomIn = () => setLightboxZoom((z) => Math.min(LIGHTBOX_ZOOM_MAX, z + LIGHTBOX_ZOOM_STEP));
+  const lightboxZoomReset = () => setLightboxZoom(1);
 
   // Calculate scroll percentage from the internal scroll container of Case1/Case2
   useEffect(() => {
@@ -673,23 +691,105 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           document.body
         )}
 
-      {/* Lightbox: imagen original (legible) desde public/originals/ si existe; si no, la del caso */}
+      {/* Lightbox: imagen con control de zoom desde tamaño real; scroll para recorrer */}
       <Dialog open={lightboxOpen} onOpenChange={(open: boolean) => !open && closeLightbox()}>
         <DialogContent
-          className="max-w-[90vw] max-h-[90vh] w-auto p-2 bg-[#f7f2ed] border-[#5a3e26] border-dashed rounded-[22px] overflow-hidden"
+          className="p-2 bg-[#f7f2ed] border-[#5a3e26] border-dashed rounded-[22px] overflow-hidden flex flex-col box-border"
+          style={{
+            width: '95vw',
+            height: '95vh',
+            maxWidth: '95vw',
+            maxHeight: '95vh',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
           onPointerDownOutside={closeLightbox}
         >
-          <DialogTitle className="sr-only">Imagen ampliada</DialogTitle>
+          <DialogTitle className="sr-only">Imagen con zoom - desplázate para ver los detalles</DialogTitle>
           {lightboxDisplaySrc && (
-            <img
-              src={(lightboxPreferredSrc ?? lightboxFallbackSrc) ?? ''}
-              alt="Imagen ampliada - contenido legible"
-              className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-[12px]"
-              onClick={(e) => e.stopPropagation()}
-              onError={() => {
-                if (lightboxFallbackSrc) setLightboxPreferredSrc(lightboxFallbackSrc);
-              }}
-            />
+            <>
+              {/* Barra de zoom */}
+              <div className="shrink-0 flex items-center justify-center gap-2 mb-1">
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); lightboxZoomOut(); }}
+                  disabled={lightboxZoom <= LIGHTBOX_ZOOM_MIN}
+                  className="h-8 min-w-[32px] px-2 rounded-lg bg-[#e5e2de] border border-[#5a3e26] border-dashed text-[#362517] text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ebe3da] transition-colors"
+                  aria-label="Reducir zoom"
+                  title="Reducir zoom"
+                >
+                  −
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); lightboxZoomReset(); }}
+                  className="h-8 min-w-[48px] px-2 rounded-lg bg-[#e5e2de] border border-[#5a3e26] border-dashed text-[#362517] text-xs font-medium hover:bg-[#ebe3da] transition-colors"
+                  aria-label="Tamaño real (100%)"
+                  title="Tamaño real (100%)"
+                >
+                  {Math.round(lightboxZoom * 100)}%
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); lightboxZoomIn(); }}
+                  disabled={lightboxZoom >= LIGHTBOX_ZOOM_MAX}
+                  className="h-8 min-w-[32px] px-2 rounded-lg bg-[#e5e2de] border border-[#5a3e26] border-dashed text-[#362517] text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#ebe3da] transition-colors"
+                  aria-label="Aumentar zoom"
+                  title="Aumentar zoom"
+                >
+                  +
+                </button>
+                <span className="text-[11px] text-[#5a3e26] ml-1">Desplázate para ver detalles</span>
+              </div>
+              <div
+                className="flex-1 min-h-0 min-w-0 overflow-auto rounded-[12px] bg-[#ebe3da]"
+                style={{ overscrollBehavior: 'contain', WebkitOverflowScrolling: 'touch' }}
+              >
+                {lightboxImageSize ? (
+                  <div
+                    style={{
+                      width: lightboxImageSize.w * lightboxZoom,
+                      height: lightboxImageSize.h * lightboxZoom,
+                      position: 'relative',
+                    }}
+                  >
+                    <img
+                      src={(lightboxPreferredSrc ?? lightboxFallbackSrc) ?? ''}
+                      alt="Imagen con zoom para ver detalles"
+                      className="rounded-[12px] block align-top"
+                      width={lightboxImageSize.w}
+                      height={lightboxImageSize.h}
+                      style={{
+                        transform: `scale(${lightboxZoom})`,
+                        transformOrigin: 'top left',
+                        maxWidth: 'none',
+                        maxHeight: 'none',
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      onError={() => {
+                        if (lightboxFallbackSrc) setLightboxPreferredSrc(lightboxFallbackSrc);
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <img
+                    src={(lightboxPreferredSrc ?? lightboxFallbackSrc) ?? ''}
+                    alt="Imagen con zoom para ver detalles"
+                    className="rounded-[12px] block align-top"
+                    style={{ width: 'auto', height: 'auto', maxWidth: 'none', maxHeight: 'none' }}
+                    onClick={(e) => e.stopPropagation()}
+                    onLoad={(e) => {
+                      const img = e.target as HTMLImageElement;
+                      setLightboxImageSize({ w: img.naturalWidth, h: img.naturalHeight });
+                    }}
+                    onError={() => {
+                      if (lightboxFallbackSrc) setLightboxPreferredSrc(lightboxFallbackSrc);
+                    }}
+                  />
+                )}
+              </div>
+            </>
           )}
         </DialogContent>
       </Dialog>
