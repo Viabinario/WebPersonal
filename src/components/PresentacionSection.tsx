@@ -2,6 +2,7 @@ import {
   CASE_INTRO_TEXT,
   SOCIAL_LOGO_SRCS,
   SOCIAL_LABELS,
+  SOCIAL_URLS,
 } from "./case-shared";
 
 interface PresentacionSectionProps {
@@ -42,12 +43,12 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
         <div className="bg-[#e5e2de] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[18px]">
           <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-[4px]">
             {/* Row 1: LinkedIn, GitHub, Behance */}
-            <SocialButton img={SOCIAL_LOGO_SRCS[0]} label={SOCIAL_LABELS[0]} />
-            <SocialButton img={SOCIAL_LOGO_SRCS[1]} label={SOCIAL_LABELS[1]} />
-            <SocialButton img={SOCIAL_LOGO_SRCS[2]} label={SOCIAL_LABELS[2]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[0]} label={SOCIAL_LABELS[0]} url={SOCIAL_URLS[0]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[1]} label={SOCIAL_LABELS[1]} url={SOCIAL_URLS[1]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[2]} label={SOCIAL_LABELS[2]} url={SOCIAL_URLS[2]} />
             {/* Row 2: Notion, YouTube, vacío */}
-            <SocialButton img={SOCIAL_LOGO_SRCS[3]} label={SOCIAL_LABELS[3]} />
-            <SocialButton img={SOCIAL_LOGO_SRCS[4]} label={SOCIAL_LABELS[4]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[3]} label={SOCIAL_LABELS[3]} url={SOCIAL_URLS[3]} />
+            <SocialButton img={SOCIAL_LOGO_SRCS[4]} label={SOCIAL_LABELS[4]} url={SOCIAL_URLS[4]} />
             <SocialButton empty />
             {/* Row 3: vacíos */}
             <SocialButton empty />
@@ -63,30 +64,61 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
 interface SocialButtonProps {
   img?: string;
   label?: string;
+  url?: string;
   empty?: boolean;
 }
 
-function SocialButton({ img, label, empty }: SocialButtonProps) {
-  return (
-    <button 
-      className="relative w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110"
-      aria-label={empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`}
-      title={empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`}
-      disabled={empty}
-    >
-      <div className="absolute bg-[#d9bda5] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300">
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 lg:w-[44px] lg:h-[44px] rounded-[14px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25),0px_8px_2px_0px_rgba(0,0,0,0),0px_5px_2px_0px_rgba(0,0,0,0.01),0px_3px_2px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.04)] group-hover:shadow-[0px_6px_6px_0px_rgba(0,0,0,0.3),0px_10px_3px_0px_rgba(0,0,0,0),0px_7px_3px_0px_rgba(0,0,0,0.01),0px_4px_3px_0px_rgba(0,0,0,0.04),0px_2px_2px_0px_rgba(0,0,0,0.05)] transition-all duration-300">
+const socialButtonClass =
+  "relative w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110 inline-flex items-center justify-center";
+const socialButtonInner =
+  "absolute bg-[#d9bda5] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300";
+const socialButtonShadow =
+  "absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 lg:w-[44px] lg:h-[44px] rounded-[14px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25),0px_8px_2px_0px_rgba(0,0,0,0),0px_5px_2px_0px_rgba(0,0,0,0.01),0px_3px_2px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.04)] group-hover:shadow-[0px_6px_6px_0px_rgba(0,0,0,0.3),0px_10px_3px_0px_rgba(0,0,0,0),0px_7px_3px_0px_rgba(0,0,0,0.01),0px_4px_3px_0px_rgba(0,0,0,0.04),0px_2px_2px_0px_rgba(0,0,0,0.05)] transition-all duration-300";
+
+function SocialButton({ img, label, url, empty }: SocialButtonProps) {
+  const ariaLabel = empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`;
+  const content = (
+    <>
+      <div className={socialButtonInner}>
+        <div className={socialButtonShadow}>
           {!empty && img ? (
-            <img 
-              src={img} 
-              alt="Social Network" 
+            <img
+              src={img}
+              alt=""
               className="w-full h-full rounded-[14px] object-cover"
+              aria-hidden
             />
           ) : (
             <div className="w-full h-full rounded-[14px] bg-[#f7f2ed]" />
           )}
         </div>
       </div>
-    </button>
+    </>
+  );
+
+  if (empty || !url) {
+    return (
+      <span
+        className={socialButtonClass}
+        aria-label={ariaLabel}
+        title={ariaLabel}
+        role="presentation"
+      >
+        {content}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={socialButtonClass}
+      aria-label={ariaLabel}
+      title={ariaLabel}
+    >
+      {content}
+    </a>
   );
 }

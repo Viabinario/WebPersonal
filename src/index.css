@@ -41,4 +41,22 @@
     @apply font-['Roboto:Bold',sans-serif] font-bold leading-[normal] relative shrink-0 text-brown-dark text-[24px];
     font-variation-settings: 'wdth' 100;
   }
+
+  /* Utility: solo variación de fuente (wdth 100). Úsala en elementos que no usen .case-* pero necesiten el mismo ajuste. */
+  .case-font-wdth {
+    font-variation-settings: 'wdth' 100;
+  }
+
+  /* Listas con viñetas en casos de estudio: un solo estilo para reducir duplicación */
+  .case-list-wrap {
+    @apply absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-brown-dark text-[14px] text-justify;
+    font-variation-settings: 'wdth' 100;
+  }
+  .case-list {
+    @apply list-disc mb-0;
+  }
+  .case-list-item {
+    @apply mb-0 leading-normal;
+    margin-inline-start: 21px;
+  }
 }

@@ -604,7 +604,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
               ref={caseContainerRef}
               data-case-lightbox
               role="presentation"
-              className="w-[1280px] h-[832px] relative cursor-zoom-in"
+              className="w-[1280px] h-[832px] relative"
               onClick={handleCaseContentClick}
             >
               <Case1Component />
@@ -615,7 +615,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
               ref={caseContainerRef}
               data-case-lightbox
               role="presentation"
-              className="w-[1280px] h-[832px] relative cursor-zoom-in"
+              className="w-[1280px] h-[832px] relative"
               onClick={handleCaseContentClick}
             >
               <Case2Component />

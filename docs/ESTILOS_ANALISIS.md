@@ -18,8 +18,8 @@
 - Casi no se usa en componentes; en Case1/Case2 predominan valores arbitrarios (`#5a3e26`, `#f7f2ed`) y constantes en `case-shared`.
 
 ### 4. Estilos de casos (Case1 / Case2)
-- Tipografía compartida en **`case-shared`**: constantes JS con cadenas de clases Tailwind (`CASE_FONT_STYLE`, `CASE_CLASS_FORM_LABEL`, `CASE_CLASS_*`).
-- Una sola fuente de verdad en código; cambio de fuente/color/tamaño se hace en un sitio.
+- Tipografía compartida en **`case-shared`**: constantes JS con nombres de clase (`CASE_CLASS_FORM_LABEL`, `CASE_CLASS_*`, `CASE_CLASS_FONT_WDTH`).
+- Una sola fuente de verdad en **CSS** (`index.css`): las clases `.case-*` definen estilos y `font-variation-settings`; no se usa `style={}` en JSX para ello.
 
 ---
 
@@ -61,13 +61,25 @@ Sin tocar el objetivo del sitio ni el layout:
 
 ## Implementación realizada
 
-- En **`index.css`** se añadieron clases en `@layer components`: `.case-form-label`, `.case-title-sm`, `.case-title-md`, `.case-body-justify`, `.case-title-lg`, con los mismos estilos que antes (usando `text-brown-dark` del `tailwind.config.js`) y `font-variation-settings: 'wdth' 100`.
-- **`case-shared`** exporta solo nombres de clase (`"case-form-label"`, `"case-title-sm"`, etc.), manteniendo la misma API para Case1 y Case2.
-- Case1 y Case2 no requieren cambios: siguen usando `CASE_CLASS_*` y opcionalmente `CASE_FONT_STYLE`; el estilo real vive en CSS.
+- En **`index.css`** se añadieron clases en `@layer components`: `.case-form-label`, `.case-title-sm`, `.case-title-md`, `.case-body-justify`, `.case-title-lg`, con los mismos estilos que antes (usando `text-brown-dark` del `tailwind.config.js`) y `font-variation-settings: 'wdth' 100`. Se añadió la utility `.case-font-wdth` (solo `font-variation-settings: 'wdth' 100`) para elementos que no usan las otras `.case-*`.
+- **`case-shared`** exporta nombres de clase (`CASE_CLASS_*`, `CASE_CLASS_FONT_WDTH`); el estilo real vive en CSS. Se eliminó `CASE_FONT_STYLE` (objeto `style`) para evitar repetición: todo se controla por clases.
+- Case1 y Case2 usan solo `className={CASE_CLASS_*}` o `className="... case-font-wdth"`; se eliminaron **más de 165** usos de `style={CASE_FONT_STYLE}` para reducir código y centralizar en CSS.
+
+## ¿Se pueden optimizar los className repetidos con CSS?
+
+**Sí.** Los patrones de `className` que se repiten en muchas partes se pueden (y en este proyecto se han) centralizar en CSS:
+
+1. **Clases semánticas en `index.css`** (`.case-form-label`, `.case-title-sm`, `.case-title-md`, `.case-body-justify`, `.case-title-lg`): sustituyen cadenas largas de Tailwind por un solo nombre de clase y concentran `font-variation-settings` en un sitio.
+2. **Utility `.case-font-wdth`**: para elementos que solo necesitan la variación de fuente, sin repetir `style={}` en cada uno.
+3. **Efecto:** menos código en JSX, una sola fuente de verdad en CSS, y cambios de tipografía/color en un solo archivo.
+
+Para nuevos patrones que se repitan mucho, conviene añadir una clase en `@layer components` en `index.css` y usar una constante en `case-shared`.
+
+---
 
 ## Resumen
 
 - **`globals.css`:** no se usa; tiene comentario aclaratorio; se ignora o se elimina si no se adopta ese sistema.
-- **`index.css`:** CSS global activo; concentra la tipografía compartida de casos en clases semánticas.
-- **`case-shared`:** sigue siendo la API; exporta nombres de clase que apuntan a las clases en `index.css`.
-- **CSS Module:** opción válida para encapsular por componente; para casos compartidos, el híbrido con `index.css` + constantes es la opción aplicada y no desmejora el sitio.
+- **`index.css`:** CSS global activo; concentra la tipografía compartida de casos en clases semánticas y la utility `.case-font-wdth`.
+- **`case-shared`:** exporta nombres de clase que apuntan a las clases en `index.css`; no se usa `style={}` para variación de fuente.
+- **CSS Module:** opción válida para encapsular por componente; para casos compartidos, el híbrido con `index.css` + constantes es la opción aplicada.

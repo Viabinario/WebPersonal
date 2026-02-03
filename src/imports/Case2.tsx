@@ -4,13 +4,12 @@ import {
   ContentBodySideLeft,
   ContentCenter,
   ContentRight,
-  CASE_FONT_STYLE,
-  CASE_CLASS_FORM_LABEL,
   CASE_CLASS_TITLE_SM,
   CASE_CLASS_TITLE_MD,
   CASE_CLASS_BODY_JUSTIFY,
   CASE_CLASS_TITLE_LG,
 } from "../components/case-shared";
+import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage from "../assets/case2/case2-01.png";
 import imgDesignSprint1 from "../assets/case2/case2-02.png";
 import imgSprintQuestion1 from "../assets/case2/case2-03.png";
@@ -71,7 +70,7 @@ function ContainerText() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Container_Text">
       <div className="content-stretch flex flex-col gap-[12px] items-start px-[32px] relative size-full">
-        <div className="flex-[1_0_0] font-['Roboto:Regular',sans-serif] font-normal leading-[1.2] min-h-px min-w-px relative text-[14px] text-black text-justify w-full" style={CASE_FONT_STYLE}>
+        <div className="flex-[1_0_0] font-['Roboto:Regular',sans-serif] font-normal leading-[1.2] min-h-px min-w-px relative text-[14px] text-black text-justify w-full case-font-wdth">
           <p className="css-4hzbpn mb-0">{`Hola, soy Francisco Sánchez, arquitecto de profesión con una experiencia laboral de más de 14 años, diseñando y gestionando proyectos de edificación de diversa tipología. `}</p>
           <p className="css-4hzbpn mb-0">&nbsp;</p>
           <p className="css-4hzbpn mb-0">Mi camino hacia el UX/UI surge desde mis primeros años de universidad, interesándome en el mundo digital a través del diseño de sitios web, apreciándolos como experiencias habitables digitales.</p>
@@ -112,276 +111,11 @@ function Content1X1() {
   );
 }
 
-function ContentLabel() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />;
-}
-
-function Input() {
-  return (
-    <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
-      <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
-            <p className="css-g0mm18 leading-[normal] overflow-hidden">NOMBRE</p>
-          </div>
-        </div>
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#a16f44] border-dashed inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function ContentMessage() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />;
-}
-
-function NameInput() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[404px]" data-name="Name_Input">
-      <ContentLabel />
-      <Input />
-      <ContentMessage />
-    </div>
-  );
-}
-
-function ContentLabel1() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />;
-}
-
-function Input1() {
-  return (
-    <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
-      <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
-            <p className="css-g0mm18 leading-[normal] overflow-hidden">EMAIL</p>
-          </div>
-        </div>
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#a16f44] border-dashed inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function ContentMessage1() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />;
-}
-
-function EmailInput() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[404px]" data-name="Email_Input">
-      <ContentLabel1 />
-      <Input1 />
-      <ContentMessage1 />
-    </div>
-  );
-}
-
-function ContentLabel2() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />;
-}
-
-function Input2() {
-  return (
-    <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
-      <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
-            <p className="css-g0mm18 leading-[normal] overflow-hidden">TELÉFONO</p>
-          </div>
-        </div>
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#a16f44] border-dashed inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function ContentMessage2() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />;
-}
-
-function PhoneInput() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[404px]" data-name="Phone_Input">
-      <ContentLabel2 />
-      <Input2 />
-      <ContentMessage2 />
-    </div>
-  );
-}
-
-function ContentLabel3() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Label" />;
-}
-
-function Input3() {
-  return (
-    <div className="bg-[#f7f2ed] h-[48px] relative rounded-[8px] shrink-0 w-full" data-name="Input">
-      <div className="flex flex-row items-center overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex gap-[14px] items-center px-[12px] py-[6px] relative size-full">
-          <div className={CASE_CLASS_FORM_LABEL} style={CASE_FONT_STYLE}>
-            <p className="css-g0mm18 leading-[normal] overflow-hidden">ASUNTO</p>
-          </div>
-        </div>
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#a16f44] border-dashed inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function ContentMessage3() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content_Message" />;
-}
-
-function SubjectInput() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[404px]" data-name="Subject_Input">
-      <ContentLabel3 />
-      <Input3 />
-      <ContentMessage3 />
-    </div>
-  );
-}
-
-function ContentLabel4() {
-  return <div className="content-stretch flex items-center justify-center shrink-0 w-full" data-name="Content Label" />;
-}
-
-function ContentPlaceholder() {
-  return (
-    <div className="content-stretch flex h-[180px] items-start relative shrink-0 w-full" data-name="Content Placeholder">
-      <div className="flex flex-[1_0_0] flex-col font-['Roboto:Regular',sans-serif] font-normal justify-center leading-[0] min-h-px min-w-px overflow-hidden relative text-[#5a3e26] text-[16px] text-ellipsis" style={CASE_FONT_STYLE}>
-        <p className="css-4hzbpn leading-[normal]">MENSAJE</p>
-      </div>
-    </div>
-  );
-}
-
-function ContentIcon7() {
-  return <div className="content-stretch flex items-end justify-end shrink-0 w-full" data-name="Content icon" />;
-}
-
-function Input4() {
-  return (
-    <div className="bg-[#f7f2ed] relative rounded-[8px] shrink-0 w-full" data-name="Input">
-      <div className="overflow-clip rounded-[inherit] size-full">
-        <div className="content-stretch flex flex-col gap-[2px] items-start p-[12px] relative w-full">
-          <ContentPlaceholder />
-          <ContentIcon7 />
-        </div>
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#a16f44] border-dashed inset-0 pointer-events-none rounded-[8px]" />
-    </div>
-  );
-}
-
-function ContentMessage4() {
-  return <div className="content-stretch flex h-[20px] items-center justify-center shrink-0 w-full" data-name="Content Message" />;
-}
-
-function MessageInput() {
-  return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0 w-[404px]" data-name="Message_Input">
-      <ContentLabel4 />
-      <Input4 />
-      <ContentMessage4 />
-    </div>
-  );
-}
-
-function Send() {
-  return (
-    <div className="relative shrink-0 size-[24px]" data-name="send-01">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-        <g id="send-01">
-          <path d={svgPaths.p18e0c400} id="Icon" stroke="var(--stroke-0, #3D3A36)" strokeLinecap="round" strokeWidth="2" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Button() {
-  return (
-    <div className="bg-[#e1e1e1] content-stretch flex gap-[10px] h-[44px] items-center justify-center p-[10px] relative rounded-[99999997952px] shrink-0 w-[88px]" data-name="Button">
-      <div aria-hidden="true" className="absolute border border-[#a3a19e] border-solid inset-0 pointer-events-none rounded-[99999997952px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]" />
-      <Send />
-    </div>
-  );
-}
-
-function Delete() {
-  return (
-    <div className="relative shrink-0 size-[24px]" data-name="delete">
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-        <g id="delete">
-          <path d={svgPaths.p327d2300} id="Icon" stroke="var(--stroke-0, #3D3A36)" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Button1() {
-  return (
-    <div className="bg-[#e1e1e1] content-stretch flex gap-[10px] h-[44px] items-center justify-center p-[10px] relative rounded-[999px] shrink-0 w-[88px]" data-name="Button">
-      <div aria-hidden="true" className="absolute border border-[#a3a19e] border-solid inset-0 pointer-events-none rounded-[999px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]" />
-      <Delete />
-    </div>
-  );
-}
-
-function Content() {
-  return (
-    <div className="content-stretch flex gap-[20px] h-[44px] items-center justify-end relative shrink-0 w-[400px]" data-name="Content">
-      <Button />
-      <Button1 />
-    </div>
-  );
-}
-
-function ContactForm() {
-  return (
-    <div className="bg-[#e5e2de] relative rounded-[22px] shrink-0 w-[490px]" data-name="Contact_Form">
-      <div className="content-stretch flex flex-col gap-[2px] items-center overflow-clip pb-[32px] pt-[22px] px-[100px] relative rounded-[inherit] w-full">
-        <NameInput />
-        <EmailInput />
-        <PhoneInput />
-        <SubjectInput />
-        <MessageInput />
-        <Content />
-      </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[22px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]" />
-    </div>
-  );
-}
-
-function Contact() {
-  return (
-    <div className="content-stretch flex flex-col items-start relative shrink-0 w-[712px]" data-name="Contact">
-      <ContactForm />
-    </div>
-  );
-}
-
-function ContentForm1() {
-  return (
-    <div className="relative shrink-0 w-full" data-name="Content-Form">
-      <div className="flex flex-col items-center size-full">
-        <div className="content-stretch flex flex-col items-center pl-[200px] relative w-full">
-          <Contact />
-        </div>
-      </div>
-    </div>
-  );
-}
-
 function ContentBodyRight() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-[1_0_0] flex-col h-full items-start min-h-px min-w-[1280px] py-[38px] relative" data-name="Content-Body-Right">
       <Content1X1 />
-      <ContentForm1 />
+      <ContentForm1Case />
     </div>
   );
 }
@@ -402,7 +136,7 @@ function ContentLeft184Px() {
 function ContentProjectTitle() {
   return (
     <div className="content-start flex flex-wrap gap-[10px] h-[72px] items-start relative shrink-0 w-full" data-name="Content Project Title">
-      <p className="css-4hzbpn flex-[1_0_0] font-['Roboto:Bold',sans-serif] font-bold leading-[40px] min-h-px min-w-px relative text-[#5a3e26] text-[32px]" style={CASE_FONT_STYLE}>
+      <p className="css-4hzbpn flex-[1_0_0] font-['Roboto:Bold',sans-serif] font-bold leading-[40px] min-h-px min-w-px relative text-[#5a3e26] text-[32px] case-font-wdth">
         Del Revés
       </p>
     </div>
@@ -412,7 +146,7 @@ function ContentProjectTitle() {
 function ContentTitle() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Tipo de Proyecto</p>
       </div>
     </div>
@@ -422,7 +156,7 @@ function ContentTitle() {
 function ContentText() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">
         <p className="css-4hzbpn mb-0">{` App Móvil  / trabajo grupal (presencial y remoto).`}</p>
         <p className="css-4hzbpn">Participación personal principal: Componentes, Arquitectura, coordinar día miércoles, UI: actividades, chat.</p>
       </div>
@@ -442,7 +176,7 @@ function ModuleText() {
 function ContentTitle1() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Entregables</p>
       </div>
     </div>
@@ -452,7 +186,7 @@ function ContentTitle1() {
 function ContentText1() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>{`Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones. Presentación oral grupal. `}</p>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">{`Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones. Presentación oral grupal. `}</p>
     </div>
   );
 }
@@ -478,7 +212,7 @@ function ContentText2() {
 function ContentTitle2() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Herramientas `}</p>
       </div>
     </div>
@@ -488,9 +222,9 @@ function ContentTitle2() {
 function ContentText3() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px]" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <span className="leading-[normal]">{`Metodología `}</span>
-        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
+        <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
           Design Sprint
         </span>
         <span className="leading-[normal]">. Software: Figma (Design, Make, Slide)</span>
@@ -511,7 +245,7 @@ function ModuleText2() {
 function ContentTitle3() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_SM} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Duración `}</p>
       </div>
     </div>
@@ -521,7 +255,7 @@ function ContentTitle3() {
 function ContentText4() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         7 días.
       </p>
     </div>
@@ -567,7 +301,7 @@ function ContentResume388Px() {
 function ContentImage() {
   return (
     <div className="h-[286px] pointer-events-none relative rounded-[8px] shrink-0 w-[576px]" data-name="Content-Image">
-      <img alt="" className="absolute inset-0 max-w-none object-cover rounded-[8px] size-full" src={imgContentImage} />
+      <img alt="Portada del caso Del Revés" className="absolute inset-0 max-w-none object-cover rounded-[8px] size-full" src={imgContentImage} />
       <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 rounded-[8px]" />
     </div>
   );
@@ -576,7 +310,7 @@ function ContentImage() {
 function ContentTitle4() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Descripción</p>
       </div>
     </div>
@@ -586,13 +320,13 @@ function ContentTitle4() {
 function ContentText6() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`El encargo consistió en `}</span>
-          <span className="font-['Roboto:Bold_Italic',sans-serif] font-bold italic leading-[normal]" style={CASE_FONT_STYLE}>
+          <span className="font-['Roboto:Bold_Italic',sans-serif] font-bold italic leading-[normal] case-font-wdth">
             crear una solución digital innovadora en 5 días, que ayude a mejorar la salud mental, el bienestar emocional y reducir la ansiedad en cualquiera de sus ámbitos (laboral, familiar, bullying, auto-impuesto, etc.) de todo tipo de personas.
           </span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
             {" "}
           </span>
         </p>
@@ -640,7 +374,7 @@ function ContentImage1() {
   return (
     <div className="bg-white content-stretch flex flex-col h-[267px] items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[145px] relative shrink-0 w-[352px]" data-name="Design-Sprint 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDesignSprint1} />
+        <img alt="Design Sprint" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDesignSprint1} />
       </div>
     </div>
   );
@@ -649,7 +383,7 @@ function ContentImage1() {
 function ContentTitle5() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Metodología</p>
       </div>
     </div>
@@ -659,7 +393,7 @@ function ContentTitle5() {
 function ContentText8() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">El proyecto se desarrolló mediante la metodología Design Sprint, trabajando durante cinco días para encontrar las mejores soluciones al problema planteado. Durante este proceso generamos ideas, seleccionamos las mejores y las llevamos a nuestro producto para posteriormente validar en un testeo los resultados.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">Gracias a esta metodología seguimos un proceso organizado y ágil, que nos permitió crear una aplicación centrada en el usuario y que le aporte una solución a su problema.</p>
@@ -720,7 +454,7 @@ function IconDays() {
 function ContentTextIcon() {
   return (
     <div className="content-stretch flex h-[48px] items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
+      <p className={CASE_CLASS_TITLE_LG}>
         Lunes / Investigación
       </p>
     </div>
@@ -739,7 +473,7 @@ function IconDaysText() {
 function ContentTitle6() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Sprint Questions</p>
       </div>
     </div>
@@ -749,7 +483,7 @@ function ContentTitle6() {
 function ContentText10() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>{`Se plantean distintas preguntas para comprender mejor las necesidades de los usuarios y detectar oportunidades de mejora y priorizar los aspectos clave del proyecto. `}</p>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">{`Se plantean distintas preguntas para comprender mejor las necesidades de los usuarios y detectar oportunidades de mejora y priorizar los aspectos clave del proyecto. `}</p>
     </div>
   );
 }
@@ -775,7 +509,7 @@ function ContentImage2() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[171.938px] relative shrink-0 w-[330.375px]" data-name="Sprint Question 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgSprintQuestion1} />
+        <img alt="Preguntas del Sprint" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgSprintQuestion1} />
       </div>
     </div>
   );
@@ -801,7 +535,7 @@ function IconDaysText1() {
 function ContentTitle7() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Brainstorming</p>
       </div>
     </div>
@@ -811,7 +545,7 @@ function ContentTitle7() {
 function ContentText12() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Durante esta etapa, se genera un gran número de ideas para explorar diferentes formas de resolver las necesidades de los usuarios y responder a los retos definidos en el Sprint.
       </p>
     </div>
@@ -839,7 +573,7 @@ function ContentImage3() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[102px] relative shrink-0 w-[294px]" data-name="Brainstorming 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgBrainstorming1} />
+        <img alt="Brainstorming" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgBrainstorming1} />
       </div>
     </div>
   );
@@ -865,7 +599,7 @@ function IconDaysText2() {
 function ContentTitle8() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">How might we...?</p>
       </div>
     </div>
@@ -875,7 +609,7 @@ function ContentTitle8() {
 function ContentText14() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Permite convertir los problemas en oportunidades de diseño claras y accionables, explorando posibles soluciones alineadas con los retos del proyecto.
       </p>
     </div>
@@ -903,7 +637,7 @@ function ContentImage4() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[174.188px] relative shrink-0 w-[331.125px]" data-name="hmw 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHmw1} />
+        <img alt="How Might We" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHmw1} />
       </div>
     </div>
   );
@@ -929,7 +663,7 @@ function IconDaysText3() {
 function ContentTitle9() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">User Persona y Journey Map</p>
       </div>
     </div>
@@ -939,7 +673,7 @@ function ContentTitle9() {
 function ContentText16() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         El objetivo analizando el User Persona y el Journey Map es comprender quién es el usuario y qué necesita, así como, analizar su experiencia, identificar puntos de dolor y detectar oportunidades para mejorar la solución.
       </p>
     </div>
@@ -967,7 +701,7 @@ function ContentImage5() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[387.2px] relative shrink-0 w-[353px]" data-name="user_persona 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgUserPersona1} />
+        <img alt="Persona de usuario" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgUserPersona1} />
       </div>
     </div>
   );
@@ -992,7 +726,7 @@ function ContentImage6() {
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[575.1px] relative shrink-0 w-[524.4px]" data-name="Acciones 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgAcciones1} />
+            <img alt="Acciones" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgAcciones1} />
           </div>
         </div>
       </div>
@@ -1034,7 +768,7 @@ function IconDays1() {
 function ContentTextIcon1() {
   return (
     <div className="content-stretch flex h-[48px] items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
+      <p className={CASE_CLASS_TITLE_LG}>
         Martes / Inspiración
       </p>
     </div>
@@ -1054,7 +788,7 @@ function ContentImage7() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[350px] relative shrink-0 w-[211px]" data-name="Logo 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLogo1} />
+        <img alt="Logo" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLogo1} />
       </div>
     </div>
   );
@@ -1063,7 +797,7 @@ function ContentImage7() {
 function ContentTitle10() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Divergir / Generar ideas / Buscar soluciones</p>
       </div>
     </div>
@@ -1073,7 +807,7 @@ function ContentTitle10() {
 function ContentText18() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Contribuimos en nuestra plantilla con ideas visuales: paletas de colores, interfaces, herramientas, usos y flujos.
       </p>
     </div>
@@ -1116,7 +850,7 @@ function ContentImage8() {
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative size-full">
           <div className="h-[500px] relative shrink-0 w-[549px]" data-name="moodboard 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMoodboard1} />
+            <img alt="Moodboard" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMoodboard1} />
           </div>
         </div>
       </div>
@@ -1140,7 +874,7 @@ function ContentImage9() {
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[500px] relative shrink-0 w-[486px]" data-name="Lightning demos 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLightningDemos1} />
+            <img alt="Lightning Demos" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLightningDemos1} />
           </div>
         </div>
       </div>
@@ -1164,7 +898,7 @@ function ContentImage10() {
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[354px] relative shrink-0 w-[500px]" data-name="crazy 8 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgCrazy81} />
+            <img alt="Crazy 8" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgCrazy81} />
           </div>
         </div>
       </div>
@@ -1176,7 +910,7 @@ function ContentImage10() {
 function ContentText20() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Todo el desarrollo de ideas, notas, imágenes que cada integrante proyectó en la plantilla grupal sirvieron de base para crear individualmente un Crazy 8, para las distintas pantallas y características de la futura app. Luego de debatir puntos de vistas y una votación se seleccionaron las pantallas para el Crazy 8 grupal, el cual el día siguiente se establecería definitivamente.
       </p>
     </div>
@@ -1229,7 +963,7 @@ function IconDays2() {
 function ContentTextIcon2() {
   return (
     <div className="content-stretch flex h-[48px] items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
+      <p className={CASE_CLASS_TITLE_LG}>
         Miércoles / Decisión
       </p>
     </div>
@@ -1249,7 +983,7 @@ function ContentImage11() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="relative shrink-0 size-[350px]" data-name="decision_2 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDecision21} />
+        <img alt="Decisión" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDecision21} />
       </div>
     </div>
   );
@@ -1258,7 +992,7 @@ function ContentImage11() {
 function ContentTitle11() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Crazy 8</p>
       </div>
     </div>
@@ -1268,7 +1002,7 @@ function ContentTitle11() {
 function ContentText22() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`Después de exponer cada uno sus ideas, mediante una votación entre el equipo, definimos los crazy 8 finales. `}</p>
         <p className="css-4hzbpn">Se definieron las siguientes páginas:</p>
       </div>
@@ -1310,7 +1044,7 @@ function ContentImage12() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[606px] relative shrink-0 w-[215px]" data-name="C8 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgC81} />
+        <img alt="Sketch C8" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgC81} />
       </div>
     </div>
   );
@@ -1331,7 +1065,7 @@ function ContentImage13() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[479px] relative shrink-0 w-[350px]" data-name="IDEAS 2">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIdeas2} />
+        <img alt="Ideas" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIdeas2} />
       </div>
     </div>
   );
@@ -1354,7 +1088,7 @@ function ContentImage14() {
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[420px] relative shrink-0 w-[503px]" data-name="STOYRYBOARD 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgStoyryboard1} />
+            <img alt="Storyboard" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgStoyryboard1} />
           </div>
         </div>
       </div>
@@ -1366,7 +1100,7 @@ function ContentImage14() {
 function ContentTitle12() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Storyboard</p>
       </div>
     </div>
@@ -1376,7 +1110,7 @@ function ContentTitle12() {
 function ContentText24() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`Nuestro storyboard  muestra a una persona que en un primer momento se encuentra agobiada en medio del tráfico, luego no tiene tiempo para comer porque está en una sesión online, pero recuerda que le recomendaron la app “Del revés” y decide descargarla, planeando usarla antes de dormir.`}</p>
         <p className="css-4hzbpn">{`Prueba  dentro de la app en la sección de dormir y al despertar al siguiente día su expresión “aaahhhhhh!” confirma que ha sido de gran ayuda y se siente un poco mejor. `}</p>
       </div>
@@ -1431,7 +1165,7 @@ function IconDays3() {
 function ContentTextIcon3() {
   return (
     <div className="content-stretch flex h-[48px] items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
+      <p className={CASE_CLASS_TITLE_LG}>
         Jueves / Prototipado
       </p>
     </div>
@@ -1451,7 +1185,7 @@ function ContentImage15() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="relative shrink-0 size-[350px]" data-name="prototipado 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgPrototipado1} />
+        <img alt="Prototipado" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgPrototipado1} />
       </div>
     </div>
   );
@@ -1460,7 +1194,7 @@ function ContentImage15() {
 function ContentTitle13() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Design System</p>
       </div>
     </div>
@@ -1470,7 +1204,7 @@ function ContentTitle13() {
 function ContentText26() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Creamos un design system basado en las ideas sacadas el martes gracias al moodboard incluyendo el logo, los colores, la tipografía y los diferentes componentes.
       </p>
     </div>
@@ -1513,7 +1247,7 @@ function ContentImage16() {
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[600px] relative shrink-0 w-[466px]" data-name="colorestipo 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgColorestipo1} />
+            <img alt="Color y tipografía" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgColorestipo1} />
           </div>
         </div>
       </div>
@@ -1537,7 +1271,7 @@ function ContentImage17() {
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[412px] relative shrink-0 w-[550px]" data-name="components 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgComponents1} />
+            <img alt="Componentes" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgComponents1} />
           </div>
         </div>
       </div>
@@ -1549,7 +1283,7 @@ function ContentImage17() {
 function ContentTitle14() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Componentes</p>
       </div>
     </div>
@@ -1559,7 +1293,7 @@ function ContentTitle14() {
 function ContentText28() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         El desarrollo de los componentes estuvo organizado de acuerdo a una distribución de las páginas de la app entre los integrantes del grupo (6 personas).
       </p>
     </div>
@@ -1599,7 +1333,7 @@ function ContentImage18() {
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[456px] relative shrink-0 w-[450px]" data-name="ARQUITECTURA 2">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgArquitectura2} />
+            <img alt="Arquitectura de información" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgArquitectura2} />
           </div>
         </div>
       </div>
@@ -1623,7 +1357,7 @@ function ContentImage19() {
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[610px] relative shrink-0 w-[476px]" data-name="interfaz 1">
-            <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgInterfaz1} />
+            <img alt="Interfaz" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgInterfaz1} />
           </div>
         </div>
       </div>
@@ -1661,7 +1395,7 @@ function IconDays4() {
 function ContentTextIcon4() {
   return (
     <div className="content-stretch flex h-[48px] items-center justify-center relative shrink-0" data-name="Content-Text-Icon">
-      <p className={CASE_CLASS_TITLE_LG} style={CASE_FONT_STYLE}>
+      <p className={CASE_CLASS_TITLE_LG}>
         Viernes / Testeo
       </p>
     </div>
@@ -1681,7 +1415,7 @@ function ContentImage20() {
   return (
     <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[378px] relative shrink-0 w-[350px]" data-name="mocktest 1">
-        <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMocktest1} />
+        <img alt="Mock test" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMocktest1} />
       </div>
     </div>
   );
@@ -1694,7 +1428,7 @@ function ContentTitle15() {
 function ContentText30() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Se llevó a cabo una evaluación del prototipo con personas reales, lo que permitió detectar dificultades de uso y confirmar que las propuestas desarrolladas realmente responden a lo que los usuarios necesitan.
       </p>
     </div>
@@ -1736,7 +1470,7 @@ function ContentProject1000Px() {
     <div className="bg-[#f7f2ed] h-[670px] relative rounded-[22px] shrink-0 w-[1000px]" data-name="Content_Project_1000px">
       <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[inherit] size-full">
         <div className="h-[362px] relative shrink-0 w-[950px]" data-name="testing_feedback 2">
-          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgTestingFeedback2} />
+          <img alt="Testing y feedback" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgTestingFeedback2} />
         </div>
       </div>
       <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
@@ -1747,7 +1481,7 @@ function ContentProject1000Px() {
 function ContentTitle16() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Futuribles</p>
       </div>
     </div>
@@ -1757,9 +1491,9 @@ function ContentTitle16() {
 function ContentText32() {
   return (
     <div className="flex-[1_0_0] min-h-px min-w-px relative w-full" data-name="Content_text">
-      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify" style={CASE_FONT_STYLE}>
+      <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <p className="css-4hzbpn mb-0">
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
             Chatbox
           </span>
           <span className="leading-[normal]">: Se va a desarrollar una pantalla previa donde aparezcan diferentes comunidades a las que poder unirse para hablar con personas en una situación parecida y tener la posibilidad de compartir sus vivencias y darse apoyo.</span>
@@ -1767,13 +1501,13 @@ function ContentText32() {
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>{`Progreso: `}</span>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">{`Progreso: `}</span>
           <span className="leading-[normal]">Al terminar cada actividad, saldrá una pantalla donde se verá el crecimiento de la planta a modo de feedback para que puedan ver su progreso de una manera más visual.</span>
         </p>
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal]" style={CASE_FONT_STYLE}>{`Perfil: `}</span>
+          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">{`Perfil: `}</span>
           <span className="leading-[normal]">Añadiremos una pantalla donde las personas usuarias puedan ver su perfil, ya que la actual puede ser confuso al tener campos rellenables.</span>
         </p>
         <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
@@ -1807,7 +1541,7 @@ function ContentImage21() {
     <div className="relative rounded-[8px] shrink-0 w-[370px]" data-name="Content-Image">
       <div className="content-stretch flex flex-col items-center overflow-clip py-[71px] relative rounded-[inherit] w-full">
         <div className="h-[139px] relative shrink-0 w-[350px]" data-name="futuribles 1">
-          <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFuturibles1} />
+          <img alt="Futuribles" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFuturibles1} />
         </div>
       </div>
       <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
@@ -1842,7 +1576,7 @@ function ContentTitle184Px1() {
 function ContentTitle17() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Conclusiones</p>
       </div>
     </div>
@@ -1852,7 +1586,7 @@ function ContentTitle17() {
 function ContentText35() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`En este proyecto, lo más retador ha sido poder organizarnos con distintas personas y priorizar las tareas para conseguir realizar todo el proceso en 5 días de trabajo. `}</p>
         <p className="css-4hzbpn mb-0">Llegar a lograr que la idea inicial se transformara en una experiencia clara y funcional para las personas usuarias fue muy gratificante. Finalmente, pudimos observar que este proyecto tiene una gran capacidad de expansión en próximos MVP, ya que es flexible y puede adaptarse a diferentes contextos y necesidades, sin embargo no pudimos ampliarlo como hubiéramos querido ya que la metodología nos condicionaba a realizarlo en un tiempo concreto.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
@@ -1882,7 +1616,7 @@ function ContentText36() {
 function ContentTitle18() {
   return (
     <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
-      <div className={CASE_CLASS_TITLE_MD} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Agradecimientos</p>
       </div>
     </div>
@@ -1892,7 +1626,7 @@ function ContentTitle18() {
 function ContentText37() {
   return (
     <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
-      <div className={CASE_CLASS_BODY_JUSTIFY} style={CASE_FONT_STYLE}>
+      <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">A los compañeros y compañeras que conformaron este trabajo grupal:</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">Agustina, Anna, Claudia, Erik y Jonattan</p>
