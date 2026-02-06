@@ -8,6 +8,8 @@ import {
   CASE_CLASS_TITLE_MD,
   CASE_CLASS_BODY_JUSTIFY,
   CASE_CLASS_TITLE_LG,
+  LINKS_OTHER_FORMATS_CASE2,
+  LINKS_CREDITS_CASE2,
 } from "../components/case-shared";
 import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage from "../assets/case2/case2-01.png";
@@ -145,7 +147,7 @@ function ContentProjectTitle() {
 
 function ContentTitle() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Tipo de Proyecto</p>
       </div>
@@ -155,7 +157,7 @@ function ContentTitle() {
 
 function ContentText() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">
         <p className="css-4hzbpn mb-0">{` App Móvil  / trabajo grupal (presencial y remoto).`}</p>
         <p className="css-4hzbpn">Participación personal principal: Componentes, Arquitectura, coordinar día miércoles, UI: actividades, chat.</p>
@@ -175,7 +177,7 @@ function ModuleText() {
 
 function ContentTitle1() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Entregables</p>
       </div>
@@ -185,7 +187,7 @@ function ContentTitle1() {
 
 function ContentText1() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">{`Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones. Presentación oral grupal. `}</p>
     </div>
   );
@@ -211,7 +213,7 @@ function ContentText2() {
 
 function ContentTitle2() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Herramientas `}</p>
       </div>
@@ -221,7 +223,7 @@ function ContentTitle2() {
 
 function ContentText3() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <span className="leading-[normal]">{`Metodología `}</span>
         <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
@@ -244,7 +246,7 @@ function ModuleText2() {
 
 function ContentTitle3() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Duración `}</p>
       </div>
@@ -309,7 +311,7 @@ function ContentImage() {
 
 function ContentTitle4() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Descripción</p>
       </div>
@@ -319,7 +321,7 @@ function ContentTitle4() {
 
 function ContentText6() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`El encargo consistió en `}</span>
@@ -382,7 +384,7 @@ function ContentImage1() {
 
 function ContentTitle5() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Metodología</p>
       </div>
@@ -392,7 +394,7 @@ function ContentTitle5() {
 
 function ContentText8() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">El proyecto se desarrolló mediante la metodología Design Sprint, trabajando durante cinco días para encontrar las mejores soluciones al problema planteado. Durante este proceso generamos ideas, seleccionamos las mejores y las llevamos a nuestro producto para posteriormente validar en un testeo los resultados.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
@@ -472,7 +474,7 @@ function IconDaysText() {
 
 function ContentTitle6() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Sprint Questions</p>
       </div>
@@ -482,7 +484,7 @@ function ContentTitle6() {
 
 function ContentText10() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">{`Se plantean distintas preguntas para comprender mejor las necesidades de los usuarios y detectar oportunidades de mejora y priorizar los aspectos clave del proyecto. `}</p>
     </div>
   );
@@ -507,9 +509,9 @@ function ContentText11() {
 
 function ContentImage2() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
-      <div className="h-[171.938px] relative shrink-0 w-[330.375px]" data-name="Sprint Question 1">
-        <img alt="Preguntas del Sprint" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgSprintQuestion1} />
+    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+      <div className="relative min-h-0 w-full flex-1" data-name="Sprint Question 1">
+        <img alt="Preguntas del Sprint" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgSprintQuestion1} />
       </div>
     </div>
   );
@@ -517,8 +519,8 @@ function ContentImage2() {
 
 function ContentResume388Px2() {
   return (
-    <div className="bg-[#fff6eb] h-[670px] relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
-      <div className="content-stretch flex flex-col gap-[22px] items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
+    <div className="bg-[#fff6eb] flex h-[670px] flex-col relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
+      <div className="flex min-h-0 flex-1 flex-col gap-[22px] items-stretch overflow-hidden px-[8px] py-[22px] relative rounded-[inherit]">
         <IconDaysText />
         <ContentText11 />
         <ContentImage2 />
@@ -534,7 +536,7 @@ function IconDaysText1() {
 
 function ContentTitle7() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Brainstorming</p>
       </div>
@@ -544,7 +546,7 @@ function ContentTitle7() {
 
 function ContentText12() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[80px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Durante esta etapa, se genera un gran número de ideas para explorar diferentes formas de resolver las necesidades de los usuarios y responder a los retos definidos en el Sprint.
       </p>
@@ -571,9 +573,9 @@ function ContentText13() {
 
 function ContentImage3() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
-      <div className="h-[102px] relative shrink-0 w-[294px]" data-name="Brainstorming 1">
-        <img alt="Brainstorming" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgBrainstorming1} />
+    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+      <div className="relative min-h-0 w-full flex-1" data-name="Brainstorming 1">
+        <img alt="Brainstorming" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgBrainstorming1} />
       </div>
     </div>
   );
@@ -581,8 +583,8 @@ function ContentImage3() {
 
 function ContentResume388Px3() {
   return (
-    <div className="bg-[#f7f2ed] h-[670px] relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
-      <div className="content-stretch flex flex-col gap-[22px] items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
+    <div className="bg-[#f7f2ed] flex h-[670px] flex-col relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
+      <div className="flex min-h-0 flex-1 flex-col gap-[22px] items-stretch overflow-hidden px-[8px] py-[22px] relative rounded-[inherit]">
         <IconDaysText1 />
         <ContentText13 />
         <ContentImage3 />
@@ -598,7 +600,7 @@ function IconDaysText2() {
 
 function ContentTitle8() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">How might we...?</p>
       </div>
@@ -608,7 +610,7 @@ function ContentTitle8() {
 
 function ContentText14() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[200px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Permite convertir los problemas en oportunidades de diseño claras y accionables, explorando posibles soluciones alineadas con los retos del proyecto.
       </p>
@@ -635,9 +637,9 @@ function ContentText15() {
 
 function ContentImage4() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
-      <div className="h-[174.188px] relative shrink-0 w-[331.125px]" data-name="hmw 1">
-        <img alt="How Might We" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgHmw1} />
+    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+      <div className="relative min-h-0 w-full flex-1" data-name="hmw 1">
+        <img alt="How Might We" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgHmw1} />
       </div>
     </div>
   );
@@ -645,8 +647,8 @@ function ContentImage4() {
 
 function ContentResume388Px4() {
   return (
-    <div className="bg-[#f7f2ed] h-[670px] relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
-      <div className="content-stretch flex flex-col gap-[22px] items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
+    <div className="bg-[#f7f2ed] flex h-[670px] flex-col relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
+      <div className="flex min-h-0 flex-1 flex-col gap-[22px] items-stretch overflow-hidden px-[8px] py-[22px] relative rounded-[inherit]">
         <IconDaysText2 />
         <ContentText15 />
         <ContentImage4 />
@@ -662,7 +664,7 @@ function IconDaysText3() {
 
 function ContentTitle9() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">User Persona y Journey Map</p>
       </div>
@@ -672,7 +674,7 @@ function ContentTitle9() {
 
 function ContentText16() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[80px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         El objetivo analizando el User Persona y el Journey Map es comprender quién es el usuario y qué necesita, así como, analizar su experiencia, identificar puntos de dolor y detectar oportunidades para mejorar la solución.
       </p>
@@ -699,9 +701,9 @@ function ContentText17() {
 
 function ContentImage5() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
-      <div className="h-[387.2px] relative shrink-0 w-[353px]" data-name="user_persona 1">
-        <img alt="Persona de usuario" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgUserPersona1} />
+    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+      <div className="relative min-h-0 w-full flex-1" data-name="user_persona 1">
+        <img alt="Persona de usuario" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgUserPersona1} />
       </div>
     </div>
   );
@@ -709,8 +711,8 @@ function ContentImage5() {
 
 function ContentResume388Px5() {
   return (
-    <div className="bg-[#f7f2ed] h-[670px] relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
-      <div className="content-stretch flex flex-col gap-[22px] items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
+    <div className="bg-[#f7f2ed] flex h-[670px] flex-col relative rounded-[22px] shrink-0 w-[388px]" data-name="Content_Resume_388px">
+      <div className="flex min-h-0 flex-1 flex-col gap-[22px] items-stretch overflow-hidden px-[8px] py-[22px] relative rounded-[inherit]">
         <IconDaysText3 />
         <ContentText17 />
         <ContentImage5 />
@@ -725,7 +727,7 @@ function ContentImage6() {
     <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] w-full" data-name="Content-Image">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
-          <div className="h-[575.1px] relative shrink-0 w-[524.4px]" data-name="Acciones 1">
+          <div className="h-[576px] relative shrink-0 w-[524px]" data-name="Acciones 1">
             <img alt="Acciones" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgAcciones1} />
           </div>
         </div>
@@ -991,7 +993,7 @@ function ContentImage11() {
 
 function ContentTitle11() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Crazy 8</p>
       </div>
@@ -1001,7 +1003,7 @@ function ContentTitle11() {
 
 function ContentText22() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`Después de exponer cada uno sus ideas, mediante una votación entre el equipo, definimos los crazy 8 finales. `}</p>
         <p className="css-4hzbpn">Se definieron las siguientes páginas:</p>
@@ -1099,7 +1101,7 @@ function ContentImage14() {
 
 function ContentTitle12() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Storyboard</p>
       </div>
@@ -1193,7 +1195,7 @@ function ContentImage15() {
 
 function ContentTitle13() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Design System</p>
       </div>
@@ -1282,7 +1284,7 @@ function ContentImage17() {
 
 function ContentTitle14() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Componentes</p>
       </div>
@@ -1422,7 +1424,7 @@ function ContentImage20() {
 }
 
 function ContentTitle15() {
-  return <div className="h-[29.688px] shrink-0 w-full" data-name="Content_title" />;
+  return <div className="h-[30px] shrink-0 w-full" data-name="Content_title" />;
 }
 
 function ContentText30() {
@@ -1480,7 +1482,7 @@ function ContentProject1000Px() {
 
 function ContentTitle16() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Futuribles</p>
       </div>
@@ -1575,7 +1577,7 @@ function ContentTitle184Px1() {
 
 function ContentTitle17() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Conclusiones</p>
       </div>
@@ -1585,7 +1587,7 @@ function ContentTitle17() {
 
 function ContentText35() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`En este proyecto, lo más retador ha sido poder organizarnos con distintas personas y priorizar las tareas para conseguir realizar todo el proceso en 5 días de trabajo. `}</p>
         <p className="css-4hzbpn mb-0">Llegar a lograr que la idea inicial se transformara en una experiencia clara y funcional para las personas usuarias fue muy gratificante. Finalmente, pudimos observar que este proyecto tiene una gran capacidad de expansión en próximos MVP, ya que es flexible y puede adaptarse a diferentes contextos y necesidades, sin embargo no pudimos ampliarlo como hubiéramos querido ya que la metodología nos condicionaba a realizarlo en un tiempo concreto.</p>
@@ -1615,7 +1617,7 @@ function ContentText36() {
 
 function ContentTitle18() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Agradecimientos</p>
       </div>
@@ -1623,13 +1625,26 @@ function ContentTitle18() {
   );
 }
 
+const creditLinkClass =
+  "underline decoration-dotted underline-offset-2 text-[#5a3e26] hover:text-[#3d2a1a] case-font-wdth focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:rounded-sm";
+
 function ContentText37() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">A los compañeros y compañeras que conformaron este trabajo grupal:</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
-        <p className="css-4hzbpn mb-0">Agustina, Anna, Claudia, Erik y Jonattan</p>
+        <p className="css-4hzbpn mb-0">
+          <a href={LINKS_CREDITS_CASE2[0]} target={LINKS_CREDITS_CASE2[0] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[0] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[0] === '#' ? 'Enlace en espera' : 'Ver perfil de Agustina'} aria-label={LINKS_CREDITS_CASE2[0] === '#' ? 'Agustina (enlace en espera)' : 'Ver perfil de Agustina'} onClick={(e) => LINKS_CREDITS_CASE2[0] === '#' && e.preventDefault()}>Agustina</a>
+          {', '}
+          <a href={LINKS_CREDITS_CASE2[1]} target={LINKS_CREDITS_CASE2[1] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[1] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[1] === '#' ? 'Enlace en espera' : 'Ver perfil de Anna'} aria-label={LINKS_CREDITS_CASE2[1] === '#' ? 'Anna (enlace en espera)' : 'Ver perfil de Anna'} onClick={(e) => LINKS_CREDITS_CASE2[1] === '#' && e.preventDefault()}>Anna</a>
+          {', '}
+          <a href={LINKS_CREDITS_CASE2[2]} target={LINKS_CREDITS_CASE2[2] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[2] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[2] === '#' ? 'Enlace en espera' : 'Ver perfil de Claudia'} aria-label={LINKS_CREDITS_CASE2[2] === '#' ? 'Claudia (enlace en espera)' : 'Ver perfil de Claudia'} onClick={(e) => LINKS_CREDITS_CASE2[2] === '#' && e.preventDefault()}>Claudia</a>
+          {', '}
+          <a href={LINKS_CREDITS_CASE2[3]} target={LINKS_CREDITS_CASE2[3] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[3] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[3] === '#' ? 'Enlace en espera' : 'Ver perfil de Erik'} aria-label={LINKS_CREDITS_CASE2[3] === '#' ? 'Erik (enlace en espera)' : 'Ver perfil de Erik'} onClick={(e) => LINKS_CREDITS_CASE2[3] === '#' && e.preventDefault()}>Erik</a>
+          {' y '}
+          <a href={LINKS_CREDITS_CASE2[4]} target={LINKS_CREDITS_CASE2[4] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[4] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[4] === '#' ? 'Enlace en espera' : 'Ver perfil de Jonattan'} aria-label={LINKS_CREDITS_CASE2[4] === '#' ? 'Jonattan (enlace en espera)' : 'Ver perfil de Jonattan'} onClick={(e) => LINKS_CREDITS_CASE2[4] === '#' && e.preventDefault()}>Jonattan</a>
+        </p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn">/enero/2026</p>
       </div>
@@ -1734,14 +1749,44 @@ function IcnYoutube() {
   );
 }
 
+const linkIconClass =
+  "inline-flex shrink-0 cursor-pointer transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 rounded";
+
 function ContentLinksOtherFormats() {
   return (
     <div className="relative shrink-0 w-full" data-name="Content-Links">
       <div className="flex flex-row justify-center size-full">
         <div className="content-stretch flex gap-[10px] items-start justify-center p-[8px] relative w-full">
-          <IcnBehance />
-          <IcnFigma />
-          <IcnYoutube />
+          <a
+            href={LINKS_OTHER_FORMATS_CASE2[0]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en Behance"
+            title="Ver en Behance"
+          >
+            <IcnBehance />
+          </a>
+          <a
+            href={LINKS_OTHER_FORMATS_CASE2[1]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en Figma"
+            title="Ver en Figma"
+          >
+            <IcnFigma />
+          </a>
+          <a
+            href={LINKS_OTHER_FORMATS_CASE2[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en YouTube"
+            title="Ver en YouTube"
+          >
+            <IcnYoutube />
+          </a>
         </div>
       </div>
     </div>

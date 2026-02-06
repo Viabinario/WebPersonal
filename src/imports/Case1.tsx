@@ -11,6 +11,7 @@ import {
   CASE_CLASS_LIST_WRAP,
   CASE_CLASS_LIST,
   CASE_CLASS_LIST_ITEM,
+  LINKS_OTHER_FORMATS_CASE1,
 } from "../components/case-shared";
 import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage0 from "../assets/case1/case1-03b.png";
@@ -157,7 +158,7 @@ function ContentProjectTitle() {
 
 function ContentTitle() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Tipo de Proyecto</p>
       </div>
@@ -167,7 +168,7 @@ function ContentTitle() {
 
 function ContentText() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">
         Proyecto Final de Bootcamp (PFB) Web adaptativa / responsiva, trabajo individual.
       </p>
@@ -186,7 +187,7 @@ function ModuleText() {
 
 function ContentTitle1() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">Entregables</p>
       </div>
@@ -196,7 +197,7 @@ function ContentTitle1() {
 
 function ContentText1() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">
         Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones.
       </p>
@@ -224,7 +225,7 @@ function ContentText2() {
 
 function ContentTitle2() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Herramientas `}</p>
       </div>
@@ -234,7 +235,7 @@ function ContentTitle2() {
 
 function ContentText3() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <span className="leading-[normal]">{`Metodología `}</span>
         <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
@@ -257,7 +258,7 @@ function ModuleText2() {
 
 function ContentTitle3() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_SM}>
         <p className="css-4hzbpn leading-[normal]">{`Duración `}</p>
       </div>
@@ -267,7 +268,7 @@ function ContentTitle3() {
 
 function ContentText4() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         15 días.
       </p>
@@ -322,7 +323,7 @@ function ContentImage() {
 
 function ContentTitle4() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Descripción</p>
       </div>
@@ -332,7 +333,7 @@ function ContentTitle4() {
 
 function ContentText6() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Kora es una `}</span>
@@ -454,7 +455,7 @@ function IconTitleSection() {
 
 function ContentTitle5() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Contexto y Necesidades</p>
       </div>
@@ -464,7 +465,7 @@ function ContentTitle5() {
 
 function ContentText8() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">El aislamiento social, el envejecimiento poblacional y la soledad no deseada, son señaladas como fenómenos perjudiciales que afectan la calidad de vida de nuestras sociedades, principalmente en los segmentos seniors y jóvenes.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
@@ -517,7 +518,7 @@ function ContentImage2() {
 
 function ContentTitle6() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Objetivos</p>
       </div>
@@ -527,7 +528,7 @@ function ContentTitle6() {
 
 function ContentText10() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">Surge así la idea de generar un producto donde los adultos mayores sean agentes activos y no sólo pacientes de diversas actividades y puedan aportar valor a ese segmento de la población que también se observa con necesidades de integración y vínculos emocionales: los jóvenes; de manera que el tejido social se enriquezca en el tiempo intergeneracional y mejore la calidad de vida en el corto y largo plazo.</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
@@ -568,12 +569,12 @@ function ContentResume388Px2() {
 }
 
 function ContentTitle7() {
-  return <div className="h-[29.688px] shrink-0 w-full" data-name="Content_title" />;
+  return <div className="h-[30px] shrink-0 w-full" data-name="Content_title" />;
 }
 
 function ContentText12() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute flex flex-col font-['Roboto:Bold','Noto_Sans:Bold',sans-serif] font-bold inset-0 justify-center leading-[0] text-[#5a3e26] text-[20px] text-center case-font-wdth">
         <p className="css-4hzbpn leading-[normal]">Roadmap →</p>
       </div>
@@ -610,7 +611,7 @@ function ContentProject1000Px() {
   return (
     <div className="bg-[#f7f2ed] h-[670px] relative rounded-[22px] shrink-0 w-[1000px]" data-name="Content_Project_1000px">
       <div className="content-stretch flex flex-col items-center justify-center overflow-clip relative rounded-[inherit] size-full">
-        <div className="h-[654.55px] relative shadow-[0px_2.6px_3.9px_0px_rgba(0,0,0,0.04),0px_6.5px_11.7px_0px_rgba(0,0,0,0.05),0px_11.7px_36.4px_0px_rgba(0,0,0,0.1)] shrink-0 w-[900.9px]" data-name="Visual Roadmap Design 2 1">
+        <div className="h-[656px] relative shadow-[0px_2.6px_3.9px_0px_rgba(0,0,0,0.04),0px_6.5px_11.7px_0px_rgba(0,0,0,0.05),0px_11.7px_36.4px_0px_rgba(0,0,0,0.1)] shrink-0 w-[902px]" data-name="Visual Roadmap Design 2 1">
           <img alt="Roadmap de diseño" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgVisualRoadmapDesign21} />
         </div>
       </div>
@@ -664,7 +665,7 @@ function IconTitleSection1() {
 
 function ContentTitle8() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Research Question</p>
       </div>
@@ -674,7 +675,7 @@ function ContentTitle8() {
 
 function ContentText14() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">Para comprender las necesidades del usuario, que en este caso de estudio se planteará en dos perfiles (senior y joven), nos preguntamos inicialmente: “</span>
@@ -730,7 +731,7 @@ function ContentImage4() {
 
 function ContentTitle9() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Metodología</p>
       </div>
@@ -740,7 +741,7 @@ function ContentTitle9() {
 
 function ContentText16() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         <span className="leading-[normal]">{`Para abordar el desarrollo de la investigación fue implementada la metodología `}</span>
         <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
@@ -771,7 +772,7 @@ function ContentText17() {
 
 function ContentTitle10() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Herramientas</p>
       </div>
@@ -781,7 +782,7 @@ function ContentTitle10() {
 
 function ContentText18() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_LIST_WRAP}>
         <p className="css-4hzbpn leading-[normal] mb-0">{`Las herramientas implementadas en cada fase del proceso fueron: `}</p>
         <ul className={CASE_CLASS_LIST}>
@@ -854,7 +855,7 @@ function ContentImage5() {
 
 function ContentTitle11() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Benchmark</p>
       </div>
@@ -864,7 +865,7 @@ function ContentTitle11() {
 
 function ContentText20() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <span className="leading-[normal]">{`Las competencias analizadas tuvieron relación con el tipo de usuario focalizado, qué propuestas tenían como ofertas, y en qué basaban sus contenidos. Las competencias `}</span>
         <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">{`directas `}</span>
@@ -923,7 +924,7 @@ function ContentImage6() {
 
 function ContentTitle12() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">DAFO</p>
       </div>
@@ -933,7 +934,7 @@ function ContentTitle12() {
 
 function ContentText22() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] case-font-wdth">
         <p className="css-4hzbpn mb-0">Con esta herramientas analizamos las situaciones internas y externas en vías de desarrollar un producto / solución.</p>
         <p className="css-4hzbpn">Las oportunidades se utilizaron para hacer una consulta por método de Borda con 6 puntos (3,2,1) para tres preferencias, las cuales se reservaron para incorporar los insights posteriores.</p>
@@ -993,7 +994,7 @@ function ContentImage7() {
 
 function ContentTitle13() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Encuesta / Entrevistas</p>
       </div>
@@ -1003,7 +1004,7 @@ function ContentTitle13() {
 
 function ContentText24() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Para el diseño de la `}</span>
@@ -1103,12 +1104,12 @@ function IconTitleSection2() {
 }
 
 function ContentTitle14() {
-  return <div className="h-[29.688px] shrink-0 w-full" data-name="Content_title" />;
+  return <div className="h-[30px] shrink-0 w-full" data-name="Content_title" />;
 }
 
 function ContentText26() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         En esta serie de herramientas de investigación ahondaremos desde distintos ángulos en entender al usuario, los aspectos externos e internos, su comportamiento, sus afinidades, sus temores.
       </p>
@@ -1164,7 +1165,7 @@ function ContentImage9() {
 
 function ContentTitle15() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Personas</p>
       </div>
@@ -1174,7 +1175,7 @@ function ContentTitle15() {
 
 function ContentText28() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Determinamos tres tipos de user persona. Ricardo, el joven; Elena, la senior; y Ana, la familiar tutora y quien calificaría como Buyer Persona. También identificamos al arquetipo, el “Constructor de Puentes”.
       </p>
@@ -1228,7 +1229,7 @@ function Frame() {
 
 function ContentTitle16() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">User Journey Map</p>
       </div>
@@ -1238,7 +1239,7 @@ function ContentTitle16() {
 
 function ContentText30() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">{`En el Journey Map del usuario se seleccionó a Elena. En un trabajo más elaborado hubiéramos querido analizar a los otros tipos de users, para comprender mejor el universo y ahondar más en el concepto de “match” que se plantea en la solución. Aquí, Elena recorre desde su inquietud su relación con la plataforma. Es una usuaria activa: dispuesta a aprender y ganar autonomía en habilidades digitales, y también a ofrecer sus conocimientos. `}</p>
     </div>
   );
@@ -1290,7 +1291,7 @@ function Frame1() {
 
 function ContentTitle17() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Empathy Map</p>
       </div>
@@ -1300,7 +1301,7 @@ function ContentTitle17() {
 
 function ContentText32() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Buscamos profundizar en aspectos más blandos de Elena, de su relación con la solución y de su interacción con los usuarios que participan. Surge con relevancia la importancia de la seguridad y su interés por la confianza en el uso de la plataforma y de adquirir confianza y seguridad en sí misma.
       </p>
@@ -1354,7 +1355,7 @@ function Frame2() {
 
 function ContentTitle18() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Business Canvas</p>
       </div>
@@ -1364,7 +1365,7 @@ function ContentTitle18() {
 
 function ContentText34() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         El modelo de negocio al integrar los tipos de usuarios nos permitió aclarar flujos de la idea de negocio y precisar subproductos asociados a cada uno de los tipos de usuario: qué intereses tienen los seniors del caso, los jóvenes, los buyer. Fue de usma importancia comprender también los requermientos y alcances de inversión para materializar el proyecto. La posibilidad de tener una comprensión en fases de implementación es mucho más clara así como también de organizar los avances de tipo comercial.
       </p>
@@ -1418,7 +1419,7 @@ function Frame3() {
 
 function ContentTitle19() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Value Proposition</p>
       </div>
@@ -1428,7 +1429,7 @@ function ContentTitle19() {
 
 function ContentText36() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">{`Luego de hacer el modelo de negocio, analizamos las relaciones de nuestra propuesta de producto con el cliente, qué evitar, qué espera, que beneficios obtiene, etc. Esto nos permitirá afinar las herramientas o la utilidad que tendrá nuestro producto, a no perder de vista factores primordiales que caracterizan a nuestros usuarios y a qué de sus necesidades y deseos  estamos atendiendo. La Plataforma Kora debe responder satisfactoriamente a tres tipos de usuarios que se interrelacionan en un ecosistema integrado.`}</p>
     </div>
   );
@@ -1465,7 +1466,7 @@ function ContentProject796Px3() {
 
 function ContentTitle20() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Ideación</p>
       </div>
@@ -1521,7 +1522,7 @@ function Frame4() {
 
 function ContentTitle22() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Priorización</p>
       </div>
@@ -1531,7 +1532,7 @@ function ContentTitle22() {
 
 function ContentText42() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Usamos la herramienta MoSCoW, para priorizar las ideas finales. En otras palabras: qué debe tener, qué debería tener, qué podría tener y qué no tendrá (para la primera versión). Finalizada la entrega se decidió, por límites de tiempo, pasar algunas ideas de Could Have a Won’t Have.
       </p>
@@ -1618,12 +1619,12 @@ function IconTitleSection3() {
 }
 
 function ContentTitle23() {
-  return <div className="h-[29.688px] shrink-0 w-full" data-name="Content_title" />;
+  return <div className="h-[30px] shrink-0 w-full" data-name="Content_title" />;
 }
 
 function ContentText44() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`En estas fases, a continuación, pasamos a diseñar la estructura de la plataforma web. `}</p>
         <p className="css-4hzbpn">En primer lugar, creamos la estructura de contenido en tres niveles, para luego implementar la técnica de Card Sorting híbrido y así obtener un equilibrio entre la idea, lo pensado como estructura y un punto de vista externo, todo centrado en el usuario.</p>
@@ -1664,7 +1665,7 @@ function ContentProject388Px() {
 
 function ContentTitle24() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Card Sorting</p>
       </div>
@@ -1674,7 +1675,7 @@ function ContentTitle24() {
 
 function ContentText46() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         El flujo del Card Sorting Híbrido transcurrió en una actividad de tres etapas. La primera, como investigador autor, generé una estructura preliminar de los elementos (post it) que compondrían la plataforma web, especificando con colores los tres niveles requeridos. El segundo paso fue “neutralizar” el orden de los elementos y asignarles un solo color, para luego compartir este lienzo con una compañera de Bootcamp, con el finde que ella propusiera un orden y asignación de colores (niveles). Finalmente se diseña una estructura que integra ambas propuestas: la propia y la de la compañera
       </p>
@@ -1725,7 +1726,7 @@ function ContentProject1000Px2() {
 
 function ContentTitle25() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Arquitectura de la información</p>
       </div>
@@ -1735,7 +1736,7 @@ function ContentTitle25() {
 
 function ContentText48() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">La arquitectura de información propuesta la concebimos tomando en consideración a los dos usuarios objetivos, Elena (usuario senior) y Ricardo (usuario joven). Cada uno tiene su propia interfaz, con algunas similitudes en los niveles, que en términos del backend dan cuenta de las interconexiones e interacciones entre ambos usuarios.</p>
         <p className="css-4hzbpn">{`Fue importante priorizar la simpleza en la navegación, para ambos usuarios. Por parte del senior, por razones de facilitar la memoria y los accesos a los servicios, y por parte del joven, para involucrarlo en la jerarquía de servicios orientados al usuario senior. `}</p>
@@ -1763,7 +1764,7 @@ function ContentText49() {
 
 function ContentTitle26() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Wireframes</p>
       </div>
@@ -1773,7 +1774,7 @@ function ContentTitle26() {
 
 function ContentText50() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">{`De acuerdo al Briefing del PFB, se diseñaron los Wireframes Low Fidelity de las pantallas principales de la arquitectura, sin indicar flujos. A modo personal, esta herramienta facilitó la visualización precisamente de los flujos e interacciones, manteniendo los criterios de accesibilidad, en cuanto a simpleza, tamaños, y de usabilidad, contemplando versatilidad de los componentes y de la unicidad de la plataforma en su conjunto.  `}</p>
     </div>
   );
@@ -1823,7 +1824,7 @@ function ContentProject1000Px4() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-center px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[1000px]" data-name="Content_Project_1000px">
       <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
-      <div className="h-[651px] relative shrink-0 w-[819.2px]" data-name="Wireframe 1">
+      <div className="h-[651px] relative shrink-0 w-[820px]" data-name="Wireframe 1">
         <img alt="Wireframe" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgWireframe1} />
       </div>
     </div>
@@ -1832,7 +1833,7 @@ function ContentProject1000Px4() {
 
 function ContentTitle27() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Identidad Visual</p>
       </div>
@@ -1842,7 +1843,7 @@ function ContentTitle27() {
 
 function ContentText52() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] case-font-wdth">
         <p className="css-4hzbpn mb-0">
           <span className="leading-[normal]">{`Gráficamente, el elemento simbólico que da origen al nombre de la aplicación y a su concepto unitario es el instrumento músical de cuerdas conocido como Kora, utilizado en algunos países africanos como parte de la cultura oral y que acompaña a los poetas a transmitir de generación en generación tradiciones mediante el canto. Esto simboliza el objetivo de `}</span>
@@ -1955,7 +1956,7 @@ function IconTitleSection4() {
 
 function ContentTitle28() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Design System</p>
       </div>
@@ -1965,7 +1966,7 @@ function ContentTitle28() {
 
 function ContentText54() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Está orientado principalmente por variables: [1] Accesibilidad: si bien no se realizó una aplicación exhaustiva de la WCAG 2.1, se incorporación conscientemente criterios en contrastes, tamaños de textos en componentes, pensando en un usuario general, pero motivado por nuestro caso senior. [2] Simplicidad. El diseño tiende a un aspecto algo “vintage” con cierta intención, la de cuidar familiaridad con interfaces ya conocidas. Esta es un área para desarrollar con mayor análisis, para saber de qué manera o en qué direcciones podemos innovar en diseño visual sin que la disrupción aleje a nuestro usuario senior.
       </p>
@@ -2005,7 +2006,7 @@ function ContentResume388Px5() {
 
 function ContentTitle29() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Style Guide</p>
       </div>
@@ -2015,7 +2016,7 @@ function ContentTitle29() {
 
 function ContentText56() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_LIST_WRAP}>
         <ul className={CASE_CLASS_LIST}>
           <li className={CASE_CLASS_LIST_ITEM}>Style Color</li>
@@ -2060,7 +2061,7 @@ function ContentImage13() {
     <div className="bg-white flex-[1_0_0] h-[626px] min-h-px min-w-px relative rounded-[8px]" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative size-full">
-          <div className="h-[614.4px] relative shrink-0 w-[434.25px]" data-name="Style_color 2">
+          <div className="h-[616px] relative shrink-0 w-[434px]" data-name="Style_color 2">
             <img alt="Estilo y color" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgStyleColor2} />
           </div>
         </div>
@@ -2082,7 +2083,7 @@ function ContentProject592Px8() {
 function Styles() {
   return (
     <div className="h-[558px] relative shrink-0 w-[538px]" data-name="Styles">
-      <div className="absolute h-[476.5px] left-0 top-0 w-[214.5px]" data-name="Fonts 1">
+      <div className="absolute h-[478px] left-0 top-0 w-[216px]" data-name="Fonts 1">
         <img alt="Tipografías" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFonts1} />
       </div>
       <div className="absolute h-[217px] left-[215px] top-[12px] w-[323px]" data-name="grid_style 1">
@@ -2119,7 +2120,7 @@ function ContentProject592Px9() {
 
 function ContentTitle30() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Componentes</p>
       </div>
@@ -2202,7 +2203,7 @@ function ContentProject592Px10() {
 
 function ContentTitle31() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Prototipado</p>
       </div>
@@ -2315,7 +2316,7 @@ function IconTitleSection5() {
 
 function ContentTitle32() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Pruebas de Usuario</p>
       </div>
@@ -2325,7 +2326,7 @@ function ContentTitle32() {
 
 function ContentText62() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <p className="absolute css-4hzbpn font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[normal] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
         Realizamos dos pruebas de usuario, una insitu con una persona voluntaria y otra con una compañera, de manera remota. En el momento del testeo, el prototipo no estaba completamente terminado, de manera que las observaciones fueron muy bien recibidas, ya que permitieron abordar antes de un avance importante algunas deficiencias u omisiones. También contribuyeron a corregir o detenerse en algunas interacciones, para analizar si realmente estaban cumpliendo con lo esperado.
       </p>
@@ -2394,7 +2395,7 @@ function ContentTitle184Px5() {
 
 function ContentTitle33() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Análisis de Resultados</p>
       </div>
@@ -2404,7 +2405,7 @@ function ContentTitle33() {
 
 function ContentText65() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">{`En este PFB pudimos abordar con mayor detalle las fases de UX  y UI que vimos en dos retos anteriores dentro del Bootcamp. Esta vez, a diferencia de las anteriores, introdujimos Accesibilidad, más precisión respecto a herramientas de UX Research y también más arrojo en probar nuevos elementos de interfaz. En nuestro caso, al tratarse de una plataforma de tipo social y de intercambio bidireccional, la selección de qué componentes incorporar o qué interacciones priorizar, cómo y dónde, fue un desafío muy estimulante, ya que nos empujaba a ponernos en la situación de dos tipos de usuarios que interactuarían mediante la plataforma, bajo la premisa de que esa relación debía convertirse en un círculo virtuoso.`}</p>
         <p className="css-4hzbpn">{`Ante este descubrimiento, la visión del producto final cobró una mayor complejidad que a vista de la entrega concreta del proyecto, se asumiría para un proceso con mayor desarrollo. `}</p>
@@ -2432,7 +2433,7 @@ function ContentText66() {
 
 function ContentTitle34() {
   return (
-    <div className="h-[29.688px] relative shrink-0 w-full" data-name="Content_title">
+    <div className="h-[30px] relative shrink-0 w-full" data-name="Content_title">
       <div className={CASE_CLASS_TITLE_MD}>
         <p className="css-4hzbpn leading-[normal]">Agradecimientos</p>
       </div>
@@ -2442,7 +2443,7 @@ function ContentTitle34() {
 
 function ContentText67() {
   return (
-    <div className="h-[201.217px] relative shrink-0 w-full" data-name="Content_text">
+    <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className={CASE_CLASS_BODY_JUSTIFY}>
         <p className="css-4hzbpn mb-0">A mi familia, por apoyo, colaboración, amor, paciencia, entrega.</p>
         <p className="css-4hzbpn mb-0">A nuestro profesor/tutor de UX/UI, Óscar Orosa, por su dedicación docente destacada, generosidad y empatía.</p>
@@ -2552,14 +2553,44 @@ function IcnYoutube() {
   );
 }
 
+const linkIconClass =
+  "inline-flex shrink-0 cursor-pointer transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 rounded";
+
 function ContentLinksOtherFormats() {
   return (
     <div className="relative shrink-0 w-full" data-name="Content-Links">
       <div className="flex flex-row justify-center size-full">
         <div className="content-stretch flex gap-[10px] items-start justify-center p-[8px] relative w-full">
-          <IcnBehance />
-          <IcnFigma />
-          <IcnYoutube />
+          <a
+            href={LINKS_OTHER_FORMATS_CASE1[0]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en Behance"
+            title="Ver en Behance"
+          >
+            <IcnBehance />
+          </a>
+          <a
+            href={LINKS_OTHER_FORMATS_CASE1[1]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en Figma"
+            title="Ver en Figma"
+          >
+            <IcnFigma />
+          </a>
+          <a
+            href={LINKS_OTHER_FORMATS_CASE1[2]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkIconClass}
+            aria-label="Ver en YouTube"
+            title="Ver en YouTube"
+          >
+            <IcnYoutube />
+          </a>
         </div>
       </div>
     </div>

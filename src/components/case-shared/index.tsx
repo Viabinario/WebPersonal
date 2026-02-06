@@ -42,6 +42,29 @@ export const SOCIAL_URLS = [
   'https://youtube.com/@FranArqUxUi',
 ] as const;
 
+/** URLs para los enlaces “Otros formatos” en Case1 (Behance, Figma, YouTube). Mismo orden que los íconos. */
+export const LINKS_OTHER_FORMATS_CASE1 = [
+  'https://www.behance.net/gallery/243463543/Kora',
+  'https://www.figma.com/proto/eeGUqTiYQiFJElsKsRfb9n/Francisco.S%C3%A1nchez---PFB---UX-UI?page-id=191%3A2454&node-id=622-7245&viewport=1139%2C344%2C0.1&t=43qDKMgq0hz2KBuH-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=622%3A7245&show-proto-sidebar=1',
+  'https://youtu.be/z0cbnLVPbm0',
+] as const;
+
+/** URLs "Otros formatos" para Case2 (Behance, Figma, YouTube). Mismo orden que los íconos. Editar con los enlaces del caso 2. */
+export const LINKS_OTHER_FORMATS_CASE2 = [
+  'https://www.behance.net/gallery/243653683/Del-revs',
+  'https://www.figma.com/proto/TQ2cOSOlDvO1kFurl0qlOX/DelReves---G4---UI?page-id=0%3A1&node-id=17-655&p=f&viewport=215%2C93%2C0.09&t=pzL2bIZShMPm60H4-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=3%3A504&show-proto-sidebar=1',
+  'https://youtu.be/VXkacI3VHlA',
+] as const;
+
+/** URLs para créditos Case2 (orden: Agustina, Anna, Claudia, Erik, Jonattan). En standby hasta confirmar enlaces reales; sustituir "#" por las URLs. */
+export const LINKS_CREDITS_CASE2 = [
+  '#',
+  '#',
+  '#',
+  '#',
+  '#',
+] as const;
+
 // --- Estilos de texto compartidos (Case1 y Case2). Clases definidas en index.css (@layer components). ---
 /** Clase utility para variación de fuente cuando no uses otra .case-* (evita style={} repetido). */
 export const CASE_CLASS_FONT_WDTH = "case-font-wdth";
