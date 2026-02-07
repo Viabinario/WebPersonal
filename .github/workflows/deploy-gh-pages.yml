@@ -1,5 +1,5 @@
-# Build y subida a docs/ (GitHub Pages solo permite / o /docs en el desplegable)
-# Settings → Pages: Deploy from a branch → Branch = fsanchez → Folder = /docs
+# Build y despliegue a rama gh-pages (solo contenido compilado, sin código fuente)
+# Settings → Pages: Deploy from a branch → Branch = gh-pages → Folder = / (root)
 name: Deploy to GitHub Pages
 
 on:
@@ -12,7 +12,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,17 +34,16 @@ jobs:
           VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL || '' }}
           VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL || '' }}
 
-      - name: Copiar dist/ a docs/ (GitHub Pages requiere /docs)
+      - name: Asegurar CNAME y .nojekyll
         run: |
-          rm -rf docs
-          mkdir -p docs
-          cp -r dist/. docs/
-          touch docs/.nojekyll
+          echo "fsanchez.suroesteintegral.com" > dist/CNAME
+          touch dist/.nojekyll
 
-      - name: Subir docs/ a la rama fsanchez
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
-          git diff --staged --quiet || git commit -m "Deploy: actualizar docs/ con build de Vite"
-          git push origin fsanchez
+      - name: Deploy a gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          cname: fsanchez.suroesteintegral.com
