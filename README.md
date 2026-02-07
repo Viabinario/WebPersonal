@@ -1,142 +1,88 @@
-# Sitio Web Personal - Francisco Sánchez
+# Sitio Web Personal — Francisco Sánchez
 
-Sitio web personal profesional diseñado en Figma y desarrollado con React, TypeScript y Tailwind CSS.
+Portfolio y sitio web personal de presentación profesional. Diseñado en Figma (Design & Make), desarrollado en TypeScript/React y desplegado en GitHub Pages.
 
-## 🚀 Características
+---
 
-- **Diseño Responsivo**: Adaptado para dispositivos móviles, tablets y desktop
-- **Navegación Intuitiva**: Sistema de navegación con vista de cuadrícula y zoom
-- **Secciones Principales**:
-  - Presentación
-  - Sobre mí
-  - Casos de estudio
-  - Contacto (con formulario funcional)
-- **Tecnologías Modernas**: React 18, TypeScript, Tailwind CSS, Vite
+## Sobre el proyecto
 
-## 📋 Requisitos Previos
+El sitio funciona como un **lienzo único**: todas las secciones quedan visibles en una misma vista, con navegación por cuadrícula y zoom para acceder al detalle. La experiencia está optimizada para **desktop (1280×832)** y en evolución hacia una mejor adaptación móvil.
 
-- Node.js 18+ 
-- npm o yarn
+### Secciones
 
-## 🛠️ Instalación
+- **Presentación** — Introducción al proyecto y enlaces a redes (LinkedIn, GitHub, Behance, Notion, YouTube).
+- **Sobre mí** — Perfil y contexto profesional.
+- **Casos de estudio** — Dos proyectos detallados con contenido en scroll horizontal y navegación entre casos.
+- **Contacto** — Formulario de envío de mensajes y opción de copiar el correo.
 
-1. Clona el repositorio o navega al directorio del proyecto
-2. Instala las dependencias:
+### Diseño y desarrollo
+
+- **Diseño y prototipo**: Figma (Design & Make).
+- **Frontend**: React 18, TypeScript, TSX, Tailwind CSS, Vite.
+- **Herramientas**: Cursor (AI) para modelado de código y pruebas en tiempo real.
+- **Formulario de contacto**: lógica de backend en Vercel; envío de correos vía API.
+- **Despliegue**: GitHub Pages con dominio propio.
+
+El contenido compartido (texto de presentación, redes, estilos de enlaces de texto) está centralizado en `src/components/case-shared` para mantener una única fuente de verdad en todo el sitio.
+
+---
+
+## Cómo ejecutarlo en local
+
+**Requisitos:** Node.js 18+ y npm (o yarn).
 
 ```bash
+# Instalar dependencias
 npm install
-```
 
-## 🏃 Desarrollo
-
-Inicia el servidor de desarrollo:
-
-```bash
+# Servidor de desarrollo
 npm run dev
 ```
 
-El sitio estará disponible en `http://localhost:3000`
+El sitio se sirve en `http://localhost:5173` (o el puerto que indique Vite).
 
-## 🏗️ Construcción
-
-Para crear una versión de producción:
+**Build de producción:**
 
 ```bash
 npm run build
 ```
 
-Los archivos optimizados se generarán en la carpeta `dist/`.
+La salida se genera en `dist/`. El formulario de contacto requiere configuración mediante variables de entorno (no incluidas en el repositorio).
 
-## 📁 Estructura del Proyecto
+---
+
+## Estructura del proyecto
 
 ```
-DEV_WebPersonal/
-├── src/
-│   ├── assets/          # Imágenes y recursos estáticos
-│   ├── components/      # Componentes React
-│   │   ├── ui/          # Componentes de UI (shadcn/ui)
-│   │   └── ...
-│   ├── styles/          # Estilos globales
-│   ├── utils/           # Utilidades y helpers
-│   ├── App.tsx          # Componente principal
-│   └── main.tsx         # Punto de entrada
-├── index.html
-├── package.json
-├── tailwind.config.js   # Configuración de Tailwind CSS
-├── tsconfig.json        # Configuración de TypeScript
-└── vite.config.ts       # Configuración de Vite
+src/
+├── assets/           # Imágenes y recursos (casos, redes, perfil)
+├── components/       # Componentes React (secciones, navegación, case-shared, ui)
+├── imports/          # Contenido de casos de estudio (Case1, Case2) y pantallas
+├── styles/           # Estilos globales
+├── utils/            # Utilidades (API de contacto, etc.)
+├── App.tsx
+├── main.tsx
+└── index.css
 ```
 
-## 🎨 Tecnologías Utilizadas
+---
 
-- **React 18.3.1**: Biblioteca de UI
-- **TypeScript**: Tipado estático
-- **Vite 6.3.5**: Build tool y dev server
-- **Tailwind CSS 3.4.13**: Framework de CSS utility-first
-- **Radix UI**: Componentes accesibles
-- **Resend**: Envío de emails del formulario de contacto (vía API de contacto)
+## Tecnologías
 
-## 📱 Responsive Design
+- **React** + **TypeScript** (TSX)
+- **Vite** — build y dev server
+- **Tailwind CSS** — estilos y tema (colores, tipografía Roboto)
+- **Radix UI** — base de componentes accesibles (shadcn/ui)
+- **Resend** — envío de emails desde el backend del formulario
 
-El sitio está optimizado para:
-- **Mobile**: < 1024px - Diseño de scroll vertical con navegación simplificada
-- **Desktop**: ≥ 1024px - Diseño original con canvas de 2560x1664px y navegación por cuadrícula
+---
 
-## 🔧 Configuración
+## Nota sobre seguridad
 
-### Variables de Entorno
+Las credenciales y datos sensibles no forman parte del repositorio. La configuración del formulario de contacto y del despliegue se hace mediante variables de entorno y documentación interna cuando aplica.
 
-El formulario de contacto se gestiona con **Resend** (API de envío de emails). La configuración se hace con variables de entorno.
+---
 
-**Configuración recomendada:**
+## Licencia
 
-1. Copia el archivo de ejemplo (si existe):
-```bash
-cp .env.example .env
-```
-
-2. En el **frontend** (`.env` en la raíz), configura la URL del API de contacto:
-```
-VITE_CONTACT_API_URL=https://tu-proyecto.vercel.app/api/contact
-```
-
-3. En el **backend** (Vercel → Environment Variables), configura: `RESEND_API_KEY`, `RESEND_TO_EMAIL` y opcionalmente `RESEND_FROM_EMAIL`.
-
-**Nota:** El archivo `.env` está en `.gitignore` y NO se subirá al repositorio. Para detalles completos (despliegue, troubleshooting), ver **RESEND_SETUP.md**.
-
-## 📝 Notas de Desarrollo
-
-- El proyecto fue originalmente generado desde Figma Make
-- Se ha mejorado con:
-  - Configuración adecuada de Tailwind CSS
-  - Sistema responsivo mobile-first
-  - Limpieza de código y optimizaciones
-  - Actualización de dependencias a versiones estables
-  - Implementación de medidas de seguridad en el formulario de contacto
-
-## 🔒 Seguridad
-
-### Archivos Excluidos del Repositorio
-
-El proyecto incluye un `.gitignore` completo que protege:
-- ✅ Credenciales y secretos (`.env`, `*.key`, `*.pem`, etc.)
-- ✅ Archivos de build (`dist/`, `build/`)
-- ✅ Dependencias (`node_modules/`)
-- ✅ Archivos temporales y logs
-- ✅ Archivos del sistema operativo
-- ✅ Archivos de IDEs y editores
-
-**⚠️ IMPORTANTE:** 
-- Nunca subas archivos con credenciales reales al repositorio
-- Usa variables de entorno para información sensible
-- Consulta `GITIGNORE_GUIDE.md` para más detalles sobre seguridad
-
-### Documentación de Seguridad
-
-- `SECURITY.md` - Medidas de seguridad del formulario de contacto
-- `GITIGNORE_GUIDE.md` - Guía sobre archivos excluidos y mejores prácticas
-
-## 📄 Licencia
-
-Este proyecto es privado y personal.
-  
+Proyecto de uso personal y privado.
