@@ -4,8 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    // Dominio propio sirve en raíz; base '/' para que los scripts sean /assets/... (no /WebPersonal/assets/...)
-    base: '/',
+    // En CI (GitHub Pages) usar subpath del repo; en local base '/' para dev
+    base: process.env.VITE_BASE_PATH ? `/${process.env.VITE_BASE_PATH.replace(/^\/|\/$/g, '')}/` : '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
