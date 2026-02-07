@@ -4,8 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    // base '/' para dominio propio (CNAME) en raíz y para dev local
-    base: '/',
+    // Rutas relativas para evitar MIME/octet-stream en GitHub Pages con dominio propio
+    base: './',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
