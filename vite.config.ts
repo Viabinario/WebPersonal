@@ -4,8 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    // En CI (GitHub Pages) usar subpath del repo; en local base '/' para dev
-    base: process.env.VITE_BASE_PATH ? `/${process.env.VITE_BASE_PATH.replace(/^\/|\/$/g, '')}/` : '/',
+    // base '/' para dominio propio (CNAME) en raíz y para dev local
+    base: '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

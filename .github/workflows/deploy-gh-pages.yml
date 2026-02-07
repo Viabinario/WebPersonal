@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: 'true'
-          VITE_BASE_PATH: ${{ github.event.repository.name }}
+          # base '/' para dominio propio (CNAME) en raíz; no usar subpath del repo
           # Repo variables: Settings → Secrets and variables → Actions → Variables (linter warning here is a false positive)
           VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL || '' }}
           VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL || '' }}
