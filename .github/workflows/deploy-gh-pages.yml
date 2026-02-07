@@ -35,8 +35,9 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: 'true'
-          # Variable de repo en GitHub: Settings → Secrets and variables → Actions → Variables (el aviso del linter es falso positivo)
-          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL }}
+          # Repo variables: Settings → Secrets and variables → Actions → Variables (linter warning here is a false positive)
+          VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL || '' }}
+          VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL || '' }}
 
       - name: Verificar salida del build (compatibilidad GitHub Pages)
         run: |
