@@ -1,6 +1,5 @@
-# Build y subida del contenido de dist/ a la rama gh-pages.
-# Así puedes seguir usando: Settings → Pages → Source = "Deploy from a branch" → rama gh-pages, carpeta / (root).
-# La rama gh-pages solo contiene el sitio construido (index.html + assets/), no el código fuente.
+# Build y subida de dist/ a la rama fsanchez. dist/ está en .gitignore, se fuerza su inclusión en el commit.
+# Settings → Pages: Deploy from a branch → Branch = fsanchez → Folder = /dist
 name: Deploy to GitHub Pages
 
 on:
@@ -11,8 +10,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build-and-push:
@@ -37,10 +34,13 @@ jobs:
           VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL || '' }}
           VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL || '' }}
 
-      - name: Deploy to branch gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: true
+      - name: Asegurar .nojekyll
+        run: touch dist/.nojekyll
+
+      - name: Subir dist/ a la rama fsanchez
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f dist/
+          git diff --staged --quiet || git commit -m "Deploy: actualizar dist/ con build de Vite"
+          git push origin fsanchez

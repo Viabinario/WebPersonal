@@ -4,8 +4,8 @@
   import path from 'path';
 
   export default defineConfig({
-    // Rutas relativas para evitar MIME/octet-stream en GitHub Pages con dominio propio
-    base: './',
+    // base '/' para dominio propio en raíz (fsanchez.suroesteintegral.com)
+    base: '/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
