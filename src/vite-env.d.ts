@@ -3,6 +3,8 @@
 // Variables de entorno (Vite sustituye en build)
 interface ImportMetaEnv {
   readonly VITE_CONTACT_API_URL?: string;
+  /** Correo de contacto mostrado y copiable (ej: contacto@tudominio.com). */
+  readonly VITE_CONTACT_EMAIL?: string;
 }
 
 interface ImportMeta {

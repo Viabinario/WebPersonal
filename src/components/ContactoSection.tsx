@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import svgPaths from "../imports/svg-pj45jcyo5z";
 import svgPathsSuccess from "../imports/svg-ug55i8e7pd";
 import svgPathsError from "../imports/svg-nd4dsni8hv";
-import { contactApiUrl } from '../utils/contactApi';
+import { contactApiUrl, contactEmail } from '../utils/contactApi';
 import {
   validateAndSanitizeName,
   validateAndSanitizeEmail,
@@ -71,7 +71,25 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
   const [errorModal, setErrorModal] = useState<{field: string, message: string} | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rateLimitError, setRateLimitError] = useState(false);
+  const [copied, setCopied] = useState(false);
   const submitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const copyFeedbackRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleCopyEmail = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!contactEmail) return;
+    try {
+      await navigator.clipboard.writeText(contactEmail);
+      setCopied(true);
+      if (copyFeedbackRef.current) clearTimeout(copyFeedbackRef.current);
+      copyFeedbackRef.current = setTimeout(() => {
+        setCopied(false);
+        copyFeedbackRef.current = null;
+      }, 2000);
+    } catch {
+      setErrorModal({ field: 'general', message: 'No se pudo copiar al portapapeles.' });
+    }
+  };
 
 
   const handleClick = () => {
@@ -485,13 +503,32 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     return '#3D3A36';
   };
 
+  const copyButtonClass =
+    'flex items-center justify-center gap-2 h-[48px] px-4 rounded-[16px] border border-dashed border-[#5a3e26] bg-[#e5e2de] text-[#5a3e26] font-["Roboto:Regular",sans-serif] text-[14px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] hover:bg-[#d9d5d0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200';
+
   return (
-    <div className="w-full min-h-screen lg:w-[1280px] lg:h-[832px] bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-0">
-      {/* Wrapper container for form and modals */}
-      <div className="relative w-full h-full flex items-center justify-end">
-        {/* Container for form and modals */}
-        <div className="relative w-full max-w-[400px] lg:absolute lg:right-[38px] lg:top-1/2 lg:-translate-y-1/2">
-          {/* Contact Form - Fondo #e5e2de con campos a todo el ancho menos 10px por lado */}
+    <div className="w-full min-h-screen max-w-full bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-0 lg:min-h-[832px]">
+      {/* Contenedor de la sección: botón y formulario */}
+      <div className="relative w-full h-full flex flex-col items-center justify-center gap-6 py-8 lg:flex-row lg:gap-0 lg:py-0">
+        {/* Contenedor independiente: botón copiar correo (izquierda, altura media en lg) */}
+        <div className="relative shrink-0 lg:absolute lg:left-[min(38px,5vw)] lg:top-1/2 lg:-translate-y-1/2 lg:z-10">
+          <button
+            type="button"
+            onClick={handleCopyEmail}
+            disabled={!contactEmail}
+            aria-label={contactEmail ? 'Copiar correo de contacto al portapapeles' : 'Correo no configurado'}
+            title={contactEmail ? (copied ? 'Copiado' : 'Copiar correo de contacto') : 'Configura VITE_CONTACT_EMAIL en .env'}
+            className={copyButtonClass}
+          >
+            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+            <span>{copied ? 'Copiado' : 'Copiar correo'}</span>
+          </button>
+        </div>
+
+        {/* Contenedor independiente: formulario (derecha en lg, ancho fijo 400px) */}
+        <div className="relative w-full max-w-[400px] shrink-0 lg:absolute lg:right-[min(38px,5vw)] lg:top-1/2 lg:-translate-y-1/2">
           <div 
             className={`bg-[#e5e2de] flex flex-col gap-[10px] px-[10px] py-[22px] relative rounded-[22px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] w-full ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
             onClick={handleClick}

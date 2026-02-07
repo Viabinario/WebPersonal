@@ -26,10 +26,10 @@ export function SobreMiSection({ isZoomed = false, onNavigate }: SobreMiSectionP
   };
 
   return (
-    <div className="relative w-full h-full bg-[#f7f2ed] flex items-center justify-center p-4 md:p-8 lg:p-0">
+    <div className="relative w-full h-full min-w-0 max-w-full bg-[#f7f2ed] flex items-center justify-center p-4 md:p-8 lg:p-0">
       {/* Text Box - Right side - CLICKABLE */}
       <div 
-        className={`w-full max-w-[388px] lg:absolute lg:top-[38px] lg:right-[38px] ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
+        className={`w-full max-w-[388px] lg:absolute lg:top-[38px] lg:right-[min(38px,5vw)] ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
         onClick={handleClick}
         aria-label={isZoomed ? "Hacer clic para navegar a la sección Sobre mí" : undefined}
         title={isZoomed ? "Hacer clic para navegar a la sección Sobre mí" : undefined}

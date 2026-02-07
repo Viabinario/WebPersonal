@@ -71,10 +71,15 @@ export default function App() {
         transformOrigin: '0 0',
       };
     } else {
-      // Show active section — content left-aligned (no empty zone on left)
+      // Show active section — scale down when viewport is smaller than section so content stays in view
       const position = sectionPositions[activeSection];
+      const scaleX = window.innerWidth / SECTION_WIDTH;
+      const scaleY = window.innerHeight / SECTION_HEIGHT;
+      const scale = Math.min(1, scaleX, scaleY);
+      const translateX = position.x * scale;
+      const translateY = position.y * scale;
       return {
-        transform: `translate(${position.x}px, ${position.y}px)`,
+        transform: `translate(${translateX}px, ${translateY}px) scale(${scale})`,
         transformOrigin: '0 0',
       };
     }

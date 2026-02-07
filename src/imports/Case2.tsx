@@ -3,7 +3,6 @@ import svgPathsOtherFormats from "./svg-mbzxtnnqxt";
 import {
   ContentBodySideLeft,
   ContentCenter,
-  ContentRight,
   CASE_CLASS_TITLE_SM,
   CASE_CLASS_TITLE_MD,
   CASE_CLASS_BODY_JUSTIFY,
@@ -42,7 +41,6 @@ function Content1X() {
     <div className="h-[835px] relative shrink-0 w-[1280px]" data-name="Content 1x1">
       <ContentBodySideLeft />
       <ContentCenter />
-      <ContentRight />
     </div>
   );
 }
@@ -100,7 +98,7 @@ function BoxTextColumn() {
       <div className="content-stretch flex flex-col items-center overflow-clip py-[48px] relative rounded-[inherit] size-full">
         <ContainerText />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[22px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]" />
     </div>
   );
 }
@@ -132,7 +130,7 @@ function MatrixV() {
 }
 
 function ContentLeft184Px() {
-  return <div className="bg-[#f7f2ed] h-[670px] shrink-0 w-[184px]" data-name="Content_Left_184px" />;
+  return <div className="bg-[#f7f2ed] h-[670px] shrink-0 w-[254px]" data-name="Content_Left_184px" />;
 }
 
 function ContentProjectTitle() {
@@ -304,7 +302,7 @@ function ContentImage() {
   return (
     <div className="h-[286px] pointer-events-none relative rounded-[8px] shrink-0 w-[576px]" data-name="Content-Image">
       <img alt="Portada del caso Del Revés" className="absolute inset-0 max-w-none object-cover rounded-[8px] size-full" src={imgContentImage} />
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -365,7 +363,7 @@ function ContentText7() {
 function ContentProject592Px() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start justify-end px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage />
       <ContentText7 />
     </div>
@@ -431,7 +429,7 @@ function ContentResume388Px1() {
         <ContentImage1 />
         <ContentText9 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -525,7 +523,7 @@ function ContentResume388Px2() {
         <ContentText11 />
         <ContentImage2 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -589,7 +587,7 @@ function ContentResume388Px3() {
         <ContentText13 />
         <ContentImage3 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -653,7 +651,7 @@ function ContentResume388Px4() {
         <ContentText15 />
         <ContentImage4 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -717,7 +715,7 @@ function ContentResume388Px5() {
         <ContentText17 />
         <ContentImage5 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -732,7 +730,7 @@ function ContentImage6() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -740,7 +738,7 @@ function ContentImage6() {
 function ContentProject592Px1() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start justify-end px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage6 />
     </div>
   );
@@ -841,7 +839,7 @@ function ContentResume388Px6() {
         <ContentImage7 />
         <ContentText19 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -856,7 +854,7 @@ function ContentImage8() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -864,7 +862,7 @@ function ContentImage8() {
 function ContentProject592Px2() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage8 />
     </div>
   );
@@ -880,7 +878,7 @@ function ContentImage9() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -888,7 +886,7 @@ function ContentImage9() {
 function ContentProject592Px3() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage9 />
     </div>
   );
@@ -904,7 +902,7 @@ function ContentImage10() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -938,7 +936,7 @@ function ContentText21() {
 function ContentProject592Px4() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[30px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage10 />
       <ContentText21 />
     </div>
@@ -1037,7 +1035,7 @@ function ContentResume388Px7() {
         <ContentImage11 />
         <ContentText23 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1058,7 +1056,7 @@ function ContentResume388Px8() {
       <div className="content-stretch flex flex-col items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
         <ContentImage12 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1079,7 +1077,7 @@ function ContentResume388Px9() {
       <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
         <ContentImage13 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1094,7 +1092,7 @@ function ContentImage14() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1140,7 +1138,7 @@ function ContentText25() {
 function ContentProject592Px5() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage14 />
       <ContentText25 />
     </div>
@@ -1238,7 +1236,7 @@ function ContentResume388Px10() {
         <ContentImage15 />
         <ContentText27 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1253,7 +1251,7 @@ function ContentImage16() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1261,7 +1259,7 @@ function ContentImage16() {
 function ContentProject592Px6() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage16 />
     </div>
   );
@@ -1277,7 +1275,7 @@ function ContentImage17() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1322,7 +1320,7 @@ function ContentText29() {
 function ContentProject592Px7() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage17 />
       <ContentText29 />
     </div>
@@ -1339,7 +1337,7 @@ function ContentImage18() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1347,7 +1345,7 @@ function ContentImage18() {
 function ContentProject592Px8() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage18 />
     </div>
   );
@@ -1363,7 +1361,7 @@ function ContentImage19() {
           </div>
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1371,7 +1369,7 @@ function ContentImage19() {
 function ContentProject592Px9() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage19 />
     </div>
   );
@@ -1462,7 +1460,7 @@ function ContentResume388Px11() {
         <ContentImage20 />
         <ContentText31 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1475,7 +1473,7 @@ function ContentProject1000Px() {
           <img alt="Testing y feedback" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgTestingFeedback2} />
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1546,7 +1544,7 @@ function ContentImage21() {
           <img alt="Futuribles" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFuturibles1} />
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-0 pointer-events-none rounded-[8px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
   );
 }
@@ -1558,7 +1556,7 @@ function ContentResume388Px12() {
         <ContentText33 />
         <ContentImage21 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1684,7 +1682,7 @@ function ContentProject1000Px1() {
       <div className="content-stretch flex flex-col items-center overflow-clip px-[199px] py-[22px] relative rounded-[inherit] size-full">
         <Content1 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-0 pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1795,8 +1793,8 @@ function ContentLinksOtherFormats() {
 
 function ContentOtherFormats() {
   return (
-    <div className="content-stretch flex flex-col gap-[8px] items-start pt-[250px] relative shrink-0 w-[184px]" data-name="Content-Other-Formats">
-      <div aria-hidden="true" className="absolute border-[#5a3e26] border-b border-dashed inset-0 pointer-events-none" />
+    <div className="content-stretch flex flex-col gap-[8px] items-start pt-[280px] relative shrink-0 w-[200px]" data-name="Content-Other-Formats">
+      <div aria-hidden="true" className="absolute border-[#5a3e26] border-b border-dashed inset-px pointer-events-none" />
       <ContentTextOtherFormats />
       <ContentLinksOtherFormats />
     </div>
@@ -1805,7 +1803,7 @@ function ContentOtherFormats() {
 
 function ConentHorizontalProjectCase() {
   return (
-    <div className="absolute content-stretch flex gap-[20px] items-start left-0 overflow-clip px-[38px] top-[21px]" data-name="Conent-Horizontal-ProjectCase">
+    <div className="absolute content-stretch flex gap-[20px] items-start left-0 overflow-clip top-[21px]" data-name="Conent-Horizontal-ProjectCase">
       <ContentLeft184Px />
       <ContentResume388Px />
       <ContentProject592Px />
@@ -1844,7 +1842,7 @@ function ConentHorizontalProjectCase() {
 
 function UsecaseContainer1280X() {
   return (
-    <div className="absolute bg-[#f7f2ed] border-[#7e5635] border-dashed border-r h-[712px] left-0 overflow-x-auto overflow-y-clip top-0 w-[1280px]" data-name="Usecase_container_1280x712">
+    <div className="absolute bg-[#f7f2ed] h-[712px] left-0 overflow-x-auto overflow-y-clip top-0 w-[1280px]" data-name="Usecase_container_1280x712">
       <ConentHorizontalProjectCase />
     </div>
   );

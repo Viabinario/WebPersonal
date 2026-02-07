@@ -568,12 +568,12 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     );
   }
 
-  // Case Studies View (case1 o case2): no botón animado; hit area de toda la zona cuando zoom out
+  // Case Studies View (case1 o case2): scroll alineado con la línea superior del menú principal
   return (
     <div className="relative w-full h-full bg-[#f7f2ed] overflow-hidden">
       <div
         ref={scrollContainerRef}
-        className="absolute inset-0 overflow-x-auto overflow-y-hidden"
+        className="absolute top-0 left-0 right-0 bottom-0 lg:top-[16px] lg:left-[1px] lg:bottom-0 lg:pt-2 lg:pb-2 lg:pr-px overflow-x-auto overflow-y-hidden"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         <style>{`
@@ -598,7 +598,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           }
         `}</style>
 
-        <div className="h-full inline-block min-w-full">
+        <div className="h-full inline-block min-w-full pl-[0px] pr-[10px]">
           {currentView === 'case1' && (
             <div
               ref={caseContainerRef}
@@ -622,6 +622,12 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
             </div>
           )}
         </div>
+
+        {/* Borde derecho del frame (712px): única línea segmentada del frame, dibujada hacia dentro para evitar recorte y tonalidad desigual */}
+        <div
+          aria-hidden
+          className="absolute right-0 top-0 h-[712px] w-px border-l border-[#7e5635] border-dashed pointer-events-none lg:top-2"
+        />
       </div>
 
       {/* Overlay hit area cuando zoom out con case activo: encima del contenido, toda la cuadrícula clicable para zoom in */}
