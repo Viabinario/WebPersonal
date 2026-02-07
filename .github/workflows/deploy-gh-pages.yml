@@ -1,5 +1,5 @@
-# Build y despliegue a rama gh-pages (solo contenido compilado, sin código fuente)
-# Settings → Pages: Deploy from a branch → Branch = gh-pages → Folder = / (root)
+# Build y subida a docs/ de la rama fsanchez (GitHub Pages requiere / o /docs)
+# Settings → Pages: Deploy from a branch → Branch = fsanchez → Folder = /docs
 name: Deploy to GitHub Pages
 
 on:
@@ -34,16 +34,18 @@ jobs:
           VITE_CONTACT_API_URL: ${{ vars.VITE_CONTACT_API_URL || '' }}
           VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL || '' }}
 
-      - name: Asegurar CNAME y .nojekyll
+      - name: Preparar docs/ con CNAME y .nojekyll
         run: |
-          echo "fsanchez.suroesteintegral.com" > dist/CNAME
-          touch dist/.nojekyll
+          rm -rf docs
+          mkdir -p docs
+          cp -r dist/. docs/
+          echo "fsanchez.suroesteintegral.com" > docs/CNAME
+          touch docs/.nojekyll
 
-      - name: Deploy a gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: true
-          cname: fsanchez.suroesteintegral.com
+      - name: Subir docs/ a fsanchez
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --staged --quiet || git commit -m "Deploy: actualizar docs/ con build y CNAME"
+          git push origin fsanchez
