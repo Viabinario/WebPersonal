@@ -13,12 +13,30 @@ import imgSocial03 from '../../assets/social/social-03.png'; // Behance
 import imgSocial04 from '../../assets/social/social-04.png'; // Notion
 import imgSocial05 from '../../assets/social/social-05.png'; // YouTube
 
-/** Texto de introducción (Presentación + Cases). Editar aquí para cambiar en PresentacionSection, Case1 y Case2. */
+/** Estilo único para enlaces de texto en todo el sitio. Subrayado punteado, color tema, focus visible. */
+export const TEXT_LINK_CLASS =
+  "underline decoration-dotted underline-offset-2 text-[#5a3e26] hover:text-[#3d2a1a] case-font-wdth focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:rounded-sm";
+
+/** Texto de introducción (Presentación + Cases). Negrita con <strong>, saltos de línea con {'\n\n'}. */
 export const CASE_INTRO_TEXT = {
-  paragraph1:
-    'Lorem ipsum dolor sit amet consectetur. Congue mauris id rhoncus adipiscing amet pharetra ornare amet luctus. Suspendisse lectus viverra sollicitudin nibh imperdiet diam vitae. Scelerisque mi urna tellus odio tortor. Et platea placerat eget iaculis consectetur in.',
-  paragraph2:
-    'Hac nec nisi nunc rhoncus gravida. Dignissim purus nunc risus diam amet faucibus nibh lacus. Dui enim nulla etiam molestie at a dictum eu dapibus. Pharetra ut sed id praesent. Massa facilisi tristique massa nunc amet consequat faucibus.',
+  paragraph: (
+    <>
+      Este sitio ha sido diseñado y construido <strong>íntegramente desde cero</strong>, inspirado en el lienzo del arquitecto: donde todo el proyecto queda a la vista <strong>en un mismo espacio</strong>, su globalidad y lo específico.
+      {'\n\n'}
+      Técnicamente, surgió de una ideación y prototipado en <strong>Figma (Design & Make)</strong>, que luego fue desarrollado como frontend en <strong>TypeScript/TSX</strong>, modelando el código con <strong>Cursor (AI)</strong> y testeando cada interacción en tiempo real. La gestión del formulario de contacto apoya su lógica de backend en <strong>Vercel</strong> y el despliegue final lo realicé a través de{' '}
+      <a
+        href="https://github.com/Viabinario/WebPersonal"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`font-bold ${TEXT_LINK_CLASS}`}
+      >
+        GitHub Pages
+      </a>{' '}
+      con un dominio propio.
+      {'\n\n'}
+      Actualmente, la experiencia está optimizada para <strong>desktop (1280x832)</strong>, priorizando la visualización detallada de los proyectos mientras continúo iterando en su adaptabilidad móvil.
+    </>
+  ),
 };
 
 /** Logos de redes (orden: LinkedIn, GitHub, Behance, Notion, YouTube). Usado en PresentacionSection y Cases. */
@@ -120,10 +138,7 @@ export function ContentProfilePhoto() {
 
 export function BoxText({ children }: { children?: React.ReactNode }) {
   const content = children ?? (
-    <>
-      <p className="css-4hzbpn mb-0">{CASE_INTRO_TEXT.paragraph1}</p>
-      <p className="css-4hzbpn">{CASE_INTRO_TEXT.paragraph2}</p>
-    </>
+    <p className="css-4hzbpn mb-0 whitespace-pre-line">{CASE_INTRO_TEXT.paragraph}</p>
   );
   return (
     <div

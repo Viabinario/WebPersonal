@@ -9,6 +9,7 @@ import {
   CASE_CLASS_TITLE_LG,
   LINKS_OTHER_FORMATS_CASE2,
   LINKS_CREDITS_CASE2,
+  TEXT_LINK_CLASS,
 } from "../components/case-shared";
 import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage from "../assets/case2/case2-01.png";
@@ -1623,9 +1624,6 @@ function ContentTitle18() {
   );
 }
 
-const creditLinkClass =
-  "underline decoration-dotted underline-offset-2 text-[#5a3e26] hover:text-[#3d2a1a] case-font-wdth focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:rounded-sm";
-
 function ContentText37() {
   return (
     <div className="relative shrink-0 w-full" data-name="Content_text">
@@ -1633,15 +1631,15 @@ function ContentText37() {
         <p className="css-4hzbpn mb-0">A los compañeros y compañeras que conformaron este trabajo grupal:</p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn mb-0">
-          <a href={LINKS_CREDITS_CASE2[0]} target={LINKS_CREDITS_CASE2[0] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[0] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[0] === '#' ? 'Enlace en espera' : 'Ver perfil de Agustina'} aria-label={LINKS_CREDITS_CASE2[0] === '#' ? 'Agustina (enlace en espera)' : 'Ver perfil de Agustina'} onClick={(e) => LINKS_CREDITS_CASE2[0] === '#' && e.preventDefault()}>Agustina</a>
+          <a href={LINKS_CREDITS_CASE2[0]} target={LINKS_CREDITS_CASE2[0] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[0] === '#' ? undefined : 'noopener noreferrer'} className={TEXT_LINK_CLASS} title={LINKS_CREDITS_CASE2[0] === '#' ? 'Enlace en espera' : 'Ver perfil de Agustina'} aria-label={LINKS_CREDITS_CASE2[0] === '#' ? 'Agustina (enlace en espera)' : 'Ver perfil de Agustina'} onClick={(e) => LINKS_CREDITS_CASE2[0] === '#' && e.preventDefault()}>Agustina</a>
           {', '}
-          <a href={LINKS_CREDITS_CASE2[1]} target={LINKS_CREDITS_CASE2[1] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[1] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[1] === '#' ? 'Enlace en espera' : 'Ver perfil de Anna'} aria-label={LINKS_CREDITS_CASE2[1] === '#' ? 'Anna (enlace en espera)' : 'Ver perfil de Anna'} onClick={(e) => LINKS_CREDITS_CASE2[1] === '#' && e.preventDefault()}>Anna</a>
+          <a href={LINKS_CREDITS_CASE2[1]} target={LINKS_CREDITS_CASE2[1] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[1] === '#' ? undefined : 'noopener noreferrer'} className={TEXT_LINK_CLASS} title={LINKS_CREDITS_CASE2[1] === '#' ? 'Enlace en espera' : 'Ver perfil de Anna'} aria-label={LINKS_CREDITS_CASE2[1] === '#' ? 'Anna (enlace en espera)' : 'Ver perfil de Anna'} onClick={(e) => LINKS_CREDITS_CASE2[1] === '#' && e.preventDefault()}>Anna</a>
           {', '}
-          <a href={LINKS_CREDITS_CASE2[2]} target={LINKS_CREDITS_CASE2[2] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[2] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[2] === '#' ? 'Enlace en espera' : 'Ver perfil de Claudia'} aria-label={LINKS_CREDITS_CASE2[2] === '#' ? 'Claudia (enlace en espera)' : 'Ver perfil de Claudia'} onClick={(e) => LINKS_CREDITS_CASE2[2] === '#' && e.preventDefault()}>Claudia</a>
+          <a href={LINKS_CREDITS_CASE2[2]} target={LINKS_CREDITS_CASE2[2] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[2] === '#' ? undefined : 'noopener noreferrer'} className={TEXT_LINK_CLASS} title={LINKS_CREDITS_CASE2[2] === '#' ? 'Enlace en espera' : 'Ver perfil de Claudia'} aria-label={LINKS_CREDITS_CASE2[2] === '#' ? 'Claudia (enlace en espera)' : 'Ver perfil de Claudia'} onClick={(e) => LINKS_CREDITS_CASE2[2] === '#' && e.preventDefault()}>Claudia</a>
           {', '}
-          <a href={LINKS_CREDITS_CASE2[3]} target={LINKS_CREDITS_CASE2[3] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[3] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[3] === '#' ? 'Enlace en espera' : 'Ver perfil de Erik'} aria-label={LINKS_CREDITS_CASE2[3] === '#' ? 'Erik (enlace en espera)' : 'Ver perfil de Erik'} onClick={(e) => LINKS_CREDITS_CASE2[3] === '#' && e.preventDefault()}>Erik</a>
+          <a href={LINKS_CREDITS_CASE2[3]} target={LINKS_CREDITS_CASE2[3] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[3] === '#' ? undefined : 'noopener noreferrer'} className={TEXT_LINK_CLASS} title={LINKS_CREDITS_CASE2[3] === '#' ? 'Enlace en espera' : 'Ver perfil de Erik'} aria-label={LINKS_CREDITS_CASE2[3] === '#' ? 'Erik (enlace en espera)' : 'Ver perfil de Erik'} onClick={(e) => LINKS_CREDITS_CASE2[3] === '#' && e.preventDefault()}>Erik</a>
           {' y '}
-          <a href={LINKS_CREDITS_CASE2[4]} target={LINKS_CREDITS_CASE2[4] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[4] === '#' ? undefined : 'noopener noreferrer'} className={creditLinkClass} title={LINKS_CREDITS_CASE2[4] === '#' ? 'Enlace en espera' : 'Ver perfil de Jonattan'} aria-label={LINKS_CREDITS_CASE2[4] === '#' ? 'Jonattan (enlace en espera)' : 'Ver perfil de Jonattan'} onClick={(e) => LINKS_CREDITS_CASE2[4] === '#' && e.preventDefault()}>Jonattan</a>
+          <a href={LINKS_CREDITS_CASE2[4]} target={LINKS_CREDITS_CASE2[4] === '#' ? undefined : '_blank'} rel={LINKS_CREDITS_CASE2[4] === '#' ? undefined : 'noopener noreferrer'} className={TEXT_LINK_CLASS} title={LINKS_CREDITS_CASE2[4] === '#' ? 'Enlace en espera' : 'Ver perfil de Jonattan'} aria-label={LINKS_CREDITS_CASE2[4] === '#' ? 'Jonattan (enlace en espera)' : 'Ver perfil de Jonattan'} onClick={(e) => LINKS_CREDITS_CASE2[4] === '#' && e.preventDefault()}>Jonattan</a>
         </p>
         <p className="css-4hzbpn mb-0">&nbsp;</p>
         <p className="css-4hzbpn">/enero/2026</p>

@@ -503,32 +503,40 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
     return '#3D3A36';
   };
 
-  const copyButtonClass =
-    'flex items-center justify-center gap-2 h-[48px] px-4 rounded-[16px] border border-dashed border-[#5a3e26] bg-[#e5e2de] text-[#5a3e26] font-["Roboto:Regular",sans-serif] text-[14px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] hover:bg-[#d9d5d0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200';
+  const copyButtonBaseClass =
+    'flex items-center justify-center gap-2 h-[48px] w-[320px] min-w-[320px] px-4 rounded-[16px] border border-dashed font-["Roboto:Regular",sans-serif] text-[14px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-200';
+  const copyButtonClass = copied
+    ? `${copyButtonBaseClass} border-[#3A6E2E] bg-[#3A6E2E] text-white focus-visible:ring-[#3A6E2E]`
+    : `${copyButtonBaseClass} border-[#5a3e26] bg-[#e5e2de] text-[#5a3e26] hover:bg-[#d9d5d0] focus-visible:ring-[#5a3e26]`;
 
   return (
     <div className="w-full min-h-screen max-w-full bg-[#f7f2ed] flex items-center justify-center p-4 md:p-6 lg:p-0 lg:min-h-[832px]">
-      {/* Contenedor de la sección: botón y formulario */}
-      <div className="relative w-full h-full flex flex-col items-center justify-center gap-6 py-8 lg:flex-row lg:gap-0 lg:py-0">
-        {/* Contenedor independiente: botón copiar correo (izquierda, altura media en lg) */}
-        <div className="relative shrink-0 lg:absolute lg:left-[min(38px,5vw)] lg:top-1/2 lg:-translate-y-1/2 lg:z-10">
+      {/* Contenedor de la sección: espacio menú | zona central (texto + botón copiar) | formulario */}
+      <div className="relative w-full h-full flex flex-col items-center justify-center gap-6 py-8 lg:flex-row lg:items-start lg:gap-0 lg:py-0">
+        {/* Espacio reservado al menú principal (38 + 184 ≈ 222px) para que la zona central quede entre menú y formulario */}
+        <div className="hidden lg:block w-0 lg:w-[222px] lg:shrink-0" aria-hidden />
+        {/* Zona central: texto y botón copiar; en lg, 18px por debajo del borde superior del formulario */}
+        <div className="relative shrink-0 w-full flex flex-col items-center justify-center gap-[62px] lg:flex-1 lg:min-w-0 lg:justify-start lg:pt-[18px]">
+          <p className="text-[#362517] font-['Roboto:Regular',sans-serif] text-[14px] text-left max-w-[420px]">
+            Puedes escribirme a través del formulario, o bien, si lo prefieres, escribirme desde tu gestor de correos, presiona abajo para copiar mi dirección:
+          </p>
           <button
             type="button"
             onClick={handleCopyEmail}
             disabled={!contactEmail}
-            aria-label={contactEmail ? 'Copiar correo de contacto al portapapeles' : 'Correo no configurado'}
-            title={contactEmail ? (copied ? 'Copiado' : 'Copiar correo de contacto') : 'Configura VITE_CONTACT_EMAIL en .env'}
+            aria-label={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico al portapapeles') : 'Correo no configurado'}
+            title={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico') : 'Configura VITE_CONTACT_EMAIL en .env'}
             className={copyButtonClass}
           >
             <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
-            <span>{copied ? 'Copiado' : 'Copiar correo'}</span>
+            <span>{copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico'}</span>
           </button>
         </div>
 
-        {/* Contenedor independiente: formulario (derecha en lg, ancho fijo 400px) */}
-        <div className="relative w-full max-w-[400px] shrink-0 lg:absolute lg:right-[min(38px,5vw)] lg:top-1/2 lg:-translate-y-1/2">
+        {/* Contenedor del formulario: ancho fijo 400px, margen derecho en lg */}
+        <div className="relative w-full max-w-[400px] shrink-0 lg:mr-[min(38px,5vw)]">
           <div 
             className={`bg-[#e5e2de] flex flex-col gap-[10px] px-[10px] py-[22px] relative rounded-[22px] shadow-[16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)] w-full ${isZoomed ? 'cursor-pointer hover:scale-105 transition-transform duration-300' : ''}`}
             onClick={handleClick}
