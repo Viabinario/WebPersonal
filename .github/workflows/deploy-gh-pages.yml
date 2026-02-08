@@ -49,13 +49,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Forzar add de archivos JS (por si .gitignore los bloquea)
+          # Añadir todos los archivos de docs/
           git add docs/
-          git add -f docs/assets/*.js
+          # FORZAR add de archivos JS (porque .gitignore los bloquea)
+          git add -f docs/assets/*.js || true
           # Commitear solo si hay cambios
           if ! git diff --staged --quiet; then
             git commit -m "Deploy: actualizar docs/ con build y CNAME"
             git push origin fsanchez
           else
-            echo "No hay cambios en docs/, skip commit"
+            echo "✓ No hay cambios en docs/, skip commit"
           fi
