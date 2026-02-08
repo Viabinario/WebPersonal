@@ -2,12 +2,15 @@
 
 ## ⚠️ REGLA DE ORO
 
-**NUNCA commitear `docs/` manualmente**
+**NUNCA commitear `docs/` manualmente (excepto en emergencias)**
 
 El workflow de GitHub Actions se encarga automáticamente de:
 - Hacer `npm run build`
-- Actualizar `docs/`
+- Actualizar `docs/` (usando `git add -f` para archivos JS)
 - Desplegar a GitHub Pages
+
+**IMPORTANTE:** Debido a que `.gitignore` bloquea `*.js`, los archivos JS en `docs/assets/` 
+requieren `git add -f` para ser incluidos. El workflow lo hace automáticamente.
 
 ---
 
@@ -74,13 +77,38 @@ Verificar:
 ```bash
 # ❌ NO hacer build local para commitear
 npm run build
-git add docs/  # ¡NO!
+git add docs/  # ¡NO! (El workflow lo hace automáticamente)
 
-# ❌ NO copiar dist/ a docs/
+# ❌ NO copiar dist/ a docs/ para commitear
 Copy-Item dist\* docs\  # ¡NO!
 
 # ❌ NO forzar push sin rebase
 git push --force  # ¡PELIGROSO!
+
+# ❌ NO commitear docs/ sin -f para los JS
+git add docs/assets/*.js  # ¡Esto NO funcionará! Los JS son ignorados por .gitignore
+```
+
+### ⚠️ Si EXCEPCIONALMENTE necesitas commitear docs/ manualmente:
+
+```bash
+# 1. Hacer build
+npm run build
+
+# 2. Copiar a docs/
+Remove-Item -Recurse -Force docs
+mkdir docs
+Copy-Item -Recurse "dist\*" docs\
+echo "fsanchez.suroesteintegral.com" > docs\CNAME
+New-Item -ItemType File -Path "docs\.nojekyll" -Force
+
+# 3. Añadir con -f para los JS (IMPORTANTE)
+git add docs/
+git add -f docs/assets/*.js  # ← FORZAR porque .gitignore bloquea *.js
+
+# 4. Commitear y push con protocolo
+git commit -m "build: actualizar docs/ manualmente"
+git fetch origin fsanchez && git pull --rebase origin fsanchez && git push origin fsanchez
 ```
 
 ---
