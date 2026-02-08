@@ -16,8 +16,9 @@ const ZOOMED_CLICKABLE_CLASS =
   "cursor-pointer hover:scale-105 transition-transform duration-300";
 const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";
 
-/** Índices 0–4 = redes; null = celda vacía. Orden: fila 1 (0,1,2), fila 2 (3,4,null), fila 3 (null,null,null). */
+/** Índices 0–4 = redes; null = celda vacía. Desktop: 3x3. Móvil: solo estos 5 en fila flexible. */
 const SOCIAL_GRID_ITEMS: (number | null)[] = [0, 1, 2, 3, 4, null, null, null, null];
+const SOCIAL_LINKS_ONLY = [0, 1, 2, 3, 4] as const;
 
 export function PresentacionSection({ isZoomed = false, onNavigate }: PresentacionSectionProps) {
   const isClickable = isZoomed && !!onNavigate;
@@ -43,15 +44,21 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
           </p>
         </div>
       </div>
-      {/*Contenedor de botones de redes sociales */}
-      <div className="absolute bottom-4 right-4 md:bottom-[38px] md:right-[38px] lg:bottom-[228px] lg:right-[38px]">
+      {/* Redes: móvil = fila flexible; desktop = 3x3 con tamaño fijo */}
+      <div className="mt-4 w-full max-w-[460px] lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[188px] lg:max-w-none">
         <div className="bg-[#e5e2de] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[18px]">
-          <div className="grid grid-cols-3 gap-1 md:gap-2 lg:gap-[4px]">
+          {/* Móvil/tablet: solo 5 enlaces en fila que se adapta al ancho */}
+          <div className="flex flex-wrap justify-center gap-2 lg:hidden">
+            {SOCIAL_LINKS_ONLY.map((index) => (
+              <SocialButton key={index} index={index} />
+            ))}
+          </div>
+          {/* Desktop: cuadrícula 3x3 fija (3×48px + 2×4px gap + padding ≈ 184px) */}
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-[4px] lg:place-items-center">
             {SOCIAL_GRID_ITEMS.map((index, i) => (
-              <SocialButton
-                key={i}
-                index={index}
-              />
+              <div key={i} className="flex shrink-0 items-center justify-center">
+                <SocialButton index={index} />
+              </div>
             ))}
           </div>
         </div>
@@ -66,7 +73,7 @@ interface SocialButtonProps {
 }
 
 const BTN_CLASS =
-  "relative w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110 inline-flex items-center justify-center";
+  "relative shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110 inline-flex items-center justify-center";
 const BTN_INNER =
   "absolute bg-[#d9bda5] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300";
 const BTN_SHADOW =

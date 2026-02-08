@@ -96,6 +96,77 @@ export const CASE_CLASS_LIST_WRAP = "case-list-wrap";
 export const CASE_CLASS_LIST = "case-list";
 export const CASE_CLASS_LIST_ITEM = "case-list-item";
 
+// --- Descripción de casos: única fuente para mobile y desktop ---
+const P = ({ children }: { children?: React.ReactNode }) => <p className="css-4hzbpn mb-0">{children}</p>;
+const P_NB = ({ children }: { children?: React.ReactNode }) => <p className="css-4hzbpn leading-[normal] mb-0">{children}</p>;
+const Span = ({ children }: { children?: React.ReactNode }) => <span className="leading-[normal]">{children}</span>;
+const Bold = ({ children }: { children?: React.ReactNode }) => <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">{children}</span>;
+const BoldItalic = ({ children }: { children?: React.ReactNode }) => <span className="font-['Roboto:Bold_Italic',sans-serif] font-bold italic leading-[normal] case-font-wdth">{children}</span>;
+
+/** Descripción del caso Kora (Case1). Usar en Case1.tsx y CaseMobileView. */
+export const CASE1_DESCRIPTION_CONTENT = (
+  <>
+    <P>
+      <Span>Kora es una </Span>
+      <Bold>plataforma social digital y ecosistema de intercambio de valor bidireccional</Bold>
+      <Span>, cuyo propósito central es </Span>
+      <Bold>revalorizar el capital senior y fortalecer la cohesión social mediante la conexión estructurada entre generaciones</Bold>
+      <Span>.</Span>
+    </P>
+    <P_NB>&nbsp;</P_NB>
+    <P>
+      <Span>A diferencia de los modelos educativos tradicionales, Kora está diseñada sobre el principio de la </Span>
+      <Bold>Reciprocidad Solidaria</Bold>
+      <Span>:</Span>
+    </P>
+    <P_NB>&nbsp;</P_NB>
+    <ul className="mb-0">
+      <li className="css-4hzbpn list-disc ms-[21px]">
+        <Bold>Para el Adulto Mayor</Bold>
+        <Span>: Kora es el canal para transformar el conocimiento no académico (relatos, oficios manuales, historia local, recetas) en un activo productivo y monetizable. Esto combate el aislamiento social y la subutilización del senior talent al asignarle un valor económico y cultural a su experiencia.</Span>
+      </li>
+    </ul>
+    <P_NB>&nbsp;</P_NB>
+    <ul className="mb-0">
+      <li className="css-4hzbpn list-disc ms-[21px]">
+        <Bold>Para la Generación Joven</Bold>
+        <Span>
+          : Kora es la vía para adquirir conocimiento experiencial único y combatir la soledad de la hiperconectividad a través de interacciones de calidad. A cambio, la juventud ofrece la inclusión digital y apoyo técnico que el Senior necesita.
+          <br aria-hidden="true" />
+          <br aria-hidden="true" />
+        </Span>
+      </li>
+    </ul>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <p className="css-4hzbpn leading-[normal]">&nbsp;</p>
+  </>
+);
+
+/** Descripción del caso Del Revés (Case2). Usar en Case2.tsx y CaseMobileView. */
+export const CASE2_DESCRIPTION_CONTENT = (
+  <>
+    <P>
+      <Span>El encargo consistió en </Span>
+      <BoldItalic>crear una solución digital innovadora en 5 días, que ayude a mejorar la salud mental, el bienestar emocional y reducir la ansiedad en cualquiera de sus ámbitos (laboral, familiar, bullying, auto-impuesto, etc.) de todo tipo de personas.</BoldItalic>
+      <Span> </Span>
+    </P>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>Como grupo nos centramos en las personas que trabajan profesionalmente cuidando la salud mental de otros.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>Estas personas, que se dedican a apoyar emocionalmente a otros suelen quedarse con parte de ese dolor, tienen jornadas muy extensas y en ocasiones, apenas tiempo entre sesiones. Esto deriva en que puedan acumular estrés y cansancio emocional. A día de hoy no hay herramientas específicas que se dediquen a ayudar a estas personas.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>Nuestra app busca ser un apoyo para estas personas, ofreciéndoles ejercicios de relajación y cuidado mental adaptados a sus tiempos. Así pueden liberar tensión, regularse mejor y evitar que el estrés se acumule. Además un foro anónimo entre personas en la misma situación les ayudarían a desahogarse y sentirse acompañados.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <p className="css-4hzbpn leading-[normal]">&nbsp;</p>
+  </>
+);
+
+/** Títulos de los casos (para móvil y cualquier uso centralizado). */
+export const CASE1_TITLE = 'Kora';
+export const CASE2_TITLE = 'Del Revés';
+
 export function ContentBodySideLeft() {
   return (
     <div

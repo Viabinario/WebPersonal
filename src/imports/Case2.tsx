@@ -10,6 +10,7 @@ import {
   LINKS_OTHER_FORMATS_CASE2,
   LINKS_CREDITS_CASE2,
   TEXT_LINK_CLASS,
+  CASE2_DESCRIPTION_CONTENT,
 } from "../components/case-shared";
 import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage from "../assets/case2/case2-01.png";
@@ -322,23 +323,7 @@ function ContentText6() {
   return (
     <div className="0 relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
-        <p className="css-4hzbpn mb-0">
-          <span className="leading-[normal]">{`El encargo consistió en `}</span>
-          <span className="font-['Roboto:Bold_Italic',sans-serif] font-bold italic leading-[normal] case-font-wdth">
-            crear una solución digital innovadora en 5 días, que ayude a mejorar la salud mental, el bienestar emocional y reducir la ansiedad en cualquiera de sus ámbitos (laboral, familiar, bullying, auto-impuesto, etc.) de todo tipo de personas.
-          </span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-            {" "}
-          </span>
-        </p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">{`Como grupo nos centramos en las personas que trabajan profesionalmente cuidando la salud mental de otros. `}</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">{`Estas personas, que se dedican a apoyar emocionalmente a otros suelen quedarse con parte de ese dolor, tienen jornadas muy extensas y en ocasiones, apenas tiempo entre sesiones.  Esto deriva en que puedan acumular estrés y cansancio emocional. A día de hoy no hay herramientas específicas que se dediquen a ayudar a estas personas.`}</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">Nuestra app busca ser un apoyo para estas personas, ofreciéndoles ejercicios de relajación y cuidado mental adaptados a sus tiempos. Así pueden liberar tensión, regularse mejor y evitar que el estrés se acumule. Además un foro anónimo entre personas en la misma situación les ayudarían a desahogarse y sentirse acompañados.</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal]">&nbsp;</p>
+        {CASE2_DESCRIPTION_CONTENT}
       </div>
     </div>
   );

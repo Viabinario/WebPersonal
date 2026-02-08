@@ -3,7 +3,7 @@ import { NavigationGrid, ZoomGridButton } from './components/NavigationComponent
 import { PresentacionSection } from './components/PresentacionSection';
 import { SobreMiSection } from './components/SobreMiSection';
 import { ContactoSection } from './components/ContactoSection';
-import { CasosEstudioSection } from './components/CasosEstudioSection';
+import { CasosEstudioSection, CaseStudyNavMobile, type CaseView } from './components/CasosEstudioSection';
 import imgProfilePhoto from "./assets/037303b6b1de60b5b46c711eb2f0e126520f42b0.png";
 
 type Section = 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
@@ -30,6 +30,7 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('presentacion');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [caseView, setCaseView] = useState<CaseView>('menu');
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -123,20 +124,18 @@ export default function App() {
     }
   };
 
-  // Mobile layout: stacked sections
+  // Mobile: menú hamburguesa derecha; menú de casos (sandwich, misma idea gráfica del botón) izquierda
   if (isMobile) {
+    const headerLeftContent = activeSection === 'casos-estudio' ? (
+      <CaseStudyNavMobile currentView={caseView} onSelectCase={setCaseView} />
+    ) : undefined;
     return (
       <div className="w-full min-h-screen bg-[#f7f2ed]">
-        {/* Mobile Navigation */}
-        <div className="sticky top-0 z-50 bg-[#f7f2ed] border-b-2 border-[#5a3e26] border-dashed">
-          <NavigationGrid activeSection={activeSection} onNavigate={handleNavigate} />
-        </div>
-
-        {/* Mobile Sections - Stacked */}
-        <div className="w-full">
+        <NavigationGrid activeSection={activeSection} onNavigate={handleNavigate} embedInFlow leftContent={headerLeftContent} />
+        <main className="w-full">
           {activeSection === 'presentacion' && (
             <div className="w-full min-h-screen">
-              <PresentacionSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
+              <PresentacionSection isZoomed={false} onNavigate={handleNavigate} />
             </div>
           )}
           {activeSection === 'sobre-mi' && (
@@ -145,8 +144,15 @@ export default function App() {
             </div>
           )}
           {activeSection === 'casos-estudio' && (
-            <div className="w-full min-h-screen">
-              <CasosEstudioSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
+            <div className="w-full min-h-screen flex flex-col">
+              <CasosEstudioSection
+                isZoomed={false}
+                onNavigate={handleNavigate}
+                activeSection={activeSection}
+                isMobile
+                mobileCaseView={caseView}
+                onMobileCaseViewChange={setCaseView}
+              />
             </div>
           )}
           {activeSection === 'contacto' && (
@@ -154,7 +160,7 @@ export default function App() {
               <ContactoSection isZoomed={false} onNavigate={handleNavigate} />
             </div>
           )}
-        </div>
+        </main>
       </div>
     );
   }
@@ -191,7 +197,7 @@ export default function App() {
         <div className="w-[2560px] h-[1664px] grid grid-cols-2 grid-rows-2 relative">
           {/* Top Left - Presentación */}
           <div className="w-[1280px] h-[832px]">
-            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} />
           </div>
 
           {/* Top Right - Sobre mí */}

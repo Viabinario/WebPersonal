@@ -11,6 +11,7 @@ import {
   CASE_CLASS_LIST,
   CASE_CLASS_LIST_ITEM,
   LINKS_OTHER_FORMATS_CASE1,
+  CASE1_DESCRIPTION_CONTENT,
 } from "../components/case-shared";
 import { ContentForm1Case } from "../components/case-shared/ContactFormCase";
 import imgContentImage0 from "../assets/case1/case1-03b.png";
@@ -333,51 +334,7 @@ function ContentText6() {
   return (
     <div className="h-[202px] relative shrink-0 w-full" data-name="Content_text">
       <div className="absolute font-['Roboto:Regular',sans-serif] font-normal inset-0 leading-[0] text-[#5a3e26] text-[14px] text-justify case-font-wdth">
-        <p className="css-4hzbpn mb-0">
-          <span className="leading-[normal]">{`Kora es una `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-            plataforma social digital y ecosistema de intercambio de valor bidireccional
-          </span>
-          <span className="leading-[normal]">{`, cuyo propósito central es `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-            revalorizar el capital senior y fortalecer la cohesión social mediante la conexión estructurada entre generaciones
-          </span>
-          <span className="leading-[normal]">.</span>
-        </p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn mb-0">
-          <span className="leading-[normal]">{`A diferencia de los modelos educativos tradicionales, Kora está diseñada sobre el principio de la `}</span>
-          <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-            Reciprocidad Solidaria
-          </span>
-          <span className="leading-[normal]">:</span>
-        </p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <ul className="mb-0">
-          <li className="css-4hzbpn list-disc ms-[21px]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-              Para el Adulto Mayor
-            </span>
-            <span className="leading-[normal]">: Kora es el canal para transformar el conocimiento no académico (relatos, oficios manuales, historia local, recetas) en un activo productivo y monetizable. Esto combate el aislamiento social y la subutilización del senior talent al asignarle un valor económico y cultural a su experiencia.</span>
-          </li>
-        </ul>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <ul className="mb-0">
-          <li className="css-4hzbpn list-disc ms-[21px]">
-            <span className="font-['Roboto:Bold',sans-serif] font-bold leading-[normal] case-font-wdth">
-              Para la Generación Joven
-            </span>
-            <span className="leading-[normal]">
-              : Kora es la vía para adquirir conocimiento experiencial único y combatir la soledad de la hiperconectividad a través de interacciones de calidad. A cambio, la juventud ofrece la inclusión digital y apoyo técnico que el Senior necesita.
-              <br aria-hidden="true" />
-              <br aria-hidden="true" />
-            </span>
-          </li>
-        </ul>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal] mb-0">&nbsp;</p>
-        <p className="css-4hzbpn leading-[normal]">&nbsp;</p>
+        {CASE1_DESCRIPTION_CONTENT}
       </div>
     </div>
   );

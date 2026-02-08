@@ -2,17 +2,22 @@ import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Case1Component from '../imports/Case1';
 import Case2Component from '../imports/Case2';
+import { CaseMobileView } from './CaseMobileView';
 import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
 
 // Wrapper for case buttons bar: shows semi-transparent background on hover so labels are readable
-function CaseButtonsBar({ children }: { children: React.ReactNode }) {
+function CaseButtonsBar({ children, embedInFlow = false }: { children: React.ReactNode; embedInFlow?: boolean }) {
   const [isBarHovered, setIsBarHovered] = useState(false);
+
+  const positionClass = embedInFlow
+    ? 'relative z-20 w-full flex justify-center py-3 px-2 bg-[#f7f2ed]/95 rounded-b-[22px] border-b-2 border-x-2 border-[#5a3e26] border-dashed'
+    : 'fixed bottom-[12px] left-[222px] z-40';
 
   return (
     <div
-      className="fixed bottom-[12px] left-[222px] z-40 flex gap-[10px] items-center py-2 pl-2 pr-4 rounded-[22px] transition-[background-color] duration-300"
+      className={`${positionClass} flex gap-[10px] items-center py-2 pl-2 pr-4 rounded-[22px] transition-[background-color] duration-300`}
       style={{
-        backgroundColor: isBarHovered ? 'rgba(247, 242, 237, 0.94)' : 'transparent',
+        backgroundColor: embedInFlow ? 'rgba(247, 242, 237, 0.98)' : (isBarHovered ? 'rgba(247, 242, 237, 0.94)' : 'transparent'),
         isolation: 'isolate',
       }}
       onMouseEnter={() => setIsBarHovered(true)}
@@ -216,6 +221,8 @@ interface ScrollProgressProps {
   onScrollRightEnd?: () => void;
   onScrollToStart?: () => void;
   onScrollToEnd?: () => void;
+  /** En móvil: integrado en el flujo de la sección, no fixed */
+  embedInFlow?: boolean;
 }
 
 function ScrollProgress({
@@ -228,9 +235,13 @@ function ScrollProgress({
   onScrollRightEnd,
   onScrollToStart,
   onScrollToEnd,
+  embedInFlow = false,
 }: ScrollProgressProps) {
+  const positionClass = embedInFlow
+    ? 'relative z-20 mx-auto mt-2 mb-2'
+    : 'fixed right-[4px] bottom-[12px] z-40';
   return (
-    <div className="fixed right-[4px] bottom-[12px] z-40">
+    <div className={positionClass}>
       <div className="relative h-[44px] w-[260px]" data-name="Navigation-Case-Scroll">
         {/* Progress percentage in center */}
         <div className="absolute left-[108px] size-[44px] top-0" data-name="Progress_Scroll">
@@ -328,19 +339,129 @@ function getOriginalsBaseUrl(): string {
   return base.endsWith('/') ? `${base}originals/` : `${base}/originals/`;
 }
 
-type CaseView = 'menu' | 'case1' | 'case2';
+export type CaseView = 'menu' | 'case1' | 'case2';
+
+/** Lista de casos para el menú móvil (escalable: añadir más entradas aquí). */
+const CASE_OPTIONS: { id: CaseView; label: string }[] = [
+  { id: 'case1', label: 'Kora' },
+  { id: 'case2', label: 'Del Revés' },
+];
+
+/** Menú móvil de casos: un botón sandwich (misma idea gráfica que el botón de casos) que abre lista de proyectos. Esquina superior izquierda. */
+export function CaseStudyNavMobile({
+  currentView,
+  onSelectCase,
+}: {
+  currentView: CaseView;
+  onSelectCase: (view: CaseView) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [open]);
+
+  return (
+    <div className="relative flex items-center">
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        aria-label={open ? 'Cerrar menú de proyectos' : 'Abrir menú de proyectos'}
+        aria-expanded={open}
+        className="relative shrink-0 flex items-center transition-all duration-300 group"
+      >
+        <div
+          className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 overflow-visible flex flex-col items-center justify-center gap-1.5 ${
+            open ? 'bg-[#4d4b4a]' : 'bg-[#4d4b4a] hover:bg-[#3a3938]'
+          }`}
+        >
+          {open && (
+            <div className="absolute inset-0 border-4 border-[#5a3e26] border-solid rounded-[12px] pointer-events-none" />
+          )}
+          {!open && (
+            <div
+              className="absolute -inset-1 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+              }}
+            />
+          )}
+          <span className="block h-0.5 w-5 rounded-full bg-[#f7f2ed]" />
+          <span className="block h-0.5 w-5 rounded-full bg-[#f7f2ed]" />
+          <span className="block h-0.5 w-5 rounded-full bg-[#f7f2ed]" />
+        </div>
+      </button>
+
+      {open && (
+        <nav
+          className="absolute top-full left-0 mt-2 w-[min(240px,75vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+          aria-label="Proyectos de casos de estudio"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {CASE_OPTIONS.map(({ id, label }) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => { onSelectCase(id); setOpen(false); }}
+              className={`w-full text-left px-4 py-3 font-['Roboto',sans-serif] text-[15px] font-medium transition-colors flex items-center gap-3 ${
+                currentView === id ? 'bg-[#e8d8c9] text-[#5a3e26]' : 'text-[#5a3e26] hover:bg-[#e8d8c9]/60'
+              }`}
+              style={currentView === id ? { borderLeft: '4px solid #5a3e26' } : undefined}
+            >
+              <span className="w-2.5 h-2.5 rounded-full shrink-0 bg-[#5a3e26]" aria-hidden />
+              {label}
+            </button>
+          ))}
+        </nav>
+      )}
+    </div>
+  );
+}
+
+/** Menú Kora/Del Revés para desktop (barra de botones). Exportado para usarse en App. */
+export function CaseStudyNavForHeader({
+  currentView,
+  onSelectCase,
+}: {
+  currentView: CaseView;
+  onSelectCase: (view: CaseView) => void;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      <CaseButton
+        onClick={() => onSelectCase('case1')}
+        isActive={currentView === 'case1'}
+        label="Kora"
+      />
+      <CaseButton
+        onClick={() => onSelectCase('case2')}
+        isActive={currentView === 'case2'}
+        label="Del Revés"
+      />
+    </div>
+  );
+}
 
 interface CasosEstudioSectionProps {
   isZoomed?: boolean;
   onNavigate?: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
   activeSection?: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
+  /** En móvil: barra de casos y scroll integrados en la sección (no superpuestos) */
+  isMobile?: boolean;
+  /** En móvil: vista de caso controlada desde fuera (header); si se pasan, se usan en lugar del estado interno */
+  mobileCaseView?: CaseView;
+  onMobileCaseViewChange?: (view: CaseView) => void;
 }
 
-export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate, activeSection = 'presentacion' }: CasosEstudioSectionProps) {
+export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
   const isCasosEstudioActive = activeSection === 'casos-estudio';
-  // Menú de casos y control de scroll solo en Casos de Estudio y cuando NO hay zoom (vista de cuadrícula)
   const showCaseStudyUI = isCasosEstudioActive && !_isZoomed;
-  const [currentView, setCurrentView] = useState<CaseView>('menu');
+  const [internalView, setInternalView] = useState<CaseView>('menu');
+  const currentView = isMobile && mobileCaseView !== undefined ? mobileCaseView : internalView;
+  const setCurrentView = isMobile && onMobileCaseViewChange ? onMobileCaseViewChange : setInternalView;
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [lightboxPreferredSrc, setLightboxPreferredSrc] = useState<string | null>(null);
   const [lightboxFallbackSrc, setLightboxFallbackSrc] = useState<string | null>(null);
@@ -536,23 +657,25 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     };
   }, []);
 
-  // Menu View: Case buttons rendered via portal into document.body so fixed = viewport (same row as zoom)
+  // Menu View: en desktop portal con barra; en móvil los botones están en el header
   if (currentView === 'menu') {
-    const caseButtonsBar = showCaseStudyUI ? (
-      <CaseButtonsBar>
+    const caseButtonsContent = (
+      <>
         <CaseButton onClick={() => handleCaseClick('case1')} label="Kora" />
         <CaseButton onClick={() => handleCaseClick('case2')} label="Del Revés" />
-      </CaseButtonsBar>
-    ) : null;
+      </>
+    );
     return (
       <div
-        className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden ${_isZoomed ? 'cursor-pointer hover:opacity-95 transition-opacity duration-200' : ''}`}
+        className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden flex flex-col ${_isZoomed ? 'cursor-pointer hover:opacity-95 transition-opacity duration-200' : ''}`}
         onClick={_isZoomed ? handleSectionClick : undefined}
         aria-label={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
         title={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
         role={_isZoomed ? 'button' : undefined}
         tabIndex={_isZoomed ? 0 : undefined}
       >
+        {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
+        {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
         {/* Botón animado cuando no hay case activo; hit area de toda la sección siempre activa en zoom out */}
         {(_isZoomed || placeholderExiting) && currentView === 'menu' && (
             <ZoomedPlaceholder
@@ -563,21 +686,46 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
               onEnterComplete={handlePlaceholderEnterComplete}
             />
           )}
-        {showCaseStudyUI && createPortal(caseButtonsBar, document.body)}
+        {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
       </div>
     );
   }
 
-  // Case Studies View (case1 o case2): scroll alineado con la línea superior del menú principal
+  // Case Studies View (case1 o case2): scroll alineado con la línea superior del menú principal; en móvil barra y scroll en flujo
+  const scrollProgressProps = {
+    scrollPercentage: scrollPercentage,
+    onScrollLeft: () => {
+      const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
+      if (scrollElement) scrollElement.scrollLeft -= 100;
+    },
+    onScrollRight: () => {
+      const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
+      if (scrollElement) scrollElement.scrollLeft += 100;
+    },
+    onScrollLeftStart: startScrollLeft,
+    onScrollLeftEnd: stopScroll,
+    onScrollRightStart: startScrollRight,
+    onScrollRightEnd: stopScroll,
+    onScrollToStart: () => {
+      const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
+      if (scrollElement) scrollElement.scrollLeft = 0;
+    },
+    onScrollToEnd: () => {
+      const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
+      if (scrollElement) scrollElement.scrollLeft = scrollElement.scrollWidth - scrollElement.clientWidth;
+    },
+  };
+
   return (
-    <div className="relative w-full h-full bg-[#f7f2ed] overflow-hidden">
+    <div className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden ${isMobile ? 'flex flex-col' : ''}`}>
+      {/* En móvil la barra de casos está en el header; no se duplica aquí */}
       <div
         ref={scrollContainerRef}
-        className="absolute top-0 left-0 right-0 bottom-0 lg:top-[16px] lg:left-[1px] lg:bottom-0 lg:pt-2 lg:pb-2 lg:pr-px overflow-x-auto overflow-y-hidden"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        className={`w-full ${isMobile ? 'flex-1 min-h-0 overflow-y-auto overflow-x-hidden' : 'absolute top-0 left-0 right-0 bottom-0 overflow-x-auto overflow-y-hidden lg:top-[16px] lg:left-[1px] lg:bottom-0 lg:pt-2 lg:pb-2 lg:pr-px'}`}
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         <style>{`
-          .overflow-x-auto::-webkit-scrollbar {
+          .overflow-x-auto::-webkit-scrollbar, .overflow-y-auto::-webkit-scrollbar {
             display: none;
           }
           [data-name="Container_Button_Usecases"] {
@@ -598,28 +746,40 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           }
         `}</style>
 
-        <div className="h-full inline-block min-w-full pl-[0px] pr-[10px]">
+        <div className={isMobile ? 'w-full min-h-full' : 'h-full inline-block min-w-full pl-[0px] pr-[10px]'}>
           {currentView === 'case1' && (
-            <div
-              ref={caseContainerRef}
-              data-case-lightbox
-              role="presentation"
-              className="w-[1280px] h-[832px] relative"
-              onClick={handleCaseContentClick}
-            >
-              <Case1Component />
-            </div>
+            isMobile ? (
+              <div ref={caseContainerRef} className="w-full min-h-full" role="article">
+                <CaseMobileView caseId="case1" />
+              </div>
+            ) : (
+              <div
+                ref={caseContainerRef}
+                data-case-lightbox
+                role="presentation"
+                className="w-[1280px] h-[832px] relative"
+                onClick={handleCaseContentClick}
+              >
+                <Case1Component />
+              </div>
+            )
           )}
           {currentView === 'case2' && (
-            <div
-              ref={caseContainerRef}
-              data-case-lightbox
-              role="presentation"
-              className="w-[1280px] h-[832px] relative"
-              onClick={handleCaseContentClick}
-            >
-              <Case2Component />
-            </div>
+            isMobile ? (
+              <div ref={caseContainerRef} className="w-full min-h-full" role="article">
+                <CaseMobileView caseId="case2" />
+              </div>
+            ) : (
+              <div
+                ref={caseContainerRef}
+                data-case-lightbox
+                role="presentation"
+                className="w-[1280px] h-[832px] relative"
+                onClick={handleCaseContentClick}
+              >
+                <Case2Component />
+              </div>
+            )
           )}
         </div>
 
@@ -642,8 +802,8 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
         />
       )}
 
-      {/* Case buttons + ScrollProgress: solo en Casos de Estudio y sin zoom */}
-      {showCaseStudyUI &&
+      {/* Case buttons + ScrollProgress: en desktop vía portal; en móvil barra ya arriba y ScrollProgress abajo en flujo */}
+      {showCaseStudyUI && !isMobile &&
         createPortal(
           <>
             <CaseButtonsBar>
@@ -661,37 +821,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
               />
             </CaseButtonsBar>
             {(currentView === 'case1' || currentView === 'case2') && (
-              <ScrollProgress
-          scrollPercentage={scrollPercentage}
-          onScrollLeft={() => {
-            const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
-            if (scrollElement) {
-              scrollElement.scrollLeft -= 100;
-            }
-          }}
-          onScrollRight={() => {
-            const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
-            if (scrollElement) {
-              scrollElement.scrollLeft += 100;
-            }
-          }}
-          onScrollLeftStart={startScrollLeft}
-          onScrollLeftEnd={stopScroll}
-          onScrollRightStart={startScrollRight}
-          onScrollRightEnd={stopScroll}
-          onScrollToStart={() => {
-            const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
-            if (scrollElement) {
-              scrollElement.scrollLeft = 0;
-            }
-          }}
-          onScrollToEnd={() => {
-            const scrollElement = caseContainerRef.current?.querySelector('[data-name="Usecase_container_1280x712"]') as HTMLElement;
-            if (scrollElement) {
-              scrollElement.scrollLeft = scrollElement.scrollWidth - scrollElement.clientWidth;
-            }
-          }}
-        />
+              <ScrollProgress {...scrollProgressProps} />
             )}
           </>,
           document.body

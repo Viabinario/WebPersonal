@@ -1,5 +1,5 @@
 // Navigation and Zoom components extracted from Figma imports
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Simple navigation button without individual labels
 interface SimpleNavButtonProps {
@@ -37,29 +37,110 @@ function SimpleNavButton({ onClick, isActive, bgColor, onHover, onLeave, section
   );
 }
 
+const SECTION_LABELS: Record<'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio', string> = {
+  'presentacion': 'Presentación',
+  'sobre-mi': 'Sobre mí',
+  'contacto': 'Contacto',
+  'casos-estudio': 'Casos de estudio',
+};
+
+const SECTION_COLORS: Record<'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio', string> = {
+  'presentacion': '#e8d8c9',
+  'sobre-mi': '#a16f44',
+  'contacto': '#caa381',
+  'casos-estudio': '#5a3e26',
+};
+
+/** Menú móvil: icono hamburguesa esquina superior derecha; al clicar se expande con textos explícitos */
+function MobileNavMenu({
+  activeSection,
+  onNavigate,
+}: {
+  activeSection: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
+  onNavigate: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = () => setOpen(false);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [open]);
+
+  const sections: ('presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio')[] = ['presentacion', 'sobre-mi', 'casos-estudio', 'contacto'];
+
+  return (
+    <div className="relative flex justify-end">
+      <button
+        type="button"
+        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        aria-label={open ? 'Cerrar menú' : 'Abrir menú de navegación'}
+        aria-expanded={open}
+        className="flex flex-col justify-center gap-1.5 w-11 h-11 rounded-[12px] border-2 border-[#5a3e26] border-solid bg-[#f7f2ed] p-2.5 touch-manipulation"
+      >
+        <span className="block h-0.5 w-full rounded-full bg-[#5a3e26]" />
+        <span className="block h-0.5 w-full rounded-full bg-[#5a3e26]" />
+        <span className="block h-0.5 w-full rounded-full bg-[#5a3e26]" />
+      </button>
+
+      {open && (
+        <nav
+          className="absolute top-full right-0 mt-2 w-[min(280px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+          aria-label="Navegación principal"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {sections.map((section) => (
+            <button
+              key={section}
+              type="button"
+              onClick={() => { onNavigate(section); setOpen(false); }}
+              className={`w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium transition-colors flex items-center gap-3 ${
+                activeSection === section ? 'bg-[#e8d8c9] text-[#5a3e26]' : 'text-[#5a3e26] hover:bg-[#e8d8c9]/60'
+              }`}
+              style={activeSection === section ? { borderLeft: `4px solid ${SECTION_COLORS[section]}` } : undefined}
+            >
+              <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: SECTION_COLORS[section] }} aria-hidden />
+              {SECTION_LABELS[section]}
+            </button>
+          ))}
+        </nav>
+      )}
+    </div>
+  );
+}
+
 interface NavigationGridProps {
   activeSection: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
   onNavigate: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
+  /** En móvil: true = menú hamburguesa en esquina superior derecha */
+  embedInFlow?: boolean;
+  /** Contenido opcional a la izquierda del header (ej. menú de casos Kora/Del Revés) */
+  leftContent?: React.ReactNode;
 }
 
-export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProps) {
+export function NavigationGrid({ activeSection, onNavigate, embedInFlow = false, leftContent }: NavigationGridProps) {
   const [hoveredSection, setHoveredSection] = useState<'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio' | null>(null);
-  
-  const sectionLabels = {
-    'presentacion': 'Presentación',
-    'sobre-mi': 'Sobre mí',
-    'contacto': 'Contacto',
-    'casos-estudio': 'Casos de estudio',
-  };
 
   const displaySection = hoveredSection || activeSection;
 
+  if (embedInFlow) {
+    return (
+      <header className="sticky top-0 z-40 w-full flex items-center justify-between py-2 px-3 border-b-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] min-h-[52px]">
+        <div className="flex items-center min-w-0 flex-1">{leftContent}</div>
+        <div className="shrink-0">
+          <MobileNavMenu activeSection={activeSection} onNavigate={onNavigate} />
+        </div>
+      </header>
+    );
+  }
+
+  const wrapperClass = 'fixed top-2 left-2 md:top-4 md:left-4 lg:top-[38px] lg:left-[38px] z-50';
+
   return (
-    <div className="fixed top-2 left-2 md:top-4 md:left-4 lg:top-[38px] lg:left-[38px] z-50">
+    <div className={wrapperClass}>
       <div className="w-[140px] h-[170px] md:w-[160px] md:h-[200px] lg:w-[184px] lg:h-[224px]">
-        {/* Grid 2x2 of buttons */}
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-[20px]">
-          {/* Top Left - Presentación */}
           <SimpleNavButton
             onClick={() => onNavigate('presentacion')}
             isActive={activeSection === 'presentacion'}
@@ -68,8 +149,6 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             onLeave={() => setHoveredSection(null)}
             sectionName="Presentación"
           />
-
-          {/* Top Right - Sobre Mí */}
           <SimpleNavButton
             onClick={() => onNavigate('sobre-mi')}
             isActive={activeSection === 'sobre-mi'}
@@ -78,8 +157,6 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             onLeave={() => setHoveredSection(null)}
             sectionName="Sobre mí"
           />
-
-          {/* Bottom Left - Casos de Estudio (CAMBIADO) */}
           <SimpleNavButton
             onClick={() => onNavigate('casos-estudio')}
             isActive={activeSection === 'casos-estudio'}
@@ -88,8 +165,6 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             onLeave={() => setHoveredSection(null)}
             sectionName="Casos de estudio"
           />
-
-          {/* Bottom Right - Contacto (CAMBIADO) */}
           <SimpleNavButton
             onClick={() => onNavigate('contacto')}
             isActive={activeSection === 'contacto'}
@@ -99,11 +174,9 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
             sectionName="Contacto"
           />
         </div>
-
-        {/* Single label area below all buttons */}
         <div className="mt-1 md:mt-2 lg:mt-[8px] w-full h-4 md:h-5 lg:h-[20px] flex items-center justify-center">
           <p className="font-['Roboto:Regular',sans-serif] font-bold text-[#5a3e26] text-[10px] md:text-[11px] lg:text-[12px] text-center uppercase">
-            {sectionLabels[displaySection]}
+            {SECTION_LABELS[displaySection]}
           </p>
         </div>
       </div>
@@ -114,11 +187,14 @@ export function NavigationGrid({ activeSection, onNavigate }: NavigationGridProp
 interface ZoomGridButtonProps {
   isZoomed: boolean;
   onToggleZoom: () => void;
+  /** En móvil: integrado en el flujo (no fixed) */
+  embedInFlow?: boolean;
 }
 
-export function ZoomGridButton({ isZoomed, onToggleZoom }: ZoomGridButtonProps) {
+export function ZoomGridButton({ isZoomed, onToggleZoom, embedInFlow = false }: ZoomGridButtonProps) {
+  const wrapperClass = embedInFlow ? 'relative z-50' : 'fixed bottom-[12px] left-2 md:left-4 lg:left-[38px] z-50';
   return (
-    <div className="fixed bottom-[12px] left-2 md:left-4 lg:left-[38px] z-50">
+    <div className={wrapperClass}>
       <button
         onClick={onToggleZoom}
         aria-label={isZoomed ? 'Volver a la sección' : 'Ver todo el lienzo'}
