@@ -36,9 +36,12 @@ jobs:
 
       - name: Preparar docs/ con CNAME y .nojekyll
         run: |
+          # Limpiar docs/ existente para evitar conflictos
           rm -rf docs
           mkdir -p docs
+          # Copiar build fresco
           cp -r dist/. docs/
+          # Añadir archivos necesarios para GitHub Pages
           echo "fsanchez.suroesteintegral.com" > docs/CNAME
           touch docs/.nojekyll
 
@@ -46,6 +49,13 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Forzar add de archivos JS (por si .gitignore los bloquea)
           git add docs/
-          git diff --staged --quiet || git commit -m "Deploy: actualizar docs/ con build y CNAME"
-          git push origin fsanchez
+          git add -f docs/assets/*.js
+          # Commitear solo si hay cambios
+          if ! git diff --staged --quiet; then
+            git commit -m "Deploy: actualizar docs/ con build y CNAME"
+            git push origin fsanchez
+          else
+            echo "No hay cambios en docs/, skip commit"
+          fi
