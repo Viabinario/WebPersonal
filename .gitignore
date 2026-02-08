@@ -64,7 +64,8 @@ out/
 # Excluir archivos .js compilados, pero permitir archivos SVG generados en imports
 *.js
 !src/imports/*.js  # Mantener archivos SVG generados
-!docs/**/*.js  # Permitir archivos JS del build para GitHub Pages
+!docs/assets/*.js  # Permitir archivos JS del build para GitHub Pages
+!docs/**/*.js      # Permitir archivos JS en cualquier subdirectorio de docs/
 *.d.ts
 !src/**/*.d.ts
 
