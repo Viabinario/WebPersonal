@@ -17,7 +17,7 @@ import imgSocial05 from '../../assets/social/social-05.png'; // YouTube
 export const TEXT_LINK_CLASS =
   "underline decoration-dotted underline-offset-2 text-[#5a3e26] hover:text-[#3d2a1a] case-font-wdth focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:rounded-sm";
 
-/** Texto de introducción (Presentación + Cases). Negrita con <strong>, saltos de línea con {'\n\n'}. */
+/** Texto de introducción (Presentación desktop). Negrita con <strong>, saltos de línea con {'\n\n'}. */
 export const CASE_INTRO_TEXT = {
   paragraph: (
     <>
@@ -34,10 +34,89 @@ export const CASE_INTRO_TEXT = {
       </a>{' '}
       con un dominio propio.
       {'\n\n'}
-      Actualmente, la experiencia está optimizada para <strong>desktop (1280x832)</strong>, priorizando la visualización detallada de los proyectos mientras continúo iterando en su adaptabilidad móvil.
+      Actualmente, la experiencia está optimizada para <strong>desktop (1280x832)</strong>, priorizando la visualización detallada de los proyectos mientras continúo iterando en su adaptabilidad móvil, la cual es funcional, pero en proceso de estudio de diseño [feb/2026].
     </>
   ),
 };
+
+/** Texto de introducción para la Presentación en versión móvil. Editar aquí el contenido que se muestra solo en móvil. */
+export const CASE_INTRO_TEXT_MOBILE = {
+  paragraph: (
+    <>
+      Bienvenido a la versión mobile "lite" de mi sitio web creada desde cero. Prototipado en <strong>Figma</strong>, desarrollado en <strong>TypeScript/TSX</strong> con <strong>Cursor (AI)</strong>. Formulario y despliegue con <strong>Vercel</strong> y <strong>GitHub Pages</strong>.
+      {'\n\n'}
+      Una versión mobile opcional con una propuesta distinta de navegación sigue en desarrollo [feb/2026].
+    </>
+  ),
+};
+
+/** Presentación desktop, inglés. */
+export const CASE_INTRO_TEXT_EN = {
+  paragraph: (
+    <>
+      This site has been designed and built <strong>entirely from scratch</strong>, inspired by the architect’s canvas: where the whole project is visible <strong>in one space</strong>, both the big picture and the details.
+      {'\n\n'}
+      Technically, it started from ideation and prototyping in <strong>Figma (Design & Make)</strong>, then developed as a frontend in <strong>TypeScript/TSX</strong>, with code shaped using <strong>Cursor (AI)</strong> and each interaction tested in real time. The contact form’s logic is backed by <strong>Vercel</strong>, and the final deployment was done via{' '}
+      <a
+        href="https://github.com/Viabinario/WebPersonal"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`font-bold ${TEXT_LINK_CLASS}`}
+      >
+        GitHub Pages
+      </a>{' '}
+      with a custom domain.
+      {'\n\n'}
+      The experience is currently optimized for <strong>desktop (1280×832)</strong>, prioritising detailed project viewing while I continue to iterate on mobile adaptability [Feb 2026].
+    </>
+  ),
+};
+
+/** Presentación móvil, inglés. */
+export const CASE_INTRO_TEXT_MOBILE_EN = {
+  paragraph: (
+    <>
+      Welcome to the “lite” mobile version of my site, built from scratch. Prototyped in <strong>Figma</strong>, developed in <strong>TypeScript/TSX</strong> with <strong>Cursor (AI)</strong>. Form and deployment with <strong>Vercel</strong> and <strong>GitHub Pages</strong>.
+      {'\n\n'}
+      An optional mobile version with a different navigation approach is still in development [Feb 2026].
+    </>
+  ),
+};
+
+/** Sobre mí: texto del cuadro. ES y EN para el switch de idioma. */
+export const SOBRE_MI_TEXT_ES = (
+  <>
+    Hola, soy Francisco Sánchez, arquitecto de profesión con una experiencia laboral de más de 14 años,
+    diseñando y gestionando proyectos de edificación de diversa tipología.
+    <br /><br />
+    Mi camino hacia el UX/UI surge desde mis primeros años de universidad, interesándome en el mundo digital
+    a través del diseño de sitios web, apreciándolos como experiencias habitables digitales.
+    <br /><br />
+    Posteriormente, al especializarme en BIM, pude darle continuidad a esta inquietud de conocimiento y creatividad,
+    abordando proyectos con una mayor complejidad en la gestión digital de la información.
+    <br /><br />
+    Este cambio de rumbo aparente, es parte sustancial de mi búsqueda profesional, ahora en una fase de consolidar
+    mi interés en la creación de productos digitales, donde quiero volcar mis años de madurez, descubrimientos de
+    trabajar con muchos equipos y aprendizajes que nunca acaban y siempre suman.
+  </>
+);
+
+export const SOBRE_MI_TEXT_EN = (
+  <>
+    Hi, I’m Francisco Sánchez, an architect by profession with over 14 years of experience
+    designing and managing building projects of various types.
+    <br /><br />
+    My path into UX/UI began in my early university years, with an interest in the digital world
+    through web design, seeing sites as digital spaces to inhabit.
+    <br /><br />
+    Later, specialising in BIM allowed me to continue this drive for knowledge and creativity,
+    taking on projects with greater complexity in digital information management.
+    <br /><br />
+    This apparent change of direction is a core part of my professional journey, now in a phase of
+    consolidating my interest in digital product creation, where I want to apply my years of experience,
+    learnings from working with many teams, and the kind of learning that never stops and always adds up.
+  </>
+);
 
 /** Logos de redes (orden: LinkedIn, GitHub, Behance, Notion, YouTube). Usado en PresentacionSection y Cases. */
 export const SOCIAL_LOGO_SRCS = [

@@ -1,13 +1,19 @@
 import {
   CASE_INTRO_TEXT,
+  CASE_INTRO_TEXT_MOBILE,
+  CASE_INTRO_TEXT_EN,
+  CASE_INTRO_TEXT_MOBILE_EN,
   SOCIAL_LOGO_SRCS,
   SOCIAL_LABELS,
   SOCIAL_URLS,
 } from "./case-shared";
+import { LangSwitch, useLocale } from "../context/LocaleContext";
 
 interface PresentacionSectionProps {
   isZoomed?: boolean;
   onNavigate?: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
+  /** Si es true, se usa CASE_INTRO_TEXT_MOBILE en lugar de CASE_INTRO_TEXT. */
+  isMobile?: boolean;
 }
 
 const TEXT_BOX_BASE_CLASS =
@@ -20,8 +26,13 @@ const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";
 const SOCIAL_GRID_ITEMS: (number | null)[] = [0, 1, 2, 3, 4, null, null, null, null];
 const SOCIAL_LINKS_ONLY = [0, 1, 2, 3, 4] as const;
 
-export function PresentacionSection({ isZoomed = false, onNavigate }: PresentacionSectionProps) {
+export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = false }: PresentacionSectionProps) {
   const isClickable = isZoomed && !!onNavigate;
+  const { locale } = useLocale();
+  const introParagraph =
+    locale === 'en'
+      ? (isMobile ? CASE_INTRO_TEXT_MOBILE_EN.paragraph : CASE_INTRO_TEXT_EN.paragraph)
+      : (isMobile ? CASE_INTRO_TEXT_MOBILE.paragraph : CASE_INTRO_TEXT.paragraph);
 
   const handleClick = () => {
     if (isClickable && onNavigate) onNavigate("presentacion");
@@ -38,9 +49,10 @@ export function PresentacionSection({ isZoomed = false, onNavigate }: Presentaci
         tabIndex={isClickable ? 0 : undefined}
       >
         {/*Texto de Presentación */}
-        <div className="w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
+        <div className="relative w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
+          <LangSwitch />
           <p className="font-['Roboto:Regular',sans-serif] text-sm md:text-base lg:text-[14px] text-black text-justify leading-normal whitespace-pre-line">
-            {CASE_INTRO_TEXT.paragraph}
+            {introParagraph}
           </p>
         </div>
       </div>

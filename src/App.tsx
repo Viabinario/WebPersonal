@@ -135,7 +135,7 @@ export default function App() {
         <main className="w-full">
           {activeSection === 'presentacion' && (
             <div className="w-full min-h-screen">
-              <PresentacionSection isZoomed={false} onNavigate={handleNavigate} />
+              <PresentacionSection isZoomed={false} onNavigate={handleNavigate} isMobile />
             </div>
           )}
           {activeSection === 'sobre-mi' && (
@@ -197,7 +197,7 @@ export default function App() {
         <div className="w-[2560px] h-[1664px] grid grid-cols-2 grid-rows-2 relative">
           {/* Top Left - Presentación */}
           <div className="w-[1280px] h-[832px]">
-            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} />
+            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} isMobile={false} />
           </div>
 
           {/* Top Right - Sobre mí */}

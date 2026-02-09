@@ -146,7 +146,7 @@ export function CaseMobileView({ caseId }: CaseMobileViewProps) {
         </section>
 
         <p className="mt-6 text-sm text-[#5a3e26]/80 border-t border-[#5a3e26]/20 pt-4">
-          Contenido completo en versión desktop. Diseño móvil en desarrollo.
+          Contenido completo en versión desktop. Diseño móvil en desarrollo / febrero 2026.
         </p>
       </div>
     </article>
