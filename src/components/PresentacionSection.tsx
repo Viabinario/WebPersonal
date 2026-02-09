@@ -49,7 +49,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         tabIndex={isClickable ? 0 : undefined}
       >
         {/*Texto de Presentación */}
-        <div className="relative w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
+        <div className="relative w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed pt-12 pr-14 pl-6 pb-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
           <LangSwitch />
           <p className="font-['Roboto:Regular',sans-serif] text-sm md:text-base lg:text-[14px] text-black text-justify leading-normal whitespace-pre-line">
             {introParagraph}

@@ -43,7 +43,7 @@ export function SobreMiSection({ isZoomed = false, onNavigate }: SobreMiSectionP
           <LangSwitch />
           <div
             ref={textContainerRef}
-            className="p-6 md:p-8 lg:p-[48px] lg:px-[32px] overflow-y-auto flex-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+            className="pt-12 pr-14 pl-6 pb-6 md:p-8 lg:p-[48px] lg:px-[32px] overflow-y-auto flex-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
           >
             <p className="font-['Roboto:Regular',sans-serif] text-sm md:text-base lg:text-[14px] text-black text-justify leading-[1.2]">
               {locale === 'en' ? SOBRE_MI_TEXT_EN : SOBRE_MI_TEXT_ES}
