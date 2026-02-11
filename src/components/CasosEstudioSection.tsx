@@ -492,14 +492,6 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     }
     prevZoomedRef.current = _isZoomed;
   }, [_isZoomed]);
-  
-  // Cuando activeSection cambia a casos-estudio, ocultar placeholder
-  useEffect(() => {
-    if (isCasosEstudioActive && placeholderExiting) {
-      setPlaceholderExiting(false);
-      exitFromClickRef.current = false;
-    }
-  }, [isCasosEstudioActive, placeholderExiting]);
 
   // Clic en la animación: desplaza hacia los botones y luego zoom in
   const handlePlaceholderClick = () => {
