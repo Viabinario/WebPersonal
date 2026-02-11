@@ -667,16 +667,11 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     );
     return (
       <div
-        className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden flex flex-col ${_isZoomed ? 'cursor-pointer hover:opacity-95 transition-opacity duration-200' : ''}`}
-        onClick={_isZoomed ? handleSectionClick : undefined}
-        aria-label={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
-        title={_isZoomed ? 'Hacer clic para navegar a la sección Casos de Estudio' : undefined}
-        role={_isZoomed ? 'button' : undefined}
-        tabIndex={_isZoomed ? 0 : undefined}
+        className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden flex flex-col`}
       >
         {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
         {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
-        {/* Botón animado cuando no hay case activo; hit area de toda la sección siempre activa en zoom out */}
+        {/* Botón animado cuando no hay case activo; maneja el zoom in directamente */}
         {(_isZoomed || placeholderExiting) && currentView === 'menu' && (
             <ZoomedPlaceholder
               onClick={handlePlaceholderClick}
@@ -686,7 +681,6 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
               onEnterComplete={handlePlaceholderEnterComplete}
             />
           )}
-        {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
       </div>
     );
   }
