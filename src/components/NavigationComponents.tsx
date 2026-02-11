@@ -21,18 +21,42 @@ function SimpleNavButton({ onClick, isActive, bgColor, onHover, onLeave, section
       title={`Navegar a la sección ${sectionName}`}
       className={`relative w-14 h-14 md:w-16 md:h-16 lg:w-[82px] lg:h-[82px] rounded-[16px] md:rounded-[18px] lg:rounded-[22px] transition-all duration-300 ${
         isActive 
-          ? 'scale-95 shadow-[inset_0px_4px_8px_rgba(0,0,0,0.3)]' 
-          : 'hover:scale-105 hover:shadow-[0px_4px_8px_rgba(0,0,0,0.2)] shadow-[0px_2px_4px_rgba(0,0,0,0.1)]'
+          ? 'scale-95 shadow-[inset_0px_4px_12px_rgba(0,0,0,0.4)]' 
+          : 'hover:scale-105 hover:shadow-[0px_6px_16px_rgba(0,0,0,0.25)] shadow-[0px_4px_12px_rgba(0,0,0,0.15)]'
       } group overflow-visible`}
-      style={{ backgroundColor: bgColor }}
+      style={{ 
+        background: isActive 
+          ? bgColor 
+          : `linear-gradient(135deg, ${bgColor} 0%, ${bgColor} 60%, color-mix(in srgb, ${bgColor} 85%, white) 100%)`
+      }}
     >
+      {/* Highlight sutil en la parte superior para efecto de profundidad */}
+      {!isActive && (
+        <div 
+          className="absolute inset-0 rounded-[16px] md:rounded-[18px] lg:rounded-[22px] pointer-events-none"
+          style={{
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 25%, transparent 60%)',
+          }}
+        />
+      )}
+      
       {/* Borde difuminado que se irradia en hover */}
       <div 
         className="absolute -inset-1 rounded-[18px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{
-          boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 6px 2px rgba(90, 62, 38, 0.12), 0 0 12px 4px rgba(90, 62, 38, 0.06), 0 0 20px 6px rgba(90, 62, 38, 0.03)',
+          boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 0 8px 3px rgba(90, 62, 38, 0.15), 0 0 16px 6px rgba(90, 62, 38, 0.08), 0 0 24px 8px rgba(90, 62, 38, 0.04)',
         }}
       />
+      
+      {/* Sombra interior sutil para dar más profundidad */}
+      {!isActive && (
+        <div 
+          className="absolute inset-0 rounded-[16px] md:rounded-[18px] lg:rounded-[22px] pointer-events-none"
+          style={{
+            boxShadow: 'inset 0px -1px 2px rgba(0,0,0,0.1), inset 0px 1px 1px rgba(255,255,255,0.2)',
+          }}
+        />
+      )}
     </button>
   );
 }

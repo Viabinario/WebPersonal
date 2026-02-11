@@ -119,9 +119,7 @@ export default function App() {
   };
 
   const handleProfilePhotoClick = () => {
-    if (isZoomed) {
-      handleNavigate('presentacion');
-    }
+    handleNavigate('sobre-mi');
   };
 
   // Mobile: menú hamburguesa derecha; menú de casos (sandwich, misma idea gráfica del botón) izquierda
@@ -220,14 +218,34 @@ export default function App() {
 
           {/* Profile Photo - Positioned absolutely on canvas, moves between sections */}
           <div 
-            className={`absolute w-[184px] h-[184px] rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden transition-all duration-700 ease-in-out z-10 ${isZoomed ? 'cursor-pointer hover:scale-105' : ''}`}
-            style={getProfilePhotoPosition()}
+            className="absolute w-[184px] h-[184px] rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group hover:scale-105 cursor-pointer"
+            style={{
+              ...getProfilePhotoPosition(),
+              transition: 'all 0.7s ease-in-out, transform 0.3s ease-out, box-shadow 0.3s ease-out',
+            }}
             onClick={handleProfilePhotoClick}
+            role="button"
+            aria-label="Navegar a la sección Sobre mí"
+            title="Navegar a la sección Sobre mí"
+            tabIndex={0}
           >
             <img 
               src={imgProfilePhoto} 
-              alt="Profile" 
-              className="w-full h-full object-cover"
+              alt="Foto de perfil" 
+              className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+            />
+            
+            {/* Overlay sutil que aparece en hover */}
+            <div 
+              className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+            />
+            
+            {/* Sombra que aumenta en hover */}
+            <div 
+              className="absolute -inset-1 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 4px 12px rgba(90, 62, 38, 0.15), 0 8px 24px rgba(90, 62, 38, 0.1)',
+              }}
             />
           </div>
         </div>

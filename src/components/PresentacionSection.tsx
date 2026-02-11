@@ -57,16 +57,36 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         </div>
       </div>
       {/* Redes: móvil = fila flexible; desktop = 3x3 con tamaño fijo */}
-      <div className="mt-4 w-full max-w-[460px] lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[188px] lg:max-w-none">
-        <div className="bg-[#e5e2de] rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[18px]">
+      <div className="mt-4 w-full max-w-[460px] lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[200px] lg:max-w-none">
+        <div 
+          className="rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[20px] relative shadow-[0px_4px_12px_rgba(0,0,0,0.15)]"
+          style={{
+            background: 'linear-gradient(135deg, #e5e2de 0%, #e5e2de 70%, color-mix(in srgb, #e5e2de 90%, white) 100%)',
+          }}
+        >
+          {/* Highlight superior */}
+          <div 
+            className="absolute inset-0 rounded-[22px] pointer-events-none"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 25%, transparent 60%)',
+            }}
+          />
+          
+          {/* Sombra interior */}
+          <div 
+            className="absolute inset-0 rounded-[22px] pointer-events-none"
+            style={{
+              boxShadow: 'inset 0px -2px 4px rgba(0,0,0,0.08), inset 0px 1px 2px rgba(255,255,255,0.25)',
+            }}
+          />
           {/* Móvil/tablet: solo 5 enlaces en fila que se adapta al ancho */}
-          <div className="flex flex-wrap justify-center gap-2 lg:hidden">
+          <div className="flex flex-wrap justify-center gap-3 lg:hidden relative z-10">
             {SOCIAL_LINKS_ONLY.map((index) => (
               <SocialButton key={index} index={index} />
             ))}
           </div>
-          {/* Desktop: cuadrícula 3x3 fija (3×48px + 2×4px gap + padding ≈ 184px) */}
-          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-[4px] lg:place-items-center">
+          {/* Desktop: cuadrícula 3x3 fija (3×48px + 2×10px gap + padding ≈ 188px) */}
+          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-[10px] lg:place-items-center relative z-10">
             {SOCIAL_GRID_ITEMS.map((index, i) => (
               <div key={i} className="flex shrink-0 items-center justify-center">
                 <SocialButton index={index} />
@@ -85,11 +105,11 @@ interface SocialButtonProps {
 }
 
 const BTN_CLASS =
-  "relative shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-transform duration-300 ease-out hover:scale-110 inline-flex items-center justify-center";
+  "relative shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-[48px] lg:h-[48px] group cursor-pointer transition-all duration-300 ease-out hover:scale-110 inline-flex items-center justify-center";
 const BTN_INNER =
-  "absolute bg-[#d9bda5] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300";
+  "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 md:w-10 md:h-10 lg:w-[42px] lg:h-[42px] rounded-[16px] transition-all duration-300";
 const BTN_SHADOW =
-  "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 lg:w-[44px] lg:h-[44px] rounded-[14px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25),0px_8px_2px_0px_rgba(0,0,0,0),0px_5px_2px_0px_rgba(0,0,0,0.01),0px_3px_2px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.04)] group-hover:shadow-[0px_6px_6px_0px_rgba(0,0,0,0.3),0px_10px_3px_0px_rgba(0,0,0,0),0px_7px_3px_0px_rgba(0,0,0,0.01),0px_4px_3px_0px_rgba(0,0,0,0.04),0px_2px_2px_0px_rgba(0,0,0,0.05)] transition-all duration-300";
+  "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 md:w-11 md:h-11 lg:w-[44px] lg:h-[44px] rounded-[14px] shadow-[0px_4px_8px_0px_rgba(0,0,0,0.2),0px_2px_4px_0px_rgba(0,0,0,0.12)] group-hover:shadow-[0px_6px_12px_0px_rgba(0,0,0,0.3),0px_3px_6px_0px_rgba(0,0,0,0.18)] transition-all duration-300";
 
 function SocialButton({ index }: SocialButtonProps) {
   const empty = index === null;
@@ -100,15 +120,53 @@ function SocialButton({ index }: SocialButtonProps) {
   const ariaLabel = empty ? "Botón de red social vacío" : `Visitar perfil en ${label ?? "Red social"}`;
 
   const content = (
-    <div className={BTN_INNER}>
+    <>
+      {/* Border con degradado sutil */}
+      <div 
+        className={BTN_INNER}
+        style={{
+          background: 'linear-gradient(135deg, #d9bda5 0%, #d9bda5 60%, color-mix(in srgb, #d9bda5 85%, white) 100%)',
+        }}
+      >
+        {/* Highlight superior para profundidad */}
+        <div 
+          className="absolute inset-0 rounded-[16px] pointer-events-none"
+          style={{
+            background: 'linear-gradient(180deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.15) 30%, transparent 60%)',
+          }}
+        />
+        
+        {/* Sombra interior sutil */}
+        <div 
+          className="absolute inset-0 rounded-[16px] pointer-events-none"
+          style={{
+            boxShadow: 'inset 0px -1px 2px rgba(0,0,0,0.15), inset 0px 1px 1px rgba(255,255,255,0.3)',
+          }}
+        />
+      </div>
+      
+      {/* Contenedor con contenido e imagen */}
       <div className={BTN_SHADOW}>
         {!empty && img ? (
           <img src={img} alt="" className="w-full h-full rounded-[14px] object-cover" aria-hidden />
         ) : (
-          <div className="w-full h-full rounded-[14px] bg-[#f7f2ed]" />
+          <div 
+            className="w-full h-full rounded-[14px]"
+            style={{
+              background: 'linear-gradient(135deg, #f7f2ed 0%, #f7f2ed 60%, color-mix(in srgb, #f7f2ed 90%, white) 100%)',
+            }}
+          />
         )}
       </div>
-    </div>
+      
+      {/* Resplandor en hover */}
+      <div 
+        className="absolute -inset-[2px] rounded-[18px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+        style={{
+          boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.15), 0 0 4px 1px rgba(90, 62, 38, 0.12), 0 0 8px 2px rgba(90, 62, 38, 0.06)',
+        }}
+      />
+    </>
   );
 
   const commonProps = { className: BTN_CLASS, "aria-label": ariaLabel, title: ariaLabel };
