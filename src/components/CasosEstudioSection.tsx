@@ -791,8 +791,8 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
       </div>
 
       {/* Overlay hit area cuando zoom out con case activo: encima del contenido, toda la cuadrícula clicable para zoom in */}
-      {/* IMPORTANTE: Solo mostrar cuando hay un case activo (no en menu), para no bloquear el botón animado */}
-      {_isZoomed && currentView !== 'menu' && (
+      {/* IMPORTANTE: Este overlay solo aparece cuando hay un case activo (el menú hace return antes) */}
+      {_isZoomed && (
         <div
           className="absolute inset-0 z-30 cursor-pointer hover:opacity-95 transition-opacity duration-200"
           onClick={handleSectionClick}
