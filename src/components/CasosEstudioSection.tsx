@@ -456,7 +456,7 @@ interface CasosEstudioSectionProps {
   onMobileCaseViewChange?: (view: CaseView) => void;
 }
 
-export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
+export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate = () => {}, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
   const isCasosEstudioActive = activeSection === 'casos-estudio';
   const showCaseStudyUI = isCasosEstudioActive && !_isZoomed;
   const [internalView, setInternalView] = useState<CaseView>('menu');
