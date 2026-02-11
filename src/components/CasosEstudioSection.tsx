@@ -490,9 +490,16 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
 
   // Clic en la animación: desplaza hacia los botones y luego zoom in
   const handlePlaceholderClick = () => {
-    if (_isZoomed && _onNavigate && !placeholderExiting) {
+    // Si no hay función de navegación, no hacer nada
+    if (!_onNavigate || placeholderExiting) return;
+    
+    // Si está en zoom out, hacer animación de salida antes de navegar
+    if (_isZoomed) {
       exitFromClickRef.current = true;
       setPlaceholderExiting(true);
+    } else {
+      // Si no está en zoom (caso edge), navegar directamente
+      _onNavigate('casos-estudio');
     }
   };
 
