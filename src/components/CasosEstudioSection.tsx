@@ -479,14 +479,27 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
   // Zoom out: animación entra desde los botones al centro. Zoom in (botón zoom): animación sale hacia los botones.
   useEffect(() => {
     if (_isZoomed && !prevZoomedRef.current) {
+      // Entrando a zoom out: animar desde botones al centro
       setPlaceholderEnteringFromButtons(true);
     }
     if (!_isZoomed && prevZoomedRef.current) {
-      exitFromClickRef.current = false;
-      setPlaceholderExiting(true);
+      // Saliendo de zoom out: animar hacia botones
+      // IMPORTANTE: Solo resetear exitFromClickRef si NO fue un clic del usuario
+      // Si exitFromClickRef es true, significa que el usuario hizo clic en el botón y debe navegar
+      if (!exitFromClickRef.current) {
+        setPlaceholderExiting(true);
+      }
     }
     prevZoomedRef.current = _isZoomed;
   }, [_isZoomed]);
+  
+  // Cuando activeSection cambia a casos-estudio, ocultar placeholder
+  useEffect(() => {
+    if (isCasosEstudioActive && placeholderExiting) {
+      setPlaceholderExiting(false);
+      exitFromClickRef.current = false;
+    }
+  }, [isCasosEstudioActive, placeholderExiting]);
 
   // Clic en la animación: desplaza hacia los botones y luego zoom in
   const handlePlaceholderClick = () => {
