@@ -134,6 +134,27 @@ interface ZoomedPlaceholderProps {
 function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enteringFromButtons = false, onEnterComplete }: ZoomedPlaceholderProps) {
   const [entrancePhase, setEntrancePhase] = useState<'at-buttons' | 'to-center'>('at-buttons');
   const moverRef = useRef<HTMLDivElement>(null);
+  const exitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const exitCompletedRef = useRef(false);
+  
+  // Fallback: si transitionEnd no se dispara, forzar onExitComplete después de 500ms
+  useEffect(() => {
+    if (isExiting && onExitComplete) {
+      exitCompletedRef.current = false;
+      exitTimeoutRef.current = setTimeout(() => {
+        if (!exitCompletedRef.current) {
+          exitCompletedRef.current = true;
+          onExitComplete();
+        }
+      }, 500);
+    }
+    return () => {
+      if (exitTimeoutRef.current) {
+        clearTimeout(exitTimeoutRef.current);
+        exitTimeoutRef.current = null;
+      }
+    };
+  }, [isExiting, onExitComplete]);
 
   useEffect(() => {
     if (enteringFromButtons) {
@@ -146,8 +167,20 @@ function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enterin
   }, [enteringFromButtons]);
 
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    // Solo procesar transiciones del mover (no del botón interno)
     if (e.target !== moverRef.current) return;
-    if (isExiting) onExitComplete?.();
+    // Solo transiciones de transform (opacity dispara múltiples veces)
+    if (e.propertyName !== 'transform') return;
+    
+    if (isExiting && !exitCompletedRef.current) {
+      exitCompletedRef.current = true;
+      // Cancelar timeout si existe
+      if (exitTimeoutRef.current) {
+        clearTimeout(exitTimeoutRef.current);
+        exitTimeoutRef.current = null;
+      }
+      onExitComplete?.();
+    }
     if (enteringFromButtons && entrancePhase === 'to-center') onEnterComplete?.();
   };
 
@@ -169,7 +202,13 @@ function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enterin
             opacity: 1,
             transition: 'transform 0.45s ease-out, opacity 0.45s ease-out',
           }
-        : {};
+        : isExiting
+          ? {
+              transform: `translate(${PLACEHOLDER_EXIT_OFFSET.x}px, ${PLACEHOLDER_EXIT_OFFSET.y}px)`,
+              opacity: 0,
+              transition: 'transform 0.4s ease-in, opacity 0.4s ease-in',
+            }
+          : {};
 
   return (
     <>
@@ -476,42 +515,30 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
   const [placeholderExiting, setPlaceholderExiting] = useState(false);
   const [placeholderEnteringFromButtons, setPlaceholderEnteringFromButtons] = useState(false);
 
-  // Zoom out: animación entra desde los botones al centro. Zoom in (botón zoom): animación sale hacia los botones.
+  // Zoom out: animación entra desde los botones al centro. Zoom in desde botón zoom: animación sale hacia los botones.
   useEffect(() => {
     if (_isZoomed && !prevZoomedRef.current) {
       // Entrando a zoom out: animar desde botones al centro
       setPlaceholderEnteringFromButtons(true);
     }
     if (!_isZoomed && prevZoomedRef.current) {
-      // Saliendo de zoom out: animar hacia botones
-      // IMPORTANTE: Solo resetear exitFromClickRef si NO fue un clic del usuario
-      // Si exitFromClickRef es true, significa que el usuario hizo clic en el botón y debe navegar
-      if (!exitFromClickRef.current) {
-        setPlaceholderExiting(true);
-      }
+      // Saliendo de zoom out: animar hacia botones (solo desde botón zoom, no desde clic en placeholder)
+      setPlaceholderExiting(true);
     }
     prevZoomedRef.current = _isZoomed;
   }, [_isZoomed]);
 
-  // Clic en la animación: desplaza hacia los botones y luego zoom in
+  // Clic en la animación: desaparecer y zoom in
   const handlePlaceholderClick = () => {
     // Si no hay función de navegación, no hacer nada
-    if (!_onNavigate || placeholderExiting) return;
+    if (!_onNavigate) return;
     
-    // Si está en zoom out, hacer animación de salida antes de navegar
-    if (_isZoomed) {
-      exitFromClickRef.current = true;
-      setPlaceholderExiting(true);
-    } else {
-      // Si no está en zoom (caso edge), navegar directamente
-      _onNavigate('casos-estudio');
-    }
+    // Navegación directa sin animación de traslado
+    _onNavigate('casos-estudio');
   };
 
   const handlePlaceholderExitComplete = () => {
-    if (exitFromClickRef.current && _onNavigate) {
-      _onNavigate('casos-estudio');
-    }
+    // Ya no se usa para navegación, solo para limpiar estado
     exitFromClickRef.current = false;
     setPlaceholderExiting(false);
   };
@@ -684,10 +711,10 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
         {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
         {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
         {/* Botón animado cuando no hay case activo; maneja el zoom in directamente */}
-        {(_isZoomed || placeholderExiting) && currentView === 'menu' && (
+        {_isZoomed && currentView === 'menu' && (
             <ZoomedPlaceholder
               onClick={handlePlaceholderClick}
-              isExiting={placeholderExiting}
+              isExiting={false}
               onExitComplete={handlePlaceholderExitComplete}
               enteringFromButtons={placeholderEnteringFromButtons}
               onEnterComplete={handlePlaceholderEnterComplete}
@@ -727,7 +754,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
       {/* En móvil la barra de casos está en el header; no se duplica aquí */}
       <div
         ref={scrollContainerRef}
-        className={`w-full ${isMobile ? 'flex-1 min-h-0 overflow-y-auto overflow-x-hidden' : 'absolute top-0 left-0 right-0 bottom-0 overflow-x-auto overflow-y-hidden lg:top-[16px] lg:left-[1px] lg:bottom-0 lg:pt-2 lg:pb-2 lg:pr-px'}`}
+        className={`w-full ${isMobile ? 'flex-1 min-h-0 overflow-y-auto overflow-x-hidden' : 'absolute top-0 left-0 right-0 bottom-0 overflow-x-auto overflow-y-hidden lg:top-[-4px] lg:left-[1px] lg:bottom-[20px] lg:pt-2 lg:pb-2'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
       >
         <style>{`
@@ -752,7 +779,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           }
         `}</style>
 
-        <div className={isMobile ? 'w-full min-h-full' : 'h-full inline-block min-w-full pl-[0px] pr-[10px]'}>
+        <div className={isMobile ? 'w-full min-h-full' : 'h-full inline-block min-w-full pl-[0px] pr-[0px]'}>
           {currentView === 'case1' && (
             isMobile ? (
               <div ref={caseContainerRef} className="w-full min-h-full" role="article">
@@ -763,7 +790,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
                 ref={caseContainerRef}
                 data-case-lightbox
                 role="presentation"
-                className="w-[1280px] h-[832px] relative"
+                className="w-full h-full relative"
                 onClick={handleCaseContentClick}
               >
                 <Case1Component />
@@ -780,7 +807,7 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
                 ref={caseContainerRef}
                 data-case-lightbox
                 role="presentation"
-                className="w-[1280px] h-[832px] relative"
+                className="w-full h-full relative"
                 onClick={handleCaseContentClick}
               >
                 <Case2Component />

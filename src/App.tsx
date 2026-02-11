@@ -181,16 +181,17 @@ export default function App() {
       <div
         className={`absolute top-0 left-0 bottom-0 overflow-hidden ${showCasosEstudioViewportExtension ? 'right-[38px]' : 'right-0'}`}
       >
-        {/* From 1280px to clip edge: same background so no visible empty zone (Contacto section hidden) */}
+        {/* Casos de Estudio: versión flotante fuera de la grilla cuando está activo */}
         {showCasosEstudioViewportExtension && (
-          <div
-            className="absolute top-0 bottom-0 left-[1280px] right-0 z-10 pointer-events-none bg-[#f7f2ed]"
-            aria-hidden
-          />
+          <div className="absolute inset-0 z-20 bg-[#f7f2ed]">
+            <div className="w-full h-[832px]">
+              <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+            </div>
+          </div>
         )}
         {/* Canvas Container */}
         <div
-          className="absolute top-0 left-0 transition-transform duration-700 ease-in-out"
+          className={`absolute top-0 left-0 transition-transform duration-700 ease-in-out ${showCasosEstudioViewportExtension ? 'invisible' : ''}`}
           style={getCanvasTransform()}
         >
           {/* Large Canvas - 2x2 Grid */}
@@ -207,11 +208,13 @@ export default function App() {
 
           {/* Bottom Left - Casos de Estudio */}
           <div className="w-[1280px] h-[832px]">
-            <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+            {!showCasosEstudioViewportExtension && (
+              <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+            )}
           </div>
 
           {/* Bottom Right - Contacto */}
-          <div className="w-[1280px] h-[832px]">
+          <div className={`w-[1280px] h-[832px] ${showCasosEstudioViewportExtension ? 'opacity-0 pointer-events-none' : ''}`}>
             <ContactoSection isZoomed={isZoomed} onNavigate={handleNavigate} />
           </div>
 

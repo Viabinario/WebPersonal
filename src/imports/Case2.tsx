@@ -51,7 +51,7 @@ function ContentCarousel() {
   return (
     <div className="h-[829px] relative shrink-0 w-full" data-name="Content-Carousel">
       <div className="flex flex-col justify-end size-full">
-        <div className="content-stretch flex flex-col items-start justify-end pl-[222px] relative size-full">
+        <div className="content-stretch flex flex-col items-start justify-end pl-0 relative size-full">
           {/* ContainerButtonUsecases removed - handled by parent CasosEstudioSection */}
         </div>
       </div>
@@ -1786,7 +1786,7 @@ function ContentOtherFormats() {
 
 function ConentHorizontalProjectCase() {
   return (
-    <div className="absolute content-stretch flex gap-[20px] items-start left-0 overflow-clip top-[21px]" data-name="Conent-Horizontal-ProjectCase">
+    <div className="absolute content-stretch flex gap-[20px] items-start left-0 right-0 overflow-clip top-[21px]" data-name="Conent-Horizontal-ProjectCase">
       <ContentLeft184Px />
       <ContentResume388Px />
       <ContentProject592Px />
@@ -1825,7 +1825,7 @@ function ConentHorizontalProjectCase() {
 
 function UsecaseContainer1280X() {
   return (
-    <div className="absolute bg-[#f7f2ed] h-[712px] left-0 overflow-x-auto overflow-y-clip top-0 w-[1280px]" data-name="Usecase_container_1280x712">
+    <div className="absolute bg-[#f7f2ed] h-[712px] left-0 right-0 overflow-x-auto overflow-y-clip top-0" data-name="Usecase_container_1280x712">
       <ConentHorizontalProjectCase />
     </div>
   );
