@@ -1,4 +1,5 @@
-import { SOCIAL_LOGO_SRCS, SOCIAL_LABELS, SOCIAL_URLS } from "./case-shared";
+import { Download } from "lucide-react";
+import { SOCIAL_LOGO_SRCS, SOCIAL_LABELS, SOCIAL_URLS, LINK_CV_PDF } from "./case-shared";
 import { LangSwitch } from "../context/LocaleContext";
 
 /** Ancho de la barra (ícono + padding). Debe coincidir con el margen derecho del contenido en App. */
@@ -66,6 +67,26 @@ export function SocialBarDesktop() {
         );
       })}
       </div>
+      {/* Botón descarga CV (mismo enlace que en móvil) */}
+      <a
+        href={LINK_CV_PDF}
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${BTN_CLASS} flex shrink-0`}
+        aria-label="Descargar CV"
+        title="Descargar CV"
+      >
+        <div
+          className={BTN_INNER}
+          style={{
+            background: 'linear-gradient(135deg, #d9bda5 0%, #d9bda5 60%, color-mix(in srgb, #d9bda5 85%, white) 100%)',
+          }}
+        />
+        <div className={`${BTN_SHADOW} flex items-center justify-center text-[#5a3e26]`}>
+          <Download size={22} strokeWidth={2} aria-hidden />
+        </div>
+      </a>
     </aside>
   );
 }
