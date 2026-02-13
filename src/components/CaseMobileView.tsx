@@ -14,6 +14,8 @@ import {
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 import imgCase1Cover from '../assets/case1/case1-03b.png';
 import imgCase2Cover from '../assets/case2/case2-01.png';
+import Case1MobileEnhanced from './Case1MobileEnhanced';
+import Case2MobileEnhanced from './Case2MobileEnhanced';
 
 export type CaseMobileId = 'case1' | 'case2';
 
@@ -86,6 +88,14 @@ interface CaseMobileViewProps {
 }
 
 export function CaseMobileView({ caseId }: CaseMobileViewProps) {
+  // Case1 (Kora) y Case2 (Del Revés) usan versión mejorada con parallax y dropdowns
+  if (caseId === 'case1') {
+    return <Case1MobileEnhanced />;
+  }
+  if (caseId === 'case2') {
+    return <Case2MobileEnhanced />;
+  }
+
   const { title, description } = CASE_MOBILE_CONTENT[caseId];
 
   return (
