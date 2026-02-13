@@ -21,7 +21,7 @@ interface PresentacionSectionProps {
 }
 
 const TEXT_BOX_BASE_CLASS =
-  "w-full max-w-[720px] md:max-w-[800px] lg:max-w-[900px] md:pt-[200px] lg:pt-0 lg:absolute lg:top-[260px] lg:left-[300px] lg:right-[250px] lg:max-w-none md:px-4 lg:px-0";
+  "w-full max-w-[720px] md:max-w-[800px] lg:max-w-[900px] md:pt-[200px] lg:pt-0 lg:absolute lg:top-[260px] lg:left-[300px] lg:right-[56px] lg:max-w-none md:px-4 lg:px-0";
 const ZOOMED_CLICKABLE_CLASS =
   "cursor-pointer hover:scale-[1.01] transition-transform duration-300";
 const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";
@@ -151,7 +151,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
       >
         <div
           ref={textRef}
-          className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line mt-4 text-base md:text-lg lg:text-xl max-w-none"
+          className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line mt-4 text-base md:text-lg lg:text-xl max-w-none lg:max-h-[572px] lg:overflow-y-auto lg:pr-1"
           style={{ fontVariationSettings: '"wdth" 100' }}
         >
           <SegmentWords segments={introSegments} />
