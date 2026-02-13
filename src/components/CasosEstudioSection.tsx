@@ -1,9 +1,16 @@
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Download } from 'lucide-react';
 import Case1Component from '../imports/Case1';
 import Case2Component from '../imports/Case2';
 import { CaseMobileView } from './CaseMobileView';
 import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
+import {
+  LINKS_OTHER_FORMATS_CASE1,
+  LINKS_OTHER_FORMATS_CASE2,
+  LINK_CV_PDF,
+} from './case-shared';
+import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
 // Wrapper for case buttons bar: shows semi-transparent background on hover so labels are readable
 function CaseButtonsBar({ children, embedInFlow = false }: { children: React.ReactNode; embedInFlow?: boolean }) {
@@ -514,6 +521,14 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
 
   const [placeholderExiting, setPlaceholderExiting] = useState(false);
   const [placeholderEnteringFromButtons, setPlaceholderEnteringFromButtons] = useState(false);
+  const [cvMenuOpen, setCvMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!cvMenuOpen) return;
+    const close = () => setCvMenuOpen(false);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [cvMenuOpen]);
 
   // Zoom out: animación entra desde los botones al centro. Zoom in desde botón zoom: animación sale hacia los botones.
   useEffect(() => {
@@ -822,6 +837,68 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           className="absolute right-0 top-0 h-[712px] w-px border-l border-[#7e5635] border-dashed pointer-events-none lg:top-2"
         />
       </div>
+
+      {/* Bottom bar móvil: igual que la top bar en desktop, se renderiza en body para no ser recortada por overflow del contenedor */}
+      {isMobile && (currentView === 'case1' || currentView === 'case2') &&
+        createPortal(
+          <nav
+            className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-4 px-4 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-[#f7f2ed] border-t-2 border-[#5a3e26] border-dashed"
+            aria-label="Otros formatos y descarga de CV"
+          >
+            {([
+              { label: 'Behance', aria: 'Ver en Behance', path: svgPathsOtherFormats.p5a0b600 },
+              { label: 'Figma', aria: 'Ver en Figma', path: svgPathsOtherFormats.p27c0d200 },
+              { label: 'YouTube', aria: 'Ver en YouTube', path: svgPathsOtherFormats.pee38400 },
+            ] as const).map((item, i) => {
+              const href = currentView === 'case1' ? LINKS_OTHER_FORMATS_CASE1[i] : LINKS_OTHER_FORMATS_CASE2[i];
+              return (
+                <a
+                  key={item.label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl text-[#5a3e26] hover:text-[#5a3e26]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f2ed] transition-colors"
+                  aria-label={item.aria}
+                  title={item.aria}
+                >
+                  <svg className="block size-6" fill="none" viewBox="0 0 44 44" aria-hidden>
+                    <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d={item.path} />
+                  </svg>
+                </a>
+              );
+            })}
+            <div className="relative flex items-center justify-center">
+              <button
+                type="button"
+                onClick={(e) => { e.stopPropagation(); setCvMenuOpen((o) => !o); }}
+                aria-label={cvMenuOpen ? 'Cerrar menú de descarga' : 'Descargar CV'}
+                aria-expanded={cvMenuOpen}
+                className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl text-[#5a3e26] hover:text-[#5a3e26]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f2ed] transition-colors"
+              >
+                <Download size={24} strokeWidth={2} aria-hidden />
+              </button>
+              {cvMenuOpen && (
+                <div
+                  className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[min(200px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+                  aria-label="Menú descarga CV"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <a
+                    href={LINK_CV_PDF}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+                    onClick={() => setCvMenuOpen(false)}
+                  >
+                    Descargar CV
+                  </a>
+                </div>
+              )}
+            </div>
+          </nav>,
+          document.body
+        )}
 
       {/* Overlay hit area cuando zoom out con case activo: encima del contenido, toda la cuadrícula clicable para zoom in */}
       {/* IMPORTANTE: Este overlay solo aparece cuando hay un case activo (el menú hace return antes) */}

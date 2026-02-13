@@ -153,6 +153,9 @@ export const LINKS_OTHER_FORMATS_CASE2 = [
   'https://youtu.be/VXkacI3VHlA',
 ] as const;
 
+/** URL del CV en PDF para descarga (colocar el archivo en public/cv.pdf o usar enlace externo). */
+export const LINK_CV_PDF = '/FSanchez_UXUI.pdf';
+
 /** URLs para créditos Case2 (orden: Agustina, Anna, Claudia, Erik, Jonattan). En standby hasta confirmar enlaces reales; sustituir "#" por las URLs. */
 export const LINKS_CREDITS_CASE2 = [
   '#',

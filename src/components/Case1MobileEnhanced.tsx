@@ -175,8 +175,8 @@ export default function Case1MobileEnhanced() {
         </div>
       </motion.section>
 
-      {/* Contenido principal con fondo blanco */}
-      <div className="bg-white">
+      {/* Contenido principal con fondo blanco (pb para no quedar bajo la bottom bar) */}
+      <div className="bg-white pb-28">
         {/* Mockup principal */}
         <section id="main-content" className="relative py-16 px-6" aria-labelledby="mockup-title">
           <div className="max-w-md mx-auto">
@@ -669,6 +669,7 @@ export default function Case1MobileEnhanced() {
           </div>
         </section>
       </div>
+
     </div>
   );
 }

@@ -193,7 +193,7 @@ export default function Case2MobileEnhanced() {
         </div>
       </motion.section>
 
-      <div className="bg-white">
+      <div className="bg-white pb-28">
         {/* Mockup principal */}
         <section id="main-content" className="relative py-16 px-6" aria-labelledby="mockup-title">
           <div className="max-w-md mx-auto">
@@ -697,6 +697,7 @@ export default function Case2MobileEnhanced() {
           </div>
         </section>
       </div>
+
     </div>
   );
 }
