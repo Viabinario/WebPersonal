@@ -1,13 +1,17 @@
+import { useRef, useEffect } from "react";
 import {
-  CASE_INTRO_TEXT,
-  CASE_INTRO_TEXT_MOBILE,
-  CASE_INTRO_TEXT_EN,
-  CASE_INTRO_TEXT_MOBILE_EN,
+  type IntroSegment,
+  CASE_INTRO_SEGMENTS_ES,
+  CASE_INTRO_SEGMENTS_EN,
+  CASE_INTRO_SEGMENTS_MOBILE_ES,
+  CASE_INTRO_SEGMENTS_MOBILE_EN,
   SOCIAL_LOGO_SRCS,
   SOCIAL_LABELS,
   SOCIAL_URLS,
+  TEXT_LINK_CLASS,
 } from "./case-shared";
-import { LangSwitch, useLocale } from "../context/LocaleContext";
+import { useLocale } from "../context/LocaleContext";
+import gsap from "gsap";
 
 interface PresentacionSectionProps {
   isZoomed?: boolean;
@@ -17,29 +21,122 @@ interface PresentacionSectionProps {
 }
 
 const TEXT_BOX_BASE_CLASS =
-  "w-full max-w-[460px] md:pt-[170px] lg:pt-0 lg:absolute lg:top-[240px] lg:left-1/2 lg:-translate-x-1/2";
+  "w-full max-w-[720px] md:max-w-[800px] lg:max-w-[900px] md:pt-[200px] lg:pt-0 lg:absolute lg:top-[260px] lg:left-[300px] lg:right-[250px] lg:max-w-none md:px-4 lg:px-0";
 const ZOOMED_CLICKABLE_CLASS =
-  "cursor-pointer hover:scale-105 transition-transform duration-300";
+  "cursor-pointer hover:scale-[1.01] transition-transform duration-300";
 const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";
+const SPLIT_WORD_CLASS = "presentacion-split-word";
 
-/** Índices 0–4 = redes; null = celda vacía. Desktop: 3x3. Móvil: solo estos 5 en fila flexible. */
-const SOCIAL_GRID_ITEMS: (number | null)[] = [0, 1, 2, 3, 4, null, null, null, null];
 const SOCIAL_LINKS_ONLY = [0, 1, 2, 3, 4] as const;
+
+/** Caja de redes solo para móvil/tablet (en desktop se usa la barra global SocialBarDesktop). */
+function SocialBox({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 relative shadow-[0px_4px_12px_rgba(0,0,0,0.15)] ${className}`}
+      style={{
+        background: 'linear-gradient(135deg, #e5e2de 0%, #e5e2de 70%, color-mix(in srgb, #e5e2de 90%, white) 100%)',
+      }}
+    >
+      <div
+        className="absolute inset-0 rounded-[22px] pointer-events-none"
+        style={{
+          background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 25%, transparent 60%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 rounded-[22px] pointer-events-none"
+        style={{
+          boxShadow: 'inset 0px -2px 4px rgba(0,0,0,0.08), inset 0px 1px 2px rgba(255,255,255,0.25)',
+        }}
+      />
+      <div className="flex flex-wrap justify-center gap-3 relative z-10">
+        {SOCIAL_LINKS_ONLY.map((index) => (
+          <SocialButton key={index} index={index} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function splitIntoWords(text: string): string[] {
+  return text.split(/(\s+)/).filter(Boolean);
+}
+
+function SegmentWords({ segments }: { segments: IntroSegment[] }) {
+  return (
+    <>
+      {segments.map((seg, i) => {
+        const tokens = splitIntoWords(seg.content);
+        const Wrapper = seg.type === 'strong' ? 'strong' : seg.type === 'link' ? 'a' : 'span';
+        const wrapperProps =
+          seg.type === 'link' && seg.href
+            ? {
+                href: seg.href,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+                className: `inline font-bold ${TEXT_LINK_CLASS}`,
+              }
+            : { className: 'inline' };
+        const isLink = seg.type === 'link';
+        return (
+          <Wrapper key={i} {...wrapperProps}>
+            {tokens.map((token, j) => {
+              const isWhitespace = /^\s+$/.test(token);
+              if (isWhitespace) {
+                return token === '\n\n' ? (
+                  <span key={j} className="block h-[1em]" aria-hidden />
+                ) : (
+                  <span key={j} className="inline-block w-[0.28em]" aria-hidden style={{ userSelect: 'none' }} />
+                );
+              }
+              return (
+                <span
+                  key={j}
+                  className={`${SPLIT_WORD_CLASS} inline-block mr-[0.28em] ${isLink ? 'underline decoration-dotted underline-offset-2' : ''}`}
+                >
+                  {token}
+                </span>
+              );
+            })}
+          </Wrapper>
+        );
+      })}
+    </>
+  );
+}
 
 export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = false }: PresentacionSectionProps) {
   const isClickable = isZoomed && !!onNavigate;
   const { locale } = useLocale();
-  const introParagraph =
+  const introSegments =
     locale === 'en'
-      ? (isMobile ? CASE_INTRO_TEXT_MOBILE_EN.paragraph : CASE_INTRO_TEXT_EN.paragraph)
-      : (isMobile ? CASE_INTRO_TEXT_MOBILE.paragraph : CASE_INTRO_TEXT.paragraph);
+      ? (isMobile ? CASE_INTRO_SEGMENTS_MOBILE_EN : CASE_INTRO_SEGMENTS_EN)
+      : (isMobile ? CASE_INTRO_SEGMENTS_MOBILE_ES : CASE_INTRO_SEGMENTS_ES);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el) return;
+    const words = el.querySelectorAll(`.${SPLIT_WORD_CLASS}`);
+    if (words.length === 0) return;
+    gsap.set(words, { opacity: 0, y: 14 });
+    gsap.to(words, {
+      opacity: 1,
+      y: 0,
+      duration: 0.45,
+      stagger: 0.022,
+      ease: 'power2.out',
+      overwrite: true,
+    });
+  }, [introSegments, locale, isMobile]);
 
   const handleClick = () => {
     if (isClickable && onNavigate) onNavigate("presentacion");
   };
 
   return (
-    <div className="relative w-full h-full bg-[#f7f2ed] flex flex-col items-center justify-center md:justify-start lg:justify-center p-4 md:px-8 md:py-6 md:pb-16 lg:p-0">
+    <div className="relative w-full h-full min-h-full bg-[#f7f2ed] flex flex-col items-center justify-center md:justify-start lg:justify-center p-4 md:px-8 md:py-6 md:pb-16 lg:p-0">
       <div
         className={`${TEXT_BOX_BASE_CLASS} ${isClickable ? ZOOMED_CLICKABLE_CLASS : ""}`}
         onClick={handleClick}
@@ -48,52 +145,19 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         role={isClickable ? "button" : undefined}
         tabIndex={isClickable ? 0 : undefined}
       >
-        {/*Texto de Presentación */}
-        <div className="relative w-full bg-[#e8d8c9] rounded-[22px] border-2 border-[#5a3e26] border-dashed pt-12 pr-14 pl-6 pb-6 md:p-12 lg:p-[48px] shadow-[25px_25px_10px_0px_rgba(0,0,0,0),16px_16px_9px_0px_rgba(0,0,0,0.02),9px_9px_8px_0px_rgba(0,0,0,0.07),4px_4px_6px_0px_rgba(0,0,0,0.12),1px_1px_3px_0px_rgba(0,0,0,0.14)]">
-          <LangSwitch />
-          <p className="font-['Roboto:Regular',sans-serif] text-sm md:text-base lg:text-[14px] text-black text-justify leading-normal whitespace-pre-line">
-            {introParagraph}
-          </p>
+        <div className="relative w-full flex flex-col">
+          <div
+            ref={textRef}
+            className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line mt-4 text-base md:text-lg lg:text-xl max-w-none"
+            style={{ fontVariationSettings: '"wdth" 100' }}
+          >
+            <SegmentWords segments={introSegments} />
+          </div>
         </div>
       </div>
-      {/* Redes: móvil = fila flexible; desktop = 3x3 con tamaño fijo */}
-      <div className="mt-4 w-full max-w-[460px] md:mt-6 lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[200px] lg:max-w-none">
-        <div 
-          className="rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[20px] relative shadow-[0px_4px_12px_rgba(0,0,0,0.15)]"
-          style={{
-            background: 'linear-gradient(135deg, #e5e2de 0%, #e5e2de 70%, color-mix(in srgb, #e5e2de 90%, white) 100%)',
-          }}
-        >
-          {/* Highlight superior */}
-          <div 
-            className="absolute inset-0 rounded-[22px] pointer-events-none"
-            style={{
-              background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 25%, transparent 60%)',
-            }}
-          />
-          
-          {/* Sombra interior */}
-          <div 
-            className="absolute inset-0 rounded-[22px] pointer-events-none"
-            style={{
-              boxShadow: 'inset 0px -2px 4px rgba(0,0,0,0.08), inset 0px 1px 2px rgba(255,255,255,0.25)',
-            }}
-          />
-          {/* Móvil/tablet: solo 5 enlaces en fila que se adapta al ancho */}
-          <div className="flex flex-wrap justify-center gap-3 lg:hidden relative z-10">
-            {SOCIAL_LINKS_ONLY.map((index) => (
-              <SocialButton key={index} index={index} />
-            ))}
-          </div>
-          {/* Desktop: cuadrícula 3x3 fija (3×48px + 2×10px gap + padding ≈ 188px) */}
-          <div className="hidden lg:grid lg:grid-cols-3 lg:gap-[10px] lg:place-items-center relative z-10">
-            {SOCIAL_GRID_ITEMS.map((index, i) => (
-              <div key={i} className="flex shrink-0 items-center justify-center">
-                <SocialButton index={index} />
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Redes: solo móvil/tablet (en desktop la barra SocialBarDesktop está fija al margen derecho en App) */}
+      <div className="mt-4 w-full max-w-[460px] md:mt-6 lg:hidden">
+        <SocialBox />
       </div>
     </div>
   );

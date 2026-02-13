@@ -83,6 +83,79 @@ export const CASE_INTRO_TEXT_MOBILE_EN = {
   ),
 };
 
+/** Segmentos del texto de intro para efecto Split Text (palabra a palabra). type: text | strong | link. */
+export type IntroSegment = { type: 'text' | 'strong' | 'link'; content: string; href?: string };
+
+const GITHUB_PAGES_URL = 'https://github.com/Viabinario/WebPersonal';
+
+export const CASE_INTRO_SEGMENTS_ES: IntroSegment[] = [
+  { type: 'text', content: 'Este sitio ha sido diseñado y construido ' },
+  { type: 'strong', content: 'íntegramente desde cero' },
+  { type: 'text', content: ', inspirado en el lienzo del arquitecto: donde todo el proyecto queda a la vista ' },
+  { type: 'strong', content: 'en un mismo espacio' },
+  { type: 'text', content: ', su globalidad y lo específico.\n\nTécnicamente, surgió de una ideación y prototipado en ' },
+  { type: 'strong', content: 'Figma (Design & Make)' },
+  { type: 'text', content: ', que luego fue desarrollado como frontend en ' },
+  { type: 'strong', content: 'TypeScript/TSX' },
+  { type: 'text', content: ', modelando el código con ' },
+  { type: 'strong', content: 'Cursor (AI)' },
+  { type: 'text', content: ' y testeando cada interacción en tiempo real. La gestión del formulario de contacto apoya su lógica de backend en ' },
+  { type: 'strong', content: 'Vercel' },
+  { type: 'text', content: ' y el despliegue final lo realicé a través de ' },
+  { type: 'link', content: 'GitHub Pages', href: GITHUB_PAGES_URL },
+  { type: 'text', content: ' con un dominio propio.\n\nActualmente, la experiencia está optimizada para ' },
+  { type: 'strong', content: 'desktop (1280x832)' },
+  { type: 'text', content: ', priorizando la visualización detallada de los proyectos mientras continúo iterando en su adaptabilidad móvil, la cual es funcional, pero en proceso de estudio de diseño [feb/2026].' },
+];
+
+export const CASE_INTRO_SEGMENTS_EN: IntroSegment[] = [
+  { type: 'text', content: 'This site has been designed and built ' },
+  { type: 'strong', content: 'entirely from scratch' },
+  { type: 'text', content: ", inspired by the architect's canvas: where the whole project is visible " },
+  { type: 'strong', content: 'in one space' },
+  { type: 'text', content: ', both the big picture and the details.\n\nTechnically, it started from ideation and prototyping in ' },
+  { type: 'strong', content: 'Figma (Design & Make)' },
+  { type: 'text', content: ', then developed as a frontend in ' },
+  { type: 'strong', content: 'TypeScript/TSX' },
+  { type: 'text', content: ', with code shaped using ' },
+  { type: 'strong', content: 'Cursor (AI)' },
+  { type: 'text', content: " and each interaction tested in real time. The contact form's logic is backed by " },
+  { type: 'strong', content: 'Vercel' },
+  { type: 'text', content: ', and the final deployment was done via ' },
+  { type: 'link', content: 'GitHub Pages', href: GITHUB_PAGES_URL },
+  { type: 'text', content: ' with a custom domain.\n\nThe experience is currently optimized for ' },
+  { type: 'strong', content: 'desktop (1280×832)' },
+  { type: 'text', content: ', prioritising detailed project viewing while I continue to iterate on mobile adaptability [Feb 2026].' },
+];
+
+export const CASE_INTRO_SEGMENTS_MOBILE_ES: IntroSegment[] = [
+  { type: 'text', content: 'Bienvenido a la versión mobile "lite" de mi sitio web creada desde cero. Prototipado en ' },
+  { type: 'strong', content: 'Figma' },
+  { type: 'text', content: ', desarrollado en ' },
+  { type: 'strong', content: 'TypeScript/TSX' },
+  { type: 'text', content: ' con ' },
+  { type: 'strong', content: 'Cursor (AI)' },
+  { type: 'text', content: '. Formulario y despliegue con ' },
+  { type: 'strong', content: 'Vercel' },
+  { type: 'text', content: ' y ' },
+  { type: 'strong', content: 'GitHub Pages' },
+  { type: 'text', content: '.\n\nUna versión mobile opcional con una propuesta distinta de navegación sigue en desarrollo [feb/2026].' },
+];
+
+export const CASE_INTRO_SEGMENTS_MOBILE_EN: IntroSegment[] = [
+  { type: 'text', content: 'Welcome to the "lite" mobile version of my site, built from scratch. Prototyped in ' },
+  { type: 'strong', content: 'Figma' },
+  { type: 'text', content: ', developed in ' },
+  { type: 'strong', content: 'TypeScript/TSX' },
+  { type: 'text', content: ' with ' },
+  { type: 'strong', content: 'Cursor (AI)' },
+  { type: 'text', content: '. Form and deployment with ' },
+  { type: 'strong', content: 'Vercel' },
+  { type: 'text', content: ' and ' },
+  { type: 'strong', content: 'GitHub Pages' },
+  { type: 'text', content: '.\n\nAn optional mobile version with a different navigation approach is still in development [Feb 2026].' },
+];
+
 /** Sobre mí: texto del cuadro. ES y EN para el switch de idioma. */
 export const SOBRE_MI_TEXT_ES = (
   <>
@@ -117,6 +190,21 @@ export const SOBRE_MI_TEXT_EN = (
     learnings from working with many teams, and the kind of learning that never stops and always adds up.
   </>
 );
+
+/** Segmentos Sobre mí para efecto Split Text (mismo tipo IntroSegment que Presentación). */
+export const SOBRE_MI_SEGMENTS_ES: IntroSegment[] = [
+  { type: 'text', content: 'Hola, soy Francisco Sánchez, arquitecto de profesión con una experiencia laboral de más de 14 años, diseñando y gestionando proyectos de edificación de diversa tipología.\n\n' },
+  { type: 'text', content: 'Mi camino hacia el UX/UI surge desde mis primeros años de universidad, interesándome en el mundo digital a través del diseño de sitios web, apreciándolos como experiencias habitables digitales.\n\n' },
+  { type: 'text', content: 'Posteriormente, al especializarme en BIM, pude darle continuidad a esta inquietud de conocimiento y creatividad, abordando proyectos con una mayor complejidad en la gestión digital de la información.\n\n' },
+  { type: 'text', content: 'Este cambio de rumbo aparente, es parte sustancial de mi búsqueda profesional, ahora en una fase de consolidar mi interés en la creación de productos digitales, donde quiero volcar mis años de madurez, descubrimientos de trabajar con muchos equipos y aprendizajes que nunca acaban y siempre suman.' },
+];
+
+export const SOBRE_MI_SEGMENTS_EN: IntroSegment[] = [
+  { type: 'text', content: "Hi, I'm Francisco Sánchez, an architect by profession with over 14 years of experience designing and managing building projects of various types.\n\n" },
+  { type: 'text', content: 'My path into UX/UI began in my early university years, with an interest in the digital world through web design, seeing sites as digital spaces to inhabit.\n\n' },
+  { type: 'text', content: 'Later, specialising in BIM allowed me to continue this drive for knowledge and creativity, taking on projects with greater complexity in digital information management.\n\n' },
+  { type: 'text', content: 'This apparent change of direction is a core part of my professional journey, now in a phase of consolidating my interest in digital product creation, where I want to apply my years of experience, learnings from working with many teams, and the kind of learning that never stops and always adds up.' },
+];
 
 /** Logos de redes (orden: LinkedIn, GitHub, Behance, Notion, YouTube). Usado en PresentacionSection y Cases. */
 export const SOCIAL_LOGO_SRCS = [

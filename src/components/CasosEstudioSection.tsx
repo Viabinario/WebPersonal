@@ -10,6 +10,7 @@ import {
   LINKS_OTHER_FORMATS_CASE2,
   LINK_CV_PDF,
 } from './case-shared';
+import { SOCIAL_BAR_WIDTH_PX } from './SocialBarDesktop';
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
 // Wrapper for case buttons bar: shows semi-transparent background on hover so labels are readable
@@ -285,9 +286,10 @@ function ScrollProgress({
 }: ScrollProgressProps) {
   const positionClass = embedInFlow
     ? 'relative z-20 mx-auto mt-2 mb-2'
-    : 'fixed right-[4px] bottom-[12px] z-40';
+    : 'fixed bottom-[12px] z-40';
+  const positionStyle = !embedInFlow ? { right: SOCIAL_BAR_WIDTH_PX + 8 } : undefined;
   return (
-    <div className={positionClass}>
+    <div className={positionClass} style={positionStyle}>
       <div className="relative h-[44px] w-[260px]" data-name="Navigation-Case-Scroll">
         {/* Progress percentage in center */}
         <div className="absolute left-[108px] size-[44px] top-0" data-name="Progress_Scroll">
@@ -787,6 +789,10 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
           [data-name="Conent-Horizontal-ProjectCase"] {
             width: auto !important;
             min-width: max-content !important;
+          }
+          /* Desktop: solo fondo blanco en contenedores de imagen (el borde ya lo lleva el div interno) */
+          [data-case-lightbox] [data-name="Content-Image"] {
+            background-color: #ffffff !important;
           }
           [data-case-lightbox] img {
             pointer-events: auto;

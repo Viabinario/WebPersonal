@@ -44,8 +44,11 @@ export function useLocale(): LocaleContextValue {
   return ctx;
 }
 
-/** Switch ES | EN para colocar en la esquina superior derecha del cuadro de texto. Detiene propagación para no activar clics del cuadro. */
-export function LangSwitch() {
+const LANG_BTN_CLASS =
+  "rounded px-1.5 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-1 min-w-[28px]";
+
+/** Switch ES | EN. Si vertical=true, se muestra en columna (para barra estrecha). Si no, en fila con posición absoluta top-right. */
+export function LangSwitch({ vertical = false }: { vertical?: boolean }) {
   const { locale, setLocale } = useLocale();
 
   const handleClick = (e: React.MouseEvent, next: Locale) => {
@@ -54,16 +57,12 @@ export function LangSwitch() {
     setLocale(next);
   };
 
-  return (
-    <div
-      className="absolute top-2 right-2 z-10 flex items-center gap-0 rounded-md border border-[#5a3e26]/30 bg-[#f7f2ed]/95 px-0.5 py-0.5 shadow-sm"
-      role="group"
-      aria-label="Idioma del cuadro"
-    >
+  const buttons = (
+    <>
       <button
         type="button"
         onClick={(e) => handleClick(e, 'es')}
-        className={`min-w-[28px] rounded px-1.5 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-1 ${locale === 'es' ? 'bg-[#5a3e26] text-white' : 'text-[#5a3e26] hover:bg-[#e8d8c9]'}`}
+        className={`${LANG_BTN_CLASS} ${locale === 'es' ? 'bg-[#5a3e26] text-white' : 'text-[#5a3e26] hover:bg-[#e8d8c9]'}`}
         aria-pressed={locale === 'es'}
         aria-label="Español"
       >
@@ -72,12 +71,34 @@ export function LangSwitch() {
       <button
         type="button"
         onClick={(e) => handleClick(e, 'en')}
-        className={`min-w-[28px] rounded px-1.5 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-1 ${locale === 'en' ? 'bg-[#5a3e26] text-white' : 'text-[#5a3e26] hover:bg-[#e8d8c9]'}`}
+        className={`${LANG_BTN_CLASS} ${locale === 'en' ? 'bg-[#5a3e26] text-white' : 'text-[#5a3e26] hover:bg-[#e8d8c9]'}`}
         aria-pressed={locale === 'en'}
         aria-label="English"
       >
         EN
       </button>
+    </>
+  );
+
+  if (vertical) {
+    return (
+      <div
+        className="flex flex-col items-center gap-0.5 rounded-md border border-[#5a3e26]/30 bg-[#f7f2ed]/95 px-0.5 py-0.5 shadow-sm w-full"
+        role="group"
+        aria-label="Idioma"
+      >
+        {buttons}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="absolute top-2 right-2 z-10 flex items-center gap-0 rounded-md border border-[#5a3e26]/30 bg-[#f7f2ed]/95 px-0.5 py-0.5 shadow-sm"
+      role="group"
+      aria-label="Idioma del cuadro"
+    >
+      {buttons}
     </div>
   );
 }

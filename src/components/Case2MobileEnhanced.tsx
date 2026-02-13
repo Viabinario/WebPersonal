@@ -683,7 +683,7 @@ export default function Case2MobileEnhanced() {
               className="mt-10 text-center"
             >
               <p className="text-white text-base mb-4 leading-loose">
-                Proyecto Grupal · Design Sprint · Enero 2026
+                Proyecto Grupal · Design Sprint · nov/2025
               </p>
               <p className="text-white text-sm mb-4">
                 Equipo de 6 personas · Diseño colaborativo

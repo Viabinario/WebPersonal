@@ -658,7 +658,7 @@ export default function Case1MobileEnhanced() {
               className="mt-10 text-center"
             >
               <p className="text-[#2d0097] text-base mb-4 leading-loose">
-                Proyecto Final de Bootcamp · Design Thinking · 2024
+                Proyecto Final de Bootcamp · Design Thinking · dic/2025
               </p>
               <div className="flex justify-center gap-3 flex-wrap">
                 <Badge color="purple">Product Design</Badge>

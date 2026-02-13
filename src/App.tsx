@@ -4,6 +4,8 @@ import { PresentacionSection } from './components/PresentacionSection';
 import { SobreMiSection } from './components/SobreMiSection';
 import { ContactoSection } from './components/ContactoSection';
 import { CasosEstudioSection, CaseStudyNavMobile, type CaseView } from './components/CasosEstudioSection';
+import { SocialBarDesktop, SOCIAL_BAR_WIDTH_PX } from './components/SocialBarDesktop';
+import { LangSwitch } from './context/LocaleContext';
 import imgProfilePhoto from "./assets/037303b6b1de60b5b46c711eb2f0e126520f42b0.png";
 
 type Section = 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
@@ -118,9 +120,9 @@ export default function App() {
           transform: 'translateX(-50%)',
         };
       } else {
-        // En desktop, posición absoluta a la derecha
+        // En desktop, posición absoluta a la derecha (610 = 650 - 40px a la izquierda)
         return {
-          left: `${CANVAS_WIDTH - SECTION_WIDTH + 650}px`,
+          left: `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`,
           top: '38px',
           transform: 'translateX(0)',
         };
@@ -193,9 +195,22 @@ export default function App() {
       {/* Fixed Zoom Button */}
       <ZoomGridButton isZoomed={isZoomed} onToggleZoom={handleToggleZoom} />
 
-      {/* Casos de estudio (not zoomed): viewport from left 0 to right 38px — no empty zone left or right */}
+      {/* Switch idioma: en móvil/tablet fijo arriba-derecha (la barra está oculta); en desktop va dentro de la barra */}
+      <div className="fixed top-2 right-2 z-30 lg:hidden">
+        <LangSwitch />
+      </div>
+
+      {/* Barra social vertical fija al margen derecho (desktop): idioma arriba + redes */}
+      <SocialBarDesktop />
+
+      {/* Contenido: margen derecho para la barra social (desktop) y/o zoom en Casos; Casos no debe tapar la barra */}
       <div
-        className={`absolute top-0 left-0 bottom-0 overflow-hidden ${showCasosEstudioViewportExtension ? 'right-[38px]' : 'right-0'}`}
+        className="absolute top-0 left-0 bottom-0 overflow-hidden"
+        style={{
+          right: windowWidth < 1024
+            ? (showCasosEstudioViewportExtension ? 38 : 0)
+            : SOCIAL_BAR_WIDTH_PX,
+        }}
       >
         {/* Casos de Estudio: versión flotante fuera de la grilla cuando está activo */}
         {showCasosEstudioViewportExtension && (
@@ -205,7 +220,7 @@ export default function App() {
             </div>
           </div>
         )}
-        {/* Canvas Container */}
+        {/* Canvas Container: misma capa para zoom in/out en Presentación para que la transición sea progresiva */}
         <div
           className={`absolute top-0 left-0 transition-transform duration-700 ease-in-out ${showCasosEstudioViewportExtension ? 'invisible' : ''}`}
           style={getCanvasTransform()}

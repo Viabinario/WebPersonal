@@ -302,7 +302,7 @@ function ContentResume388Px() {
 
 function ContentImage() {
   return (
-    <div className="h-[286px] pointer-events-none relative rounded-[8px] shrink-0 w-[576px]" data-name="Content-Image">
+    <div className="bg-white h-[286px] pointer-events-none relative rounded-[8px] shrink-0 w-[576px] overflow-clip" data-name="Content-Image">
       <img alt="Portada del caso Del Revés" className="absolute inset-0 max-w-none object-cover rounded-[8px] size-full" src={imgContentImage} />
       <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[8px]" />
     </div>
@@ -349,7 +349,7 @@ function ContentText7() {
 function ContentProject592Px() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start justify-end px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage />
       <ContentText7 />
     </div>
@@ -415,7 +415,7 @@ function ContentResume388Px1() {
         <ContentImage1 />
         <ContentText9 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -493,7 +493,7 @@ function ContentText11() {
 
 function ContentImage2() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+    <div className="bg-white flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
       <div className="relative min-h-0 w-full flex-1" data-name="Sprint Question 1">
         <img alt="Preguntas del Sprint" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgSprintQuestion1} />
       </div>
@@ -509,7 +509,7 @@ function ContentResume388Px2() {
         <ContentText11 />
         <ContentImage2 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -557,7 +557,7 @@ function ContentText13() {
 
 function ContentImage3() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+    <div className="bg-white flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
       <div className="relative min-h-0 w-full flex-1" data-name="Brainstorming 1">
         <img alt="Brainstorming" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgBrainstorming1} />
       </div>
@@ -573,7 +573,7 @@ function ContentResume388Px3() {
         <ContentText13 />
         <ContentImage3 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -621,7 +621,7 @@ function ContentText15() {
 
 function ContentImage4() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+    <div className="bg-white flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
       <div className="relative min-h-0 w-full flex-1" data-name="hmw 1">
         <img alt="How Might We" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgHmw1} />
       </div>
@@ -637,7 +637,7 @@ function ContentResume388Px4() {
         <ContentText15 />
         <ContentImage4 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -685,7 +685,7 @@ function ContentText17() {
 
 function ContentImage5() {
   return (
-    <div className="flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
+    <div className="bg-white flex min-h-0 flex-1 flex-col items-start justify-start overflow-hidden p-[10px] relative rounded-[8px] w-full max-w-[372px]" data-name="Content-Image">
       <div className="relative min-h-0 w-full flex-1" data-name="user_persona 1">
         <img alt="Persona de usuario" className="absolute inset-0 max-w-full max-h-full w-full h-full object-contain object-top pointer-events-none" src={imgUserPersona1} />
       </div>
@@ -701,14 +701,14 @@ function ContentResume388Px5() {
         <ContentText17 />
         <ContentImage5 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage6() {
   return (
-    <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] w-full" data-name="Content-Image">
+    <div className="bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[576px] relative shrink-0 w-[524px]" data-name="Acciones 1">
@@ -724,7 +724,7 @@ function ContentImage6() {
 function ContentProject592Px1() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start justify-end px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage6 />
     </div>
   );
@@ -772,7 +772,7 @@ function IconDaysText4() {
 
 function ContentImage7() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[350px] relative shrink-0 w-[211px]" data-name="Logo 1">
         <img alt="Logo" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLogo1} />
       </div>
@@ -825,14 +825,14 @@ function ContentResume388Px6() {
         <ContentImage7 />
         <ContentText19 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage8() {
   return (
-    <div className="h-[523px] relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white h-[523px] relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative size-full">
           <div className="h-[500px] relative shrink-0 w-[549px]" data-name="moodboard 1">
@@ -848,7 +848,7 @@ function ContentImage8() {
 function ContentProject592Px2() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage8 />
     </div>
   );
@@ -856,7 +856,7 @@ function ContentProject592Px2() {
 
 function ContentImage9() {
   return (
-    <div className="relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[500px] relative shrink-0 w-[486px]" data-name="Lightning demos 1">
@@ -872,7 +872,7 @@ function ContentImage9() {
 function ContentProject592Px3() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage9 />
     </div>
   );
@@ -880,7 +880,7 @@ function ContentProject592Px3() {
 
 function ContentImage10() {
   return (
-    <div className="relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[354px] relative shrink-0 w-[500px]" data-name="crazy 8 1">
@@ -922,7 +922,7 @@ function ContentText21() {
 function ContentProject592Px4() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[30px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage10 />
       <ContentText21 />
     </div>
@@ -967,7 +967,7 @@ function IconDaysText5() {
 
 function ContentImage11() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="relative shrink-0 size-[350px]" data-name="decision_2 1">
         <img alt="Decisión" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgDecision21} />
       </div>
@@ -1021,14 +1021,14 @@ function ContentResume388Px7() {
         <ContentImage11 />
         <ContentText23 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage12() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[606px] relative shrink-0 w-[215px]" data-name="C8 1">
         <img alt="Sketch C8" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgC81} />
       </div>
@@ -1042,14 +1042,14 @@ function ContentResume388Px8() {
       <div className="content-stretch flex flex-col items-start overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
         <ContentImage12 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage13() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[479px] relative shrink-0 w-[350px]" data-name="IDEAS 2">
         <img alt="Ideas" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgIdeas2} />
       </div>
@@ -1063,14 +1063,14 @@ function ContentResume388Px9() {
       <div className="content-stretch flex flex-col items-center justify-center overflow-clip px-[8px] py-[22px] relative rounded-[inherit] size-full">
         <ContentImage13 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage14() {
   return (
-    <div className="relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[420px] relative shrink-0 w-[503px]" data-name="STOYRYBOARD 1">
@@ -1124,7 +1124,7 @@ function ContentText25() {
 function ContentProject592Px5() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage14 />
       <ContentText25 />
     </div>
@@ -1169,7 +1169,7 @@ function IconDaysText6() {
 
 function ContentImage15() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="relative shrink-0 size-[350px]" data-name="prototipado 1">
         <img alt="Prototipado" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgPrototipado1} />
       </div>
@@ -1222,14 +1222,14 @@ function ContentResume388Px10() {
         <ContentImage15 />
         <ContentText27 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
 
 function ContentImage16() {
   return (
-    <div className="relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center p-[10px] relative w-full">
           <div className="h-[600px] relative shrink-0 w-[466px]" data-name="colorestipo 1">
@@ -1245,7 +1245,7 @@ function ContentImage16() {
 function ContentProject592Px6() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage16 />
     </div>
   );
@@ -1253,7 +1253,7 @@ function ContentProject592Px6() {
 
 function ContentImage17() {
   return (
-    <div className="h-[516px] relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white h-[516px] relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[412px] relative shrink-0 w-[550px]" data-name="components 1">
@@ -1306,7 +1306,7 @@ function ContentText29() {
 function ContentProject592Px7() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col gap-[8px] h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage17 />
       <ContentText29 />
     </div>
@@ -1315,7 +1315,7 @@ function ContentProject592Px7() {
 
 function ContentImage18() {
   return (
-    <div className="h-[516px] relative rounded-[8px] shrink-0 w-full" data-name="Content-Image">
+    <div className="bg-white h-[516px] relative rounded-[8px] shrink-0 w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[456px] relative shrink-0 w-[450px]" data-name="ARQUITECTURA 2">
@@ -1331,7 +1331,7 @@ function ContentImage18() {
 function ContentProject592Px8() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage18 />
     </div>
   );
@@ -1339,7 +1339,7 @@ function ContentProject592Px8() {
 
 function ContentImage19() {
   return (
-    <div className="flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] w-full" data-name="Content-Image">
+    <div className="bg-white flex-[1_0_0] min-h-px min-w-px relative rounded-[8px] w-full overflow-clip" data-name="Content-Image">
       <div className="flex flex-col items-center justify-center overflow-clip rounded-[inherit] size-full">
         <div className="content-stretch flex flex-col items-center justify-center p-[10px] relative size-full">
           <div className="h-[610px] relative shrink-0 w-[476px]" data-name="interfaz 1">
@@ -1355,7 +1355,7 @@ function ContentImage19() {
 function ContentProject592Px9() {
   return (
     <div className="bg-[#f7f2ed] content-stretch flex flex-col h-[670px] items-start px-[8px] py-[22px] relative rounded-[22px] shrink-0 w-[592px]" data-name="Content_Project_592px">
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
       <ContentImage19 />
     </div>
   );
@@ -1399,7 +1399,7 @@ function IconDaysText7() {
 
 function ContentImage20() {
   return (
-    <div className="content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
+    <div className="bg-white content-stretch flex flex-col items-center justify-center overflow-clip p-[10px] relative rounded-[8px] shrink-0 w-[372px]" data-name="Content-Image">
       <div className="h-[378px] relative shrink-0 w-[350px]" data-name="mocktest 1">
         <img alt="Mock test" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgMocktest1} />
       </div>
@@ -1446,7 +1446,7 @@ function ContentResume388Px11() {
         <ContentImage20 />
         <ContentText31 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1459,7 +1459,7 @@ function ContentProject1000Px() {
           <img alt="Testing y feedback" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgTestingFeedback2} />
         </div>
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1524,7 +1524,7 @@ function ContentText33() {
 
 function ContentImage21() {
   return (
-    <div className="relative rounded-[8px] shrink-0 w-[370px]" data-name="Content-Image">
+    <div className="bg-white relative rounded-[8px] shrink-0 w-[370px] overflow-clip" data-name="Content-Image">
       <div className="content-stretch flex flex-col items-center overflow-clip py-[71px] relative rounded-[inherit] w-full">
         <div className="h-[139px] relative shrink-0 w-[350px]" data-name="futuribles 1">
           <img alt="Futuribles" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgFuturibles1} />
@@ -1542,7 +1542,7 @@ function ContentResume388Px12() {
         <ContentText33 />
         <ContentImage21 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
@@ -1665,7 +1665,7 @@ function ContentProject1000Px1() {
       <div className="content-stretch flex flex-col items-center overflow-clip px-[199px] py-[22px] relative rounded-[inherit] size-full">
         <Content1 />
       </div>
-      <div aria-hidden="true" className="absolute border border-[#b2b0ad] border-dashed inset-px pointer-events-none rounded-[22px]" />
+      <div aria-hidden="true" className="absolute border border-[#5a3e26] border-dashed inset-px pointer-events-none rounded-[22px]" />
     </div>
   );
 }
