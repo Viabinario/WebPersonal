@@ -129,7 +129,6 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
       ease: 'power2.out',
       overwrite: true,
     });
-    // Fallback: si GSAP no termina (p. ej. en producción), asegurar que el texto sea visible
     const fallback = setTimeout(() => {
       gsap.set(words, { opacity: 1, y: 0, clearProps: 'all' });
     }, 1500);
@@ -141,7 +140,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
   };
 
   return (
-    <div className="relative w-full h-full min-h-full bg-[#f7f2ed] flex flex-col items-center justify-center md:justify-start lg:justify-center p-4 md:px-8 md:py-6 md:pb-16 lg:p-0 overflow-y-auto">
+    <div className="relative w-full h-full min-h-full bg-[#f7f2ed] flex flex-col items-center justify-center md:justify-start lg:justify-center p-4 md:px-8 md:py-6 md:pb-16 lg:p-0">
       <div
         className={`${TEXT_BOX_BASE_CLASS} ${isClickable ? ZOOMED_CLICKABLE_CLASS : ""}`}
         onClick={handleClick}
@@ -150,14 +149,12 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         role={isClickable ? "button" : undefined}
         tabIndex={isClickable ? 0 : undefined}
       >
-        <div className="relative w-full flex flex-col">
-          <div
-            ref={textRef}
-            className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line mt-4 text-base md:text-lg lg:text-xl max-w-none"
-            style={{ fontVariationSettings: '"wdth" 100' }}
-          >
-            <SegmentWords segments={introSegments} />
-          </div>
+        <div
+          ref={textRef}
+          className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line mt-4 text-base md:text-lg lg:text-xl max-w-none"
+          style={{ fontVariationSettings: '"wdth" 100' }}
+        >
+          <SegmentWords segments={introSegments} />
         </div>
       </div>
       {/* Redes: solo móvil/tablet (en desktop la barra SocialBarDesktop está fija al margen derecho en App) */}
