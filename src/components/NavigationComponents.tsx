@@ -233,15 +233,19 @@ export function ZoomGridButton({ isZoomed, onToggleZoom, embedInFlow = false }: 
           }}
         />
         {/* Four quadrants representing the sections */}
-        <div className="absolute left-px top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
-          <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[12px] md:rounded-tl-[16px] lg:rounded-tl-[20px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px]" />
+        {/* Top Left Quadrant */}
+        <div className="absolute left-px top-px w-[26px] h-[26px] md:w-[30px] md:h-[30px] lg:w-[38px] lg:h-[38px] z-10">
+          <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[5px] md:rounded-bl-[7px] lg:rounded-bl-[10px] rounded-br-[5px] md:rounded-br-[7px] lg:rounded-br-[10px] rounded-tl-[10px] md:rounded-tl-[14px] lg:rounded-tl-[20px] rounded-tr-[5px] md:rounded-tr-[7px] lg:rounded-tr-[10px]" />
         </div>
-        <div className="absolute left-[-1px] top-[30px] md:top-[34px] lg:top-[42px] w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
-          <div className="absolute border border-[#666463] border-dashed rounded-bl-[12px] md:rounded-bl-[16px] lg:rounded-bl-[20px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px]" style={{ inset: 'calc(-2.63%) calc(-5.26%) calc(2.63%) calc(5.26%)' }} />
+        {/* Bottom Left Quadrant */}
+        <div className="absolute left-[-1px] top-[27px] md:top-[31px] lg:top-[42px] w-[26px] h-[26px] md:w-[30px] md:h-[30px] lg:w-[38px] lg:h-[38px] z-10">
+          <div className="absolute border border-[#666463] border-dashed rounded-bl-[10px] md:rounded-bl-[14px] lg:rounded-bl-[20px] rounded-br-[5px] md:rounded-br-[7px] lg:rounded-br-[10px] rounded-tl-[5px] md:rounded-tl-[7px] lg:rounded-tl-[10px] rounded-tr-[5px] md:rounded-tr-[7px] lg:rounded-tr-[10px]" style={{ inset: 'calc(-2.63%) calc(-5.26%) calc(2.63%) calc(5.26%)' }} />
         </div>
-        <div className="absolute border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[12px] md:rounded-br-[16px] lg:rounded-br-[20px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[6px] md:rounded-tr-[8px] lg:rounded-tr-[10px] z-10" style={{ inset: 'calc(51.22% - 1px) calc(2.44% - 1px) calc(2.44% - 1px) calc(51.22% - 1px)' }} />
-        <div className="absolute left-[29px] md:left-[33px] lg:left-[41px] top-px w-7 h-7 md:w-8 md:h-8 lg:w-[38px] lg:h-[38px] z-10">
-          <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[6px] md:rounded-bl-[8px] lg:rounded-bl-[10px] rounded-br-[6px] md:rounded-br-[8px] lg:rounded-br-[10px] rounded-tl-[6px] md:rounded-tl-[8px] lg:rounded-tl-[10px] rounded-tr-[12px] md:rounded-tr-[16px] lg:rounded-tr-[20px]" />
+        {/* Bottom Right Quadrant */}
+        <div className="absolute border border-[#666463] border-dashed rounded-bl-[5px] md:rounded-bl-[7px] lg:rounded-bl-[10px] rounded-br-[10px] md:rounded-br-[14px] lg:rounded-br-[20px] rounded-tl-[5px] md:rounded-tl-[7px] lg:rounded-tl-[10px] rounded-tr-[5px] md:rounded-tr-[7px] lg:rounded-tr-[10px] z-10" style={{ inset: 'calc(51.22% - 1px) calc(2.44% - 1px) calc(2.44% - 1px) calc(51.22% - 1px)' }} />
+        {/* Top Right Quadrant */}
+        <div className="absolute left-[27px] md:left-[31px] lg:left-[41px] top-px w-[26px] h-[26px] md:w-[30px] md:h-[30px] lg:w-[38px] lg:h-[38px] z-10">
+          <div className="absolute inset-0 border border-[#666463] border-dashed rounded-bl-[5px] md:rounded-bl-[7px] lg:rounded-bl-[10px] rounded-br-[5px] md:rounded-br-[7px] lg:rounded-br-[10px] rounded-tl-[5px] md:rounded-tl-[7px] lg:rounded-tl-[10px] rounded-tr-[10px] md:rounded-tr-[14px] lg:rounded-tr-[20px]" />
         </div>
       </button>
     </div>

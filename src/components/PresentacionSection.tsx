@@ -17,7 +17,7 @@ interface PresentacionSectionProps {
 }
 
 const TEXT_BOX_BASE_CLASS =
-  "w-full max-w-[460px] lg:absolute lg:top-[240px] lg:left-1/2 lg:-translate-x-1/2";
+  "w-full max-w-[460px] md:pt-[170px] lg:pt-0 lg:absolute lg:top-[240px] lg:left-1/2 lg:-translate-x-1/2";
 const ZOOMED_CLICKABLE_CLASS =
   "cursor-pointer hover:scale-105 transition-transform duration-300";
 const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";
@@ -39,7 +39,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
   };
 
   return (
-    <div className="relative w-full h-full bg-[#f7f2ed] flex flex-col items-center justify-center p-4 md:p-8 lg:p-0">
+    <div className="relative w-full h-full bg-[#f7f2ed] flex flex-col items-center justify-center md:justify-start lg:justify-center p-4 md:px-8 md:py-6 md:pb-16 lg:p-0">
       <div
         className={`${TEXT_BOX_BASE_CLASS} ${isClickable ? ZOOMED_CLICKABLE_CLASS : ""}`}
         onClick={handleClick}
@@ -57,7 +57,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         </div>
       </div>
       {/* Redes: móvil = fila flexible; desktop = 3x3 con tamaño fijo */}
-      <div className="mt-4 w-full max-w-[460px] lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[200px] lg:max-w-none">
+      <div className="mt-4 w-full max-w-[460px] md:mt-6 lg:mt-0 lg:absolute lg:bottom-[228px] lg:right-[38px] lg:w-[200px] lg:max-w-none">
         <div 
           className="rounded-[22px] border-2 border-[#5a3e26] border-dashed p-3 md:p-4 lg:p-[20px] relative shadow-[0px_4px_12px_rgba(0,0,0,0.15)]"
           style={{

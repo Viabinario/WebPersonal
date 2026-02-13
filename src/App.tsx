@@ -30,13 +30,17 @@ export default function App() {
   const [activeSection, setActiveSection] = useState<Section>('presentacion');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [caseView, setCaseView] = useState<CaseView>('menu');
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      setWindowWidth(window.innerWidth);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const handleNavigate = (section: Section) => {
@@ -95,22 +99,36 @@ export default function App() {
       };
     }
 
+    // Adjust for screen size to prevent overlap
+    const isSmallScreen = windowWidth < 1024; // md/tablet range
+    
     if (isZoomed || activeSection === 'presentacion') {
       return {
         left: `${SECTION_WIDTH / 2}px`,
-        top: '30px',
+        top: isSmallScreen ? '20px' : '30px',
         transform: 'translateX(-50%)',
       };
     } else if (activeSection === 'sobre-mi') {
-      return {
-        left: `${CANVAS_WIDTH - SECTION_WIDTH + 650}px`,
-        top: '38px',
-        transform: 'translateX(0)',
-      };
+      if (isSmallScreen) {
+        // En tablets, centrar la foto en la sección de Sobre mí
+        // CANVAS_WIDTH = 2560, la sección Sobre mí está en la derecha (1280 + ...)
+        return {
+          left: `${CANVAS_WIDTH - SECTION_WIDTH / 2}px`, // Centro de la sección derecha
+          top: '28px',
+          transform: 'translateX(-50%)',
+        };
+      } else {
+        // En desktop, posición absoluta a la derecha
+        return {
+          left: `${CANVAS_WIDTH - SECTION_WIDTH + 650}px`,
+          top: '38px',
+          transform: 'translateX(0)',
+        };
+      }
     } else {
       return {
         left: `${SECTION_WIDTH / 2}px`,
-        top: '30px',
+        top: isSmallScreen ? '20px' : '30px',
         transform: 'translateX(-50%)',
         opacity: '0',
         pointerEvents: 'none' as const,
@@ -218,7 +236,7 @@ export default function App() {
 
           {/* Profile Photo - Positioned absolutely on canvas, moves between sections */}
           <div 
-            className="absolute w-[184px] h-[184px] rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group hover:scale-105 cursor-pointer"
+            className="absolute w-[120px] h-[120px] md:w-[150px] md:h-[150px] lg:w-[184px] lg:h-[184px] rounded-[14px] md:rounded-[18px] lg:rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group hover:scale-105 cursor-pointer"
             style={{
               ...getProfilePhotoPosition(),
               transition: 'all 0.7s ease-in-out, transform 0.3s ease-out, box-shadow 0.3s ease-out',
@@ -242,7 +260,7 @@ export default function App() {
             
             {/* Sombra que aumenta en hover */}
             <div 
-              className="absolute -inset-1 rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              className="absolute -inset-1 rounded-[16px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
               style={{
                 boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 4px 12px rgba(90, 62, 38, 0.15), 0 8px 24px rgba(90, 62, 38, 0.1)',
               }}
