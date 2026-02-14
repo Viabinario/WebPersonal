@@ -120,11 +120,18 @@ function MobileNavMenu({
               type="button"
               onClick={() => { onNavigate(section); setOpen(false); }}
               className={`w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium transition-colors flex items-center gap-3 ${
-                activeSection === section ? 'bg-[#e8d8c9] text-[#5a3e26]' : 'text-[#5a3e26] hover:bg-[#e8d8c9]/60'
+                activeSection === section ? 'bg-[#FAFAFA] text-[#5a3e26]' : 'text-[#5a3e26] hover:bg-[#FAFAFA]'
               }`}
               style={activeSection === section ? { borderLeft: `4px solid ${SECTION_COLORS[section]}` } : undefined}
             >
-              <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: SECTION_COLORS[section] }} aria-hidden />
+              <span
+                className="w-[18px] h-[18px] shrink-0 border-[3px]"
+                style={{
+                  borderColor: SECTION_COLORS[section],
+                  backgroundColor: activeSection === section ? SECTION_COLORS[section] : 'transparent',
+                }}
+                aria-hidden
+              />
               {SECTION_LABELS[section]}
             </button>
           ))}

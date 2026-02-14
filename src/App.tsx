@@ -150,19 +150,41 @@ export default function App() {
     return (
       <div className="w-full min-h-screen bg-[#f7f2ed]">
         <NavigationGrid activeSection={activeSection} onNavigate={handleNavigate} embedInFlow leftContent={headerLeftContent} />
-        <main className="w-full">
+        <main className="w-full overflow-hidden">
           {activeSection === 'presentacion' && (
-            <div className="w-full min-h-screen">
-              <PresentacionSection isZoomed={false} onNavigate={handleNavigate} isMobile />
+            <div key="presentacion" className="w-full min-h-screen flex flex-col bg-[#f7f2ed] animate-mobile-slide-left">
+              <div className="flex-shrink-0 flex justify-center pt-4 pb-2">
+                <div
+                  className="w-[100px] h-[100px] rounded-[14px] border-2 border-[#5a3e26] border-dashed overflow-hidden"
+                  role="img"
+                  aria-label="Foto de perfil"
+                >
+                  <img src={imgProfilePhoto} alt="" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <div className="flex-1 min-h-0">
+                <PresentacionSection isZoomed={false} onNavigate={handleNavigate} isMobile />
+              </div>
             </div>
           )}
           {activeSection === 'sobre-mi' && (
-            <div className="w-full min-h-screen">
-              <SobreMiSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
+            <div key="sobre-mi" className="w-full min-h-screen flex flex-col bg-[#f7f2ed] animate-mobile-slide-right">
+              <div className="flex-shrink-0 flex justify-center pt-4 pb-2">
+                <div
+                  className="w-[100px] h-[100px] rounded-[14px] border-2 border-[#5a3e26] border-dashed overflow-hidden"
+                  role="img"
+                  aria-label="Foto de perfil"
+                >
+                  <img src={imgProfilePhoto} alt="" className="w-full h-full object-cover" />
+                </div>
+              </div>
+              <div className="flex-1 min-h-0">
+                <SobreMiSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
+              </div>
             </div>
           )}
           {activeSection === 'casos-estudio' && (
-            <div className="w-full min-h-screen flex flex-col">
+            <div key="casos-estudio" className="w-full min-h-screen flex flex-col animate-mobile-slide-up">
               <CasosEstudioSection
                 isZoomed={false}
                 onNavigate={handleNavigate}
@@ -174,7 +196,7 @@ export default function App() {
             </div>
           )}
           {activeSection === 'contacto' && (
-            <div className="w-full min-h-screen">
+            <div key="contacto" className="w-full min-h-screen animate-mobile-slide-up">
               <ContactoSection isZoomed={false} onNavigate={handleNavigate} />
             </div>
           )}

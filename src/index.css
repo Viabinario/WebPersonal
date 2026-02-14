@@ -60,3 +60,44 @@
     margin-inline-start: 21px;
   }
 }
+
+/* Navegación móvil: "move in" por sección (coherencia con desktop) */
+@keyframes mobile-slide-in-left {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes mobile-slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes mobile-slide-in-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-mobile-slide-left {
+  animation: mobile-slide-in-left 0.45s ease-out forwards;
+}
+.animate-mobile-slide-right {
+  animation: mobile-slide-in-right 0.45s ease-out forwards;
+}
+.animate-mobile-slide-up {
+  animation: mobile-slide-in-up 0.45s ease-out forwards;
+}
