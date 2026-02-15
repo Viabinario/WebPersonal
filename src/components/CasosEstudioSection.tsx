@@ -11,6 +11,7 @@ import {
   LINK_CV_PDF,
 } from './case-shared';
 import { SOCIAL_BAR_WIDTH_PX } from './SocialBarDesktop';
+import { StarlingMurmuration } from './StarlingMurmuration';
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
 // Wrapper for case buttons bar: shows semi-transparent background on hover so labels are readable
@@ -98,162 +99,6 @@ function CaseButton({ onClick, isActive, label, overContent = false }: CaseButto
         </div>
       )}
     </button>
-  );
-}
-
-// Placeholder animado (latido + ondas radiales) cuando hay zoom: centrado en la sección, clic = zoom in
-const ZOOMED_PLACEHOLDER_STYLE = `
-  @keyframes casos-estudio-heartbeat {
-    0%, 100% { transform: scale(1); }
-    18% { transform: scale(1.14); }
-    36% { transform: scale(0.96); }
-    54% { transform: scale(1.08); }
-    72% { transform: scale(1); }
-  }
-  .casos-estudio-heartbeat {
-    animation: casos-estudio-heartbeat 1.4s ease-in-out infinite;
-  }
-  @keyframes casos-estudio-ripple {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(9.333); opacity: 0; }
-  }
-  .casos-estudio-ripple {
-    animation: casos-estudio-ripple 1.4s ease-out infinite;
-    border: 2px solid rgba(90, 62, 38, 0.5);
-  }
-  .placeholder-exit .placeholder-mover {
-    transform: translate(-386px, 372px);
-    opacity: 0;
-    transition: transform 0.4s ease-in, opacity 0.4s ease-in;
-  }
-`;
-
-// Posición del primer botón del menú de casos en coordenadas de la sección (1280x832): centro ≈ (254, 788)
-const PLACEHOLDER_EXIT_OFFSET = { x: -386, y: 372 };
-
-interface ZoomedPlaceholderProps {
-  onClick: () => void;
-  isExiting?: boolean;
-  onExitComplete?: () => void;
-  enteringFromButtons?: boolean;
-  onEnterComplete?: () => void;
-}
-
-function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enteringFromButtons = false, onEnterComplete }: ZoomedPlaceholderProps) {
-  const [entrancePhase, setEntrancePhase] = useState<'at-buttons' | 'to-center'>('at-buttons');
-  const moverRef = useRef<HTMLDivElement>(null);
-  const exitTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const exitCompletedRef = useRef(false);
-  
-  // Fallback: si transitionEnd no se dispara, forzar onExitComplete después de 500ms
-  useEffect(() => {
-    if (isExiting && onExitComplete) {
-      exitCompletedRef.current = false;
-      exitTimeoutRef.current = setTimeout(() => {
-        if (!exitCompletedRef.current) {
-          exitCompletedRef.current = true;
-          onExitComplete();
-        }
-      }, 500);
-    }
-    return () => {
-      if (exitTimeoutRef.current) {
-        clearTimeout(exitTimeoutRef.current);
-        exitTimeoutRef.current = null;
-      }
-    };
-  }, [isExiting, onExitComplete]);
-
-  useEffect(() => {
-    if (enteringFromButtons) {
-      setEntrancePhase('at-buttons');
-      const id = requestAnimationFrame(() => {
-        requestAnimationFrame(() => setEntrancePhase('to-center'));
-      });
-      return () => cancelAnimationFrame(id);
-    }
-  }, [enteringFromButtons]);
-
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    // Solo procesar transiciones del mover (no del botón interno)
-    if (e.target !== moverRef.current) return;
-    // Solo transiciones de transform (opacity dispara múltiples veces)
-    if (e.propertyName !== 'transform') return;
-    
-    if (isExiting && !exitCompletedRef.current) {
-      exitCompletedRef.current = true;
-      // Cancelar timeout si existe
-      if (exitTimeoutRef.current) {
-        clearTimeout(exitTimeoutRef.current);
-        exitTimeoutRef.current = null;
-      }
-      onExitComplete?.();
-    }
-    if (enteringFromButtons && entrancePhase === 'to-center') onEnterComplete?.();
-  };
-
-  const wrapperClass = [
-    'absolute inset-0 flex items-center justify-center pointer-events-none z-10',
-    isExiting && 'placeholder-exit',
-  ].filter(Boolean).join(' ');
-
-  const moverStyle: React.CSSProperties =
-    enteringFromButtons && entrancePhase === 'at-buttons'
-      ? {
-          transform: `translate(${PLACEHOLDER_EXIT_OFFSET.x}px, ${PLACEHOLDER_EXIT_OFFSET.y}px)`,
-          opacity: 0,
-          transition: 'transform 0.45s ease-out, opacity 0.45s ease-out',
-        }
-      : enteringFromButtons && entrancePhase === 'to-center'
-        ? {
-            transform: 'translate(0, 0)',
-            opacity: 1,
-            transition: 'transform 0.45s ease-out, opacity 0.45s ease-out',
-          }
-        : isExiting
-          ? {
-              transform: `translate(${PLACEHOLDER_EXIT_OFFSET.x}px, ${PLACEHOLDER_EXIT_OFFSET.y}px)`,
-              opacity: 0,
-              transition: 'transform 0.4s ease-in, opacity 0.4s ease-in',
-            }
-          : {};
-
-  return (
-    <>
-      <style>{ZOOMED_PLACEHOLDER_STYLE}</style>
-      <div className={wrapperClass}>
-        <div
-          ref={moverRef}
-          className="placeholder-mover relative w-[208px] h-[208px] flex items-center justify-center"
-          style={moverStyle}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {/* Ondas cuadradas que se disuelven a 200px del perímetro */}
-          <div
-            className="casos-estudio-ripple absolute w-[48px] h-[48px] rounded-[12px] pointer-events-none"
-            style={{ animationDelay: '0s' }}
-          />
-          <div
-            className="casos-estudio-ripple absolute w-[48px] h-[48px] rounded-[12px] pointer-events-none"
-            style={{ animationDelay: '0.35s' }}
-          />
-          <div
-            className="casos-estudio-ripple absolute w-[48px] h-[48px] rounded-[12px] pointer-events-none"
-            style={{ animationDelay: '0.7s' }}
-          />
-          <div
-            className="casos-estudio-heartbeat w-[48px] h-[48px] rounded-[12px] bg-[#5a3e26] pointer-events-auto cursor-pointer hover:opacity-90 transition-opacity relative z-10"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (!isExiting) onClick();
-            }}
-            aria-label="Hacer clic para navegar a la sección Casos de Estudio"
-            title="Hacer clic para navegar a la sección Casos de Estudio"
-            role="button"
-          />
-        </div>
-      </div>
-    </>
   );
 }
 
@@ -513,11 +358,6 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const caseContainerRef = useRef<HTMLDivElement>(null);
   const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const prevZoomedRef = useRef(_isZoomed);
-  const exitFromClickRef = useRef(false);
-
-  const [placeholderExiting, setPlaceholderExiting] = useState(false);
-  const [placeholderEnteringFromButtons, setPlaceholderEnteringFromButtons] = useState(false);
   const [cvMenuOpen, setCvMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -527,41 +367,9 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     return () => document.removeEventListener('click', close);
   }, [cvMenuOpen]);
 
-  // Zoom out: animación entra desde los botones al centro. Zoom in desde botón zoom: animación sale hacia los botones.
-  useEffect(() => {
-    if (_isZoomed && !prevZoomedRef.current) {
-      // Entrando a zoom out: animar desde botones al centro
-      setPlaceholderEnteringFromButtons(true);
-    }
-    if (!_isZoomed && prevZoomedRef.current) {
-      // Saliendo de zoom out: animar hacia botones (solo desde botón zoom, no desde clic en placeholder)
-      setPlaceholderExiting(true);
-    }
-    prevZoomedRef.current = _isZoomed;
-  }, [_isZoomed]);
-
-  // Clic en la animación: desaparecer y zoom in
-  const handlePlaceholderClick = () => {
-    // Si no hay función de navegación, no hacer nada
-    if (!_onNavigate) return;
-    
-    // Navegación directa sin animación de traslado
-    _onNavigate('casos-estudio');
-  };
-
-  const handlePlaceholderExitComplete = () => {
-    // Ya no se usa para navegación, solo para limpiar estado
-    exitFromClickRef.current = false;
-    setPlaceholderExiting(false);
-  };
-
-  const handlePlaceholderEnterComplete = () => {
-    setPlaceholderEnteringFromButtons(false);
-  };
-
-  // Clic en la sección: zoom in. En modo zoom out toda la sección es siempre hit area (menú o case activo), sin depender de otras interacciones.
+  // Clic en la sección: zoom in. En modo zoom out toda la sección es hit area (menú o case activo).
   const handleSectionClick = () => {
-    if (!_isZoomed || !_onNavigate || placeholderExiting) return;
+    if (!_isZoomed || !_onNavigate) return;
     _onNavigate('casos-estudio');
   };
 
@@ -718,21 +526,13 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
     );
     return (
       <div
-        className={`relative w-full h-full bg-[#f7f2ed] overflow-hidden flex flex-col`}
+        className={`relative w-full h-full min-h-[100dvh] bg-[#f7f2ed] overflow-hidden flex flex-col`}
       >
+        {/* Fondo: murmuración (boids) — concentra y disgrega; en desktop y mobile */}
+        <StarlingMurmuration className="absolute inset-0 overflow-hidden" />
         {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
         {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
-        {/* Botón animado cuando no hay case activo; maneja el zoom in directamente */}
-        {_isZoomed && currentView === 'menu' && (
-            <ZoomedPlaceholder
-              onClick={handlePlaceholderClick}
-              isExiting={false}
-              onExitComplete={handlePlaceholderExitComplete}
-              enteringFromButtons={placeholderEnteringFromButtons}
-              onEnterComplete={handlePlaceholderEnterComplete}
-            />
-          )}
-      </div>
+        </div>
     );
   }
 
