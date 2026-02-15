@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavigationGrid, ZoomGridButton } from './components/NavigationComponents';
 import { PresentacionSection } from './components/PresentacionSection';
 import { SobreMiSection } from './components/SobreMiSection';
@@ -20,6 +20,9 @@ const CANVAS_WIDTH = 2560;
 const CANVAS_HEIGHT = 1664;
 const SECTION_WIDTH = 1280;
 const SECTION_HEIGHT = 832;
+// Presentación: texto intro left 300 + width 980 → borde derecho 1280; perfil lo más a la derecha posible
+const PRESENTACION_TEXT_RIGHT = SECTION_WIDTH;
+const PROFILE_MARGIN_FROM_TEXT = 24;
 
 const sectionPositions: Record<Section, SectionPosition> = {
   'presentacion': { x: 0, y: 0 },
@@ -34,6 +37,12 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [caseView, setCaseView] = useState<CaseView>('menu');
+  const [profilePhotoReveal, setProfilePhotoReveal] = useState(false);
+  const [profilePhotoPhase, setProfilePhotoPhase] = useState<'from' | 'to'>('from');
+  const [profilePhotoReturning, setProfilePhotoReturning] = useState(false);
+  const [profilePhotoReturnPhase, setProfilePhotoReturnPhase] = useState<'from' | 'to'>('from');
+  const profilePhotoTransitionEndRef = useRef(false);
+  const profilePhotoReturnTransitionEndRef = useRef(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,8 +59,34 @@ export default function App() {
     setIsZoomed(false);
   };
 
+  // Navegación que dispara animación foto cuando va Presentación ↔ Sobre mí
+  const handleNavigateWithPhotoAnimation = (section: Section) => {
+    if (section === 'sobre-mi' && activeSection === 'presentacion') {
+      handleProfilePlaceholderClick();
+      return;
+    }
+    if (section === 'presentacion' && activeSection === 'sobre-mi') {
+      setActiveSection('presentacion');
+      setIsZoomed(false);
+      setProfilePhotoReturning(true);
+      setProfilePhotoReturnPhase('from');
+      profilePhotoReturnTransitionEndRef.current = false;
+      return;
+    }
+    handleNavigate(section);
+  };
+
   const handleToggleZoom = () => {
-    setIsZoomed(!isZoomed);
+    if (!isZoomed && activeSection === 'sobre-mi') {
+      // Zoom out desde Sobre mí: animar foto hacia posición cero en Presentación y luego mostrar canvas completo
+      setActiveSection('presentacion');
+      setIsZoomed(true);
+      setProfilePhotoReturning(true);
+      setProfilePhotoReturnPhase('from');
+      profilePhotoReturnTransitionEndRef.current = false;
+    } else {
+      setIsZoomed(!isZoomed);
+    }
   };
 
   const getCanvasTransform = () => {
@@ -105,8 +140,10 @@ export default function App() {
     const isSmallScreen = windowWidth < 1024; // md/tablet range
     
     if (isZoomed || activeSection === 'presentacion') {
+      const imgHalf = isSmallScreen ? 75 : 92; // 150/2 o 184/2
+      const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
       return {
-        left: `${SECTION_WIDTH / 2}px`,
+        left: `${centerX}px`,
         top: isSmallScreen ? '20px' : '30px',
         transform: 'translateX(-50%)',
       };
@@ -128,8 +165,10 @@ export default function App() {
         };
       }
     } else {
+      const imgHalf = isSmallScreen ? 75 : 92;
+      const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
       return {
-        left: `${SECTION_WIDTH / 2}px`,
+        left: `${centerX}px`,
         top: isSmallScreen ? '20px' : '30px',
         transform: 'translateX(-50%)',
         opacity: '0',
@@ -138,8 +177,108 @@ export default function App() {
     }
   };
 
+  // Posición en Sobre mí (para animación de vuelta a Presentación)
+  const getProfilePhotoSobreMiPosition = () => {
+    if (isMobile) return {};
+    const isSmallScreen = windowWidth < 1024;
+    if (isSmallScreen) {
+      return {
+        left: `${CANVAS_WIDTH - SECTION_WIDTH / 2}px`,
+        top: '28px',
+        transform: 'translateX(-50%)',
+      };
+    }
+    return {
+      left: `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`,
+      top: '38px',
+      transform: 'translateX(0)',
+    };
+  };
+
+  // Posición del placeholder (72px): mismo centro que la imagen, a la derecha del texto de intro
+  const getProfilePlaceholderPosition = () => {
+    const isSmallScreen = windowWidth < 1024;
+    const imgTop = isSmallScreen ? 20 : 30;
+    const imgHeight = isSmallScreen ? 150 : 184;
+    const centerY = imgTop + imgHeight / 2;
+    const placeholderTop = centerY - 36; // 72/2
+    const imgHalf = isSmallScreen ? 75 : 92;
+    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
+    return {
+      left: `${centerX}px`,
+      top: `${placeholderTop}px`,
+      transform: 'translateX(-50%)',
+    };
+  };
+
+  // Posición "desde Presentación" para la animación; a la derecha del texto, escala desde centro
+  const getProfilePhotoFromPosition = () => {
+    const isSmallScreen = windowWidth < 1024;
+    const fullSize = isSmallScreen ? 150 : 184;
+    const scaleFrom = 72 / fullSize;
+    const imgHalf = fullSize / 2;
+    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
+    return {
+      left: `${centerX}px`,
+      top: isSmallScreen ? '20px' : '30px',
+      transform: `translateX(-50%) scale(${scaleFrom})`,
+      transformOrigin: 'center center' as const,
+      width: fullSize,
+      height: fullSize,
+    };
+  };
+
+  // Clic en la foto (solo visible en Sobre mí): flujo inverso a Presentación / estado cero
   const handleProfilePhotoClick = () => {
-    handleNavigate('sobre-mi');
+    if (activeSection === 'sobre-mi') {
+      setActiveSection('presentacion');
+      setIsZoomed(false);
+      setProfilePhotoReturning(true);
+      setProfilePhotoReturnPhase('from');
+      profilePhotoReturnTransitionEndRef.current = false;
+    } else {
+      handleNavigate('sobre-mi');
+    }
+  };
+
+  const handleProfilePlaceholderClick = () => {
+    setActiveSection('sobre-mi');
+    setIsZoomed(false);
+    setProfilePhotoReveal(true);
+    setProfilePhotoPhase('from');
+    profilePhotoTransitionEndRef.current = false;
+  };
+
+  // Tras montar con phase 'from', pasar a 'to' para disparar la transición CSS (Presentación → Sobre mí)
+  useEffect(() => {
+    if (!profilePhotoReveal || profilePhotoPhase !== 'from') return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setProfilePhotoPhase('to'));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [profilePhotoReveal, profilePhotoPhase]);
+
+  // Tras montar con phase 'from', pasar a 'to' para transición de vuelta (Sobre mí → Presentación)
+  useEffect(() => {
+    if (!profilePhotoReturning || profilePhotoReturnPhase !== 'from') return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setProfilePhotoReturnPhase('to'));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [profilePhotoReturning, profilePhotoReturnPhase]);
+
+  const handleProfilePhotoTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.propertyName !== 'left' && e.propertyName !== 'transform') return;
+    if (profilePhotoReveal && profilePhotoPhase === 'to' && !profilePhotoTransitionEndRef.current) {
+      profilePhotoTransitionEndRef.current = true;
+      setProfilePhotoReveal(false);
+      setProfilePhotoPhase('from');
+    }
+    if (profilePhotoReturning && profilePhotoReturnPhase === 'to' && !profilePhotoReturnTransitionEndRef.current) {
+      profilePhotoReturnTransitionEndRef.current = true;
+      setProfilePhotoReturning(false);
+      setProfilePhotoReturnPhase('from');
+    }
   };
 
   // Mobile: menú hamburguesa derecha; menú de casos (sandwich, misma idea gráfica del botón) izquierda
@@ -212,7 +351,7 @@ export default function App() {
   return (
     <div className="w-screen h-screen overflow-hidden bg-[#f7f2ed] relative">
       {/* Fixed Navigation Menu */}
-      <NavigationGrid activeSection={activeSection} onNavigate={handleNavigate} />
+      <NavigationGrid activeSection={activeSection} onNavigate={handleNavigateWithPhotoAnimation} />
 
       {/* Fixed Zoom Button */}
       <ZoomGridButton isZoomed={isZoomed} onToggleZoom={handleToggleZoom} />
@@ -271,38 +410,109 @@ export default function App() {
             <ContactoSection isZoomed={isZoomed} onNavigate={handleNavigate} />
           </div>
 
-          {/* Profile Photo - Positioned absolutely on canvas, moves between sections */}
-          <div 
-            className="absolute w-[120px] h-[120px] md:w-[150px] md:h-[150px] lg:w-[184px] lg:h-[184px] rounded-[14px] md:rounded-[18px] lg:rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group hover:scale-105 cursor-pointer"
-            style={{
-              ...getProfilePhotoPosition(),
-              transition: 'all 0.7s ease-in-out, transform 0.3s ease-out, box-shadow 0.3s ease-out',
-            }}
-            onClick={handleProfilePhotoClick}
-            role="button"
-            aria-label="Navegar a la sección Sobre mí"
-            title="Navegar a la sección Sobre mí"
-            tabIndex={0}
-          >
-            <img 
-              src={imgProfilePhoto} 
-              alt="Foto de perfil" 
-              className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
-            />
-            
-            {/* Overlay sutil que aparece en hover */}
-            <div 
-              className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-            />
-            
-            {/* Sombra que aumenta en hover */}
-            <div 
-              className="absolute -inset-1 rounded-[16px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          {/* Placeholder en Presentación: cuadrado gris con ondas; centrado con el centro de la imagen en posición cero */}
+          {!isMobile && (activeSection === 'presentacion' || isZoomed) && !profilePhotoReveal && !profilePhotoReturning && (
+            <div
+              className="absolute z-10 flex items-center justify-center"
               style={{
-                boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 4px 12px rgba(90, 62, 38, 0.15), 0 8px 24px rgba(90, 62, 38, 0.1)',
+                ...getProfilePlaceholderPosition(),
+                width: 72,
+                height: 72,
               }}
-            />
-          </div>
+            >
+              <div className="profile-photo-ripple absolute w-9 h-9 rounded-[10px]" style={{ animationDelay: '0s' }} aria-hidden />
+              <div className="profile-photo-ripple absolute w-9 h-9 rounded-[10px]" style={{ animationDelay: '0.8s' }} aria-hidden />
+              <div className="profile-photo-ripple absolute w-9 h-9 rounded-[10px]" style={{ animationDelay: '1.6s' }} aria-hidden />
+              <button
+                type="button"
+                className="profile-photo-heartbeat relative z-10 w-9 h-9 rounded-[10px] bg-[#a16f44] cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={handleProfilePlaceholderClick}
+                aria-label="Ver foto de perfil y navegar a Sobre mí"
+                title="Ver foto de perfil y navegar a Sobre mí"
+              />
+            </div>
+          )}
+          {/* Foto de perfil: en Sobre mí o durante transición Presentación→Sobre mí o Sobre mí→Presentación */}
+          {!isMobile && (activeSection === 'sobre-mi' || profilePhotoReveal || profilePhotoReturning) && (
+            <div
+              className={`absolute rounded-[14px] md:rounded-[18px] lg:rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group cursor-pointer ${
+                !profilePhotoReveal && !profilePhotoReturning ? 'w-[120px] h-[120px] md:w-[150px] md:h-[150px] lg:w-[184px] lg:h-[184px] hover:scale-105' : ''
+              }`}
+              style={{
+                ...(profilePhotoReveal && profilePhotoPhase === 'from'
+                  ? (() => {
+                      const from = getProfilePhotoFromPosition();
+                      return {
+                        left: from.left,
+                        top: from.top,
+                        transform: from.transform,
+                        transformOrigin: from.transformOrigin,
+                        width: from.width,
+                        height: from.height,
+                        transition: 'left 0.7s ease-in-out, top 0.7s ease-in-out, transform 0.7s ease-in-out',
+                      };
+                    })()
+                  : profilePhotoReveal && profilePhotoPhase === 'to'
+                    ? {
+                        ...getProfilePhotoPosition(),
+                        transform: `${getProfilePhotoPosition().transform || 'translateX(0)'} scale(1)`,
+                        transformOrigin: 'center center',
+                        width: windowWidth < 1024 ? 150 : 184,
+                        height: windowWidth < 1024 ? 150 : 184,
+                        transition: 'left 0.7s ease-in-out, top 0.7s ease-in-out, transform 0.7s ease-in-out',
+                      }
+                    : profilePhotoReturning && profilePhotoReturnPhase === 'from'
+                      ? {
+                          ...getProfilePhotoSobreMiPosition(),
+                          transform: `${getProfilePhotoSobreMiPosition().transform || 'translateX(0)'} scale(1)`,
+                          transformOrigin: 'center center',
+                          width: windowWidth < 1024 ? 150 : 184,
+                          height: windowWidth < 1024 ? 150 : 184,
+                          transition: 'left 0.7s ease-in-out, top 0.7s ease-in-out, transform 0.7s ease-in-out',
+                        }
+                      : profilePhotoReturning && profilePhotoReturnPhase === 'to'
+                        ? (() => {
+                            const to = getProfilePhotoFromPosition();
+                            return {
+                              left: to.left,
+                              top: to.top,
+                              transform: to.transform,
+                              transformOrigin: to.transformOrigin,
+                              width: to.width,
+                              height: to.height,
+                              transition: 'left 0.7s ease-in-out, top 0.7s ease-in-out, transform 0.7s ease-in-out',
+                            };
+                          })()
+                        : {
+                            ...getProfilePhotoPosition(),
+                            transition: 'all 0.7s ease-in-out, transform 0.3s ease-out, box-shadow 0.3s ease-out',
+                          }),
+              }}
+              onClick={profilePhotoReveal || profilePhotoReturning ? undefined : handleProfilePhotoClick}
+              onTransitionEnd={handleProfilePhotoTransitionEnd}
+              role="button"
+              aria-label={activeSection === 'sobre-mi' ? 'Volver a la sección Presentación' : 'Navegar a la sección Sobre mí'}
+              title={activeSection === 'sobre-mi' ? 'Volver a la sección Presentación' : 'Navegar a la sección Sobre mí'}
+              tabIndex={0}
+            >
+              <img
+                src={imgProfilePhoto}
+                alt="Foto de perfil"
+                className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+              />
+              {!profilePhotoReveal && !profilePhotoReturning && (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/0 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                  <div
+                    className="absolute -inset-1 rounded-[16px] md:rounded-[20px] lg:rounded-[24px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      boxShadow: '0 0 0 1px rgba(90, 62, 38, 0.2), 0 4px 12px rgba(90, 62, 38, 0.15), 0 8px 24px rgba(90, 62, 38, 0.1)',
+                    }}
+                  />
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
       </div>

@@ -67,7 +67,7 @@ function CaseButton({ onClick, isActive, label, overContent = false }: CaseButto
       {/* Square button with background - 48x48px */}
       <div
         className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 overflow-visible ${
-          isActive ? 'bg-[#4d4b4a]' : 'bg-[#4d4b4a] hover:bg-[#3a3938]'
+          isActive ? 'bg-[#5a3e26]' : 'bg-[#5a3e26] hover:opacity-90'
         }`}
       >
         {isActive && (
@@ -119,7 +119,7 @@ const ZOOMED_PLACEHOLDER_STYLE = `
   }
   .casos-estudio-ripple {
     animation: casos-estudio-ripple 1.4s ease-out infinite;
-    border: 2px solid rgba(77, 75, 74, 0.45);
+    border: 2px solid rgba(90, 62, 38, 0.5);
   }
   .placeholder-exit .placeholder-mover {
     transform: translate(-386px, 372px);
@@ -242,7 +242,7 @@ function ZoomedPlaceholder({ onClick, isExiting = false, onExitComplete, enterin
             style={{ animationDelay: '0.7s' }}
           />
           <div
-            className="casos-estudio-heartbeat w-[48px] h-[48px] rounded-[12px] bg-[#4d4b4a] pointer-events-auto cursor-pointer hover:opacity-90 transition-opacity relative z-10"
+            className="casos-estudio-heartbeat w-[48px] h-[48px] rounded-[12px] bg-[#5a3e26] pointer-events-auto cursor-pointer hover:opacity-90 transition-opacity relative z-10"
             onClick={(e) => {
               e.stopPropagation();
               if (!isExiting) onClick();
@@ -422,13 +422,8 @@ export function CaseStudyNavMobile({
         className="relative shrink-0 flex items-center transition-all duration-300 group"
       >
         <div
-          className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 overflow-visible flex flex-col items-center justify-center gap-1.5 ${
-            open ? 'bg-[#4d4b4a]' : 'bg-[#4d4b4a] hover:bg-[#3a3938]'
-          }`}
+          className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] border-2 border-[#5a3e26] transition-all duration-300 hover:scale-105 overflow-visible flex flex-col items-center justify-center gap-1.5 bg-[#5a3e26] ${open ? '' : 'hover:opacity-90'}`}
         >
-          {open && (
-            <div className="absolute inset-0 border-4 border-[#5a3e26] border-solid rounded-[12px] pointer-events-none" />
-          )}
           {!open && (
             <div
               className="absolute -inset-1 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -459,7 +454,7 @@ export function CaseStudyNavMobile({
               }`}
               style={currentView === id ? { borderLeft: '4px solid #5a3e26' } : undefined}
             >
-              <span className="w-2.5 h-2.5 rounded-full shrink-0 bg-[#5a3e26]" aria-hidden />
+              <span className="w-2.5 h-2.5 shrink-0 bg-[#5a3e26]" aria-hidden />
               {label}
             </button>
           ))}

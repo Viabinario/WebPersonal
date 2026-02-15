@@ -101,3 +101,23 @@
 .animate-mobile-slide-up {
   animation: mobile-slide-in-up 0.45s ease-out forwards;
 }
+
+/* Placeholder foto de perfil (Presentación): latido + ondas, mismo efecto que Casos de estudio */
+@keyframes profile-photo-heartbeat {
+  0%, 100% { transform: scale(1); }
+  18% { transform: scale(1.14); }
+  36% { transform: scale(0.96); }
+  54% { transform: scale(1.08); }
+  72% { transform: scale(1); }
+}
+@keyframes profile-photo-ripple {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(4); opacity: 0; }
+}
+.profile-photo-heartbeat {
+  animation: profile-photo-heartbeat 1.4s ease-in-out infinite;
+}
+.profile-photo-ripple {
+  animation: profile-photo-ripple 2.4s ease-out infinite;
+  border: 2px solid rgba(161, 111, 68, 0.5);
+}
