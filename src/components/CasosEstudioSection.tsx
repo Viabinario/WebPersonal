@@ -344,12 +344,26 @@ interface CasosEstudioSectionProps {
   /** En móvil: vista de caso controlada desde fuera (header); si se pasan, se usan en lugar del estado interno */
   mobileCaseView?: CaseView;
   onMobileCaseViewChange?: (view: CaseView) => void;
+  /** Vista inicial del caso (desktop); se usa para respetar enlaces directos */
+  initialView?: CaseView;
+  /** Notificación al padre cuando cambia la vista de caso (desktop) */
+  onCaseViewChange?: (view: CaseView) => void;
 }
 
-export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate = () => {}, onRequestZoomIn, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
+export function CasosEstudioSection({
+  isZoomed: _isZoomed = false,
+  onNavigate: _onNavigate = () => {},
+  onRequestZoomIn,
+  activeSection = 'presentacion',
+  isMobile = false,
+  mobileCaseView,
+  onMobileCaseViewChange,
+  initialView,
+  onCaseViewChange,
+}: CasosEstudioSectionProps) {
   const isCasosEstudioActive = activeSection === 'casos-estudio';
   const showCaseStudyUI = isCasosEstudioActive && !_isZoomed;
-  const [internalView, setInternalView] = useState<CaseView>('menu');
+  const [internalView, setInternalView] = useState<CaseView>(initialView ?? 'menu');
   const currentView = isMobile && mobileCaseView !== undefined ? mobileCaseView : internalView;
   const setCurrentView = isMobile && onMobileCaseViewChange ? onMobileCaseViewChange : setInternalView;
   const [scrollPercentage, setScrollPercentage] = useState(0);
@@ -478,6 +492,9 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
 
   const handleCaseClick = (caseView: CaseView) => {
     setCurrentView(caseView);
+    if (onCaseViewChange) {
+      onCaseViewChange(caseView);
+    }
   };
 
   // Continuous scroll handlers

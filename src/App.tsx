@@ -54,6 +54,43 @@ export default function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Leer sección/caso inicial desde la URL (?section=...&case=...)
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      const sectionParam = url.searchParams.get('section') as Section | null;
+      const caseParam = url.searchParams.get('case');
+
+      if (sectionParam && (sectionParam === 'presentacion' || sectionParam === 'sobre-mi' || sectionParam === 'contacto' || sectionParam === 'casos-estudio')) {
+        setActiveSection(sectionParam);
+      }
+
+      if (caseParam === 'kora') {
+        setCaseView('case1');
+      } else if (caseParam === 'del-reves') {
+        setCaseView('case2');
+      }
+    } catch {
+      // Ignorar URLs no válidas
+    }
+  }, []);
+
+  // Sincronizar la URL con la sección/caso actual
+  useEffect(() => {
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set('section', activeSection);
+      if (activeSection === 'casos-estudio' && (caseView === 'case1' || caseView === 'case2')) {
+        url.searchParams.set('case', caseView === 'case1' ? 'kora' : 'del-reves');
+      } else {
+        url.searchParams.delete('case');
+      }
+      window.history.replaceState({}, '', url.toString());
+    } catch {
+      // Ignorar si no se puede actualizar la URL
+    }
+  }, [activeSection, caseView]);
+
   const handleNavigate = (section: Section) => {
     setActiveSection(section);
     setIsZoomed(false);
@@ -345,6 +382,8 @@ export default function App() {
                 isMobile
                 mobileCaseView={caseView}
                 onMobileCaseViewChange={setCaseView}
+                initialView={caseView}
+                onCaseViewChange={setCaseView}
               />
             </div>
           )}
@@ -396,6 +435,8 @@ export default function App() {
                 onNavigate={handleNavigate}
                 onRequestZoomIn={() => { setActiveSection('casos-estudio'); handleToggleZoom(); }}
                 activeSection={activeSection}
+                initialView={caseView}
+                onCaseViewChange={setCaseView}
               />
             </div>
           </div>
@@ -425,6 +466,8 @@ export default function App() {
                 onNavigate={handleNavigate}
                 onRequestZoomIn={() => { setActiveSection('casos-estudio'); handleToggleZoom(); }}
                 activeSection={activeSection}
+                initialView={caseView}
+                onCaseViewChange={setCaseView}
               />
             )}
           </div>
