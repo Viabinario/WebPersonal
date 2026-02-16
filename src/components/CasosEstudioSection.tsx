@@ -16,8 +16,8 @@ import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
 // Colores para el degradado radial que sigue el cursor (Kora: azules; Del Revés: verdes)
 const CARD_GRADIENT_COLORS = {
-  kora: 'rgba(45,0,151,0.5), rgba(66,12,192,0.35), rgba(26,0,89,0.15), transparent',
-  delReves: 'rgba(45,138,31,0.5), rgba(26,56,20,0.35), rgba(31,92,21,0.15), transparent',
+  kora: 'rgba(36,0,124,0.5), rgba(67,0,226,0.35), rgba(26,0,89,0.15), transparent',
+  delReves: 'rgba(40,76,27,0.5), rgba(94,178,63,0.5), rgba(94,178,63,0.15), transparent',
 } as const;
 
 // Card con degradado radial dinámico que sigue el mouse (estilo Andrew Parson: actualización directa del background)

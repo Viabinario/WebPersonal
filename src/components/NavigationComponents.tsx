@@ -92,7 +92,7 @@ function MobileNavMenu({
     return () => document.removeEventListener('click', close);
   }, [open]);
 
-  const sections: ('presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio')[] = ['presentacion', 'sobre-mi', 'casos-estudio', 'contacto'];
+  const sections: ('presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio')[] = ['sobre-mi', 'presentacion', 'casos-estudio', 'contacto'];
 
   return (
     <div className="relative flex justify-end">
@@ -173,20 +173,20 @@ export function NavigationGrid({ activeSection, onNavigate, embedInFlow = false,
       <div className="w-[140px] h-[170px] md:w-[160px] md:h-[200px] lg:w-[184px] lg:h-[224px]">
         <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-[20px]">
           <SimpleNavButton
-            onClick={() => onNavigate('presentacion')}
-            isActive={activeSection === 'presentacion'}
-            bgColor="#e8d8c9"
-            onHover={() => setHoveredSection('presentacion')}
-            onLeave={() => setHoveredSection(null)}
-            sectionName="Presentación"
-          />
-          <SimpleNavButton
             onClick={() => onNavigate('sobre-mi')}
             isActive={activeSection === 'sobre-mi'}
             bgColor="#a16f44"
             onHover={() => setHoveredSection('sobre-mi')}
             onLeave={() => setHoveredSection(null)}
             sectionName="Sobre mí"
+          />
+          <SimpleNavButton
+            onClick={() => onNavigate('presentacion')}
+            isActive={activeSection === 'presentacion'}
+            bgColor="#e8d8c9"
+            onHover={() => setHoveredSection('presentacion')}
+            onLeave={() => setHoveredSection(null)}
+            sectionName="Presentación"
           />
           <SimpleNavButton
             onClick={() => onNavigate('casos-estudio')}

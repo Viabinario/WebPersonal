@@ -96,9 +96,9 @@ export function SobreMiSection({ isZoomed = false, onNavigate, skipEntranceAnima
 
   return (
     <div className="relative w-full h-full min-w-0 max-w-full bg-[#f7f2ed] flex items-start md:items-center justify-center p-4 md:p-8 md:pt-[190px] lg:items-center lg:pt-0 lg:p-0">
-      {/* Bloque de texto sin caja (como Presentación): misma posición para respetar margen izquierdo */}
+      {/* Sobre mí en celda izquierda: 38px del menú principal, ancho completo del intro (980px) como antes Presentación */}
       <div
-        className={`w-full max-w-[420px] lg:absolute lg:top-[38px] lg:right-[min(38px,5vw)] lg:max-w-[420px] ${isZoomed ? 'cursor-pointer hover:scale-[1.01] transition-transform duration-300' : ''}`}
+        className={`w-full max-w-[420px] md:max-w-[600px] lg:absolute lg:top-[280px] lg:left-[320px] lg:right-auto lg:w-[980px] lg:max-w-none ${isZoomed ? 'cursor-pointer hover:scale-[1.01] transition-transform duration-300' : ''}`}
         onClick={handleClick}
         aria-label={isZoomed ? 'Hacer clic para navegar a la sección Sobre mí' : undefined}
         title={isZoomed ? 'Hacer clic para navegar a la sección Sobre mí' : undefined}

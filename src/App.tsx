@@ -24,15 +24,16 @@ const SECTION_HEIGHT = 832;
 const PRESENTACION_TEXT_RIGHT = SECTION_WIDTH;
 const PROFILE_MARGIN_FROM_TEXT = 24;
 
+// Enrocado: Sobre mí es la sección inicial (top-left), Presentación top-right
 const sectionPositions: Record<Section, SectionPosition> = {
-  'presentacion': { x: 0, y: 0 },
-  'sobre-mi': { x: -SECTION_WIDTH, y: 0 },
+  'sobre-mi': { x: 0, y: 0 },
+  'presentacion': { x: -SECTION_WIDTH, y: 0 },
   'casos-estudio': { x: 0, y: -SECTION_HEIGHT },
   'contacto': { x: -SECTION_WIDTH, y: -SECTION_HEIGHT },
 };
 
 export default function App() {
-  const [activeSection, setActiveSection] = useState<Section>('presentacion');
+  const [activeSection, setActiveSection] = useState<Section>('sobre-mi');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -96,7 +97,7 @@ export default function App() {
     setIsZoomed(false);
   };
 
-  // Navegación que dispara animación foto cuando va Presentación ↔ Sobre mí
+  // Navegación que dispara animación foto cuando va Presentación ↔ Sobre mí (Sobre mí = inicial/izq, Presentación = der)
   const handleNavigateWithPhotoAnimation = (section: Section) => {
     if (section === 'sobre-mi' && activeSection === 'presentacion') {
       handleProfilePlaceholderClick();
@@ -164,102 +165,96 @@ export default function App() {
     }
   };
 
-  // Calculate Profile_Photo position based on active section
+  // Calculate Profile_Photo position (Sobre mí = celda izq, Presentación = celda der)
   const getProfilePhotoPosition = () => {
     if (isMobile) {
-      // Mobile: hide profile photo or position differently
-      return {
-        display: 'none',
-      };
+      return { display: 'none' };
     }
-
-    // Adjust for screen size to prevent overlap
-    const isSmallScreen = windowWidth < 1024; // md/tablet range
-    
+    const isSmallScreen = windowWidth < 1024;
+    // Presentación está en la celda derecha; placeholder/foto “en Presentación” = derecha
     if (isZoomed || activeSection === 'presentacion') {
-      const imgHalf = isSmallScreen ? 75 : 92; // 150/2 o 184/2
-      const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
-      return {
-        left: `${centerX}px`,
-        top: isSmallScreen ? '20px' : '30px',
-        transform: 'translateX(-50%)',
-      };
-    } else if (activeSection === 'sobre-mi') {
       if (isSmallScreen) {
-        // En tablets, centrar la foto en la sección de Sobre mí
-        // CANVAS_WIDTH = 2560, la sección Sobre mí está en la derecha (1280 + ...)
         return {
-          left: `${CANVAS_WIDTH - SECTION_WIDTH / 2}px`, // Centro de la sección derecha
+          left: `${CANVAS_WIDTH - SECTION_WIDTH / 2}px`,
           top: '28px',
           transform: 'translateX(-50%)',
         };
-      } else {
-        // En desktop, posición absoluta a la derecha (610 = 650 - 40px a la izquierda)
-        return {
-          left: `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`,
-          top: '38px',
-          transform: 'translateX(0)',
-        };
       }
-    } else {
+      return {
+        left: `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`,
+        top: '38px',
+        transform: 'translateX(0)',
+      };
+    }
+    // Sobre mí está en la celda izquierda
+    if (activeSection === 'sobre-mi') {
       const imgHalf = isSmallScreen ? 75 : 92;
       const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
       return {
         left: `${centerX}px`,
         top: isSmallScreen ? '20px' : '30px',
         transform: 'translateX(-50%)',
-        opacity: '0',
-        pointerEvents: 'none' as const,
       };
     }
+    const imgHalf = isSmallScreen ? 75 : 92;
+    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
+    return {
+      left: `${centerX}px`,
+      top: isSmallScreen ? '20px' : '30px',
+      transform: 'translateX(-50%)',
+      opacity: '0',
+      pointerEvents: 'none' as const,
+    };
   };
 
-  // Posición en Sobre mí (para animación de vuelta a Presentación)
+  // Posición en Sobre mí (celda izquierda; para animación de vuelta a Presentación)
   const getProfilePhotoSobreMiPosition = () => {
     if (isMobile) return {};
     const isSmallScreen = windowWidth < 1024;
+    const imgHalf = isSmallScreen ? 75 : 92;
+    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
+    return {
+      left: `${centerX}px`,
+      top: isSmallScreen ? '20px' : '30px',
+      transform: 'translateX(-50%)',
+    };
+  };
+
+  // Posición del placeholder en Presentación (celda derecha); caja 160px para ondas
+  const getProfilePlaceholderPosition = () => {
+    const isSmallScreen = windowWidth < 1024;
+    const imgTop = isSmallScreen ? 28 : 38;
+    const imgHalf = isSmallScreen ? 75 : 92;
+    const centerY = imgTop + imgHalf;
+    const placeholderTop = centerY - 80;
+    const left = isSmallScreen ? `${CANVAS_WIDTH - SECTION_WIDTH / 2}px` : `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`;
+    const transform = isSmallScreen ? 'translateX(-50%)' : 'translateX(0)';
+    return {
+      left,
+      top: `${placeholderTop}px`,
+      transform,
+    };
+  };
+
+  // Posición en Presentación (celda derecha) para animación from/to
+  const getProfilePhotoFromPosition = () => {
+    const isSmallScreen = windowWidth < 1024;
+    const fullSize = isSmallScreen ? 150 : 184;
+    const scaleFrom = 72 / fullSize;
     if (isSmallScreen) {
       return {
         left: `${CANVAS_WIDTH - SECTION_WIDTH / 2}px`,
         top: '28px',
-        transform: 'translateX(-50%)',
+        transform: `translateX(-50%) scale(${scaleFrom})`,
+        transformOrigin: 'center center' as const,
+        width: fullSize,
+        height: fullSize,
       };
     }
     return {
       left: `${CANVAS_WIDTH - SECTION_WIDTH + 610}px`,
       top: '38px',
-      transform: 'translateX(0)',
-    };
-  };
-
-  // Posición del placeholder (caja 160px para que las ondas no se recorten): mismo centro que la imagen
-  const getProfilePlaceholderPosition = () => {
-    const isSmallScreen = windowWidth < 1024;
-    const imgTop = isSmallScreen ? 20 : 30;
-    const imgHeight = isSmallScreen ? 150 : 184;
-    const centerY = imgTop + imgHeight / 2;
-    const placeholderHalf = 80; // 160/2
-    const placeholderTop = centerY - placeholderHalf;
-    const imgHalf = isSmallScreen ? 75 : 92;
-    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
-    return {
-      left: `${centerX}px`,
-      top: `${placeholderTop}px`,
-      transform: 'translateX(-50%)',
-    };
-  };
-
-  // Posición "desde Presentación" para la animación; a la derecha del texto, escala desde centro
-  const getProfilePhotoFromPosition = () => {
-    const isSmallScreen = windowWidth < 1024;
-    const fullSize = isSmallScreen ? 150 : 184;
-    const scaleFrom = 72 / fullSize;
-    const imgHalf = fullSize / 2;
-    const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
-    return {
-      left: `${centerX}px`,
-      top: isSmallScreen ? '20px' : '30px',
-      transform: `translateX(-50%) scale(${scaleFrom})`,
+      transform: `translateX(0) scale(${scaleFrom})`,
       transformOrigin: 'center center' as const,
       width: fullSize,
       height: fullSize,
@@ -446,16 +441,16 @@ export default function App() {
           className={`absolute top-0 left-0 transition-transform duration-700 ease-in-out ${showCasosEstudioViewportExtension ? 'invisible' : ''}`}
           style={getCanvasTransform()}
         >
-          {/* Large Canvas - 2x2 Grid */}
+          {/* Large Canvas - 2x2 Grid (enrocado: Sobre mí top-left, Presentación top-right) */}
         <div className="w-[2560px] h-[1664px] grid grid-cols-2 grid-rows-2 relative">
-          {/* Top Left - Presentación */}
-          <div className="w-[1280px] h-[832px]">
-            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} isMobile={false} />
-          </div>
-
-          {/* Top Right - Sobre mí */}
+          {/* Top Left - Sobre mí (sección inicial) */}
           <div className="w-[1280px] h-[832px]">
             <SobreMiSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+          </div>
+
+          {/* Top Right - Presentación */}
+          <div className="w-[1280px] h-[832px]">
+            <PresentacionSection isZoomed={isZoomed} onNavigate={handleNavigate} isMobile={false} />
           </div>
 
           {/* Bottom Left - Casos de Estudio */}
@@ -477,7 +472,7 @@ export default function App() {
             <ContactoSection isZoomed={isZoomed} onNavigate={handleNavigate} />
           </div>
 
-          {/* Placeholder en Presentación: cuadrado con ondas; caja amplia para que las ondas no se recorten */}
+          {/* Placeholder en Presentación (celda derecha): cuadrado con ondas */}
           {!isMobile && (activeSection === 'presentacion' || isZoomed) && !profilePhotoReveal && !profilePhotoReturning && (
             <div
               className="absolute z-10 flex items-center justify-center overflow-visible"
@@ -499,7 +494,7 @@ export default function App() {
               />
             </div>
           )}
-          {/* Foto de perfil: en Sobre mí o durante transición Presentación→Sobre mí o Sobre mí→Presentación */}
+          {/* Foto de perfil: en Sobre mí (celda izq) o durante transición Presentación↔Sobre mí */}
           {!isMobile && (activeSection === 'sobre-mi' || profilePhotoReveal || profilePhotoReturning) && (
             <div
               className={`absolute rounded-[14px] md:rounded-[18px] lg:rounded-[22px] border-2 border-[#5a3e26] border-dashed overflow-hidden z-10 group cursor-pointer ${

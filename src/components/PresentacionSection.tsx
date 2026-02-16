@@ -20,8 +20,9 @@ interface PresentacionSectionProps {
   isMobile?: boolean;
 }
 
+// Presentación en celda derecha: texto angosto a la derecha (como antes Sobre mí) para no montar con la foto
 const TEXT_BOX_BASE_CLASS =
-  "w-full max-w-[720px] md:max-w-[800px] lg:max-w-[900px] md:pt-[200px] lg:pt-0 lg:absolute lg:top-[260px] lg:left-[300px] lg:w-[980px] lg:max-w-none md:px-4 lg:px-0";
+  "w-full max-w-[720px] md:max-w-[800px] lg:max-w-[900px] md:pt-[200px] lg:pt-0 lg:absolute lg:top-[38px] lg:right-[min(38px,5vw)] lg:left-auto lg:max-w-[420px] lg:w-[420px] md:px-4 lg:px-0";
 const ZOOMED_CLICKABLE_CLASS =
   "cursor-pointer hover:scale-[1.01] transition-transform duration-300";
 const NAV_ARIA_LABEL = "Hacer clic para navegar a la sección de Presentación";

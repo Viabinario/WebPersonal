@@ -516,7 +516,7 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
         {/* Espacio reservado al menú principal (38 + 184 ≈ 222px) para que la zona central quede entre menú y formulario */}
         <div className="hidden lg:block w-0 lg:w-[222px] lg:shrink-0" aria-hidden />
         {/* Zona central: texto y botón copiar; en lg, 18px por debajo del borde superior del formulario */}
-        <div className="relative shrink-0 w-full flex flex-col items-center justify-center gap-[62px] lg:flex-1 lg:min-w-0 lg:justify-start lg:pt-[18px]">
+        <div className="relative shrink-0 w-full flex flex-col items-center justify-center gap-[32px] lg:flex-1 lg:min-w-0 lg:justify-start lg:pt-[18px]">
           <p className="text-[#362517] font-['Roboto:Regular',sans-serif] text-[14px] text-left max-w-[420px]">
             Puedes escribirme a través del formulario, o bien, si lo prefieres, escribirme desde tu gestor de correos, presiona abajo para copiar mi dirección:
           </p>
@@ -524,14 +524,14 @@ export function ContactoSection({ isZoomed = false, onNavigate }: ContactoSectio
             type="button"
             onClick={handleCopyEmail}
             disabled={!contactEmail}
-            aria-label={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico al portapapeles') : 'Correo no configurado'}
-            title={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico') : 'Configura VITE_CONTACT_EMAIL en .env'}
+            aria-label={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar mi dirección de correo electrónico al portapapeles') : 'Correo no configurado'}
+            title={contactEmail ? (copied ? 'Se ha copiado en el portapapeles' : 'Copiar mi dirección de correo electrónico') : 'Configura VITE_CONTACT_EMAIL en .env'}
             className={copyButtonClass}
           >
             <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
-            <span>{copied ? 'Se ha copiado en el portapapeles' : 'Copiar dirección de correo electrónico'}</span>
+            <span>{copied ? 'Se ha copiado en el portapapeles' : 'Copiar mi dirección de correo electrónico'}</span>
           </button>
         </div>
 
