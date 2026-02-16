@@ -158,7 +158,7 @@ export function PresentacionSection({ isZoomed = false, onNavigate, isMobile = f
         </div>
       </div>
       {/* Redes: solo móvil/tablet (en desktop la barra SocialBarDesktop está fija al margen derecho en App) */}
-      <div className="mt-4 w-full max-w-[460px] md:mt-6 lg:hidden">
+      <div className="mt-8 w-full max-w-[460px] md:mt-10 lg:hidden">
         <SocialBox />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useLayoutEffect } from 'react';
 import {
   type IntroSegment,
   SOBRE_MI_SEGMENTS_ES,
@@ -12,6 +12,8 @@ interface SobreMiSectionProps {
   isZoomed?: boolean;
   onNavigate?: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
   activeSection?: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
+  /** Si true, no animar entrada del texto (p. ej. al llegar desde el botón de perfil en móvil) */
+  skipEntranceAnimation?: boolean;
 }
 
 const SOBRE_MI_SPLIT_WORD_CLASS = 'sobre-mi-split-word';
@@ -54,12 +56,23 @@ function SegmentWords({ segments }: { segments: IntroSegment[] }) {
   );
 }
 
-export function SobreMiSection({ isZoomed = false, onNavigate }: SobreMiSectionProps) {
+export function SobreMiSection({ isZoomed = false, onNavigate, skipEntranceAnimation = false }: SobreMiSectionProps) {
   const textRef = useRef<HTMLDivElement>(null);
   const { locale } = useLocale();
   const segments = locale === 'en' ? SOBRE_MI_SEGMENTS_EN : SOBRE_MI_SEGMENTS_ES;
 
+  // Con skipEntranceAnimation, aplicar estado visible antes del paint para evitar retraso del texto
+  useLayoutEffect(() => {
+    if (!skipEntranceAnimation) return;
+    const el = textRef.current;
+    if (!el) return;
+    const words = el.querySelectorAll(`.${SOBRE_MI_SPLIT_WORD_CLASS}`);
+    if (words.length === 0) return;
+    gsap.set(words, { opacity: 1, y: 0 });
+  }, [segments, locale, skipEntranceAnimation]);
+
   useEffect(() => {
+    if (skipEntranceAnimation) return;
     const el = textRef.current;
     if (!el) return;
     const words = el.querySelectorAll(`.${SOBRE_MI_SPLIT_WORD_CLASS}`);
@@ -73,7 +86,7 @@ export function SobreMiSection({ isZoomed = false, onNavigate }: SobreMiSectionP
       ease: 'power2.out',
       overwrite: true,
     });
-  }, [segments, locale]);
+  }, [segments, locale, skipEntranceAnimation]);
 
   const handleClick = () => {
     if (isZoomed && onNavigate) {
@@ -94,7 +107,7 @@ export function SobreMiSection({ isZoomed = false, onNavigate }: SobreMiSectionP
       >
         <div
           ref={textRef}
-          className="font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line text-base md:text-lg lg:text-xl"
+          className={`font-['Roboto',sans-serif] text-[#5a3e26] text-justify leading-relaxed whitespace-pre-line text-base md:text-lg lg:text-xl ${skipEntranceAnimation ? 'sobre-mi-skip-entrance' : ''}`}
           style={{ fontVariationSettings: '"wdth" 100' }}
         >
           <SegmentWords segments={segments} />

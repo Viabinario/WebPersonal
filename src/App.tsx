@@ -195,13 +195,14 @@ export default function App() {
     };
   };
 
-  // Posición del placeholder (72px): mismo centro que la imagen, a la derecha del texto de intro
+  // Posición del placeholder (caja 160px para que las ondas no se recorten): mismo centro que la imagen
   const getProfilePlaceholderPosition = () => {
     const isSmallScreen = windowWidth < 1024;
     const imgTop = isSmallScreen ? 20 : 30;
     const imgHeight = isSmallScreen ? 150 : 184;
     const centerY = imgTop + imgHeight / 2;
-    const placeholderTop = centerY - 36; // 72/2
+    const placeholderHalf = 80; // 160/2
+    const placeholderTop = centerY - placeholderHalf;
     const imgHalf = isSmallScreen ? 75 : 92;
     const centerX = PRESENTACION_TEXT_RIGHT - PROFILE_MARGIN_FROM_TEXT - imgHalf;
     return {
@@ -292,13 +293,21 @@ export default function App() {
         <main className="w-full overflow-hidden">
           {activeSection === 'presentacion' && (
             <div key="presentacion" className="w-full min-h-screen flex flex-col bg-[#f7f2ed] animate-mobile-slide-left">
-              <div className="flex-shrink-0 flex justify-center pt-4 pb-2">
+              <div className="flex-shrink-0 flex justify-center pt-4 pb-10">
                 <div
-                  className="w-[100px] h-[100px] rounded-[14px] border-2 border-[#5a3e26] border-dashed overflow-hidden"
-                  role="img"
-                  aria-label="Foto de perfil"
+                  className="relative flex items-center justify-center w-[220px] h-[220px] overflow-visible"
+                  aria-hidden
                 >
-                  <img src={imgProfilePhoto} alt="" className="w-full h-full object-cover" />
+                  <div className="profile-photo-ripple absolute w-12 h-12 rounded-[12px]" style={{ animationDelay: '0s' }} aria-hidden />
+                  <div className="profile-photo-ripple absolute w-12 h-12 rounded-[12px]" style={{ animationDelay: '0.8s' }} aria-hidden />
+                  <div className="profile-photo-ripple absolute w-12 h-12 rounded-[12px]" style={{ animationDelay: '1.6s' }} aria-hidden />
+                  <button
+                    type="button"
+                    className="profile-photo-heartbeat relative z-10 w-12 h-12 rounded-[12px] bg-[#a16f44] cursor-pointer hover:opacity-90 transition-opacity border-0"
+                    onClick={() => setActiveSection('sobre-mi')}
+                    aria-label="Ir a Sobre mí"
+                    title="Ir a Sobre mí"
+                  />
                 </div>
               </div>
               <div className="flex-1 min-h-0">
@@ -307,7 +316,7 @@ export default function App() {
             </div>
           )}
           {activeSection === 'sobre-mi' && (
-            <div key="sobre-mi" className="w-full min-h-screen flex flex-col bg-[#f7f2ed] animate-mobile-slide-right">
+            <div key="sobre-mi" className="w-full min-h-screen flex flex-col bg-[#f7f2ed]">
               <div className="flex-shrink-0 flex justify-center pt-4 pb-2">
                 <div
                   className="w-[100px] h-[100px] rounded-[14px] border-2 border-[#5a3e26] border-dashed overflow-hidden"
@@ -318,7 +327,12 @@ export default function App() {
                 </div>
               </div>
               <div className="flex-1 min-h-0">
-                <SobreMiSection isZoomed={false} onNavigate={handleNavigate} activeSection={activeSection} />
+                <SobreMiSection
+                  isZoomed={false}
+                  onNavigate={handleNavigate}
+                  activeSection={activeSection}
+                  skipEntranceAnimation
+                />
               </div>
             </div>
           )}
@@ -420,14 +434,14 @@ export default function App() {
             <ContactoSection isZoomed={isZoomed} onNavigate={handleNavigate} />
           </div>
 
-          {/* Placeholder en Presentación: cuadrado gris con ondas; centrado con el centro de la imagen en posición cero */}
+          {/* Placeholder en Presentación: cuadrado con ondas; caja amplia para que las ondas no se recorten */}
           {!isMobile && (activeSection === 'presentacion' || isZoomed) && !profilePhotoReveal && !profilePhotoReturning && (
             <div
-              className="absolute z-10 flex items-center justify-center"
+              className="absolute z-10 flex items-center justify-center overflow-visible"
               style={{
                 ...getProfilePlaceholderPosition(),
-                width: 72,
-                height: 72,
+                width: 160,
+                height: 160,
               }}
             >
               <div className="profile-photo-ripple absolute w-9 h-9 rounded-[10px]" style={{ animationDelay: '0s' }} aria-hidden />
