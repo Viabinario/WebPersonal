@@ -14,6 +14,109 @@ import { SOCIAL_BAR_WIDTH_PX } from './SocialBarDesktop';
 import { StarlingMurmuration } from './StarlingMurmuration';
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
+// Colores para el degradado radial que sigue el cursor (Kora: azules; Del Revés: verdes)
+const CARD_GRADIENT_COLORS = {
+  kora: 'rgba(45,0,151,0.5), rgba(66,12,192,0.35), rgba(26,0,89,0.15), transparent',
+  delReves: 'rgba(45,138,31,0.5), rgba(26,56,20,0.35), rgba(31,92,21,0.15), transparent',
+} as const;
+
+// Card con degradado radial dinámico que sigue el mouse (estilo Andrew Parson: actualización directa del background)
+function CaseCard({
+  variant,
+  onClick,
+  label,
+  title,
+  description,
+}: {
+  variant: 'kora' | 'delReves';
+  onClick: () => void;
+  label: string;
+  title: string;
+  description: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const gradientRef = useRef<HTMLSpanElement>(null);
+  const colors = CARD_GRADIENT_COLORS[variant];
+
+  useEffect(() => {
+    const card = cardRef.current;
+    const gradientEl = gradientRef.current;
+    if (!card || !gradientEl) return;
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      gradientEl.style.background = `radial-gradient(circle at ${x}% ${y}%, ${colors})`;
+      gradientEl.style.opacity = '1';
+    };
+
+    const onMouseEnter = () => {
+      gradientEl.style.opacity = '1';
+    };
+
+    const onMouseLeave = () => {
+      gradientEl.style.opacity = '0';
+    };
+
+    card.addEventListener('mousemove', onMouseMove);
+    card.addEventListener('mouseenter', onMouseEnter);
+    card.addEventListener('mouseleave', onMouseLeave);
+    return () => {
+      card.removeEventListener('mousemove', onMouseMove);
+      card.removeEventListener('mouseenter', onMouseEnter);
+      card.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }, [colors]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      role="button"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      className="group relative w-full rounded-[18px] border-2 border-[#5a3e26] border-dashed bg-white/90 backdrop-blur-sm px-5 py-6 text-left shadow-[0_8px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] overflow-hidden isolate cursor-pointer"
+      aria-label={`Ver caso de estudio: ${title}`}
+    >
+      {/* Degradado radial: se actualiza por JS en mousemove (como en andrewparson.co.uk) */}
+      <span
+        ref={gradientRef}
+        className="absolute inset-0 pointer-events-none rounded-[16px] z-[1] transition-opacity duration-150"
+        style={{
+          background: `radial-gradient(circle at 50% 50%, ${colors})`,
+          opacity: 0,
+        }}
+        aria-hidden
+      />
+      <span className="relative z-[2] block pointer-events-none">
+        <span className="text-xs uppercase tracking-[0.3em] text-[#5a3e26]/70 mb-2 block">
+          {label}
+        </span>
+        <span className="text-xl md:text-2xl font-semibold text-[#5a3e26] mb-2 block">
+          {title}
+        </span>
+        <span className="text-sm md:text-base text-[#5a3e26]/80 leading-relaxed block">
+          {description}
+        </span>
+        <span className="mt-4 inline-flex items-center text-sm font-medium text-[#5a3e26]">
+          Ver caso
+          <span className="ml-2 inline-block transform transition-transform duration-300 group-hover:translate-x-1">
+            →
+          </span>
+        </span>
+      </span>
+    </div>
+  );
+}
+
 // Wrapper for case buttons bar: shows semi-transparent background on hover so labels are readable
 function CaseButtonsBar({ children, embedInFlow = false }: { children: React.ReactNode; embedInFlow?: boolean }) {
   const [isBarHovered, setIsBarHovered] = useState(false);
@@ -491,6 +594,13 @@ export function CasosEstudioSection({
   }, [currentView]);
 
   const handleCaseClick = (caseView: CaseView) => {
+    // En zoom out (canvas completo), las cards sirven para hacer zoom in a la sección,
+    // no para abrir directamente el caso.
+    if (_isZoomed && onRequestZoomIn) {
+      onRequestZoomIn();
+      return;
+    }
+    // En zoom in (sección Casos activa), las cards abren directamente el caso.
     setCurrentView(caseView);
     if (onCaseViewChange) {
       onCaseViewChange(caseView);
@@ -537,12 +647,6 @@ export function CasosEstudioSection({
 
   // Menu View: en desktop portal con barra; en móvil los botones están en el header
   if (currentView === 'menu') {
-    const caseButtonsContent = (
-      <>
-        <CaseButton onClick={() => handleCaseClick('case1')} label="Kora" />
-        <CaseButton onClick={() => handleCaseClick('case2')} label="Del Revés" />
-      </>
-    );
     return (
       <div
         className={`relative w-full h-full min-h-[100dvh] bg-[#f7f2ed] overflow-hidden flex flex-col`}
@@ -553,9 +657,26 @@ export function CasosEstudioSection({
           clickMode={_isZoomed ? 'zoom' : 'pause'}
           onZoomIn={_isZoomed ? onRequestZoomIn : undefined}
         />
-        {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
-        {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
+        {/* Primera pantalla de Casos: cards con degradado radial que sigue el cursor (Kora: azules, Del Revés: verdes) */}
+        <div className="relative z-10 flex-1 flex items-center justify-center px-4 py-10">
+          <div className="max-w-[960px] w-full grid gap-6 md:grid-cols-2">
+            <CaseCard
+              variant="kora"
+              onClick={() => handleCaseClick('case1')}
+              label="Caso de estudio"
+              title="Kora"
+              description="Plataforma social digital y ecosistema de intercambio de valor bidireccional entre generaciones."
+            />
+            <CaseCard
+              variant="delReves"
+              onClick={() => handleCaseClick('case2')}
+              label="Caso de estudio"
+              title="Del Revés"
+              description="Herramienta para profesionales de la salud mental que acompañan procesos emocionales complejos."
+            />
+          </div>
         </div>
+      </div>
     );
   }
 
