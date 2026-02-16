@@ -1,16 +1,24 @@
 import { useRef, useEffect, useState } from 'react';
 
-const BOIDS_COUNT = 500;
+/** Menos boids = menos CPU; 380 sigue viéndose denso */
+const BOIDS_COUNT = 380;
 const PERCEPTION_RADIUS = 28;
 const SEPARATION_RADIUS = 10;
+/** Cuadrícula espacial: solo se buscan vecinos en celdas adyacentes (O(n) en lugar de O(n²)) */
+const CELL_SIZE = PERCEPTION_RADIUS * 2;
+const PERCEPTION_RADIUS_SQ = PERCEPTION_RADIUS * PERCEPTION_RADIUS;
+const SEPARATION_RADIUS_SQ = SEPARATION_RADIUS * SEPARATION_RADIUS;
 const SEPARATION_WEIGHT = 1.2;
+/** Limitar FPS reduce uso de CPU/GPU sin perder fluidez visual */
+const TARGET_FPS = 30;
+const TARGET_FRAME_MS = 1000 / TARGET_FPS;
 /** Más alineación → vuelo coordinado tipo bandada, menos errático */
 const ALIGNMENT_WEIGHT = 1.15;
 const COHESION_WEIGHT = 1.25;
 /** Poco ruido en cohesión → masa más compacta y fluida, como estorninos */
 const COHESION_NOISE = 0.06;
 /** Velocidad moderada para que se formen y deshagan cúmulos de forma legible */
-const MAX_SPEED = 1.35;
+const MAX_SPEED = 1.85;
 /** Tamaño del píxel cuadrado (1 = un pixel) */
 const PIXEL_SIZE = 2;
 /** Pequeña deriva aleatoria por partícula → variación, sin mover el plano */
@@ -32,6 +40,10 @@ export interface StarlingMurmurationProps {
   opacity?: number;
   /** Clases del contenedor */
   className?: string;
+  /** 'pause' = clic alterna pausa (default). 'zoom' = clic llama onZoomIn y no pausa */
+  clickMode?: 'pause' | 'zoom';
+  /** Se llama al clic cuando clickMode === 'zoom' (p. ej. zoom in desde vista total) */
+  onZoomIn?: () => void;
 }
 
 /**
@@ -42,12 +54,15 @@ export function StarlingMurmuration({
   color = '#5A3E26',
   opacity = 1,
   className = '',
+  clickMode = 'pause',
+  onZoomIn,
 }: StarlingMurmurationProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const boidsRef = useRef<Boid[]>([]);
   const rafRef = useRef<number>(0);
   const frameRef = useRef(0);
+  const lastTickRef = useRef<number>(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -78,41 +93,65 @@ export function StarlingMurmuration({
 
     const wrap = (v: number, max: number) => ((v % max) + max) % max;
 
-    const tick = () => {
+    const tick = (now: number) => {
+      rafRef.current = requestAnimationFrame(tick);
+
+      if (document.hidden) return;
+      const elapsed = now - lastTickRef.current;
+      if (elapsed < TARGET_FRAME_MS && lastTickRef.current > 0) return;
+      lastTickRef.current = now;
+
       const { w, h } = setSize();
       const boids = boidsRef.current;
       frameRef.current += 1;
       const t = frameRef.current;
 
+      const nCellsX = Math.max(1, Math.ceil(w / CELL_SIZE));
+      const nCellsY = Math.max(1, Math.ceil(h / CELL_SIZE));
+      const grid: number[][] = [];
+      for (let c = 0; c < nCellsX * nCellsY; c++) grid[c] = [];
+      const mod = (a: number, n: number) => ((a % n) + n) % n;
+      for (let i = 0; i < boids.length; i++) {
+        const b = boids[i];
+        const cx = mod(Math.floor(b.x / CELL_SIZE), nCellsX);
+        const cy = mod(Math.floor(b.y / CELL_SIZE), nCellsY);
+        grid[cy * nCellsX + cx].push(i);
+      }
+
       const cx = boids.reduce((s, b) => s + b.x, 0) / boids.length;
       const cy = boids.reduce((s, b) => s + b.y, 0) / boids.length;
 
       const newBoids: Boid[] = boids.map((b, i) => {
-        let sepX = 0,
-          sepY = 0,
-          alignX = 0,
-          alignY = 0,
-          cohX = 0,
-          cohY = 0;
+        let sepX = 0, sepY = 0, alignX = 0, alignY = 0, cohX = 0, cohY = 0;
         let neighbors = 0;
-        for (let j = 0; j < boids.length; j++) {
-          if (i === j) continue;
-          const o = boids[j];
-          let dx = o.x - b.x;
-          let dy = o.y - b.y;
-          dx = dx > w / 2 ? dx - w : dx < -w / 2 ? dx + w : dx;
-          dy = dy > h / 2 ? dy - h : dy < -h / 2 ? dy + h : dy;
-          const d = Math.hypot(dx, dy) || 0.001;
-          if (d < PERCEPTION_RADIUS) {
-            neighbors++;
-            if (d < SEPARATION_RADIUS) {
-              sepX -= dx / d;
-              sepY -= dy / d;
+        const cellX = mod(Math.floor(b.x / CELL_SIZE), nCellsX);
+        const cellY = mod(Math.floor(b.y / CELL_SIZE), nCellsY);
+        for (let di = -1; di <= 1; di++) {
+          for (let dj = -1; dj <= 1; dj++) {
+            const nx = mod(cellX + di, nCellsX);
+            const ny = mod(cellY + dj, nCellsY);
+            const cell = grid[ny * nCellsX + nx];
+            for (let k = 0; k < cell.length; k++) {
+              const j = cell[k];
+              if (i === j) continue;
+              const o = boids[j];
+              let dx = o.x - b.x;
+              let dy = o.y - b.y;
+              dx = dx > w / 2 ? dx - w : dx < -w / 2 ? dx + w : dx;
+              dy = dy > h / 2 ? dy - h : dy < -h / 2 ? dy + h : dy;
+              const dSq = dx * dx + dy * dy;
+              if (dSq >= PERCEPTION_RADIUS_SQ) continue;
+              const d = Math.sqrt(dSq) || 0.001;
+              neighbors++;
+              if (dSq < SEPARATION_RADIUS_SQ) {
+                sepX -= dx / d;
+                sepY -= dy / d;
+              }
+              alignX += o.vx;
+              alignY += o.vy;
+              cohX += dx;
+              cohY += dy;
             }
-            alignX += o.vx;
-            alignY += o.vy;
-            cohX += dx;
-            cohY += dy;
           }
         }
         if (neighbors > 0) {
@@ -124,20 +163,10 @@ export function StarlingMurmuration({
           cohY += (Math.random() - 0.5) * COHESION_NOISE;
         }
 
-        /** Factores suaves → inercia, cambios de rumbo graduales (estorninos, no mosquitos) */
         const forceScale = 0.065;
-        let vx =
-          b.vx +
-          SEPARATION_WEIGHT * sepX * forceScale +
-          ALIGNMENT_WEIGHT * (alignX - b.vx) * forceScale +
-          COHESION_WEIGHT * cohX * forceScale;
-        let vy =
-          b.vy +
-          SEPARATION_WEIGHT * sepY * forceScale +
-          ALIGNMENT_WEIGHT * (alignY - b.vy) * forceScale +
-          COHESION_WEIGHT * cohY * forceScale;
+        let vx = b.vx + SEPARATION_WEIGHT * sepX * forceScale + ALIGNMENT_WEIGHT * (alignX - b.vx) * forceScale + COHESION_WEIGHT * cohX * forceScale;
+        let vy = b.vy + SEPARATION_WEIGHT * sepY * forceScale + ALIGNMENT_WEIGHT * (alignY - b.vy) * forceScale + COHESION_WEIGHT * cohY * forceScale;
 
-        /** Dispersión global: todos a la vez, luego se reagrupan en cúmulos por cohesión/alineación entre vecinos */
         const inDispersion = (t % DISPERSION_INTERVAL) < DISPERSION_DURATION;
         if (inDispersion) {
           let dx = b.x - cx;
@@ -160,10 +189,8 @@ export function StarlingMurmuration({
           vx = (vx / speed) * MAX_SPEED;
           vy = (vy / speed) * MAX_SPEED;
         }
-        let x = b.x + vx;
-        let y = b.y + vy;
-        x = wrap(x, w);
-        y = wrap(y, h);
+        let x = wrap(b.x + vx, w);
+        let y = wrap(b.y + vy, h);
         return { x, y, vx, vy };
       });
       boidsRef.current = newBoids;
@@ -171,13 +198,11 @@ export function StarlingMurmuration({
       ctx.clearRect(0, 0, w, h);
       ctx.fillStyle = color;
       ctx.globalAlpha = opacity;
-      newBoids.forEach((b) => {
-        const px = Math.floor(b.x);
-        const py = Math.floor(b.y);
-        ctx.fillRect(px, py, PIXEL_SIZE, PIXEL_SIZE);
-      });
+      for (let i = 0; i < newBoids.length; i++) {
+        const b = newBoids[i];
+        ctx.fillRect(Math.floor(b.x), Math.floor(b.y), PIXEL_SIZE, PIXEL_SIZE);
+      }
       ctx.globalAlpha = 1;
-      rafRef.current = requestAnimationFrame(tick);
     };
 
     if (paused) {
@@ -186,7 +211,8 @@ export function StarlingMurmuration({
       return () => ro.disconnect();
     }
     setSize();
-    rafRef.current = requestAnimationFrame(tick);
+    lastTickRef.current = 0;
+    rafRef.current = requestAnimationFrame((now) => tick(now));
     const ro = new ResizeObserver(() => setSize());
     ro.observe(container);
     return () => {
@@ -195,17 +221,25 @@ export function StarlingMurmuration({
     };
   }, [color, opacity, paused]);
 
+  const handleClick = () => {
+    if (clickMode === 'zoom') {
+      onZoomIn?.();
+    } else {
+      setPaused((p) => !p);
+    }
+  };
+
   return (
     <div
       ref={containerRef}
       role="button"
       tabIndex={0}
-      onClick={() => setPaused((p) => !p)}
-      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setPaused((p) => !p); } }}
+      onClick={handleClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleClick(); } }}
       className={className || 'absolute inset-0 overflow-hidden cursor-pointer'}
       style={{ pointerEvents: 'auto' }}
-      aria-label={paused ? 'Reanudar animación' : 'Pausar animación'}
-      title={paused ? 'Clic para reanudar' : 'Clic para pausar'}
+      aria-label={clickMode === 'zoom' ? 'Hacer clic para ampliar la sección' : (paused ? 'Reanudar animación' : 'Pausar animación')}
+      title={clickMode === 'zoom' ? 'Clic para ampliar' : (paused ? 'Clic para reanudar' : 'Clic para pausar')}
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
     </div>

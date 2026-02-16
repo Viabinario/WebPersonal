@@ -377,7 +377,12 @@ export default function App() {
         {showCasosEstudioViewportExtension && (
           <div className="absolute inset-0 z-20 bg-[#f7f2ed]">
             <div className="w-full h-[832px]">
-              <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+              <CasosEstudioSection
+                isZoomed={isZoomed}
+                onNavigate={handleNavigate}
+                onRequestZoomIn={() => { setActiveSection('casos-estudio'); handleToggleZoom(); }}
+                activeSection={activeSection}
+              />
             </div>
           </div>
         )}
@@ -401,7 +406,12 @@ export default function App() {
           {/* Bottom Left - Casos de Estudio */}
           <div className="w-[1280px] h-[832px]">
             {!showCasosEstudioViewportExtension && (
-              <CasosEstudioSection isZoomed={isZoomed} onNavigate={handleNavigate} activeSection={activeSection} />
+              <CasosEstudioSection
+                isZoomed={isZoomed}
+                onNavigate={handleNavigate}
+                onRequestZoomIn={() => { setActiveSection('casos-estudio'); handleToggleZoom(); }}
+                activeSection={activeSection}
+              />
             )}
           </div>
 

@@ -336,6 +336,8 @@ export function CaseStudyNavForHeader({
 interface CasosEstudioSectionProps {
   isZoomed?: boolean;
   onNavigate?: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
+  /** En zoom out: clic en la animación llama esto para hacer zoom in */
+  onRequestZoomIn?: () => void;
   activeSection?: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
   /** En móvil: barra de casos y scroll integrados en la sección (no superpuestos) */
   isMobile?: boolean;
@@ -344,7 +346,7 @@ interface CasosEstudioSectionProps {
   onMobileCaseViewChange?: (view: CaseView) => void;
 }
 
-export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate = () => {}, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
+export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _onNavigate = () => {}, onRequestZoomIn, activeSection = 'presentacion', isMobile = false, mobileCaseView, onMobileCaseViewChange }: CasosEstudioSectionProps) {
   const isCasosEstudioActive = activeSection === 'casos-estudio';
   const showCaseStudyUI = isCasosEstudioActive && !_isZoomed;
   const [internalView, setInternalView] = useState<CaseView>('menu');
@@ -528,8 +530,12 @@ export function CasosEstudioSection({ isZoomed: _isZoomed = false, onNavigate: _
       <div
         className={`relative w-full h-full min-h-[100dvh] bg-[#f7f2ed] overflow-hidden flex flex-col`}
       >
-        {/* Fondo: murmuración (boids) — concentra y disgrega; en desktop y mobile */}
-        <StarlingMurmuration className="absolute inset-0 overflow-hidden" />
+        {/* Fondo: murmuración (boids). Zoom out: clic = zoom in; zoom in: clic = pausa */}
+        <StarlingMurmuration
+          className="absolute inset-0 overflow-hidden"
+          clickMode={_isZoomed ? 'zoom' : 'pause'}
+          onZoomIn={_isZoomed ? onRequestZoomIn : undefined}
+        />
         {/* En móvil la barra de casos está en el header (arriba izquierda); en desktop: portal a body */}
         {showCaseStudyUI && !isMobile && createPortal(<CaseButtonsBar>{caseButtonsContent}</CaseButtonsBar>, document.body)}
         </div>
