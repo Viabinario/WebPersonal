@@ -89,8 +89,8 @@ El build en GitHub Actions inyecta la URL del API de contacto **solo si está co
 4. Guardar. El **próximo** push a `fsanchez` hará un build con estas variables; no hace falta tocar código.
 
 **Si las variables ya están creadas y el formulario sigue sin URL:**  
-- Si las definiste dentro de un **Environment** (p. ej. "production" o "github-pages"), el workflow tiene que usar ese entorno. En `.github/workflows/deploy-gh-pages.yml`, en el job `build-and-deploy`, descomenta y ajusta la línea `# environment: production` con el nombre de tu environment.  
-- Si el workflow falla con *"VITE_CONTACT_API_URL no está disponible en este build"*, es que la variable no llega al job: revisa que el nombre sea exactamente `VITE_CONTACT_API_URL` (sin espacios) y que esté en **Variables** (o **Secrets**) a nivel de repositorio, o que el job tenga `environment: <nombre>` si está en un Environment.
+- El workflow usa **Repository variables** (Settings → Secrets and variables → Actions → pestaña **Variables**). Ahí deben estar `VITE_CONTACT_API_URL` y (opcional) `VITE_CONTACT_EMAIL`. **No hace falta** añadirlas en un Environment (github-pages, Production, etc.): las variables de repositorio están disponibles en todos los workflows.
+- Si el workflow falla con *"VITE_CONTACT_API_URL no está disponible"*, revisa que existan en **Variables** (o **Secrets**) a nivel de repositorio, con el nombre exacto.
 
 ### Backend (Vercel / API)
 
