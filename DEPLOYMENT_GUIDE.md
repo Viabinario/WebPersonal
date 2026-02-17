@@ -72,6 +72,47 @@ Verificar:
 
 ---
 
+## 📧 Formulario de contacto (VITE_CONTACT_API_URL)
+
+El build en GitHub Actions inyecta la URL del API de contacto **solo si está configurada** en el repositorio. Si falta, el formulario mostrará: *"El formulario no está configurado (falta URL del API)"*.
+
+### Configurar en GitHub (obligatorio para que el formulario funcione)
+
+1. Ir a **GitHub** → repositorio **Viabinario/WebPersonal** → **Settings** → **Secrets and variables** → **Actions**.
+2. Pestaña **Variables** (o **Secrets** si prefieres; el workflow acepta ambos).
+3. Añadir o editar:
+   - **Nombre:** `VITE_CONTACT_API_URL`  
+     **Valor:** URL completa de tu API (ej: `https://tu-proyecto.vercel.app/api/contact`).  
+     Debe ser la URL del endpoint que envía el email (p. ej. serverless en Vercel con Resend).
+   - **Opcional:** `VITE_CONTACT_EMAIL` → correo que se muestra y se copia en "Copiar dirección de correo".
+
+4. Guardar. El **próximo** push a `fsanchez` hará un build con estas variables; no hace falta tocar código.
+
+**Si las variables ya están creadas y el formulario sigue sin URL:**  
+- Si las definiste dentro de un **Environment** (p. ej. "production" o "github-pages"), el workflow tiene que usar ese entorno. En `.github/workflows/deploy-gh-pages.yml`, en el job `build-and-deploy`, descomenta y ajusta la línea `# environment: production` con el nombre de tu environment.  
+- Si el workflow falla con *"VITE_CONTACT_API_URL no está disponible en este build"*, es que la variable no llega al job: revisa que el nombre sea exactamente `VITE_CONTACT_API_URL` (sin espacios) y que esté en **Variables** (o **Secrets**) a nivel de repositorio, o que el job tenga `environment: <nombre>` si está en un Environment.
+
+### Backend (Vercel / API)
+
+En el proyecto donde está desplegada la API (p. ej. Vercel), configurar en **Environment Variables**:
+
+- `RESEND_API_KEY` (tu clave de Resend)
+- `RESEND_FROM_EMAIL` (ej: `Contacto <onboarding@resend.dev>`)
+- `RESEND_TO_EMAIL` (correo que recibe los mensajes; puede ser el mismo que `VITE_CONTACT_EMAIL`)
+
+### Build local con formulario
+
+Para probar el envío en local, crear o editar `.env` en la raíz del proyecto (no se commitea):
+
+```
+VITE_CONTACT_API_URL=https://tu-proyecto.vercel.app/api/contact
+VITE_CONTACT_EMAIL=tu-email@ejemplo.com
+```
+
+Luego `npm run build` o `npm run dev` usarán estas variables.
+
+---
+
 ## ❌ Qué NO Hacer
 
 ```bash
