@@ -1,14 +1,10 @@
 /**
- * URL del endpoint del formulario de contacto (Resend u otro backend).
- * Configurar en .env como VITE_CONTACT_API_URL.
- * Ejemplo: https://tu-proyecto.vercel.app/api/contact
+ * URL del endpoint del formulario de contacto. Sustituida en build por Vite (.env.production o define).
+ * Configurar VITE_CONTACT_API_URL en Repository variables (GitHub Actions) o en .env (local).
  */
-export const contactApiUrl =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_API_URL) || '';
+export const contactApiUrl: string = (import.meta.env.VITE_CONTACT_API_URL ?? '').trim();
 
 /**
- * Correo de contacto (copiar al portapapeles). Configurar en .env como VITE_CONTACT_EMAIL.
- * Debe coincidir con el email destino del API (ej: RESEND_TO_EMAIL) si usas Resend.
+ * Correo de contacto (copiar al portapapeles).
  */
-export const contactEmail =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_CONTACT_EMAIL) || '';
+export const contactEmail: string = (import.meta.env.VITE_CONTACT_EMAIL ?? '').trim();

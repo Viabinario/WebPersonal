@@ -41,7 +41,11 @@ jobs:
           echo "VITE_CONTACT_API_URL configurada (longitud ${#VITE_CONTACT_API_URL})."
 
       - name: Build
-        run: npm run build
+        run: |
+          # Escribir variables en .env.production para que Vite las cargue en el build (más fiable que solo process.env)
+          printf 'VITE_CONTACT_API_URL=%s\n' "$VITE_CONTACT_API_URL" > .env.production
+          printf 'VITE_CONTACT_EMAIL=%s\n' "$VITE_CONTACT_EMAIL" >> .env.production
+          npm run build
 
       - name: Preparar docs/ con CNAME y .nojekyll
         run: |
