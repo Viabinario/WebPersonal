@@ -6,27 +6,34 @@ import React from 'react';
 import {
   LINKS_OTHER_FORMATS_CASE1,
   LINKS_OTHER_FORMATS_CASE2,
+  LINKS_OTHER_FORMATS_CASE3,
   CASE1_DESCRIPTION_CONTENT,
   CASE2_DESCRIPTION_CONTENT,
+  CASE3_DESCRIPTION_CONTENT,
   CASE1_TITLE,
   CASE2_TITLE,
+  CASE3_TITLE,
 } from './case-shared';
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 import imgCase1Cover from '../assets/case1/case1-03b.png';
 import imgCase2Cover from '../assets/case2/case2-01.png';
+import imgCase3Cover from '../assets/case3/case3-01.png';
 import Case1MobileEnhanced from './Case1MobileEnhanced';
 import Case2MobileEnhanced from './Case2MobileEnhanced';
+import Case3MobileEnhanced from './Case3MobileEnhanced';
 
-export type CaseMobileId = 'case1' | 'case2';
+export type CaseMobileId = 'case1' | 'case2' | 'case3';
 
 const CASE_COVER_IMAGES: Record<CaseMobileId, string> = {
   case1: imgCase1Cover,
   case2: imgCase2Cover,
+  case3: imgCase3Cover,
 };
 
 const OTHER_FORMATS_LINKS: Record<CaseMobileId, readonly [string, string, string]> = {
   case1: LINKS_OTHER_FORMATS_CASE1,
   case2: LINKS_OTHER_FORMATS_CASE2,
+  case3: LINKS_OTHER_FORMATS_CASE3,
 };
 
 const OTHER_FORMATS_LABELS: readonly { label: string; aria: string }[] = [
@@ -81,6 +88,7 @@ const CASE_MOBILE_CONTENT: Record<
 > = {
   case1: { title: CASE1_TITLE, description: CASE1_DESCRIPTION_CONTENT },
   case2: { title: CASE2_TITLE, description: CASE2_DESCRIPTION_CONTENT },
+  case3: { title: CASE3_TITLE, description: CASE3_DESCRIPTION_CONTENT },
 };
 
 interface CaseMobileViewProps {
@@ -88,12 +96,15 @@ interface CaseMobileViewProps {
 }
 
 export function CaseMobileView({ caseId }: CaseMobileViewProps) {
-  // Case1 (Kora) y Case2 (Del Revés) usan versión mejorada con parallax y dropdowns
+  // Case1 (Kora), Case2 (Del Revés) y Case3 (Mingo!) usan versión mejorada con parallax y dropdowns
   if (caseId === 'case1') {
     return <Case1MobileEnhanced />;
   }
   if (caseId === 'case2') {
     return <Case2MobileEnhanced />;
+  }
+  if (caseId === 'case3') {
+    return <Case3MobileEnhanced />;
   }
 
   const { title, description } = CASE_MOBILE_CONTENT[caseId];

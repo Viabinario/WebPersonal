@@ -3,21 +3,24 @@ import { createPortal } from 'react-dom';
 import { Download } from 'lucide-react';
 import Case1Component from '../imports/Case1';
 import Case2Component from '../imports/Case2';
+import Case3Component from '../imports/Case3';
 import { CaseMobileView } from './CaseMobileView';
 import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
 import {
   LINKS_OTHER_FORMATS_CASE1,
   LINKS_OTHER_FORMATS_CASE2,
+  LINKS_OTHER_FORMATS_CASE3,
   LINK_CV_PDF,
 } from './case-shared';
 import { SOCIAL_BAR_WIDTH_PX } from './SocialBarDesktop';
 import { StarlingMurmuration } from './StarlingMurmuration';
 import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 
-// Colores para el degradado radial que sigue el cursor (Kora: azules; Del Revés: verdes)
+// Colores para el degradado radial que sigue el cursor (Kora: azules; Del Revés: verdes; Mingo!: tonos tierra)
 const CARD_GRADIENT_COLORS = {
   kora: 'rgba(36,0,124,0.5), rgba(67,0,226,0.35), rgba(26,0,89,0.15), transparent',
   delReves: 'rgba(40,76,27,0.5), rgba(94,178,63,0.5), rgba(94,178,63,0.15), transparent',
+  mingo: 'rgba(90,62,38,0.45), rgba(126,87,53,0.35), rgba(90,62,38,0.15), transparent',
 } as const;
 
 // Card con degradado radial dinámico que sigue el mouse (estilo Andrew Parson: actualización directa del background)
@@ -28,7 +31,7 @@ function CaseCard({
   title,
   description,
 }: {
-  variant: 'kora' | 'delReves';
+  variant: 'kora' | 'delReves' | 'mingo';
   onClick: () => void;
   label: string;
   title: string;
@@ -335,12 +338,13 @@ function getOriginalsBaseUrl(): string {
   return base.endsWith('/') ? `${base}originals/` : `${base}/originals/`;
 }
 
-export type CaseView = 'menu' | 'case1' | 'case2';
+export type CaseView = 'menu' | 'case1' | 'case2' | 'case3';
 
 /** Lista de casos para el menú móvil (escalable: añadir más entradas aquí). */
 const CASE_OPTIONS: { id: CaseView; label: string }[] = [
   { id: 'case1', label: 'Kora' },
   { id: 'case2', label: 'Del Revés' },
+  { id: 'case3', label: 'Mingo!' },
 ];
 
 /** Menú móvil de casos: un botón sandwich (misma idea gráfica que el botón de casos) que abre lista de proyectos. Esquina superior izquierda. */
@@ -431,6 +435,11 @@ export function CaseStudyNavForHeader({
         onClick={() => onSelectCase('case2')}
         isActive={currentView === 'case2'}
         label="Del Revés"
+      />
+      <CaseButton
+        onClick={() => onSelectCase('case3')}
+        isActive={currentView === 'case3'}
+        label="Mingo!"
       />
     </div>
   );
@@ -532,7 +541,7 @@ export function CasosEstudioSection({
 
   // Calculate scroll percentage from the internal scroll container of Case1/Case2
   useEffect(() => {
-    if (currentView !== 'case1' && currentView !== 'case2') return;
+    if (currentView !== 'case1' && currentView !== 'case2' && currentView !== 'case3') return;
 
     const findScrollContainer = () => {
       const caseContainer = caseContainerRef.current;
@@ -580,7 +589,7 @@ export function CasosEstudioSection({
   useEffect(() => {
     setScrollPercentage(0);
 
-    if (currentView === 'case1' || currentView === 'case2') {
+    if (currentView === 'case1' || currentView === 'case2' || currentView === 'case3') {
       setTimeout(() => {
         const caseContainer = caseContainerRef.current;
         if (caseContainer) {
@@ -673,6 +682,13 @@ export function CasosEstudioSection({
               label="Caso de estudio"
               title="Del Revés"
               description="Herramienta para profesionales de la salud mental que acompañan procesos emocionales complejos."
+            />
+            <CaseCard
+              variant="mingo"
+              onClick={() => handleCaseClick('case3')}
+              label="Caso de estudio"
+              title="Mingo!"
+              description="App de alquiler flexible: investigación, Design Thinking y propuesta de valor para Flex Living."
             />
           </div>
         </div>
@@ -774,6 +790,23 @@ export function CasosEstudioSection({
               </div>
             )
           )}
+          {currentView === 'case3' && (
+            isMobile ? (
+              <div ref={caseContainerRef} className="w-full min-h-full" role="article">
+                <CaseMobileView caseId="case3" />
+              </div>
+            ) : (
+              <div
+                ref={caseContainerRef}
+                data-case-lightbox
+                role="presentation"
+                className="w-full h-full relative"
+                onClick={handleCaseContentClick}
+              >
+                <Case3Component />
+              </div>
+            )
+          )}
         </div>
 
         {/* Borde derecho del frame (712px): única línea segmentada del frame, dibujada hacia dentro para evitar recorte y tonalidad desigual */}
@@ -784,7 +817,7 @@ export function CasosEstudioSection({
       </div>
 
       {/* Bottom bar móvil: igual que la top bar en desktop, se renderiza en body para no ser recortada por overflow del contenedor */}
-      {isMobile && (currentView === 'case1' || currentView === 'case2') &&
+      {isMobile && (currentView === 'case1' || currentView === 'case2' || currentView === 'case3') &&
         createPortal(
           <nav
             className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-4 px-4 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-[#f7f2ed] border-t-2 border-[#5a3e26] border-dashed"
@@ -795,7 +828,7 @@ export function CasosEstudioSection({
               { label: 'Figma', aria: 'Ver en Figma', path: svgPathsOtherFormats.p27c0d200 },
               { label: 'YouTube', aria: 'Ver en YouTube', path: svgPathsOtherFormats.pee38400 },
             ] as const).map((item, i) => {
-              const href = currentView === 'case1' ? LINKS_OTHER_FORMATS_CASE1[i] : LINKS_OTHER_FORMATS_CASE2[i];
+              const href = currentView === 'case1' ? LINKS_OTHER_FORMATS_CASE1[i] : currentView === 'case2' ? LINKS_OTHER_FORMATS_CASE2[i] : LINKS_OTHER_FORMATS_CASE3[i];
               return (
                 <a
                   key={item.label}
@@ -873,10 +906,16 @@ export function CasosEstudioSection({
                 onClick={() => handleCaseClick('case2')}
                 isActive={currentView === 'case2'}
                 label="Del Revés"
-                overContent={currentView === 'case1' || currentView === 'case2'}
+                overContent={currentView === 'case1' || currentView === 'case2' || currentView === 'case3'}
+              />
+              <CaseButton
+                onClick={() => handleCaseClick('case3')}
+                isActive={currentView === 'case3'}
+                label="Mingo!"
+                overContent={currentView === 'case1' || currentView === 'case2' || currentView === 'case3'}
               />
             </CaseButtonsBar>
-            {(currentView === 'case1' || currentView === 'case2') && (
+            {(currentView === 'case1' || currentView === 'case2' || currentView === 'case3') && (
               <ScrollProgress {...scrollProgressProps} />
             )}
           </>,

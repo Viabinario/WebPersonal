@@ -241,6 +241,13 @@ export const LINKS_OTHER_FORMATS_CASE2 = [
   'https://youtu.be/VXkacI3VHlA',
 ] as const;
 
+/** URLs "Otros formatos" para Case3 Mingo! (Behance, Figma, YouTube). Mismo orden que los íconos. Editar con los enlaces del caso 3. */
+export const LINKS_OTHER_FORMATS_CASE3 = [
+  'https://www.behance.net/gallery/244488013/Mingo-Mobile-App',
+  'https://www.figma.com/proto/zQtYWAi6QpN85aqBPMaDx9/Francisco.S%C3%A1nchez---Reto2-UI?page-id=1%3A2&node-id=563-10703&p=f&viewport=411%2C276%2C0.06&t=f0aLe79ip4TeX6XQ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=83%3A387&show-proto-sidebar=1',
+  'https://youtu.be/kGIDkZKWAag',
+] as const;
+
 /** URL del CV en PDF para descarga (colocar el archivo en public/cv.pdf o usar enlace externo). */
 export const LINK_CV_PDF = '/FSanchez_UXUI.pdf';
 
@@ -336,6 +343,20 @@ export const CASE2_DESCRIPTION_CONTENT = (
 /** Títulos de los casos (para móvil y cualquier uso centralizado). */
 export const CASE1_TITLE = 'Kora';
 export const CASE2_TITLE = 'Del Revés';
+export const CASE3_TITLE = 'Mingo!';
+
+/** Descripción del caso Mingo! (Case3). Usar en Case3 y CaseMobileView. */
+export const CASE3_DESCRIPTION_CONTENT = (
+  <>
+    <P_NB>Proyecto Inicial de Bootcamp mobile App, trabajo individual.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>Product Design. Fases de Investigación y Estrategia. Fases de Diseño y Prototipado. Fases de Especificaciones. Presentación oral.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <P_NB>Metodología Design Thinking. Software: Figma (Design, Make, Slide). Duración: 15 días.</P_NB>
+    <P_NB>&nbsp;</P_NB>
+    <p className="css-4hzbpn leading-[normal]">&nbsp;</p>
+  </>
+);
 
 export function ContentBodySideLeft() {
   return (
