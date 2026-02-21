@@ -20,7 +20,7 @@ import svgPathsOtherFormats from '../imports/svg-mbzxtnnqxt';
 const CARD_GRADIENT_COLORS = {
   kora: 'rgba(36,0,124,0.5), rgba(67,0,226,0.35), rgba(26,0,89,0.15), transparent',
   delReves: 'rgba(40,76,27,0.5), rgba(94,178,63,0.5), rgba(94,178,63,0.15), transparent',
-  mingo: 'rgba(90,62,38,0.45), rgba(126,87,53,0.35), rgba(90,62,38,0.15), transparent',
+  mingo: 'rgba(0,101,113,0.5), rgba(118,163,127,0.45), rgba(217,216,139,0.35), transparent',
 } as const;
 
 // Card con degradado radial dinámico que sigue el mouse (estilo Andrew Parson: actualización directa del background)
@@ -347,28 +347,44 @@ const CASE_OPTIONS: { id: CaseView; label: string }[] = [
   { id: 'case3', label: 'Mingo!' },
 ];
 
-/** Menú móvil de casos: un botón sandwich (misma idea gráfica que el botón de casos) que abre lista de proyectos. Esquina superior izquierda. */
+/** Menú móvil de casos: botón sandwich + texto "CASOS DE ESTUDIO" a la derecha en la top bar. Opcional: control externo (open/onOpenChange) y onWhenOpen para cerrar el menú principal y evitar solapamiento. */
 export function CaseStudyNavMobile({
   currentView,
   onSelectCase,
+  open: controlledOpen,
+  onOpenChange: setControlledOpen,
+  onWhenOpen,
 }: {
   currentView: CaseView;
   onSelectCase: (view: CaseView) => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  onWhenOpen?: () => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined && setControlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = isControlled ? (value: boolean) => setControlledOpen!(value) : setInternalOpen;
 
   useEffect(() => {
     if (!open) return;
     const close = () => setOpen(false);
     document.addEventListener('click', close);
     return () => document.removeEventListener('click', close);
-  }, [open]);
+  }, [open, setOpen]);
+
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const next = !open;
+    setOpen(next);
+    if (next) onWhenOpen?.();
+  };
 
   return (
-    <div className="relative flex items-center">
+    <div className="relative flex items-center gap-3 min-w-0 flex-1">
       <button
         type="button"
-        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        onClick={handleToggle}
         aria-label={open ? 'Cerrar menú de proyectos' : 'Abrir menú de proyectos'}
         aria-expanded={open}
         className="relative shrink-0 flex items-center transition-all duration-300 group"
@@ -389,10 +405,13 @@ export function CaseStudyNavMobile({
           <span className="block h-0.5 w-5 rounded-full bg-[#f7f2ed]" />
         </div>
       </button>
+      <span className="font-['Roboto',sans-serif] font-semibold text-[#5a3e26] text-[13px] uppercase tracking-wide truncate" aria-hidden>
+        CASOS DE ESTUDIO
+      </span>
 
       {open && (
         <nav
-          className="absolute top-full left-0 mt-2 w-[min(240px,75vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+          className="absolute top-full left-0 mt-2 w-[min(240px,75vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-[60]"
           aria-label="Proyectos de casos de estudio"
           onClick={(e) => e.stopPropagation()}
         >
@@ -479,6 +498,13 @@ export function CasosEstudioSection({
   const currentView = isMobile && mobileCaseView !== undefined ? mobileCaseView : internalView;
   const setCurrentView = isMobile && onMobileCaseViewChange ? onMobileCaseViewChange : setInternalView;
   const [scrollPercentage, setScrollPercentage] = useState(0);
+
+  // Sincronizar vista interna con la que pide el padre (ej. al pulsar "Casos de Estudio" en el menú principal para volver a la página de cards).
+  useEffect(() => {
+    if (!isMobile && initialView !== undefined) {
+      setInternalView(initialView);
+    }
+  }, [isMobile, initialView]);
   const [lightboxPreferredSrc, setLightboxPreferredSrc] = useState<string | null>(null);
   const [lightboxFallbackSrc, setLightboxFallbackSrc] = useState<string | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
@@ -672,21 +698,21 @@ export function CasosEstudioSection({
             <CaseCard
               variant="kora"
               onClick={() => handleCaseClick('case1')}
-              label="Caso de estudio"
+              label="Caso de estudio - PFB"
               title="Kora"
               description="Plataforma social digital y ecosistema de intercambio de valor bidireccional entre generaciones."
             />
             <CaseCard
               variant="delReves"
               onClick={() => handleCaseClick('case2')}
-              label="Caso de estudio"
+              label="Caso de estudio - GRUPAL"
               title="Del Revés"
               description="Herramienta para profesionales de la salud mental que acompañan procesos emocionales complejos."
             />
             <CaseCard
               variant="mingo"
               onClick={() => handleCaseClick('case3')}
-              label="Caso de estudio"
+              label="Caso de estudio - Inicial"
               title="Mingo!"
               description="App de alquiler flexible: investigación, Design Thinking y propuesta de valor para Flex Living."
             />

@@ -32,12 +32,39 @@ const sectionPositions: Record<Section, SectionPosition> = {
   'contacto': { x: -SECTION_WIDTH, y: -SECTION_HEIGHT },
 };
 
+/** Lee la sección y el caso desde la URL para inicializar estado (evita que el menú no marque Casos de Estudio al cargar ?section=casos-estudio). */
+function getInitialSectionFromUrl(): Section {
+  try {
+    const sectionParam = new URL(window.location.href).searchParams.get('section') as Section | null;
+    if (sectionParam === 'presentacion' || sectionParam === 'sobre-mi' || sectionParam === 'contacto' || sectionParam === 'casos-estudio') {
+      return sectionParam;
+    }
+  } catch {
+    // ignore
+  }
+  return 'sobre-mi';
+}
+
+function getInitialCaseViewFromUrl(): CaseView {
+  try {
+    const caseParam = new URL(window.location.href).searchParams.get('case');
+    if (caseParam === 'kora') return 'case1';
+    if (caseParam === 'del-reves') return 'case2';
+    if (caseParam === 'mingo') return 'case3';
+  } catch {
+    // ignore
+  }
+  return 'menu';
+}
+
 export default function App() {
-  const [activeSection, setActiveSection] = useState<Section>('sobre-mi');
+  const [activeSection, setActiveSection] = useState<Section>(getInitialSectionFromUrl);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [caseView, setCaseView] = useState<CaseView>('menu');
+  const [caseView, setCaseView] = useState<CaseView>(getInitialCaseViewFromUrl);
+  const [mainMenuOpen, setMainMenuOpen] = useState(false);
+  const [casesMenuOpen, setCasesMenuOpen] = useState(false);
   const [profilePhotoReveal, setProfilePhotoReveal] = useState(false);
   const [profilePhotoPhase, setProfilePhotoPhase] = useState<'from' | 'to'>('from');
   const [profilePhotoReturning, setProfilePhotoReturning] = useState(false);
@@ -70,6 +97,8 @@ export default function App() {
         setCaseView('case1');
       } else if (caseParam === 'del-reves') {
         setCaseView('case2');
+      } else if (caseParam === 'mingo') {
+        setCaseView('case3');
       }
     } catch {
       // Ignorar URLs no válidas
@@ -81,8 +110,9 @@ export default function App() {
     try {
       const url = new URL(window.location.href);
       url.searchParams.set('section', activeSection);
-      if (activeSection === 'casos-estudio' && (caseView === 'case1' || caseView === 'case2')) {
-        url.searchParams.set('case', caseView === 'case1' ? 'kora' : 'del-reves');
+      if (activeSection === 'casos-estudio' && (caseView === 'case1' || caseView === 'case2' || caseView === 'case3')) {
+        const caseSlug = caseView === 'case1' ? 'kora' : caseView === 'case2' ? 'del-reves' : 'mingo';
+        url.searchParams.set('case', caseSlug);
       } else {
         url.searchParams.delete('case');
       }
@@ -95,6 +125,10 @@ export default function App() {
   const handleNavigate = (section: Section) => {
     setActiveSection(section);
     setIsZoomed(false);
+    // Al entrar a Casos de Estudio desde el menú principal, mostrar siempre la vista de cards (fondo animado + cards).
+    if (section === 'casos-estudio') {
+      setCaseView('menu');
+    }
   };
 
   // Navegación que dispara animación foto cuando va Presentación ↔ Sobre mí (Sobre mí = inicial/izq, Presentación = der)
@@ -314,14 +348,28 @@ export default function App() {
     }
   };
 
-  // Mobile: menú hamburguesa derecha; menú de casos (sandwich, misma idea gráfica del botón) izquierda
+  // Mobile: menú hamburguesa derecha; menú de casos (sandwich + texto "CASOS DE ESTUDIO") izquierda; estados para que no se solapen
   if (isMobile) {
     const headerLeftContent = activeSection === 'casos-estudio' ? (
-      <CaseStudyNavMobile currentView={caseView} onSelectCase={setCaseView} />
+      <CaseStudyNavMobile
+        currentView={caseView}
+        onSelectCase={setCaseView}
+        open={casesMenuOpen}
+        onOpenChange={setCasesMenuOpen}
+        onWhenOpen={() => setMainMenuOpen(false)}
+      />
     ) : undefined;
     return (
       <div className="w-full min-h-screen bg-[#f7f2ed]">
-        <NavigationGrid activeSection={activeSection} onNavigate={handleNavigate} embedInFlow leftContent={headerLeftContent} />
+        <NavigationGrid
+          activeSection={activeSection}
+          onNavigate={handleNavigate}
+          embedInFlow
+          leftContent={headerLeftContent}
+          mainMenuOpen={mainMenuOpen}
+          setMainMenuOpen={setMainMenuOpen}
+          onMainMenuButtonClick={() => setCasesMenuOpen(false)}
+        />
         <main className="w-full overflow-hidden">
           {activeSection === 'presentacion' && (
             <div key="presentacion" className="w-full min-h-screen flex flex-col bg-[#f7f2ed] animate-mobile-slide-left">

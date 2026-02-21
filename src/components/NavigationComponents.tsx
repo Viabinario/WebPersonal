@@ -75,30 +75,45 @@ const SECTION_COLORS: Record<'presentacion' | 'sobre-mi' | 'contacto' | 'casos-e
   'casos-estudio': '#5a3e26',
 };
 
-/** Menú móvil: icono hamburguesa esquina superior derecha; al clicar se expande con textos explícitos */
+/** Menú móvil: icono hamburguesa esquina superior derecha; al clicar se expande con textos explícitos. Opcional: control externo (open/onOpenChange) para no solaparse con el menú de casos. */
 function MobileNavMenu({
   activeSection,
   onNavigate,
+  open: controlledOpen,
+  onOpenChange: setControlledOpen,
+  onOpenButtonClick,
 }: {
   activeSection: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
   onNavigate: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  onOpenButtonClick?: () => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined && setControlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
+  const setOpen = isControlled ? (value: boolean) => setControlledOpen!(value) : setInternalOpen;
 
   useEffect(() => {
     if (!open) return;
     const close = () => setOpen(false);
     document.addEventListener('click', close);
     return () => document.removeEventListener('click', close);
-  }, [open]);
+  }, [open, setOpen]);
 
   const sections: ('presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio')[] = ['sobre-mi', 'presentacion', 'casos-estudio', 'contacto'];
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onOpenButtonClick?.();
+    setOpen(!open);
+  };
+
   return (
-    <div className="relative flex justify-end">
+    <div className="relative flex justify-end shrink-0">
       <button
         type="button"
-        onClick={(e) => { e.stopPropagation(); setOpen((o) => !o); }}
+        onClick={handleClick}
         aria-label={open ? 'Cerrar menú' : 'Abrir menú de navegación'}
         aria-expanded={open}
         className="flex flex-col justify-center gap-1.5 w-11 h-11 rounded-[12px] border-2 border-[#5a3e26] border-solid bg-[#f7f2ed] p-2.5 touch-manipulation"
@@ -110,7 +125,7 @@ function MobileNavMenu({
 
       {open && (
         <nav
-          className="absolute top-full right-0 mt-2 w-[min(280px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+          className="absolute top-full right-0 mt-2 w-[min(280px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-[60]"
           aria-label="Navegación principal"
           onClick={(e) => e.stopPropagation()}
         >
@@ -146,21 +161,40 @@ interface NavigationGridProps {
   onNavigate: (section: 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio') => void;
   /** En móvil: true = menú hamburguesa en esquina superior derecha */
   embedInFlow?: boolean;
-  /** Contenido opcional a la izquierda del header (ej. menú de casos Kora/Del Revés) */
+  /** Contenido opcional a la izquierda del header (ej. menú de casos + texto CASOS DE ESTUDIO) */
   leftContent?: React.ReactNode;
+  /** En móvil embedInFlow: control del menú principal para no solaparse con el menú de casos */
+  mainMenuOpen?: boolean;
+  setMainMenuOpen?: (open: boolean) => void;
+  /** Llamado al abrir el menú principal (para cerrar el menú de casos) */
+  onMainMenuButtonClick?: () => void;
 }
 
-export function NavigationGrid({ activeSection, onNavigate, embedInFlow = false, leftContent }: NavigationGridProps) {
+export function NavigationGrid({
+  activeSection,
+  onNavigate,
+  embedInFlow = false,
+  leftContent,
+  mainMenuOpen,
+  setMainMenuOpen,
+  onMainMenuButtonClick,
+}: NavigationGridProps) {
   const [hoveredSection, setHoveredSection] = useState<'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio' | null>(null);
 
   const displaySection = hoveredSection || activeSection;
 
   if (embedInFlow) {
     return (
-      <header className="sticky top-0 z-40 w-full flex items-center justify-between py-2 px-3 border-b-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] min-h-[52px]">
+      <header className="sticky top-0 z-40 w-full flex items-center justify-between gap-2 py-2 px-3 border-b-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] min-h-[52px]">
         <div className="flex items-center min-w-0 flex-1">{leftContent}</div>
         <div className="shrink-0">
-          <MobileNavMenu activeSection={activeSection} onNavigate={onNavigate} />
+          <MobileNavMenu
+            activeSection={activeSection}
+            onNavigate={onNavigate}
+            open={mainMenuOpen}
+            onOpenChange={setMainMenuOpen}
+            onOpenButtonClick={onMainMenuButtonClick}
+          />
         </div>
       </header>
     );
