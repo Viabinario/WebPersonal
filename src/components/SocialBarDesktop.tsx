@@ -1,4 +1,5 @@
-import { SOCIAL_LOGO_SRCS, SOCIAL_LABELS, SOCIAL_URLS, LINK_CV_PDF } from "./case-shared";
+import { useState, useEffect } from "react";
+import { SOCIAL_LOGO_SRCS, SOCIAL_LABELS, SOCIAL_URLS, LINK_CV_PDF_ES, LINK_CV_PDF_EN } from "./case-shared";
 import { LangSwitch } from "../context/LocaleContext";
 
 /** Ancho de la barra (ícono + padding). Debe coincidir con el margen derecho del contenido en App. */
@@ -13,6 +14,15 @@ const BTN_SHADOW =
 
 /** Barra vertical fija al margen derecho del viewport (desktop). Switch de idioma arriba; íconos de redes abajo. */
 export function SocialBarDesktop() {
+  const [cvMenuOpen, setCvMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!cvMenuOpen) return;
+    const close = () => setCvMenuOpen(false);
+    document.addEventListener("click", close);
+    return () => document.removeEventListener("click", close);
+  }, [cvMenuOpen]);
+
   return (
     <aside
       className="fixed top-0 right-0 bottom-0 hidden lg:flex flex-col items-center gap-3 py-4 z-20 w-14 border-l-2 border-[#5a3e26] border-dashed bg-[#f7f2ed]"
@@ -66,30 +76,59 @@ export function SocialBarDesktop() {
         );
       })}
       </div>
-      {/* Botón descarga CV (mismo enlace que en móvil) */}
-      <a
-        href={LINK_CV_PDF}
-        download
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`${BTN_CLASS} flex shrink-0`}
-        aria-label="Descargar CV"
-        title="Descargar CV"
-      >
-        <div
-          className={BTN_INNER}
-          style={{
-            background: 'linear-gradient(135deg, #d9bda5 0%, #d9bda5 60%, color-mix(in srgb, #d9bda5 85%, white) 100%)',
-          }}
-        />
-        <div className={`${BTN_SHADOW} flex items-center justify-center text-[#5a3e26]`}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-        </div>
-      </a>
+      {/* Botón descarga CV: al clic se despliega menú con ES y EN (igual que en móvil) */}
+      <div className="relative flex shrink-0">
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); setCvMenuOpen((o) => !o); }}
+          className={`${BTN_CLASS}`}
+          aria-label={cvMenuOpen ? "Cerrar menú de descarga de CV" : "Descargar CV"}
+          aria-expanded={cvMenuOpen}
+          title="Descargar CV"
+        >
+          <div
+            className={BTN_INNER}
+            style={{
+              background: 'linear-gradient(135deg, #d9bda5 0%, #d9bda5 60%, color-mix(in srgb, #d9bda5 85%, white) 100%)',
+            }}
+          />
+          <div className={`${BTN_SHADOW} flex items-center justify-center text-[#5a3e26]`}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+          </div>
+        </button>
+        {cvMenuOpen && (
+          <div
+            className="absolute right-full bottom-0 mr-2 w-[min(200px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+            aria-label="Menú descarga CV"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <a
+              href={LINK_CV_PDF_ES}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+              onClick={() => setCvMenuOpen(false)}
+            >
+              Descargar CV (Español)
+            </a>
+            <a
+              href={LINK_CV_PDF_EN}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+              onClick={() => setCvMenuOpen(false)}
+            >
+              Download CV (English)
+            </a>
+          </div>
+        )}
+      </div>
     </aside>
   );
 }

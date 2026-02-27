@@ -350,6 +350,7 @@ export default function App() {
 
   // Mobile: menú hamburguesa derecha; menú de casos (sandwich + texto "CASOS DE ESTUDIO") izquierda; estados para que no se solapen
   if (isMobile) {
+    // Misma estructura que Casos de estudio: slot izquierdo = menú de casos o switch de idioma (Sobre mí / Presentación)
     const headerLeftContent = activeSection === 'casos-estudio' ? (
       <CaseStudyNavMobile
         currentView={caseView}
@@ -366,6 +367,7 @@ export default function App() {
           onNavigate={handleNavigate}
           embedInFlow
           leftContent={headerLeftContent}
+          showLangSwitchInLeftSlot={activeSection === 'presentacion' || activeSection === 'sobre-mi'}
           mainMenuOpen={mainMenuOpen}
           setMainMenuOpen={setMainMenuOpen}
           onMainMenuButtonClick={() => setCasesMenuOpen(false)}
@@ -412,6 +414,7 @@ export default function App() {
                   onNavigate={handleNavigate}
                   activeSection={activeSection}
                   skipEntranceAnimation
+                  isMobile
                 />
               </div>
             </div>
@@ -452,10 +455,12 @@ export default function App() {
       {/* Fixed Zoom Button */}
       <ZoomGridButton isZoomed={isZoomed} onToggleZoom={handleToggleZoom} />
 
-      {/* Switch idioma: en móvil/tablet fijo arriba-derecha (la barra está oculta); en desktop va dentro de la barra */}
-      <div className="fixed top-2 right-2 z-30 lg:hidden">
-        <LangSwitch />
-      </div>
+      {/* Switch idioma: solo en desktop/tablet (no móvil); en móvil va en la top bar izquierda vía NavigationGrid */}
+      {!isMobile && (
+        <div className="fixed top-2 right-2 z-30 lg:hidden">
+          <LangSwitch />
+        </div>
+      )}
 
       {/* Barra social vertical fija al margen derecho (desktop): idioma arriba + redes */}
       <SocialBarDesktop />

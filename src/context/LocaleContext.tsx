@@ -47,8 +47,8 @@ export function useLocale(): LocaleContextValue {
 const LANG_BTN_CLASS =
   "rounded px-1.5 py-1 text-xs font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-1 min-w-[28px]";
 
-/** Switch ES | EN. Si vertical=true, se muestra en columna (para barra estrecha). Si no, en fila con posición absoluta top-right. */
-export function LangSwitch({ vertical = false }: { vertical?: boolean }) {
+/** Switch ES | EN. vertical: columna (barra estrecha). inline: en flujo, sin posición absoluta (ej. top bar móvil). Por defecto: absoluto top-right. */
+export function LangSwitch({ vertical = false, inline = false }: { vertical?: boolean; inline?: boolean }) {
   const { locale, setLocale } = useLocale();
 
   const handleClick = (e: React.MouseEvent, next: Locale) => {
@@ -84,6 +84,18 @@ export function LangSwitch({ vertical = false }: { vertical?: boolean }) {
     return (
       <div
         className="flex flex-col items-center gap-0.5 rounded-md border border-[#5a3e26]/30 bg-[#f7f2ed]/95 px-0.5 py-0.5 shadow-sm w-full"
+        role="group"
+        aria-label="Idioma"
+      >
+        {buttons}
+      </div>
+    );
+  }
+
+  if (inline) {
+    return (
+      <div
+        className="flex items-center gap-0 rounded-md border border-[#5a3e26]/30 bg-[#f7f2ed]/95 px-0.5 py-0.5 shadow-sm shrink-0"
         role="group"
         aria-label="Idioma"
       >

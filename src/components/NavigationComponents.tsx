@@ -1,5 +1,6 @@
 // Navigation and Zoom components extracted from Figma imports
 import { useState, useEffect } from 'react';
+import { LangSwitch } from '../context/LocaleContext';
 
 // Simple navigation button without individual labels
 interface SimpleNavButtonProps {
@@ -163,6 +164,8 @@ interface NavigationGridProps {
   embedInFlow?: boolean;
   /** Contenido opcional a la izquierda del header (ej. menú de casos + texto CASOS DE ESTUDIO) */
   leftContent?: React.ReactNode;
+  /** En móvil: true = mostrar switch de idioma en el mismo slot izquierdo que el menú de casos (Sobre mí / Presentación) */
+  showLangSwitchInLeftSlot?: boolean;
   /** En móvil embedInFlow: control del menú principal para no solaparse con el menú de casos */
   mainMenuOpen?: boolean;
   setMainMenuOpen?: (open: boolean) => void;
@@ -175,6 +178,7 @@ export function NavigationGrid({
   onNavigate,
   embedInFlow = false,
   leftContent,
+  showLangSwitchInLeftSlot = false,
   mainMenuOpen,
   setMainMenuOpen,
   onMainMenuButtonClick,
@@ -184,9 +188,15 @@ export function NavigationGrid({
   const displaySection = hoveredSection || activeSection;
 
   if (embedInFlow) {
+    // Misma estructura que Casos de estudio: slot izquierdo = leftContent (casos) o switch de idioma (Sobre mí / Presentación)
+    const leftSlotContent = leftContent ?? (showLangSwitchInLeftSlot ? (
+      <div className="relative flex items-center gap-3 min-w-0 flex-1">
+        <LangSwitch inline />
+      </div>
+    ) : null);
     return (
       <header className="sticky top-0 z-40 w-full flex items-center justify-between gap-2 py-2 px-3 border-b-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] min-h-[52px]">
-        <div className="flex items-center min-w-0 flex-1">{leftContent}</div>
+        <div className="flex items-center min-w-0 flex-1">{leftSlotContent}</div>
         <div className="shrink-0">
           <MobileNavMenu
             activeSection={activeSection}

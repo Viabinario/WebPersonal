@@ -228,6 +228,14 @@ export const SOCIAL_URLS = [
 ] as const;
 
 /** URLs para los enlaces “Otros formatos” en Case1 (Behance, Figma, YouTube). Mismo orden que los íconos. */
+/** Enlaces generales para la bottom bar móvil cuando no hay caso activo (Behance, Figma, YouTube). */
+export const LINKS_OTHER_FORMATS_GENERAL = [
+  'https://www.behance.net/francisfranci',
+  'https://www.figma.com/@francisfranci',
+  'https://www.youtube.com/@FranArqUxUi',
+] as const;
+
+/** URLs para los enlaces "Otros formatos" en Case1 (Behance, Figma, YouTube). Mismo orden que los íconos. */
 export const LINKS_OTHER_FORMATS_CASE1 = [
   'https://www.behance.net/gallery/243463543/Kora',
   'https://www.figma.com/proto/eeGUqTiYQiFJElsKsRfb9n/Francisco.S%C3%A1nchez---PFB---UX-UI?page-id=191%3A2454&node-id=622-7245&viewport=1139%2C344%2C0.1&t=43qDKMgq0hz2KBuH-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=622%3A7245&show-proto-sidebar=1',
@@ -248,8 +256,11 @@ export const LINKS_OTHER_FORMATS_CASE3 = [
   'https://youtu.be/kGIDkZKWAag',
 ] as const;
 
-/** URL del CV en PDF para descarga (colocar el archivo en public/cv.pdf o usar enlace externo). */
-export const LINK_CV_PDF = '/FSanchez_UXUI.pdf';
+/** URLs del CV en PDF (archivos en public/). ES sustituye la versión anterior; EN añadida como opción. */
+export const LINK_CV_PDF_ES = '/FSanchez_UXUI_ES.pdf';
+export const LINK_CV_PDF_EN = '/FSanchez_UXUI_EN.pdf';
+/** Por compatibilidad: apunta a la versión en español. */
+export const LINK_CV_PDF = LINK_CV_PDF_ES;
 
 /** URLs para créditos Case2 (orden: Agustina, Anna, Claudia, Erik, Jonattan). En standby hasta confirmar enlaces reales; sustituir "#" por las URLs. */
 export const LINKS_CREDITS_CASE2 = [

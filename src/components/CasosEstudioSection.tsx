@@ -7,10 +7,12 @@ import Case3Component from '../imports/Case3';
 import { CaseMobileView } from './CaseMobileView';
 import { Dialog, DialogContent, DialogTitle } from './ui/dialog';
 import {
+  LINKS_OTHER_FORMATS_GENERAL,
   LINKS_OTHER_FORMATS_CASE1,
   LINKS_OTHER_FORMATS_CASE2,
   LINKS_OTHER_FORMATS_CASE3,
-  LINK_CV_PDF,
+  LINK_CV_PDF_ES,
+  LINK_CV_PDF_EN,
 } from './case-shared';
 import { SOCIAL_BAR_WIDTH_PX } from './SocialBarDesktop';
 import { StarlingMurmuration } from './StarlingMurmuration';
@@ -718,6 +720,74 @@ export function CasosEstudioSection({
             />
           </div>
         </div>
+        {/* Bottom bar móvil en vista menú: enlaces generales + descarga CV (siempre visible en la sección) */}
+        {isMobile &&
+          createPortal(
+            <nav
+              className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-4 px-4 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-[#f7f2ed] border-t-2 border-[#5a3e26] border-dashed"
+              aria-label="Otros formatos y descarga de CV"
+            >
+              {([
+                { label: 'Behance', aria: 'Ver en Behance', path: svgPathsOtherFormats.p5a0b600 },
+                { label: 'Figma', aria: 'Ver en Figma', path: svgPathsOtherFormats.p27c0d200 },
+                { label: 'YouTube', aria: 'Ver en YouTube', path: svgPathsOtherFormats.pee38400 },
+              ] as const).map((item, i) => (
+                <a
+                  key={item.label}
+                  href={LINKS_OTHER_FORMATS_GENERAL[i]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl text-[#5a3e26] hover:text-[#5a3e26]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f2ed] transition-colors"
+                  aria-label={item.aria}
+                  title={item.aria}
+                >
+                  <svg className="block size-6" fill="none" viewBox="0 0 44 44" aria-hidden>
+                    <path fill="currentColor" fillRule="evenodd" clipRule="evenodd" d={item.path} />
+                  </svg>
+                </a>
+              ))}
+              <div className="relative flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); setCvMenuOpen((o) => !o); }}
+                  aria-label={cvMenuOpen ? 'Cerrar menú de descarga' : 'Descargar CV'}
+                  aria-expanded={cvMenuOpen}
+                  className="flex items-center justify-center w-11 h-11 min-w-[44px] min-h-[44px] rounded-xl text-[#5a3e26] hover:text-[#5a3e26]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5a3e26] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f7f2ed] transition-colors"
+                >
+                  <Download size={24} strokeWidth={2} aria-hidden />
+                </button>
+                {cvMenuOpen && (
+                  <div
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-[min(200px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+                    aria-label="Menú descarga CV"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <a
+                      href={LINK_CV_PDF_ES}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+                      onClick={() => setCvMenuOpen(false)}
+                    >
+                      Descargar CV (Español)
+                    </a>
+                    <a
+                      href={LINK_CV_PDF_EN}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+                      onClick={() => setCvMenuOpen(false)}
+                    >
+                      Download CV (English)
+                    </a>
+                  </div>
+                )}
+              </div>
+            </nav>,
+            document.body
+          )}
       </div>
     );
   }
@@ -842,8 +912,8 @@ export function CasosEstudioSection({
         />
       </div>
 
-      {/* Bottom bar móvil: igual que la top bar en desktop, se renderiza en body para no ser recortada por overflow del contenedor */}
-      {isMobile && (currentView === 'case1' || currentView === 'case2' || currentView === 'case3') &&
+      {/* Bottom bar móvil: siempre visible en la sección Casos de estudio; enlaces por caso o generales + descarga CV */}
+      {isMobile &&
         createPortal(
           <nav
             className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center gap-4 px-4 pt-3 pb-[max(0.5rem,env(safe-area-inset-bottom))] bg-[#f7f2ed] border-t-2 border-[#5a3e26] border-dashed"
@@ -854,7 +924,7 @@ export function CasosEstudioSection({
               { label: 'Figma', aria: 'Ver en Figma', path: svgPathsOtherFormats.p27c0d200 },
               { label: 'YouTube', aria: 'Ver en YouTube', path: svgPathsOtherFormats.pee38400 },
             ] as const).map((item, i) => {
-              const href = currentView === 'case1' ? LINKS_OTHER_FORMATS_CASE1[i] : currentView === 'case2' ? LINKS_OTHER_FORMATS_CASE2[i] : LINKS_OTHER_FORMATS_CASE3[i];
+              const href = currentView === 'case1' ? LINKS_OTHER_FORMATS_CASE1[i] : currentView === 'case2' ? LINKS_OTHER_FORMATS_CASE2[i] : currentView === 'case3' ? LINKS_OTHER_FORMATS_CASE3[i] : LINKS_OTHER_FORMATS_GENERAL[i];
               return (
                 <a
                   key={item.label}
@@ -888,14 +958,24 @@ export function CasosEstudioSection({
                   onClick={(e) => e.stopPropagation()}
                 >
                   <a
-                    href={LINK_CV_PDF}
+                    href={LINK_CV_PDF_ES}
                     download
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
                     onClick={() => setCvMenuOpen(false)}
                   >
-                    Descargar CV
+                    Descargar CV (Español)
+                  </a>
+                  <a
+                    href={LINK_CV_PDF_EN}
+                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-left px-4 py-3 font-['Roboto:Regular',sans-serif] text-[15px] font-medium text-[#5a3e26] hover:bg-[#e8d8c9] transition-colors"
+                    onClick={() => setCvMenuOpen(false)}
+                  >
+                    Download CV (English)
                   </a>
                 </div>
               )}
