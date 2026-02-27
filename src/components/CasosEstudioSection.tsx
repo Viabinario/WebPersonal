@@ -157,7 +157,8 @@ interface CaseButtonProps {
 function CaseButton({ onClick, isActive, label, overContent = false }: CaseButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const isOpaque = !overContent || isHovered;
+  // Botón activo siempre opaco para que se vea el tono distintivo; si no, opaco solo al hover cuando está sobre contenido
+  const isOpaque = isActive || !overContent || isHovered;
 
   return (
     <button
@@ -173,16 +174,24 @@ function CaseButton({ onClick, isActive, label, overContent = false }: CaseButto
       aria-label={label ? `Acceder al caso de estudio: ${label}` : undefined}
       title={label ? `Acceder al caso de estudio: ${label}` : undefined}
     >
-      {/* Square button with background - 48x48px */}
+      {/* Square button with background - 48x48px. Activo: tono distintivo (fondo más cálido + borde acento). Inactivo: borde transparente explícito para no confundir con activo. */}
       <div
-        className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 hover:scale-105 overflow-visible ${
-          isActive ? 'bg-[#5a3e26]' : 'bg-[#5a3e26] hover:opacity-90'
+        className={`relative shrink-0 w-[48px] h-[48px] rounded-[12px] transition-all duration-300 overflow-visible ${
+          isActive
+            ? 'bg-[#6a4e36] border-2 border-[#a16f44] border-solid shadow-[inset_0px_2px_6px_rgba(0,0,0,0.15)]'
+            : 'bg-[#5a3e26] border-2 border-transparent hover:scale-105 hover:opacity-90'
         }`}
       >
+        {/* Highlight sutil en la parte superior cuando está activo (misma idea que menú principal) */}
         {isActive && (
-          <div className="absolute inset-0 border-4 border-[#5a3e26] border-solid rounded-[12px] pointer-events-none" />
+          <div
+            className="absolute inset-0 rounded-[12px] pointer-events-none"
+            style={{
+              background: 'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 30%, transparent 70%)',
+            }}
+          />
         )}
-        {/* Borde difuminado que se irradia en hover (mismo efecto que menú principal) */}
+        {/* Borde difuminado que se irradia en hover (solo cuando no está activo) */}
         {!isActive && (
           <div
             className="absolute -inset-1 rounded-[14px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -1003,18 +1012,21 @@ export function CasosEstudioSection({
           <>
             <CaseButtonsBar>
               <CaseButton
+                key="case1"
                 onClick={() => handleCaseClick('case1')}
                 isActive={currentView === 'case1'}
                 label="Kora"
-                overContent={currentView === 'case1' || currentView === 'case2'}
+                overContent={currentView === 'case1' || currentView === 'case2' || currentView === 'case3'}
               />
               <CaseButton
+                key="case2"
                 onClick={() => handleCaseClick('case2')}
                 isActive={currentView === 'case2'}
                 label="Del Revés"
                 overContent={currentView === 'case1' || currentView === 'case2' || currentView === 'case3'}
               />
               <CaseButton
+                key="case3"
                 onClick={() => handleCaseClick('case3')}
                 isActive={currentView === 'case3'}
                 label="Mingo!"
