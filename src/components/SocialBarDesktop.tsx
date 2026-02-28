@@ -25,7 +25,7 @@ export function SocialBarDesktop() {
 
   return (
     <aside
-      className="fixed top-0 right-0 bottom-0 hidden lg:flex flex-col items-center gap-3 py-4 z-20 w-14 border-l-2 border-[#5a3e26] border-dashed bg-[#f7f2ed]"
+      className="fixed top-0 right-0 bottom-0 hidden lg:flex flex-col items-center gap-3 py-4 z-50 w-14 border-l-2 border-[#5a3e26] border-dashed bg-[#f7f2ed]"
       style={{
         width: `${SOCIAL_BAR_WIDTH_PX}px`,
         background: 'linear-gradient(180deg, #e5e2de 0%, #e5e2de 70%, color-mix(in srgb, #e5e2de 90%, #f7f2ed) 100%)',
@@ -102,7 +102,8 @@ export function SocialBarDesktop() {
         </button>
         {cvMenuOpen && (
           <div
-            className="absolute right-full bottom-0 mr-2 w-[min(200px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-50"
+            className="absolute right-full bottom-0 mr-2 w-[min(200px,85vw)] rounded-[16px] border-2 border-[#5a3e26] border-dashed bg-[#f7f2ed] shadow-lg py-2 z-[100]"
+            style={{ isolation: 'isolate' }}
             aria-label="Menú descarga CV"
             onClick={(e) => e.stopPropagation()}
           >
