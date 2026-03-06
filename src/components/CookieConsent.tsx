@@ -59,7 +59,7 @@ export function CookieConsent({ onAccept, onReject }: CookieConsentProps) {
     <div
       role="dialog"
       aria-label="Consentimiento de cookies"
-      className="fixed bottom-0 left-0 right-0 z-[100] px-4 py-4 md:px-6 md:py-5 bg-[#f7f2ed] border-t-2 border-[#5a3e26] border-dashed shadow-[0_-4px_20px_rgba(90,62,38,0.12)]"
+      className="fixed bottom-0 left-0 right-0 z-[100] px-4 py-4 md:px-6 md:py-5 bg-[#f7f2ed]/70 border-t-2 border-[#5a3e26] border-dashed shadow-[0_-4px_20px_rgba(90,62,38,0.12)]"
     >
       <div className="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <p className="font-['Roboto',sans-serif] text-[#5a3e26] text-sm md:text-base leading-relaxed">
