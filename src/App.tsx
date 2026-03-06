@@ -8,7 +8,7 @@ import { SocialBarDesktop, SOCIAL_BAR_WIDTH_PX } from './components/SocialBarDes
 import { LangSwitch } from './context/LocaleContext';
 import { CookieConsent } from './components/CookieConsent';
 import { getStoredConsent } from './components/CookieConsent';
-import { loadGTM, GTM_CONTAINER_ID } from './utils/gtm';
+import { loadGoogleAnalytics, GA_MEASUREMENT_ID } from './utils/gtm';
 import imgProfilePhoto from "./assets/037303b6b1de60b5b46c711eb2f0e126520f42b0.png";
 
 type Section = 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
@@ -85,10 +85,10 @@ export default function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Cargar GTM solo si el usuario aceptó cookies en una visita anterior
+  // Cargar Google Analytics solo si el usuario aceptó cookies en una visita anterior
   useEffect(() => {
     if (getStoredConsent() === 'accepted') {
-      loadGTM(GTM_CONTAINER_ID);
+      loadGoogleAnalytics(GA_MEASUREMENT_ID);
     }
   }, []);
 
@@ -449,7 +449,7 @@ export default function App() {
             </div>
           )}
         </main>
-      <CookieConsent onAccept={() => loadGTM(GTM_CONTAINER_ID)} />
+      <CookieConsent onAccept={() => loadGoogleAnalytics(GA_MEASUREMENT_ID)} />
       </div>
     );
   }
@@ -642,7 +642,7 @@ export default function App() {
         </div>
       </div>
       </div>
-      <CookieConsent onAccept={() => loadGTM(GTM_CONTAINER_ID)} />
+      <CookieConsent onAccept={() => loadGoogleAnalytics(GA_MEASUREMENT_ID)} />
     </div>
   );
 }

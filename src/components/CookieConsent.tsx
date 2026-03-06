@@ -24,7 +24,7 @@ function setStoredConsent(value: 'accepted' | 'rejected'): void {
 }
 
 interface CookieConsentProps {
-  /** Llamado cuando el usuario acepta (ya se guarda en localStorage aquí). Usar para cargar GTM. */
+  /** Llamado cuando el usuario acepta (ya se guarda en localStorage aquí). Usar para cargar Google Analytics. */
   onAccept?: () => void;
   /** Llamado cuando el usuario rechaza (ya se guarda en localStorage aquí). */
   onReject?: () => void;
@@ -32,7 +32,7 @@ interface CookieConsentProps {
 
 /**
  * Banner de consentimiento de cookies. Solo se muestra si no hay decisión previa guardada.
- * Al aceptar se guarda en localStorage y se notifica al padre (p. ej. para cargar GTM).
+ * Al aceptar se guarda en localStorage y se notifica al padre (p. ej. para cargar Google Analytics).
  */
 export function CookieConsent({ onAccept, onReject }: CookieConsentProps) {
   const [visible, setVisible] = useState<boolean | null>(null);
@@ -63,7 +63,7 @@ export function CookieConsent({ onAccept, onReject }: CookieConsentProps) {
     >
       <div className="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <p className="font-['Roboto',sans-serif] text-[#5a3e26] text-sm md:text-base leading-relaxed">
-          Utilizamos cookies y herramientas similares (p. ej. Google Tag Manager) para analizar el uso del sitio y mejorar tu experiencia. Puedes aceptar o rechazar el uso de cookies analíticas.
+          Utilizamos cookies y herramientas similares (p. ej. Google Analytics) para analizar el uso del sitio y mejorar tu experiencia. Puedes aceptar o rechazar el uso de cookies analíticas.
         </p>
         <div className="flex flex-wrap items-center gap-3 shrink-0">
           <button
