@@ -6,6 +6,9 @@ import { ContactoSection } from './components/ContactoSection';
 import { CasosEstudioSection, CaseStudyNavMobile, type CaseView } from './components/CasosEstudioSection';
 import { SocialBarDesktop, SOCIAL_BAR_WIDTH_PX } from './components/SocialBarDesktop';
 import { LangSwitch } from './context/LocaleContext';
+import { CookieConsent } from './components/CookieConsent';
+import { getStoredConsent } from './components/CookieConsent';
+import { loadGTM, GTM_CONTAINER_ID } from './utils/gtm';
 import imgProfilePhoto from "./assets/037303b6b1de60b5b46c711eb2f0e126520f42b0.png";
 
 type Section = 'presentacion' | 'sobre-mi' | 'contacto' | 'casos-estudio';
@@ -80,6 +83,13 @@ export default function App() {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Cargar GTM solo si el usuario aceptó cookies en una visita anterior
+  useEffect(() => {
+    if (getStoredConsent() === 'accepted') {
+      loadGTM(GTM_CONTAINER_ID);
+    }
   }, []);
 
   // Leer sección/caso inicial desde la URL (?section=...&case=...)
@@ -439,6 +449,7 @@ export default function App() {
             </div>
           )}
         </main>
+      <CookieConsent onAccept={() => loadGTM(GTM_CONTAINER_ID)} />
       </div>
     );
   }
@@ -631,6 +642,7 @@ export default function App() {
         </div>
       </div>
       </div>
+      <CookieConsent onAccept={() => loadGTM(GTM_CONTAINER_ID)} />
     </div>
   );
 }
